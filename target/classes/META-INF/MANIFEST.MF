@@ -1,5 +1,11 @@
 Manifest-Version: 1.0
+Implementation-Title: demows
+Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: linkl
+Implementation-Vendor-Id: projet_multitiers
 Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/projet_multi
+ tiers/
 Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
 
