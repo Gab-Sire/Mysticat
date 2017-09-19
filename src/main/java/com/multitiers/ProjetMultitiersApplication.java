@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.multitiers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
