@@ -52,8 +52,6 @@ public class TestConnectionUtils {
 				.build();
 		password = passwordGenerator.generate(passwordLength);
 		hashedPassword = ConnectionUtils.hashPassword(password);
-		failingPassword = password + "a";
-		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword);
 		
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
@@ -90,6 +88,8 @@ public class TestConnectionUtils {
 
 	@Test
 	public void hashesOfTwoDifferentPasswordsAreDifferent() {
+		failingPassword = password + "a";
+		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword);
 		assertFalse(hashedFailingPassword.equals(hashedPassword));
 	}
 
@@ -110,5 +110,14 @@ public class TestConnectionUtils {
 
 		assertTrue(ConnectionUtils.isValidUsername(validUsername));
 	}
+	
+	@Test
+	public void passwordIsValid() {
+		assertTrue(ConnectionUtils.isValidPassword(password));
+	}
+	
+	//TODO Cas inverses (non happy path) pour les 2 derniers tests.
+	
+	
 
 }

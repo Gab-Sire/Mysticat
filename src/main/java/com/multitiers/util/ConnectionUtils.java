@@ -48,4 +48,8 @@ public class ConnectionUtils {
 	public static Boolean isValidUsername(String username) {
 		return Pattern.matches(USERNAME_REGEX, username);
 	}
+	
+	public static Boolean isValidPassword(String password) {
+		return Pattern.matches(PASSWORD_REGEX, password);
+	}
 }
