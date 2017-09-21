@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "car_type")
 public abstract class Card {
+	
 	@Id
 	private String cardId;
 	private Integer manaCost;
