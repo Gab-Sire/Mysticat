@@ -6,11 +6,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.multitiers.service.InscriptionService;
+
 public class TestService {
 
 	@Before
 	public void setUp() throws Exception {
-
+		
 	}
 
 	@After
@@ -19,8 +21,8 @@ public class TestService {
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void validCredentialsSignUp() {
+		fail();
 	}
 
 }

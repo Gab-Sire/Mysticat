@@ -71,7 +71,8 @@ public class TestConnectionUtils {
 		assertNotEquals(uuid1, uuid2);
 	}
 	
-	@Test public void usernameAndPasswordMatch() {
+	@Test public void usernameIsValid() {
 		
 	}
+	
 }

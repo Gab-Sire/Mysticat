@@ -27,5 +27,4 @@ public class InscriptionService {
     public void peuplement() {
         userRepository.save(new User("Chat1", ConnectionUtils.hashPassword("myboy")));
     }
-    
 }
