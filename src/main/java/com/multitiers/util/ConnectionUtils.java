@@ -1,18 +1,23 @@
 package com.multitiers.util;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.multitiers.domaine.User;
-
 public class ConnectionUtils {
 	public static final String SALT = "sha1myboy";
+	public static final Integer MIN_USERNAME_LENGTH = 5;
+	public static final Integer MIN_PASSWORD_LENGTH = 5;
+	public static final Integer MAX_USERNAME_LENGTH = 30;
+	public static final Integer MAX_PASSWORD_LENGTH = 100;
 	
-	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 6 caracteres.
-	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
-	public final static String PASSWORD_REGEX = "";
+	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 6 caracteres et maximale de 30.
+	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
+			+ "{"+MIN_USERNAME_LENGTH+","+MAX_USERNAME_LENGTH+"}$";
+	
+	public final static String PASSWORD_REGEX = ".{"+MIN_PASSWORD_LENGTH+","+MAX_PASSWORD_LENGTH+"}";
 	
 	//Yeah, I wrote that. (not)
 	public static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+"
@@ -35,7 +40,6 @@ public class ConnectionUtils {
 	public static Boolean isCorrectPasswords(String password, String hashedPassword) {
 		return hashPassword(password).equals(hashedPassword);
 	}
-	
 	
 	public static Boolean isValidEmailFormat(String email) {
 		return Pattern.matches(EMAIL_REGEX, email);
