@@ -17,7 +17,8 @@ public class ProjetMultitiersApplication {
 	@Bean
     public CommandLineRunner peuplement(InscriptionService demoService) {
         return (args) -> {
-            demoService.peuplement();
+            demoService.inscription("Chat1", "myboy");
+            demoService.inscription("Chat2", "myboy");
         };
     }
 }

@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.multitiers.domaine.User;
+
 public class ConnectionUtils {
 	public static final String SALT = "sha1myboy";
 	
@@ -14,4 +16,5 @@ public class ConnectionUtils {
 	public static UUID generateUUID() {
 		return UUID.randomUUID();
 	}
+	
 }

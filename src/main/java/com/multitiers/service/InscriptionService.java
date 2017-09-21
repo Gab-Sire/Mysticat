@@ -5,7 +5,6 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.multitiers.ProjetMultitiersApplication;
@@ -19,6 +18,10 @@ public class InscriptionService {
     private UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
     
+    @Transactional
+    public void inscription(String username, String password) {
+        userRepository.save(new User(username, ConnectionUtils.hashPassword(password)));
+    }
     
     @Transactional
     public void peuplement() {
