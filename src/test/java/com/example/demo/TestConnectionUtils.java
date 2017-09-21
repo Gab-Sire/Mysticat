@@ -2,6 +2,8 @@ package com.example.demo;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.After;
 import org.junit.Before;
@@ -13,12 +15,16 @@ public class TestConnectionUtils {
 	static final Integer MAX_PASSWORD_LENGTH = 100;
 	static final char MINIMUM_CHAR_PASSWORD = '!';
 	static final char MAXIMUM_CHAR_PASSWORD = '~';
+	
 	RandomStringGenerator passwordGenerator;
 	Integer passwordLength;
 	String password;
 	String hashedPassword;
 	String failingPassword;
 	String hashedFailingPassword;
+	
+	UUID uuid1;
+	UUID uuid2;
 	
 	
 	@Before
@@ -29,6 +35,9 @@ public class TestConnectionUtils {
 		hashedPassword = ConnectionUtils.hashPassword(password);
 		failingPassword = password+"a";
 		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword);
+		
+		uuid1 = ConnectionUtils.generateUUID();
+		uuid2 = ConnectionUtils.generateUUID();
 	}
 
 	@After
@@ -38,6 +47,9 @@ public class TestConnectionUtils {
 		password = null;
 		hashedPassword = null;
 		failingPassword = null;
+		
+		uuid1 = null;
+		uuid2 = null;
 	}
 	
 	@Test
@@ -54,4 +66,9 @@ public class TestConnectionUtils {
 	public void hashesOfTwoDifferentPasswordsAreDifferent() {
 		assertFalse(hashedFailingPassword.equals(hashedPassword));
 	}
+	
+	@Test public void twoUUIDsCantBeTheSame() {
+		assertNotEquals(uuid1, uuid2);
+	}
+	
 }
