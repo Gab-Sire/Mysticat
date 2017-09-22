@@ -65,6 +65,7 @@ public class ConnectionUtils {
 	//TODO implement in hashPassword
 	public static String generateSalt() {
 		RandomStringGenerator saltGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MINIMUM_CHAR_PASSWORD).build();
-		return hashString(saltGenerator.generate((int) Math.random()*MAX_SALT_LENGTH));
+		String unhashedSalt = saltGenerator.generate((int)(Math.random()*MAX_SALT_LENGTH));
+		return hashString(unhashedSalt);
 	}
 }

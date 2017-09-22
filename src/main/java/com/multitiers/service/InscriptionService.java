@@ -20,11 +20,16 @@ public class InscriptionService {
     
     @Transactional
     public void inscription(String username, String password) {
-        userRepository.save(new User(username, ConnectionUtils.hashPassword(password, ConnectionUtils.generateSalt())));
+    	String salt = ConnectionUtils.generateSalt();
+    	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
+        userRepository.save(new User(username, hashedPassword, salt));
     }
     
     @Transactional
     public void peuplement() {
-        userRepository.save(new User("Chat1", ConnectionUtils.hashPassword("myboy", ConnectionUtils.generateSalt())));
+    	String salt = "salt";
+    	String password = "myboy";
+    	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
+        userRepository.save(new User("Chat1", hashedPassword, salt));
     }
 }

@@ -25,7 +25,8 @@ public class RestControlleur {
     @GetMapping(value = "/attemptConnection/{username}/{password}")
     public @ResponseBody Boolean attemptConnection(@PathVariable String username, @PathVariable String password) {
         User user = userRepository.findByUsername(username);
-        return ConnectionUtils.hashPassword(password, ConnectionUtils.generateSalt()).equals(user.getPasswordHash());
+        String hashedSalt = user.getHashedSalt();
+        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
     
 }

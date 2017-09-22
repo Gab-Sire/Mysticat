@@ -25,12 +25,14 @@ public class TestConnectionUtils {
 	RandomStringGenerator usernameGenerator;
 	Integer passwordLength;
 	Integer usernameLength;
-	String salt;
+	String salt1;
+	String salt2;
 	String password;
 	String hashedPassword;
 	String failingPassword;
 	String hashedFailingPassword;
-
+	String stringToBeHashed;
+	
 	Character lowerCaseInUsername;
 	Character upperCaseInUsername;
 	Character digitInUsername;
@@ -50,7 +52,11 @@ public class TestConnectionUtils {
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
 		usernameGenerator = new RandomStringGenerator.Builder()
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
-		salt = ConnectionUtils.generateSalt();
+		stringToBeHashed = usernameGenerator.generate((int)Math.random()*ConnectionUtils.MAX_PASSWORD_LENGTH);
+		salt1 = ConnectionUtils.generateSalt();
+		salt2 = ConnectionUtils.generateSalt();
+		
+		
 		password = passwordGenerator.generate(randomValidPasswordLength());
 		validUsername = usernameGenerator.generate(randomValidUsernameLength());
 
@@ -62,7 +68,7 @@ public class TestConnectionUtils {
 		password += generateUpperCase();
 		password +=  generateDigit();
 		
-		hashedPassword = ConnectionUtils.hashPassword(password,salt);
+		hashedPassword = ConnectionUtils.hashPassword(password,salt1);
 
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
@@ -79,7 +85,9 @@ public class TestConnectionUtils {
 		password = null;
 		hashedPassword = null;
 		failingPassword = null;
-
+		salt1 = null;
+		salt2 = null;
+		
 		validUsername = null;
 		invalidUsername = null;
 		tooShortUsername = null;
@@ -94,14 +102,19 @@ public class TestConnectionUtils {
 	}
 
 	@Test
-	public void hashesOfTheSamePasswordAreTheSame() {
-		assertTrue(ConnectionUtils.hashPassword(password, salt).equals(hashedPassword));
+	public void hashesOfTheSameStringsAreTheSame() {
+		assertTrue(ConnectionUtils.hashString(stringToBeHashed).equals(ConnectionUtils.hashString(stringToBeHashed)));
 	}
 
 	@Test
+	public void hashesOfTheSamePasswordAreDifferent() {
+		assertFalse(ConnectionUtils.hashPassword(password, salt2).equals(hashedPassword));
+	}
+	
+	@Test
 	public void hashesOfTwoDifferentPasswordsAreDifferent() {
 		failingPassword = password + "a";
-		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword, salt);
+		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword, salt1);
 		assertFalse(hashedFailingPassword.equals(hashedPassword));
 	}
 
@@ -117,12 +130,9 @@ public class TestConnectionUtils {
 
 	@Test
 	public void passwordIsValid() {
-		System.out.println(password);
 		assertTrue(ConnectionUtils.isValidPassword(password));
 	}
-
-	// TODO Cas inverses (non happy path) pour les 2 derniers tests.
-
+	
 	@Test
 	public void usernameIsTooShort() {
 		// Meet all other conditions, so you know it's length that is the problem.

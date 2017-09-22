@@ -16,17 +16,6 @@ import com.multitiers.util.ConnectionUtils;
 @Entity
 @Table(name="mys_user_usr")
 public class User {
-
-	public User(String username, String passwordHash) {
-		super();
-		this.username = username;
-		this.passwordHash = passwordHash;
-		this.decks = new HashSet<Deck>();
-		this.id = ConnectionUtils.generateUUID().toString();
-	}
-	
-	public User() {}
-	
     @Column(name = "usr_id", nullable = false, updatable = false)
     @Id
 	protected String id;
@@ -40,6 +29,29 @@ public class User {
 	@OneToMany
 	protected Set<Deck> decks;
 	
+	@Column(name="usr_salt")
+	protected String hashedSalt;
+
+	public User(String username, String passwordHash, String hashedSalt) {
+		super();
+		this.username = username;
+		this.hashedSalt = hashedSalt;
+		this.decks = new HashSet<Deck>();
+		this.id = ConnectionUtils.generateUUID().toString();
+		this.passwordHash = passwordHash;
+	}
+	
+	public User() {}
+	
+	
+	public String getHashedSalt() {
+		return hashedSalt;
+	}
+
+	public void setHashedSalt(String hashedSalt) {
+		this.hashedSalt = hashedSalt;
+	}
+
 	public String getId() {
 		return id;
 	}
