@@ -37,7 +37,6 @@ public class TestConnectionUtils {
 	Character upperCaseInUsername;
 	Character digitInUsername;
 	String validUsername;
-	String invalidUsername;
 	String tooShortPassword;
 	String tooShortUsername;
 	String tooLongUsername;
@@ -89,7 +88,6 @@ public class TestConnectionUtils {
 		salt2 = null;
 		
 		validUsername = null;
-		invalidUsername = null;
 		tooShortUsername = null;
 		
 		uuid1 = null;
@@ -169,6 +167,15 @@ public class TestConnectionUtils {
 	@Test
 	public void passwordDoesntContainUppercase() {
 		assertFalse(ConnectionUtils.isValidPassword(password.toLowerCase()));
+	}
+	
+	@Test
+	public void passwordDoesntContainDigit() {
+		assertFalse(ConnectionUtils.isValidPassword(replaceAllDigitsWithLetters(password)));
+	}
+
+	private String replaceAllDigitsWithLetters(String str) {
+		return str.replaceAll("[0-9]", (Math.random()>0.5) ? ""+generateLowerCase() : ""+generateUpperCase());
 	}
 
 	private char generateDigit() {
