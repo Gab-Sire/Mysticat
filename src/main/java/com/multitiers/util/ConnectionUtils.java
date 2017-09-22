@@ -1,9 +1,8 @@
 package com.multitiers.util;
 
 import java.util.UUID;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import org.apache.commons.text.RandomStringGenerator;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class ConnectionUtils {
@@ -12,6 +11,10 @@ public class ConnectionUtils {
 	public static final Integer MIN_PASSWORD_LENGTH = 5;
 	public static final Integer MAX_USERNAME_LENGTH = 30;
 	public static final Integer MAX_PASSWORD_LENGTH = 100;
+	public static final Integer MAX_SALT_LENGTH = 100;
+	
+	public static final char MINIMUM_CHAR_PASSWORD = '!';
+	public static final char MAXIMUM_CHAR_PASSWORD = '~';
 	
 	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5 caracteres et maximale de 30.
 	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
@@ -30,6 +33,10 @@ public class ConnectionUtils {
 			+ "?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|"
 			+ "[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x"
 			+ "5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+
+	public static String hashString(String str){
+		return DigestUtils.sha1Hex(str);
+	}
 	
 	public static String hashPassword(String password){
 		return DigestUtils.sha1Hex(password+SALT);
@@ -53,5 +60,11 @@ public class ConnectionUtils {
 	
 	public static Boolean isValidPassword(String password) {
 		return Pattern.matches(PASSWORD_REGEX, password);
+	}
+	
+	//TODO implement in hashPassword
+	public static String generateSalt() {
+		RandomStringGenerator saltGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MINIMUM_CHAR_PASSWORD).build();
+		return hashString(saltGenerator.generate((int) Math.random()*MAX_SALT_LENGTH));
 	}
 }
