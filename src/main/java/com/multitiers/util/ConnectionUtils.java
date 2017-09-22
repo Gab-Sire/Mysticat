@@ -13,11 +13,13 @@ public class ConnectionUtils {
 	public static final Integer MAX_USERNAME_LENGTH = 30;
 	public static final Integer MAX_PASSWORD_LENGTH = 100;
 	
-	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 6 caracteres et maximale de 30.
+	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5 caracteres et maximale de 30.
 	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
 			+ "{"+MIN_USERNAME_LENGTH+","+MAX_USERNAME_LENGTH+"}$";
-	
-	public final static String PASSWORD_REGEX = ".{"+MIN_PASSWORD_LENGTH+","+MAX_PASSWORD_LENGTH+"}";
+
+	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5 caracteres et maximale de 100.	
+	public final static String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
+			+ "{"+MIN_PASSWORD_LENGTH+","+MAX_PASSWORD_LENGTH+"}$";
 	
 	//Yeah, I wrote that. (not)
 	public static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+"

@@ -14,7 +14,7 @@ import com.multitiers.util.ConnectionUtils;
 
 public class TestConnectionUtils {
 
-	private static final int USERNAME_OFFSET = 4;
+	private static final int OFFSET_FOR_MINIMUM_LENGTH = 4;
 	private static final int NB_OF_LETTERS = 26;
 	private static final int NB_OF_DIGITS = 10;
 	static final char MINIMUM_CHAR_PASSWORD = '!';
@@ -48,8 +48,8 @@ public class TestConnectionUtils {
 
 	@Before
 	public void setUp() throws Exception {
-		passwordLength = (int) (Math.random() * ConnectionUtils.MAX_PASSWORD_LENGTH) + 1;
-		usernameLength = (int) (Math.random() * (ConnectionUtils.MAX_USERNAME_LENGTH - USERNAME_OFFSET));
+		passwordLength = (int) (Math.random() * (ConnectionUtils.MAX_PASSWORD_LENGTH-OFFSET_FOR_MINIMUM_LENGTH)) + 2;
+		usernameLength = (int) (Math.random() * (ConnectionUtils.MAX_USERNAME_LENGTH - OFFSET_FOR_MINIMUM_LENGTH));
 		//TODO name constant
 		usernameLength+=2;
 		passwordGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MAXIMUM_CHAR_PASSWORD)
@@ -57,15 +57,20 @@ public class TestConnectionUtils {
 		usernameGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MAXIMUM_CHAR_PASSWORD)
 				.build();
 		password = passwordGenerator.generate(passwordLength);
-		hashedPassword = ConnectionUtils.hashPassword(password);
 		
 		lowerCaseInUsername = (char) (MIN_MINUSCULE + Math.random() * NB_OF_LETTERS);
 		upperCaseInUsername = (char) (MIN_MAJUSCULE + Math.random() * NB_OF_LETTERS);
 		digitInUsername = (char) (MIN_DIGIT + Math.random() * NB_OF_DIGITS);
 		validUsername = usernameGenerator.generate(usernameLength);
+		
 		validUsername+=lowerCaseInUsername;
 		validUsername+=upperCaseInUsername;
 		validUsername+=digitInUsername;
+		
+		password+=lowerCaseInUsername;
+		password+=upperCaseInUsername;
+		password+=digitInUsername;
+		hashedPassword = ConnectionUtils.hashPassword(password);
 		
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
@@ -119,6 +124,7 @@ public class TestConnectionUtils {
 	
 	@Test
 	public void passwordIsValid() {
+		System.out.println(password);
 		assertTrue(ConnectionUtils.isValidPassword(password));
 	}
 	
@@ -151,5 +157,10 @@ public class TestConnectionUtils {
 		//Length guaranteed above maximum permitted.
 		tooLongUsername = validUsername + usernameGenerator.generate(ConnectionUtils.MAX_USERNAME_LENGTH);
 		assertFalse(ConnectionUtils.isValidUsername(tooLongUsername));
+	}
+	
+	@Ignore
+	public void passwordDoesntContainLowercase() {
+		fail();
 	}
 }
