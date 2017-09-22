@@ -25,6 +25,7 @@ public class TestConnectionUtils {
 	RandomStringGenerator usernameGenerator;
 	Integer passwordLength;
 	Integer usernameLength;
+	String salt;
 	String password;
 	String hashedPassword;
 	String failingPassword;
@@ -49,6 +50,7 @@ public class TestConnectionUtils {
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
 		usernameGenerator = new RandomStringGenerator.Builder()
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
+		salt = ConnectionUtils.generateSalt();
 		password = passwordGenerator.generate(randomValidPasswordLength());
 		validUsername = usernameGenerator.generate(randomValidUsernameLength());
 
@@ -60,7 +62,7 @@ public class TestConnectionUtils {
 		password += generateUpperCase();
 		password +=  generateDigit();
 		
-		hashedPassword = ConnectionUtils.hashPassword(password);
+		hashedPassword = ConnectionUtils.hashPassword(password,salt);
 
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
@@ -93,13 +95,13 @@ public class TestConnectionUtils {
 
 	@Test
 	public void hashesOfTheSamePasswordAreTheSame() {
-		assertTrue(ConnectionUtils.hashPassword(password).equals(hashedPassword));
+		assertTrue(ConnectionUtils.hashPassword(password, salt).equals(hashedPassword));
 	}
 
 	@Test
 	public void hashesOfTwoDifferentPasswordsAreDifferent() {
 		failingPassword = password + "a";
-		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword);
+		hashedFailingPassword = ConnectionUtils.hashPassword(failingPassword, salt);
 		assertFalse(hashedFailingPassword.equals(hashedPassword));
 	}
 

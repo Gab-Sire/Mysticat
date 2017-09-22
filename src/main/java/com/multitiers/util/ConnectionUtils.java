@@ -38,16 +38,16 @@ public class ConnectionUtils {
 		return DigestUtils.sha1Hex(str);
 	}
 	
-	public static String hashPassword(String password){
-		return DigestUtils.sha1Hex(password+SALT);
+	public static String hashPassword(String password, String salt){
+		return DigestUtils.sha1Hex(password+salt);
 	}
 	
 	public static UUID generateUUID() {
 		return UUID.randomUUID();
 	}
 	
-	public static Boolean isCorrectPasswords(String password, String hashedPassword) {
-		return hashPassword(password).equals(hashedPassword);
+	public static Boolean isCorrectPasswords(String password, String hashedPassword, String salt) {
+		return hashPassword(password, salt).equals(hashedPassword);
 	}
 	
 	public static Boolean isValidEmailFormat(String email) {
