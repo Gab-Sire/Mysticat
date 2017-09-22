@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.multitiers.util.ConnectionUtils;
@@ -35,7 +36,11 @@ public class TestConnectionUtils {
 	Character digitInUsername;
 	String validUsername;
 	String invalidUsername;
-
+	String tooShortPassword;
+	String tooShortUsername;
+	String tooLongUsername;
+	String tooLongPassword;
+	
 	String invalidUsernameBecauseLength;
 
 	UUID uuid1;
@@ -45,6 +50,7 @@ public class TestConnectionUtils {
 	public void setUp() throws Exception {
 		passwordLength = (int) (Math.random() * ConnectionUtils.MAX_PASSWORD_LENGTH) + 1;
 		usernameLength = (int) (Math.random() * (ConnectionUtils.MAX_USERNAME_LENGTH - USERNAME_OFFSET));
+		//TODO name constant
 		usernameLength+=2;
 		passwordGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MAXIMUM_CHAR_PASSWORD)
 				.build();
@@ -52,6 +58,14 @@ public class TestConnectionUtils {
 				.build();
 		password = passwordGenerator.generate(passwordLength);
 		hashedPassword = ConnectionUtils.hashPassword(password);
+		
+		lowerCaseInUsername = (char) (MIN_MINUSCULE + Math.random() * NB_OF_LETTERS);
+		upperCaseInUsername = (char) (MIN_MAJUSCULE + Math.random() * NB_OF_LETTERS);
+		digitInUsername = (char) (MIN_DIGIT + Math.random() * NB_OF_DIGITS);
+		validUsername = usernameGenerator.generate(usernameLength);
+		validUsername+=lowerCaseInUsername;
+		validUsername+=upperCaseInUsername;
+		validUsername+=digitInUsername;
 		
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
@@ -100,14 +114,6 @@ public class TestConnectionUtils {
 
 	@Test
 	public void usernameIsValid() {
-		lowerCaseInUsername = (char) (MIN_MINUSCULE + Math.random() * NB_OF_LETTERS);
-		upperCaseInUsername = (char) (MIN_MAJUSCULE + Math.random() * NB_OF_LETTERS);
-		digitInUsername = (char) (MIN_DIGIT + Math.random() * NB_OF_DIGITS);
-		validUsername = usernameGenerator.generate(usernameLength);
-		validUsername+=lowerCaseInUsername;
-		validUsername+=upperCaseInUsername;
-		validUsername+=digitInUsername;
-
 		assertTrue(ConnectionUtils.isValidUsername(validUsername));
 	}
 	
@@ -118,6 +124,32 @@ public class TestConnectionUtils {
 	
 	//TODO Cas inverses (non happy path) pour les 2 derniers tests.
 	
+	@Test
+	public void usernameIsTooShort() {
+		//Meet all other conditions, so you know it's length that is the problem.
+		tooShortUsername="";
+		tooShortUsername+=lowerCaseInUsername;
+		tooShortUsername+=upperCaseInUsername;
+		tooShortUsername+=digitInUsername;
+		assertFalse(ConnectionUtils.isValidUsername(tooShortUsername));
+	}
 	
-
+	@Test
+	public void passwordIsTooShort() {
+		tooShortPassword=passwordGenerator.generate(ConnectionUtils.MIN_PASSWORD_LENGTH-1);
+		assertFalse(ConnectionUtils.isValidPassword(tooShortPassword));
+	}
+	
+	@Test
+	public void passwordIsTooLong() {
+		tooLongPassword=passwordGenerator.generate(ConnectionUtils.MAX_PASSWORD_LENGTH+1);
+		assertFalse(ConnectionUtils.isValidPassword(tooLongPassword));
+	}
+	
+	@Test
+	public void usernameIsTooLong() {
+		//Length guaranteed above maximum permitted.
+		tooLongUsername = validUsername + usernameGenerator.generate(ConnectionUtils.MAX_USERNAME_LENGTH);
+		assertFalse(ConnectionUtils.isValidUsername(tooLongUsername));
+	}
 }
