@@ -15,26 +15,24 @@ import org.springframework.stereotype.Service;
 import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.Card;
 import com.multitiers.domaine.Deck;
+import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
+import com.multitiers.repository.CardRepository;
+import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.util.ConnectionUtils;
+import com.multitiers.util.Constantes;
 
 @Service
 public class InscriptionService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DeckRepository deckRepository;
+    @Autowired
+    private CardRepository cardRepository;
     private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
-    
-    @Transactional
-    public static User createUser(String username, String password) {
-    	String salt = ConnectionUtils.generateSalt();
-    	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
-    	User user = new User(username, hashedPassword, salt);
-    	user.setId(ConnectionUtils.generateUUID().toString());
-    	assignStarterDeck(user);
-        return user;
-    }
-
+        
     @Transactional
     public void peuplement() {
     	//Methode qu'on va utiliser pour Bootstrapper
@@ -42,6 +40,32 @@ public class InscriptionService {
         User user2 = createUser("Chat2", "myboy");
         userRepository.save(user1);
         userRepository.save(user2);
+        
+        for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
+            MinionCard card = createMinionCard("Chat"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
+            cardRepository.save(card);
+        }
+    }
+    
+    public static MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost, String desc) {
+    	MinionCard card = new MinionCard();
+    	card.setCardId(ConnectionUtils.generateUUID().toString());
+    	card.setCardName(name);
+    	card.setInitialHealth(health);
+    	card.setInitialPower(power);
+    	card.setInitialSpeed(speed);
+    	card.setManaCost(manaCost);
+    	card.setCardDescription(desc);
+    	return card;
+    }
+    
+    public static User createUser(String username, String password) {
+    	String salt = ConnectionUtils.generateSalt();
+    	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
+    	User user = new User(username, hashedPassword, salt);
+    	user.setId(ConnectionUtils.generateUUID().toString());
+    	assignStarterDeck(user);
+        return user;
     }
     
 	private static void assignStarterDeck(User user) {

@@ -24,10 +24,7 @@ public abstract class Card {
 	@Column(name="car_desc")
 	private String cardDescription;
 	
-	
-	public static MinionCard generateMinion() {
-		return null;
-	}
+	public Card() {}
 
 
 	public String getCardId() {

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multitiers.domaine.User;
+import com.multitiers.repository.CardRepository;
+import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
@@ -18,6 +20,8 @@ import com.multitiers.util.ConnectionUtils;
 public class RestControlleur {
 	@Autowired
 	private UserRepository userRepository;
+	private DeckRepository deckRepository;
+	private CardRepository cardRepository;
 	
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
