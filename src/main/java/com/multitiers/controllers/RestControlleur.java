@@ -28,5 +28,4 @@ public class RestControlleur {
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
-    
 }

@@ -12,19 +12,21 @@ public class ConnectionUtils {
 	public static final Integer MAX_USERNAME_LENGTH = 30;
 	public static final Integer MAX_PASSWORD_LENGTH = 100;
 	public static final Integer MAX_SALT_LENGTH = 100;
-	
+
 	public static final char MINIMUM_CHAR_PASSWORD = '!';
 	public static final char MAXIMUM_CHAR_PASSWORD = '~';
-	
-	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5 caracteres et maximale de 30.
-	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
-			+ "{"+MIN_USERNAME_LENGTH+","+MAX_USERNAME_LENGTH+"}$";
 
-	//Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5 caracteres et maximale de 100.	
-	public final static String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]"
-			+ "{"+MIN_PASSWORD_LENGTH+","+MAX_PASSWORD_LENGTH+"}$";
-	
-	//Yeah, I wrote that. (not)
+	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
+	// caracteres et maximale de 30.
+	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]" + "{"
+			+ MIN_USERNAME_LENGTH + "," + MAX_USERNAME_LENGTH + "}$";
+
+	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
+	// caracteres et maximale de 100.
+	public final static String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]" + "{"
+			+ MIN_PASSWORD_LENGTH + "," + MAX_PASSWORD_LENGTH + "}$";
+
+	// Yeah, I wrote that. (not)
 	public static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+"
 			+ "(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0"
 			+ "c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\"
@@ -34,38 +36,36 @@ public class ConnectionUtils {
 			+ "[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x"
 			+ "5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
-	public static String hashString(String str){
+	public static String hashString(String str) {
 		return DigestUtils.sha1Hex(str);
 	}
-	
-	public static String hashPassword(String password, String salt){
-		return DigestUtils.sha1Hex(password+salt);
+
+	public static String hashPassword(String password, String salt) {
+		return DigestUtils.sha1Hex(password + salt);
 	}
-	
+
 	public static UUID generateUUID() {
 		return UUID.randomUUID();
 	}
-	
+
 	public static Boolean isCorrectPasswords(String password, String hashedPassword, String salt) {
 		return hashPassword(password, salt).equals(hashedPassword);
 	}
-	
+
 	public static Boolean isValidEmailFormat(String email) {
 		return Pattern.matches(EMAIL_REGEX, email);
 	}
-	
+
 	public static Boolean isValidUsername(String username) {
 		return Pattern.matches(USERNAME_REGEX, username);
 	}
-	
+
 	public static Boolean isValidPassword(String password) {
 		return Pattern.matches(PASSWORD_REGEX, password);
 	}
-	
-	//TODO implement in hashPassword
+
+	// TODO implement in hashPassword
 	public static String generateSalt() {
-		RandomStringGenerator saltGenerator = new RandomStringGenerator.Builder().withinRange(MINIMUM_CHAR_PASSWORD, MINIMUM_CHAR_PASSWORD).build();
-		String unhashedSalt = saltGenerator.generate((int)(Math.random()*MAX_SALT_LENGTH));
-		return hashString(unhashedSalt);
+		return generateUUID().toString();
 	}
 }

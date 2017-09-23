@@ -22,4 +22,29 @@ public class Deck {
 	
 	@ManyToOne
 	private User owner;
+
+	public String getDeckId() {
+		return deckId;
+	}
+
+	public void setDeckId(String deckId) {
+		this.deckId = deckId;
+	}
+
+	public List<Card> getCardList() {
+		return cardList;
+	}
+
+	public void setCardList(List<Card> cardList) {
+		this.cardList = cardList;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	
 }

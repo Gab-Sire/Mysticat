@@ -3,6 +3,7 @@ package com.multitiers.domaine;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class User {
 	@Column(name="usr_password")
 	protected String passwordHash;
 	
-	@OneToMany
+	@OneToMany(mappedBy="owner" ,cascade = CascadeType.ALL)
 	protected Set<Deck> decks;
 	
 	@Column(name="usr_salt")
@@ -36,8 +37,6 @@ public class User {
 		super();
 		this.username = username;
 		this.hashedSalt = hashedSalt;
-		this.decks = new HashSet<Deck>();
-		this.id = ConnectionUtils.generateUUID().toString();
 		this.passwordHash = passwordHash;
 	}
 	

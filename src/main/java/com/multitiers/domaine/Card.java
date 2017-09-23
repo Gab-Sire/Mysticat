@@ -28,5 +28,45 @@ public abstract class Card {
 	public static MinionCard generateMinion() {
 		return null;
 	}
+
+
+	public String getCardId() {
+		return cardId;
+	}
+
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+
+
+	public Integer getManaCost() {
+		return manaCost;
+	}
+
+
+	public void setManaCost(Integer manaCost) {
+		this.manaCost = manaCost;
+	}
+
+
+	public String getCardName() {
+		return cardName;
+	}
+
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+
+	public String getCardDescription() {
+		return cardDescription;
+	}
+
+
+	public void setCardDescription(String cardDescription) {
+		this.cardDescription = cardDescription;
+	}
 	
 }
