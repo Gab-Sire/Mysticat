@@ -37,7 +37,7 @@ public class InscriptionService {
     	User user = new User(username, hashedPassword, salt);
     	user.setId(ConnectionUtils.generateUUID().toString());
     	Set<Deck> decks = new HashSet<Deck>();
-    	decks.add(createStarterDeck());
+    	decks.add(createStarterDeck(user));
     	user.setDecks(decks);
         userRepository.save(user);
     }
@@ -50,10 +50,12 @@ public class InscriptionService {
         userRepository.save(new User("Chat1", hashedPassword, salt));
     }
     
-    public Deck createStarterDeck() {
+    public Deck createStarterDeck(User owner) {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+    	starterDeck.setOwner(owner);
     	List<Card> defaultCards = new ArrayList<Card>();
+    	starterDeck.setCardList(defaultCards);
     	return starterDeck;
     }
 }

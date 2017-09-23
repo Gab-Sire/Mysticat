@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,6 +22,7 @@ public class Deck {
 	private List<Card> cardList;
 	
 	@ManyToOne
+    @JoinColumn(name="usr_id")
 	private User owner;
 
 	public String getDeckId() {
