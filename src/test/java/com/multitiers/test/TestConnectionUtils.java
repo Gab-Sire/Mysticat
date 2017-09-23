@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.multitiers.test;
 
 import static org.junit.Assert.*;
 

@@ -33,7 +33,7 @@ public class RestControlleur {
     }
     
     @GetMapping(value = "/signUp/{username}/{password}")
-    public @ResponseBody User signUp(@PathVariable String username, @PathVariable String password) {
+    public @ResponseBody User signUpGet(@PathVariable String username, @PathVariable String password) {
     	User user = InscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
