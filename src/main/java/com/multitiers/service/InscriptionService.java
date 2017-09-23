@@ -53,9 +53,7 @@ public class InscriptionService {
     public static Deck createStarterDeck(User owner) {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
-    	starterDeck.setOwner(owner);
     	List<Card> defaultCards = new ArrayList<Card>();
-    	//TODO creer les default cards
     	starterDeck.setCardList(defaultCards);
     	return starterDeck;
     }

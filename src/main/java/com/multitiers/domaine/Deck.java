@@ -20,10 +20,6 @@ public class Deck {
 	
 	@OneToMany
 	private List<Card> cardList;
-	
-	@ManyToOne
-    @JoinColumn(name="usr_id")
-	private User owner;
 
 	public String getDeckId() {
 		return deckId;
@@ -41,12 +37,4 @@ public class Deck {
 		this.cardList = cardList;
 	}
 
-	public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
-	
 }

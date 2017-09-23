@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +28,8 @@ public class User {
 	@Column(name="usr_password")
 	protected String passwordHash;
 	
-	@OneToMany(mappedBy="owner" ,cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_user")
 	protected Set<Deck> decks;
 	
 	@Column(name="usr_salt", nullable = false, updatable = false)
