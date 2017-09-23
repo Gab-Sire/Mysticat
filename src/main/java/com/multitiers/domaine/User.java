@@ -75,4 +75,12 @@ public class User {
 	public void setDecks(Set<Deck> decks) {
 		this.decks = decks;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", passwordHash=" + passwordHash + ", decks=" + decks
+				+ ", hashedSalt=" + hashedSalt + "]";
+	}
+	
+	
 }

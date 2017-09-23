@@ -4,12 +4,16 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.multitiers.domaine.User;
+import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
 
 public class TestConnectionUtils {
@@ -32,7 +36,7 @@ public class TestConnectionUtils {
 	String failingPassword;
 	String hashedFailingPassword;
 	String stringToBeHashed;
-	
+
 	Character lowerCaseInUsername;
 	Character upperCaseInUsername;
 	Character digitInUsername;
@@ -45,17 +49,19 @@ public class TestConnectionUtils {
 	UUID uuid1;
 	UUID uuid2;
 
+	User user1;
+	User user2;
+
 	@Before
 	public void setUp() throws Exception {
 		passwordGenerator = new RandomStringGenerator.Builder()
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
 		usernameGenerator = new RandomStringGenerator.Builder()
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
-		stringToBeHashed = usernameGenerator.generate((int)Math.random()*ConnectionUtils.MAX_PASSWORD_LENGTH);
+		stringToBeHashed = usernameGenerator.generate((int) Math.random() * ConnectionUtils.MAX_PASSWORD_LENGTH);
 		salt1 = ConnectionUtils.generateSalt();
 		salt2 = ConnectionUtils.generateSalt();
-		
-		
+
 		password = passwordGenerator.generate(randomValidPasswordLength());
 		validUsername = usernameGenerator.generate(randomValidUsernameLength());
 
@@ -65,14 +71,17 @@ public class TestConnectionUtils {
 
 		password += generateLowerCase();
 		password += generateUpperCase();
-		password +=  generateDigit();
-		
-		hashedPassword = ConnectionUtils.hashPassword(password,salt1);
+		password += generateDigit();
+
+		tooShortUsername = "";
+
+		hashedPassword = ConnectionUtils.hashPassword(password, salt1);
 
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
-		
-		tooShortUsername = "";
+
+		user1 = InscriptionService.createUser(validUsername, password);
+
 	}
 
 	@After
@@ -86,12 +95,15 @@ public class TestConnectionUtils {
 		failingPassword = null;
 		salt1 = null;
 		salt2 = null;
-		
+
 		validUsername = null;
 		tooShortUsername = null;
-		
+
 		uuid1 = null;
 		uuid2 = null;
+
+		user1 = null;
+		user2 = null;
 	}
 
 	@Test
@@ -108,7 +120,7 @@ public class TestConnectionUtils {
 	public void hashesOfTheSamePasswordAreDifferent() {
 		assertFalse(ConnectionUtils.hashPassword(password, salt2).equals(hashedPassword));
 	}
-	
+
 	@Test
 	public void hashesOfTwoDifferentPasswordsAreDifferent() {
 		failingPassword = password + "a";
@@ -130,7 +142,7 @@ public class TestConnectionUtils {
 	public void passwordIsValid() {
 		assertTrue(ConnectionUtils.isValidPassword(password));
 	}
-	
+
 	@Test
 	public void usernameIsTooShort() {
 		// Meet all other conditions, so you know it's length that is the problem.
@@ -163,19 +175,25 @@ public class TestConnectionUtils {
 	public void passwordDoesntContainLowercase() {
 		assertFalse(ConnectionUtils.isValidPassword(password.toUpperCase()));
 	}
-	
+
 	@Test
 	public void passwordDoesntContainUppercase() {
 		assertFalse(ConnectionUtils.isValidPassword(password.toLowerCase()));
 	}
-	
+
 	@Test
 	public void passwordDoesntContainDigit() {
 		assertFalse(ConnectionUtils.isValidPassword(replaceAllDigitsWithLetters(password)));
 	}
 
+	@Ignore
+	@Test(expected = Exception.class)
+	public void oneUserPerUsername() {
+		user2 = InscriptionService.createUser(validUsername, password);
+	}
+
 	private String replaceAllDigitsWithLetters(String str) {
-		return str.replaceAll("[0-9]", (Math.random()>0.5) ? ""+generateLowerCase() : ""+generateUpperCase());
+		return str.replaceAll("[0-9]", (Math.random() > 0.5) ? "" + generateLowerCase() : "" + generateUpperCase());
 	}
 
 	private char generateDigit() {
@@ -197,5 +215,5 @@ public class TestConnectionUtils {
 	private int randomValidUsernameLength() {
 		return (int) (Math.random() * (ConnectionUtils.MAX_USERNAME_LENGTH - OFFSET_MAX_LENGTH)) + OFFSET_MIN_LENGTH;
 	}
-	
+
 }

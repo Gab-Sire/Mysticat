@@ -3,6 +3,9 @@ package com.multitiers.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +32,18 @@ public class RestControlleur {
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
     
-    //TODO EQ1-45
     @GetMapping(value = "/signUp/{username}/{password}")
     public @ResponseBody User signUp(@PathVariable String username, @PathVariable String password) {
     	User user = InscriptionService.createUser(username, password);
-    	userRepository.save(user);
+        userRepository.save(user);
+    	return user;
+    }
+    
+    //Fonction de signUp, mais avec le POST
+    @RequestMapping(value = "/signUpPost/{username}/{password}", method=RequestMethod.POST)
+    public @ResponseBody User signUpPost(@PathVariable String username, @PathVariable String password) {
+    	User user = InscriptionService.createUser(username, password);
+        userRepository.save(user);
     	return user;
     }
 }
