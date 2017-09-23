@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multitiers.domaine.User;
 import com.multitiers.repository.UserRepository;
+import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
-
 
 @RestController
 public class RestControlleur {
@@ -27,5 +27,13 @@ public class RestControlleur {
         User user = userRepository.findByUsername(username);
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+    }
+    
+    //TODO EQ1-45
+    @GetMapping(value = "/signUp/{username}/{password}")
+    public @ResponseBody User signUp(@PathVariable String username, @PathVariable String password) {
+    	User user = InscriptionService.createUser(username, password);
+    	userRepository.save(user);
+    	return user;
     }
 }

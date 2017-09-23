@@ -15,46 +15,47 @@ import org.springframework.stereotype.Service;
 import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.Card;
 import com.multitiers.domaine.Deck;
-import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
-import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.util.ConnectionUtils;
-import com.multitiers.util.Constantes;
 
 @Service
 public class InscriptionService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private DeckRepository deckRepository;
     private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
     
     @Transactional
-    public void inscription(String username, String password) {
+    public static User createUser(String username, String password) {
     	String salt = ConnectionUtils.generateSalt();
     	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
     	User user = new User(username, hashedPassword, salt);
     	user.setId(ConnectionUtils.generateUUID().toString());
-    	Set<Deck> decks = new HashSet<Deck>();
-    	decks.add(createStarterDeck(user));
-    	user.setDecks(decks);
-        userRepository.save(user);
+    	assignStarterDeck(user);
+        return user;
     }
-    
+
     @Transactional
     public void peuplement() {
-    	String salt = "salt";
-    	String password = "myboy";
-    	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
-        userRepository.save(new User("Chat1", hashedPassword, salt));
+    	//Methode qu'on va utiliser pour Bootstrapper
+        User user1 = createUser("Chat1", "myboy");
+        User user2 = createUser("Chat2", "myboy");
+        userRepository.save(user1);
+        userRepository.save(user2);
     }
     
-    public Deck createStarterDeck(User owner) {
+	private static void assignStarterDeck(User user) {
+		Set<Deck> decks = new HashSet<Deck>();
+    	decks.add(createStarterDeck(user));
+    	user.setDecks(decks);
+	}
+    
+    public static Deck createStarterDeck(User owner) {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	starterDeck.setOwner(owner);
     	List<Card> defaultCards = new ArrayList<Card>();
+    	//TODO creer les default cards
     	starterDeck.setCardList(defaultCards);
     	return starterDeck;
     }

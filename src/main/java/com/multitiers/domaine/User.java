@@ -30,7 +30,7 @@ public class User {
 	@OneToMany(mappedBy="owner" ,cascade = CascadeType.ALL)
 	protected Set<Deck> decks;
 	
-	@Column(name="usr_salt")
+	@Column(name="usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
 
 	public User(String username, String passwordHash, String hashedSalt) {
