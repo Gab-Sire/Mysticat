@@ -30,7 +30,8 @@ public class RestControlleur {
 	private CardRepository cardRepository;
 	@Autowired
 	private MinionCardRepository minionCardRepository;
-	
+	@Autowired
+	private User user;
 	
 	@Autowired
 	private InscriptionService inscriptionService;
@@ -53,6 +54,14 @@ public class RestControlleur {
         User user = userRepository.findByUsername(username);
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+    }
+    @PostMapping(value = "/Connection")
+    public @ResponseBody Boolean ConnectionPost(@PathVariable String username, @PathVariable String password) {
+        boolean autentication = attemptConnectionPost(username, password);
+        if(autentication) {
+        	user = userRepository.findByUsername(username);
+        }
+        return autentication;
     }
     
     @GetMapping(value = "/signUp")
@@ -80,5 +89,7 @@ public class RestControlleur {
     public String userSubmit(@ModelAttribute User user) {
         return "result";
     }
+    
+   
     
 }
