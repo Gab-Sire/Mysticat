@@ -49,9 +49,10 @@ public class RestControlleur {
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
     @PostMapping(value = "/Connection")
-    public @ResponseBody Boolean ConnectionPost(@PathVariable String username, @PathVariable String password) {
-        boolean autentication = attemptConnectionPost(username, password);
+    public @ResponseBody Boolean ConnectionPost(@ModelAttribute UserCredentials userCredentials) {
+        boolean autentication = attemptConnectionPost(userCredentials);
         if(autentication) {
+        	String username = userCredentials.getUsername();
         	user = userRepository.findByUsername(username);
         }
         return autentication;
