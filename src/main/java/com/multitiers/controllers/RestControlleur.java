@@ -1,7 +1,6 @@
 package com.multitiers.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -61,10 +60,5 @@ public class RestControlleur {
     @ExceptionHandler(value=Exception.class)
     public String errorMessage() {
     	return "Erreur";
-    }
-    
-    @GetMapping(value="/getting")
-    public String greetingForm(Model model){
-    	return "";
     }
 }
