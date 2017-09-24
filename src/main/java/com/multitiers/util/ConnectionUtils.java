@@ -2,7 +2,6 @@ package com.multitiers.util;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
-import org.apache.commons.text.RandomStringGenerator;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class ConnectionUtils {
@@ -64,7 +63,6 @@ public class ConnectionUtils {
 		return Pattern.matches(PASSWORD_REGEX, password);
 	}
 
-	// TODO implement in hashPassword
 	public static String generateSalt() {
 		return generateUUID().toString();
 	}
