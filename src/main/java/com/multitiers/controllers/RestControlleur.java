@@ -3,9 +3,12 @@ package com.multitiers.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,32 +42,32 @@ public class RestControlleur {
     }
     
     @GetMapping(value = "/attemptConnection/{username}/{password}")
-    public @ResponseBody Boolean attemptConnection(@PathVariable String username, @PathVariable String password) {
+    public @ResponseBody Boolean attemptConnectionGet(@PathVariable String username, @PathVariable String password) {
         User user = userRepository.findByUsername(username);
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
-   
-    @GetMapping(value = "/signUp/{username}/{password}")
-    public @ResponseBody User signUpGet(@PathVariable String username, @PathVariable String password) {
+    
+    @PostMapping(value = "/attemptConnection")
+    public @ResponseBody Boolean attemptConnectionPost(@PathVariable String username, @PathVariable String password) {
+        User user = userRepository.findByUsername(username);
+        String hashedSalt = user.getHashedSalt();
+        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+    }
+    
+    @GetMapping(value = "/signUp")
+    public @ResponseBody User signUpGet(@RequestParam String username, @RequestParam String password) {
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
     }
     
     //Fonction de signUp, mais avec le POST
-    @RequestMapping(value = "/signUpPost/{username}/{password}", method=RequestMethod.POST)
+    @RequestMapping(value = "/signUp", method=RequestMethod.POST)
     public @ResponseBody User signUpPost(@PathVariable String username, @PathVariable String password) {
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
-    }
-    
-    @RequestMapping(value = "/attemptConnection/{username}/{password}", method=RequestMethod.POST)
-    public @ResponseBody Boolean attemptConnectionPost(@PathVariable String username, @PathVariable String password) {
-        User user = userRepository.findByUsername(username);
-        String hashedSalt = user.getHashedSalt();
-        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
     
     //Fonction qui est lancee lorsqu'une erreur survient.
@@ -72,4 +75,10 @@ public class RestControlleur {
     public String errorMessage() {
     	return "Erreur";
     }
+    
+    @PostMapping(value="/greeting")
+    public String userSubmit(@ModelAttribute User user) {
+        return "result";
+    }
+    
 }

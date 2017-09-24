@@ -45,7 +45,6 @@ public class InscriptionService {
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
             MinionCard card = createMinionCard("MinionCard"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
             cardRepository.save(card);
-            System.out.println(card);
         }
         
         User user1 = createUser("Chat1", "Myboy1");
@@ -96,7 +95,6 @@ public class InscriptionService {
     	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; i++) {
     		Card cardToAdd = cardRepository.findByCardName("MinionCard"+i);
     		defaultCards.add(cardToAdd);
-    		System.out.println(cardToAdd);
     	}
     	
     	starterDeck.setCardList(defaultCards);
