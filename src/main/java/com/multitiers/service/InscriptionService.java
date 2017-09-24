@@ -40,7 +40,7 @@ public class InscriptionService {
     public void peuplement() {
     	//Methode qu'on va utiliser pour Bootstrapper
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
-            MinionCard card = createMinionCard("Chat"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
+            MinionCard card = createMinionCard("MinionCard"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
             cardRepository.save(card);
         }
         

@@ -72,6 +72,4 @@ public abstract class Card {
 		return "Card [cardName=" + cardName + "]";
 	}
 	
-	
-	
 }

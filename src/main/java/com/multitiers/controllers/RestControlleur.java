@@ -1,6 +1,7 @@
 package com.multitiers.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +55,11 @@ public class RestControlleur {
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
+    }
+    
+    //Fonction qui est lancee lorsqu'une erreur survient.
+    @ExceptionHandler(value=Exception.class)
+    public String errorMessage() {
+    	return "Erreur";
     }
 }
