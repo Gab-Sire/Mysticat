@@ -17,6 +17,7 @@ import com.multitiers.domaine.Card;
 import com.multitiers.domaine.Deck;
 import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
+import com.multitiers.exception.BadFormatException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -47,8 +48,8 @@ public class InscriptionService {
             System.out.println(card);
         }
         
-        User user1 = createUser("Chat1", "myboy");
-        User user2 = createUser("Chat2", "myboy");
+        User user1 = createUser("Chat1", "Myboy1");
+        User user2 = createUser("Chat2", "Myboy2");
         userRepository.save(user1);
         userRepository.save(user2);
     }
@@ -66,6 +67,9 @@ public class InscriptionService {
     }
     
     public  User createUser(String username, String password) {
+    	if(!ConnectionUtils.isValidPassword(password)) {
+    		throw new BadFormatException(password);
+    	}
     	String salt = ConnectionUtils.generateSalt();
     	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
     	User user = new User(username, hashedPassword, salt);
