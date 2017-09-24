@@ -65,5 +65,13 @@ public abstract class Card {
 	public void setCardDescription(String cardDescription) {
 		this.cardDescription = cardDescription;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Card [cardName=" + cardName + "]";
+	}
+	
+	
 	
 }

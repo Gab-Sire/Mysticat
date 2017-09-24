@@ -20,8 +20,13 @@ import com.multitiers.util.ConnectionUtils;
 public class RestControlleur {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private DeckRepository deckRepository;
+	@Autowired
 	private CardRepository cardRepository;
+	
+	@Autowired
+	private InscriptionService inscriptionService;
 	
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
@@ -38,7 +43,7 @@ public class RestControlleur {
     
     @GetMapping(value = "/signUp/{username}/{password}")
     public @ResponseBody User signUpGet(@PathVariable String username, @PathVariable String password) {
-    	User user = InscriptionService.createUser(username, password);
+    	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
     }
@@ -46,7 +51,7 @@ public class RestControlleur {
     //Fonction de signUp, mais avec le POST
     @RequestMapping(value = "/signUpPost/{username}/{password}", method=RequestMethod.POST)
     public @ResponseBody User signUpPost(@PathVariable String username, @PathVariable String password) {
-    	User user = InscriptionService.createUser(username, password);
+    	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
     }

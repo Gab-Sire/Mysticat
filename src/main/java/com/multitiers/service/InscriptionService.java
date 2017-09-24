@@ -31,23 +31,26 @@ public class InscriptionService {
     private DeckRepository deckRepository;
     @Autowired
     private CardRepository cardRepository;
+    
     private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
         
+    public InscriptionService() {}
+    
     @Transactional
     public void peuplement() {
     	//Methode qu'on va utiliser pour Bootstrapper
-        User user1 = createUser("Chat1", "myboy");
-        User user2 = createUser("Chat2", "myboy");
-        userRepository.save(user1);
-        userRepository.save(user2);
-        
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
             MinionCard card = createMinionCard("Chat"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
             cardRepository.save(card);
         }
+        
+        User user1 = createUser("Chat1", "myboy");
+        User user2 = createUser("Chat2", "myboy");
+        userRepository.save(user1);
+        userRepository.save(user2);
     }
     
-    public static MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost, String desc) {
+    public  MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost, String desc) {
     	MinionCard card = new MinionCard();
     	card.setCardId(ConnectionUtils.generateUUID().toString());
     	card.setCardName(name);
@@ -59,7 +62,7 @@ public class InscriptionService {
     	return card;
     }
     
-    public static User createUser(String username, String password) {
+    public  User createUser(String username, String password) {
     	String salt = ConnectionUtils.generateSalt();
     	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
     	User user = new User(username, hashedPassword, salt);
@@ -68,16 +71,22 @@ public class InscriptionService {
         return user;
     }
     
-	private static void assignStarterDeck(User user) {
+	private  void assignStarterDeck(User user) {
 		Set<Deck> decks = new HashSet<Deck>();
     	decks.add(createStarterDeck(user));
     	user.setDecks(decks);
 	}
     
-    public static Deck createStarterDeck(User owner) {
+    public  Deck createStarterDeck(User owner) {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	List<Card> defaultCards = new ArrayList<Card>();
+    	
+    	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; i++) {
+    		Card cardToAdd = cardRepository.findByCardName("Chat"+i);
+    		defaultCards.add(cardToAdd);
+    	}
+    	
     	starterDeck.setCardList(defaultCards);
     	return starterDeck;
     }

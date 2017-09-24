@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.multitiers.domaine.User;
 import com.multitiers.service.InscriptionService;
@@ -24,7 +25,9 @@ public class TestConnectionUtils {
 	private static final int NB_OF_DIGITS = 10;
 
 	static final char MIN_MAJUSCULE = 'A', MIN_MINUSCULE = 'a', MIN_DIGIT = '0';
-
+	@Autowired
+	InscriptionService inscriptionService;
+	
 	RandomStringGenerator passwordGenerator;
 	RandomStringGenerator usernameGenerator;
 	Integer passwordLength;
@@ -79,8 +82,6 @@ public class TestConnectionUtils {
 
 		uuid1 = ConnectionUtils.generateUUID();
 		uuid2 = ConnectionUtils.generateUUID();
-
-		user1 = InscriptionService.createUser(validUsername, password);
 
 	}
 
@@ -186,10 +187,12 @@ public class TestConnectionUtils {
 		assertFalse(ConnectionUtils.isValidPassword(replaceAllDigitsWithLetters(password)));
 	}
 
+	//TODO Lance un nullpointer, pas sur comment tester.
 	@Ignore
 	@Test(expected = Exception.class)
 	public void oneUserPerUsername() {
-		user2 = InscriptionService.createUser(validUsername, password);
+		user1 = inscriptionService.createUser(validUsername, password);
+		user2 = inscriptionService.createUser(validUsername, password);
 	}
 
 	private String replaceAllDigitsWithLetters(String str) {

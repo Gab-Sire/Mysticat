@@ -44,4 +44,9 @@ public class Deck {
 		this.cardList = cardList;
 	}
 
+	@Override
+	public String toString() {
+		return "Deck [deckId=" + deckId + ", cardList=" + cardList + "]";
+	}
+
 }
