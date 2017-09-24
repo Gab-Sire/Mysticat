@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.multitiers.domaine.User;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
+import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
@@ -25,6 +26,9 @@ public class RestControlleur {
 	private DeckRepository deckRepository;
 	@Autowired
 	private CardRepository cardRepository;
+	@Autowired
+	private MinionCardRepository minionCardRepository;
+	
 	
 	@Autowired
 	private InscriptionService inscriptionService;
@@ -41,7 +45,7 @@ public class RestControlleur {
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
-    
+   
     @GetMapping(value = "/signUp/{username}/{password}")
     public @ResponseBody User signUpGet(@PathVariable String username, @PathVariable String password) {
     	User user = inscriptionService.createUser(username, password);
@@ -55,6 +59,13 @@ public class RestControlleur {
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
+    }
+    
+    @RequestMapping(value = "/attemptConnection/{username}/{password}", method=RequestMethod.POST)
+    public @ResponseBody Boolean attemptConnectionPost(@PathVariable String username, @PathVariable String password) {
+        User user = userRepository.findByUsername(username);
+        String hashedSalt = user.getHashedSalt();
+        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
     
     //Fonction qui est lancee lorsqu'une erreur survient.
