@@ -19,6 +19,7 @@ import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
+import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
@@ -31,7 +32,8 @@ public class InscriptionService {
     private DeckRepository deckRepository;
     @Autowired
     private CardRepository cardRepository;
-    
+    @Autowired
+    private MinionCardRepository minionCardRepository;
     private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
         
     public InscriptionService() {}
@@ -42,6 +44,7 @@ public class InscriptionService {
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
             MinionCard card = createMinionCard("MinionCard"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
             cardRepository.save(card);
+            System.out.println(card);
         }
         
         User user1 = createUser("Chat1", "myboy");
@@ -83,8 +86,9 @@ public class InscriptionService {
     	List<Card> defaultCards = new ArrayList<Card>();
     	
     	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; i++) {
-    		Card cardToAdd = cardRepository.findByCardName("Chat"+i);
+    		Card cardToAdd = cardRepository.findByCardName("MinionCard"+i);
     		defaultCards.add(cardToAdd);
+    		System.out.println(cardToAdd);
     	}
     	
     	starterDeck.setCardList(defaultCards);
