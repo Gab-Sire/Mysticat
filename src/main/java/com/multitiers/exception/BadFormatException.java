@@ -6,9 +6,6 @@ public class BadFormatException extends RuntimeException{
 	String message;
 	
 	public BadFormatException(String message){
-		this.message = message;
+		this.message = message+" est dans un format invalide.";
 	}
-	
-	
-	
 }

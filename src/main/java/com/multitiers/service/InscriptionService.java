@@ -70,6 +70,10 @@ public class InscriptionService {
     	if(!ConnectionUtils.isValidPassword(password)) {
     		throw new BadFormatException(password);
     	}
+    	else if(!ConnectionUtils.isValidUsername(username)) {
+    		throw new BadFormatException(password);
+    	}
+    	
     	String salt = ConnectionUtils.generateSalt();
     	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
     	User user = new User(username, hashedPassword, salt);
