@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.multitiers.domaine.MinionCard;
 
 public interface MinionCardRepository extends JpaRepository<MinionCard, String>{
-	Set<MinionCard> findByInitialPower(int initialPower);
-	Set<MinionCard> findByInitialSpeed(int initialSpeed);
-	Set<MinionCard> findByInitialHealth(int initialHealth);
-	Set<MinionCard> findByInitialPowerAndInitialHealth(int initialPower, int initialHealth);
-	Set<MinionCard> findByInitialPowerAndInitialSpeed(int initialPower, int initialSpeed);
-	Set<MinionCard> findByInitialSpeedAndInitialHealth(int initialSpeed, int initialHealth);
-	Set<MinionCard> findByInitialPowerAndInitialHealthAndInitialSpeed(int initialPower, int initialHealth, int initialSpeed);
+	Set<MinionCard> findByInitialPower(Integer initialPower);
+	Set<MinionCard> findByInitialSpeed(Integer initialSpeed);
+	Set<MinionCard> findByInitialHealth(Integer initialHealth);
+	Set<MinionCard> findByInitialPowerAndInitialHealth(Integer initialPower, Integer initialHealth);
+	Set<MinionCard> findByInitialPowerAndInitialSpeed(Integer initialPower, Integer initialSpeed);
+	Set<MinionCard> findByInitialSpeedAndInitialHealth(Integer initialSpeed, Integer initialHealth);
+	Set<MinionCard> findByInitialPowerAndInitialHealthAndInitialSpeed(Integer initialPower, Integer initialHealth, Integer initialSpeed);
 	
 }
