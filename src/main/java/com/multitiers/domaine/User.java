@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("session")
 @Entity
 @Table(name="mys_user_usr")
 public class User {
