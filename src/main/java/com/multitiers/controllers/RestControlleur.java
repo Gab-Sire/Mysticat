@@ -1,6 +1,7 @@
 package com.multitiers.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multitiers.domaine.User;
+import com.multitiers.domaine.UserCredentials;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -76,9 +78,19 @@ public class RestControlleur {
     	return "Erreur";
     }
     
-    @PostMapping(value="/greeting")
-    public String userSubmit(@ModelAttribute User user) {
-        return "result";
+    
+    @GetMapping(value="/getting")
+    public String greetingForm(Model model){
+    	return "";
     }
     
+    @PostMapping(value="/greeting")
+    public User userSubmit(@ModelAttribute UserCredentials userCredentials) {
+        System.out.println(userCredentials.getPassword()+ "\n"+ userCredentials.getUsername());
+    	String username = userCredentials.getUsername();
+        String password = userCredentials.getPassword();
+    	User user = inscriptionService.createUser(username, password);
+        userRepository.save(user);
+    	return user;
+    }
 }
