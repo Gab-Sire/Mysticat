@@ -87,13 +87,14 @@ public class InscriptionService {
     	user.setDecks(decks);
 	}
     
-    public  Deck createStarterDeck(User owner) {
+    public Deck createStarterDeck(User owner) {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	List<Card> defaultCards = new ArrayList<Card>();
     	
     	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; i++) {
-    		Card cardToAdd = cardRepository.findByCardName("MinionCard"+i);
+    		Integer cardIndex = (int) (Math.random()*Constantes.NB_OF_CARDS_IN_TEST_SET)+1;
+    		Card cardToAdd = cardRepository.findByCardName("MinionCard"+cardIndex);
     		defaultCards.add(cardToAdd);
     	}
     	

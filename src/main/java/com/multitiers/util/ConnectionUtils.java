@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class ConnectionUtils {
-	public static final String SALT = "sha1myboy";
 	public static final Integer MIN_USERNAME_LENGTH = 5;
 	public static final Integer MIN_PASSWORD_LENGTH = 5;
 	public static final Integer MAX_USERNAME_LENGTH = 30;
