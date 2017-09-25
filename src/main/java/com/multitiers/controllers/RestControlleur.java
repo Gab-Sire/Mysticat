@@ -28,8 +28,6 @@ public class RestControlleur {
 	private CardRepository cardRepository;
 	@Autowired
 	private MinionCardRepository minionCardRepository;
-	@Autowired
-	private User user;
 	
 	@Autowired
 	private InscriptionService inscriptionService;
@@ -48,6 +46,7 @@ public class RestControlleur {
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
+    /*
     @PostMapping(value = "/Connection")
     public @ResponseBody Boolean ConnectionPost(@ModelAttribute UserCredentials userCredentials) {
         boolean autentication = attemptConnectionPost(userCredentials);
@@ -57,7 +56,7 @@ public class RestControlleur {
         }
         return autentication;
     }
-    
+    */
     @PostMapping(value="/signUp")
     public User userSubmit(@ModelAttribute UserCredentials userCredentials) {
     	String username = userCredentials.getUsername();

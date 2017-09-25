@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
-@Scope("session")
+//@Component
+//@Scope("session")
 @Entity
 @Table(name="mys_user_usr")
 public class User {
