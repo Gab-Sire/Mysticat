@@ -46,17 +46,19 @@ public class RestControlleur {
         String hashedSalt = user.getHashedSalt();
         return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
     }
+    
     /*
     @PostMapping(value = "/Connection")
     public @ResponseBody Boolean ConnectionPost(@ModelAttribute UserCredentials userCredentials) {
-        boolean autentication = attemptConnectionPost(userCredentials);
-        if(autentication) {
+        boolean authentication = attemptConnectionPost(userCredentials);
+        if(authentication) {
         	String username = userCredentials.getUsername();
         	user = userRepository.findByUsername(username);
         }
-        return autentication;
+        return authentication;
     }
     */
+    
     @PostMapping(value="/signUp")
     public User userSubmit(@ModelAttribute UserCredentials userCredentials) {
     	String username = userCredentials.getUsername();
