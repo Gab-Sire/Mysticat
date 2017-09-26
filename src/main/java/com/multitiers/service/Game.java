@@ -10,6 +10,13 @@ public class Game {
 	public Game() {
 		//Hard coder player2
 		players = new Player[Constantes.MAX_NB_OF_PLAYERS];
+		currentMana = 0;
+	}
+	
+	public void nextTurn() {
+		if(currentMana<Constantes.MAX_MANA) {
+			currentMana++;
+		}
 	}
 	
 }
