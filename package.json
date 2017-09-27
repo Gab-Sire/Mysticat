@@ -1,14 +1,23 @@
 {
   "name": "projet_multitiers",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "react": "^16.0.0"
+    "axios": "^0.16.2",
+    "lodash": "^4.17.4",
+    "react": "^15.6.1",
+    "react-axios": "^1.0.3",
+    "react-dom": "^15.6.1",
+    "react-scripts": "^1.0.14"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
