@@ -21,6 +21,8 @@ public class Game {
 		if(currentMana<Constantes.MAX_MANA) {
 			currentMana++;
 		}
+		players[0].drawCard();
+		players[1].drawCard();
 	}
 	
 }

@@ -24,7 +24,7 @@ public class Player {
 		this.deck = new ArrayList<PlayableCard>(); 
 		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
 		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
-		
+
 		Collections.shuffle(deck);
 		for(int i=0; i<Constantes.STARTING_HAND_SIZE; i++) {
 			drawCard();
