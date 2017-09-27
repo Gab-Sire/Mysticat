@@ -1,5 +1,6 @@
 package com.multitiers.domaine;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,7 @@ public class User {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_user")
-	protected Set<Deck> decks;
+	protected List<Deck> decks;
 	
 	@Column(name="usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
@@ -72,10 +73,10 @@ public class User {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-	public Set<Deck> getDecks() {
+	public List<Deck> getDecks() {
 		return decks;
 	}
-	public void setDecks(Set<Deck> decks) {
+	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
 	}
 

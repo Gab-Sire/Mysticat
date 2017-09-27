@@ -17,10 +17,10 @@ public class Game {
 		actions = new TreeSet<Action>();
 	}
 	
-	public Game(Player player1) {
+	public Game(Player player1, Player player2) {
 		players = new Player[Constantes.MAX_NB_OF_PLAYERS];
 		players[0] = player1;
-		players[1] = new Player();
+		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
 		actions = new TreeSet<Action>();
 	}

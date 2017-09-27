@@ -83,7 +83,7 @@ public class InscriptionService {
     }
     
 	private  void assignStarterDeck(User user) {
-		Set<Deck> decks = new HashSet<Deck>();
+		List<Deck> decks = new ArrayList<Deck>();
     	decks.add(createStarterDeck(user));
     	user.setDecks(decks);
 	}

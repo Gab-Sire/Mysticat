@@ -73,8 +73,10 @@ public class RestControlleur {
     @ResponseBody
     public Game enterGame(@ModelAttribute UserCredentials userCredentials) {
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
+    	User userHardCoded = userRepository.findByUsername("Chat2");
     	Player player1 = new Player(user);
-    	Game game = new Game(player1);
+    	Player player2 = new Player(userHardCoded);
+    	Game game = new Game(player1, player2);
     	return game;
     }
     

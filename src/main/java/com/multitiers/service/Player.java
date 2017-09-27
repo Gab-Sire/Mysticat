@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.multitiers.domaine.Card;
+import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
 import com.multitiers.util.Constantes;
 public class Player {
+	private String name;
 	private Hero hero;
 	private List<PlayableCard> graveyard;
 	private Minion[] field;
@@ -31,11 +34,17 @@ public class Player {
 	}
 	
 	public Player(User user) {
+		this.name = user.getUsername();
+		this.deck = new ArrayList<PlayableCard>();
+		List<Card> entityCardList = user.getDecks().get(0).getCardList();
+		for(int i=0; i<entityCardList.size(); i++) {
+			this.deck.add(new PlayableMinionCard((MinionCard) entityCardList.get(i)));
+		}
+		
 		this.hero = new Hero();
 		this.graveyard = new ArrayList<PlayableCard>();
 		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
 		this.hand = new ArrayList<PlayableCard>();
-		this.deck = new ArrayList<PlayableCard>(); 
 		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
 		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
 
@@ -64,6 +73,15 @@ public class Player {
 	public void takeFatigueDamage() {
 		this.hero.health-= fatigueDamage;
 		fatigueDamage++;
+	}
+
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Hero getHero() {
