@@ -103,12 +103,15 @@ public class InscriptionService {
     	return starterDeck;
     }
     
-    public Boolean areCredentialsValidForLogin(UserCredentials userCredentials) {
+    public User getUserFromCredentials(UserCredentials userCredentials) {
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
     	User user = userRepository.findByUsername(username);
         String hashedSalt = user.getHashedSalt();
-        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+         if(ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash())) {
+        	 return user;
+         }
+         return null;
     }
     
 }

@@ -42,7 +42,7 @@ public class RestControlleur {
     
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody Boolean attemptConnectionPost(@ModelAttribute UserCredentials userCredentials) {
-    	return inscriptionService.areCredentialsValidForLogin(userCredentials);
+    	return inscriptionService.getUserFromCredentials(userCredentials)!=null;
     }
     
     /*
@@ -70,13 +70,12 @@ public class RestControlleur {
     //Deuxieme user sera hardcoded pour tester 
     //Demande les credentials, car on n'a pas de session
     @PostMapping(value="/enterGame")
+    @ResponseBody
     public Game enterGame(@ModelAttribute UserCredentials userCredentials) {
-    	//TODO refactor -> tell don't ask
-    	Game game = new Game();
-    	if(inscriptionService.areCredentialsValidForLogin(userCredentials)) {
-    		
-    	}
-    	return null;
+    	User user = inscriptionService.getUserFromCredentials(userCredentials);
+    	Player player1 = new Player(user);
+    	Game game = new Game(player1);
+    	return game;
     }
     
     //Fonction qui est lancee lorsqu'une erreur survient.
@@ -84,7 +83,4 @@ public class RestControlleur {
     public String errorMessage() {
     	return "Erreur";
     }
-
-
-
 }

@@ -12,4 +12,30 @@ public class PlayableMinionCard extends PlayableCard{
 		this.initialHealth = entityCard.getInitialHealth();
 		this.initialSpeed = entityCard.getInitialSpeed();
 	}
+
+	public Integer getInitialPower() {
+		return initialPower;
+	}
+
+	public void setInitialPower(Integer initialPower) {
+		this.initialPower = initialPower;
+	}
+
+	public Integer getInitialHealth() {
+		return initialHealth;
+	}
+
+	public void setInitialHealth(Integer initialHealth) {
+		this.initialHealth = initialHealth;
+	}
+
+	public Integer getInitialSpeed() {
+		return initialSpeed;
+	}
+
+	public void setInitialSpeed(Integer initialSpeed) {
+		this.initialSpeed = initialSpeed;
+	}
+	
+	
 }
