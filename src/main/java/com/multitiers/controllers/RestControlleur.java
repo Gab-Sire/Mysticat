@@ -15,7 +15,9 @@ import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
+import com.multitiers.service.Game;
 import com.multitiers.service.InscriptionService;
+import com.multitiers.service.Player;
 import com.multitiers.util.ConnectionUtils;
 
 @RestController
@@ -40,11 +42,7 @@ public class RestControlleur {
     
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody Boolean attemptConnectionPost(@ModelAttribute UserCredentials userCredentials) {
-    	String username = userCredentials.getUsername();
-        String password = userCredentials.getPassword();
-    	User user = userRepository.findByUsername(username);
-        String hashedSalt = user.getHashedSalt();
-        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+    	return inscriptionService.areCredentialsValidForLogin(userCredentials);
     }
     
     /*
@@ -68,10 +66,25 @@ public class RestControlleur {
     	return user;
     }
     
+    //TODO EQ1-49 Instancier une partie a partir du user qui la demande.
+    //Deuxieme user sera hardcoded pour tester 
+    //Demande les credentials, car on n'a pas de session
+    @PostMapping(value="/enterGame")
+    public Game enterGame(@ModelAttribute UserCredentials userCredentials) {
+    	//TODO refactor -> tell don't ask
+    	Game game = new Game();
+    	if(inscriptionService.areCredentialsValidForLogin(userCredentials)) {
+    		
+    	}
+    	return null;
+    }
+    
     //Fonction qui est lancee lorsqu'une erreur survient.
     @ExceptionHandler(value=Exception.class)
     public String errorMessage() {
     	return "Erreur";
     }
+
+
 
 }

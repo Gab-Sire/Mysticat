@@ -17,6 +17,7 @@ import com.multitiers.domaine.Card;
 import com.multitiers.domaine.Deck;
 import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
+import com.multitiers.domaine.UserCredentials;
 import com.multitiers.exception.BadFormatException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
@@ -101,4 +102,13 @@ public class InscriptionService {
     	starterDeck.setCardList(defaultCards);
     	return starterDeck;
     }
+    
+    public Boolean areCredentialsValidForLogin(UserCredentials userCredentials) {
+    	String username = userCredentials.getUsername();
+        String password = userCredentials.getPassword();
+    	User user = userRepository.findByUsername(username);
+        String hashedSalt = user.getHashedSalt();
+        return ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash());
+    }
+    
 }
