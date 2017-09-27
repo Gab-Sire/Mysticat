@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multitiers.domaine.User;
 import com.multitiers.domaine.UserCredentials;
+import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
+import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -44,8 +46,12 @@ public class RestControlleur {
     }
     
     @PostMapping(value = "/attemptConnection")
-    public @ResponseBody Boolean attemptConnectionPost(@ModelAttribute UserCredentials userCredentials) {
-    	return inscriptionService.getUserFromCredentials(userCredentials)!=null;
+    public @ResponseBody User loginWithCredentials(@ModelAttribute UserCredentials userCredentials) {
+    	User user = inscriptionService.getUserFromCredentials(userCredentials);
+    	if(user==null) {
+    		throw new BadCredentialsLoginException();
+    	}
+    	return user;
     }
     
     /*
@@ -61,9 +67,12 @@ public class RestControlleur {
     */
     
     @PostMapping(value="/signUp")
-    public User userSubmit(@ModelAttribute UserCredentials userCredentials) {
+    public User createUserWithCredentials(@ModelAttribute UserCredentials userCredentials) {
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
+    	if(userRepository.findByUsername(username)!=null) {
+    		throw new UsernameTakenException(username);
+    	}
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
     	return user;
@@ -72,6 +81,7 @@ public class RestControlleur {
     //TODO EQ1-49 Instancier une partie a partir du user qui la demande.
     //Deuxieme user sera hardcoded pour tester 
     //Demande les credentials, car on n'a pas de session
+    //Fonction test seulement, pas besoin de checker pour des exceptions
     @PostMapping(value="/enterGame")
     @ResponseBody
     public Game enterGame(@ModelAttribute UserCredentials userCredentials) {
@@ -83,7 +93,12 @@ public class RestControlleur {
     	return game;
     }
     
-    //Fonction qui est lancee lorsqu'une erreur survient.
+    
+    @ExceptionHandler(value=BadCredentialsLoginException.class)
+    public String handleBadCredentialsLogin() {
+    	return "Le nom d'utilisateur et le mot de passe que vous avez entre ne correspondent pas.";
+    }
+    
     @ExceptionHandler(value=BadPasswordFormatException.class)
     public String handleBadPasswordSignup() {
     	return "Votre mot de passe est dans un format invalide.\n"+
@@ -99,4 +114,11 @@ public class RestControlleur {
 				"<h2>Le nom d'utilisateur doit comprendre:</h2> \n"+
 				"<ul><li>Entre "+Constantes.MIN_USERNAME_LENGTH+" et "+Constantes.MAX_USERNAME_LENGTH+" caracteres inclusivement</li>";
     }
+    
+    @ExceptionHandler(value=UsernameTakenException.class)
+    public String handleUsernameTakenSignup(UsernameTakenException e) {
+    	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
+    }
+    
+    
 }

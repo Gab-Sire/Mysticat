@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mysticat - Enter Game Page</title>
+    <title>Mysticat - Joindre une partie Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="formstyles.css">
 </head>
 <body>
-	<h1>Enter Game</h1>
+	<h1>Joindre une partie</h1>
     <form action="enterGame" th:action="@{/enterGame}" th:object="${usercredentials}" method="post">
-    	<p>Username: <input type="text" th:field="*{username}" name="username" required/></p>
-        <p>Password: <input type="password" th:field="*{password}" name="password" required/></p>
+    	<p>Nom d'utilisateur: <input type="text" th:field="*{username}" name="username" required/></p>
+        <p>Mot de passe: <input type="password" th:field="*{password}" name="password" required/></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </body>
