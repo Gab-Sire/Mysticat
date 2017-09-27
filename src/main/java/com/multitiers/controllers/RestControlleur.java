@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,6 @@ import com.multitiers.repository.UserRepository;
 import com.multitiers.service.Game;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.service.Player;
-import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 @RestController
@@ -92,8 +92,7 @@ public class RestControlleur {
     	Game game = new Game(player1, player2);
     	return game;
     }
-    
-    
+
     @ExceptionHandler(value=BadCredentialsLoginException.class)
     public String handleBadCredentialsLogin() {
     	return "Le nom d'utilisateur et le mot de passe que vous avez entre ne correspondent pas.";

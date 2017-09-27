@@ -1,0 +1,20 @@
+{
+  "name": "projet_multitiers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://marcantoinebechard@bitbucket.org/AL-CCG/projet_multitiers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/AL-CCG/projet_multitiers#readme"
+}
