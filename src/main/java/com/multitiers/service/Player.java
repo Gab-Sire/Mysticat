@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.multitiers.domaine.User;
 import com.multitiers.util.Constantes;
 public class Player {
 	private Hero hero;
@@ -26,6 +27,23 @@ public class Player {
 		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
 
 		Collections.shuffle(deck);
+		drawStartingHand();
+	}
+	
+	public Player(User user) {
+		this.hero = new Hero();
+		this.graveyard = new ArrayList<PlayableCard>();
+		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
+		this.hand = new ArrayList<PlayableCard>();
+		this.deck = new ArrayList<PlayableCard>(); 
+		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
+		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
+
+		Collections.shuffle(deck);
+		drawStartingHand();
+	}
+
+	private void drawStartingHand() {
 		for(int i=0; i<Constantes.STARTING_HAND_SIZE; i++) {
 			drawCard();
 		}
@@ -103,7 +121,4 @@ public class Player {
 	public void setFatigueDamage(Integer fatigueDamage) {
 		this.fatigueDamage = fatigueDamage;
 	}
-	
-	
-	
 }
