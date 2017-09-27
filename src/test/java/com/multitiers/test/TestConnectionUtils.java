@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.multitiers.domaine.User;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
+import com.multitiers.util.Constantes;
 
 public class TestConnectionUtils {
 
@@ -61,7 +62,7 @@ public class TestConnectionUtils {
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
 		usernameGenerator = new RandomStringGenerator.Builder()
 				.withinRange(ConnectionUtils.MINIMUM_CHAR_PASSWORD, ConnectionUtils.MAXIMUM_CHAR_PASSWORD).build();
-		stringToBeHashed = usernameGenerator.generate((int) Math.random() * ConnectionUtils.MAX_PASSWORD_LENGTH);
+		stringToBeHashed = usernameGenerator.generate((int) Math.random() * Constantes.MAX_PASSWORD_LENGTH);
 		salt1 = ConnectionUtils.generateSalt();
 		salt2 = ConnectionUtils.generateSalt();
 
@@ -155,20 +156,20 @@ public class TestConnectionUtils {
 
 	@Test
 	public void passwordIsTooShort() {
-		tooShortPassword = passwordGenerator.generate(ConnectionUtils.MIN_PASSWORD_LENGTH - 1);
+		tooShortPassword = passwordGenerator.generate(Constantes.MIN_PASSWORD_LENGTH - 1);
 		assertFalse(ConnectionUtils.isValidPassword(tooShortPassword));
 	}
 
 	@Test
 	public void passwordIsTooLong() {
-		tooLongPassword = passwordGenerator.generate(ConnectionUtils.MAX_PASSWORD_LENGTH + 1);
+		tooLongPassword = passwordGenerator.generate(Constantes.MAX_PASSWORD_LENGTH + 1);
 		assertFalse(ConnectionUtils.isValidPassword(tooLongPassword));
 	}
 
 	@Test
 	public void usernameIsTooLong() {
 		// Length guaranteed above maximum permitted.
-		tooLongUsername = validUsername + usernameGenerator.generate(ConnectionUtils.MAX_USERNAME_LENGTH);
+		tooLongUsername = validUsername + usernameGenerator.generate(Constantes.MAX_USERNAME_LENGTH);
 		assertFalse(ConnectionUtils.isValidUsername(tooLongUsername));
 	}
 
@@ -212,11 +213,11 @@ public class TestConnectionUtils {
 	}
 
 	private int randomValidPasswordLength() {
-		return (int) (Math.random() * (ConnectionUtils.MAX_PASSWORD_LENGTH - OFFSET_MAX_LENGTH)) + OFFSET_MIN_LENGTH;
+		return (int) (Math.random() * (Constantes.MAX_PASSWORD_LENGTH - OFFSET_MAX_LENGTH)) + OFFSET_MIN_LENGTH;
 	}
 
 	private int randomValidUsernameLength() {
-		return (int) (Math.random() * (ConnectionUtils.MAX_USERNAME_LENGTH - OFFSET_MAX_LENGTH)) + OFFSET_MIN_LENGTH;
+		return (int) (Math.random() * (Constantes.MAX_USERNAME_LENGTH - OFFSET_MAX_LENGTH)) + OFFSET_MIN_LENGTH;
 	}
 
 }

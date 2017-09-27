@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multitiers.domaine.User;
 import com.multitiers.domaine.UserCredentials;
+import com.multitiers.exception.BadPasswordFormatException;
+import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -19,6 +21,7 @@ import com.multitiers.service.Game;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.service.Player;
 import com.multitiers.util.ConnectionUtils;
+import com.multitiers.util.Constantes;
 
 @RestController
 public class RestControlleur {
@@ -81,8 +84,19 @@ public class RestControlleur {
     }
     
     //Fonction qui est lancee lorsqu'une erreur survient.
-    @ExceptionHandler(value=Exception.class)
-    public String errorMessage() {
-    	return "Erreur";
+    @ExceptionHandler(value=BadPasswordFormatException.class)
+    public String handleBadPasswordSignup() {
+    	return "Votre mot de passe est dans un format invalide.\n"+
+				"<h2>Le mot de passe doit comprendre:</h2> \n"+
+				"<ul><li>Entre "+Constantes.MIN_PASSWORD_LENGTH+" et "+Constantes.MAX_PASSWORD_LENGTH+" caracteres inclusivement</li>"+
+				"<li>Au moins 1 lettre minuscle</li>"+
+				"<li>Au moins 1 lettre majuscule</li>"+
+				"<li>Au moins un chiffre</li></ul>";
+    }
+    @ExceptionHandler(value=BadUsernameFormatException.class)
+    public String handleBadUsernameSignup() {
+    	return "Votre mot de passe est dans un format invalide.\n"+
+				"<h2>Le nom d'utilisateur doit comprendre:</h2> \n"+
+				"<ul><li>Entre "+Constantes.MIN_USERNAME_LENGTH+" et "+Constantes.MAX_USERNAME_LENGTH+" caracteres inclusivement</li>";
     }
 }

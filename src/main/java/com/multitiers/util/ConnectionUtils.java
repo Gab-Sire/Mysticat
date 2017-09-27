@@ -5,24 +5,18 @@ import java.util.regex.Pattern;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class ConnectionUtils {
-	public static final Integer MIN_USERNAME_LENGTH = 5;
-	public static final Integer MIN_PASSWORD_LENGTH = 5;
-	public static final Integer MAX_USERNAME_LENGTH = 30;
-	public static final Integer MAX_PASSWORD_LENGTH = 100;
-	public static final Integer MAX_SALT_LENGTH = 100;
-
 	public static final char MINIMUM_CHAR_PASSWORD = '!';
 	public static final char MAXIMUM_CHAR_PASSWORD = '~';
 
 	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
 	// caracteres et maximale de 30.
 	public final static String USERNAME_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]" + "{"
-			+ MIN_USERNAME_LENGTH + "," + MAX_USERNAME_LENGTH + "}$";
+			+ Constantes.MIN_USERNAME_LENGTH + "," + Constantes.MAX_USERNAME_LENGTH + "}$";
 
 	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
 	// caracteres et maximale de 100.
 	public final static String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\S)[a-zA-Z\\d\\S]" + "{"
-			+ MIN_PASSWORD_LENGTH + "," + MAX_PASSWORD_LENGTH + "}$";
+			+ Constantes.MIN_PASSWORD_LENGTH + "," + Constantes.MAX_PASSWORD_LENGTH + "}$";
 
 	// Yeah, I wrote that. (not)
 	public static final String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+"

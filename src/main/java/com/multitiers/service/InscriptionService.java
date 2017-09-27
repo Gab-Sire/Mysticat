@@ -18,7 +18,8 @@ import com.multitiers.domaine.Deck;
 import com.multitiers.domaine.MinionCard;
 import com.multitiers.domaine.User;
 import com.multitiers.domaine.UserCredentials;
-import com.multitiers.exception.BadFormatException;
+import com.multitiers.exception.BadPasswordFormatException;
+import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -68,10 +69,10 @@ public class InscriptionService {
     
     public  User createUser(String username, String password) {
     	if(!ConnectionUtils.isValidPassword(password)) {
-    		throw new BadFormatException(password);
+    		throw new BadPasswordFormatException(password);
     	}
     	else if(!ConnectionUtils.isValidUsername(username)) {
-    		throw new BadFormatException(password);
+    		throw new BadUsernameFormatException(username);
     	}
     	
     	String salt = ConnectionUtils.generateSalt();
