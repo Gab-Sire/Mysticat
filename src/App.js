@@ -38,7 +38,7 @@ class App extends Component{
 	render(){
 		return(
 				<div id="board">
-				<CreateHand hand={this.state.hand} createCard={this.createTask.bind(this)}/>
+					Wow
 				</div>
 				);
 	}
