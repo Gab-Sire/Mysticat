@@ -1,6 +1,13 @@
 package com.multitiers.controllers;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.multitiers.domaine.User;
 import com.multitiers.domaine.UserCredentials;
@@ -26,6 +36,7 @@ import com.multitiers.service.Player;
 import com.multitiers.util.Constantes;
 
 @RestController
+@CrossOrigin
 public class RestControlleur {
 	@Autowired
 	private UserRepository userRepository;
@@ -39,6 +50,7 @@ public class RestControlleur {
 	@Autowired
 	private InscriptionService inscriptionService;
 	
+	@CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:8089/"})
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
         User user = userRepository.findByUsername(username);
@@ -118,6 +130,23 @@ public class RestControlleur {
     public String handleUsernameTakenSignup(UsernameTakenException e) {
     	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
     }
-    
+    @EnableWebSecurity
+    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    	@Override
+    	protected void configure(HttpSecurity http) throws Exception {
+    		http.cors().and();
+    	}
+
+    	@Bean
+    	CorsConfigurationSource corsConfigurationSource() {
+    		CorsConfiguration configuration = new CorsConfiguration();
+    		configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
+    		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+    		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    		source.registerCorsConfiguration("/**", configuration);
+    		return source;
+    	}
+    }
     
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import _ from 'lodash';
 import './App.css';
 
@@ -35,16 +36,16 @@ const self = {
 		
 }
 
-
 class App extends Component{
 	constructor(props){
 		super(props);
-		this.state={
+		this.state ={
 				
 		}
 	}
 	render(){
 		return(
+			<div>
 				<div id="board">
 					<div id="opponentHand">
 						<div className="card">
@@ -63,10 +64,24 @@ class App extends Component{
 						</div>
 					</div>
 				</div>
+				<div>
+				<button onClick={this.getInitialGameInstance()}>Allo</button>				
+			</div>
+			</div>
 				);
 	}
+	
+	getInitialGameInstance(){
+		axios.get('http://localhost:8089/getUserByName/Chat1')
+		.then(response => {
+			console.log(response);
+		})
+		.catch(error => {
+		  console.log('Error fetching and parsing data', error);
+		});
+	}
+
+	
 }
-
-
 
 export default App;
