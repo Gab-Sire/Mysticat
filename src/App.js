@@ -72,14 +72,20 @@ class App extends Component{
 	}
 	
 	getInitialGameInstance(){
-		axios.get('http://localhost:8089/getUserByName/Chat1')
-		.then(response => {
-			console.log(response);
-		})
-		.catch(error => {
-		  console.log('Error fetching and parsing data', error);
-		});
-	}
+		axios({
+			  method:'get',
+			  url:'http://localhost:8089/getUserByName/Chat1',
+			  responseType:'stream',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  console.log(response);
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
+			  }
+	
 
 	
 }

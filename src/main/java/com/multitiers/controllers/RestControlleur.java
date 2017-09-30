@@ -1,24 +1,16 @@
 package com.multitiers.controllers;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 
 import com.multitiers.domaine.User;
 import com.multitiers.domaine.UserCredentials;
@@ -50,11 +42,21 @@ public class RestControlleur {
 	@Autowired
 	private InscriptionService inscriptionService;
 	
-	@CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:8089/"})
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
         User user = userRepository.findByUsername(username);
         return user;
+    }
+    
+    @GetMapping(value="/getHardCodedGame")
+    public @ResponseBody Game getUserByName() {
+        User user1 = userRepository.findByUsername("Chat1");
+        User user2 = userRepository.findByUsername("Chat2");
+        Player player1 = new Player(user1);
+        Player player2 = new Player(user2);
+        
+    	Game game = new Game(player1, player2);
+        return game;
     }
     
     @PostMapping(value = "/attemptConnection")
@@ -65,7 +67,7 @@ public class RestControlleur {
     	}
     	return user;
     }
-    
+
     /*
     @PostMapping(value = "/Connection")
     public @ResponseBody Boolean ConnectionPost(@ModelAttribute UserCredentials userCredentials) {
@@ -130,23 +132,4 @@ public class RestControlleur {
     public String handleUsernameTakenSignup(UsernameTakenException e) {
     	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
     }
-    @EnableWebSecurity
-    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    	@Override
-    	protected void configure(HttpSecurity http) throws Exception {
-    		http.cors().and();
-    	}
-
-    	@Bean
-    	CorsConfigurationSource corsConfigurationSource() {
-    		CorsConfiguration configuration = new CorsConfiguration();
-    		configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
-    		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-    		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    		source.registerCorsConfiguration("/**", configuration);
-    		return source;
-    	}
-    }
-    
 }
