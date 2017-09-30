@@ -41,3 +41,14 @@
 #opponentHand .card{
 	background-color: red;
 }
+
+#selfHand .card{
+	font-size: 12px;
+	background-color: yellow;
+}
+
+.cardName{
+	font-weight: bold;
+	font-style: underline;
+	overflow: auto;
+}

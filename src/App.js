@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import CardList from './CardList';
 import axios from 'axios';
 import _ from 'lodash';
 import './App.css';
@@ -8,15 +7,24 @@ import './App.css';
 class App extends Component{
 	constructor(props){
 		super(props);
-		this.state ={
-			loaded: false,
-			
-		}
 		this.getInitialGameInstance();
+		this.state ={
+				counter :1,
+			gameState : {
+				//En attendant que le call asynchrone finisse besoin d'un objet player
+				players: [
+						{
+						hand : [
+							{
+
+							}
+						]
+						}
+				]
+			}
+		}
 	}
 	render(){
-		if(this.state.loaded){
-			console.log(this.state.gameState.players[0].hand);
 			return(
 				<div>
 					<div id="board">
@@ -25,36 +33,23 @@ class App extends Component{
 								Card back
 							</div>
 						</div>
-						<div id="selfHand">
-							<CardList 
-								cards = {this.state.gameState.players[0].hand}
-						/>
+							<div id="selfHand">
+							{this.state.gameState.players[0].hand.map((card)=>{
+								return <div className="card">
+								<div className="cardName">{card.name}</div>
+								Cost: {card.manaCost}<br/>
+								Power: {card.initialPower}<br/>
+								Health: {card.initialHealth}<br/>
+								Speed: {card.initialSpeed}<br/>
+								</div>
+							})}
 						</div>
 					</div>
-					<div>				
-				</div>
-				</div>
-					);
-		}
-		return(
-				<div>
-					<div id="board">
-						<div id="opponentHand">
-							<div className="card">
-								Card back
-							</div>
-						</div>
-						<div id="selfHand">
-							<CardList 
-						/>						
-						</div>
-					</div>
-					<div>				
-				</div>
 				</div>
 					);
 	}
 	
+	//Fonction qui fetch un game state fait par Spring avec valeurs par defaut
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
@@ -63,10 +58,8 @@ class App extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  console.log(response);
-				  this.state.gameState = response.data;
-				  this.state.loaded = true;
-				  this.render();
+				  this.setState({gameState: response.data});
+				  this.forceUpdate();
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
