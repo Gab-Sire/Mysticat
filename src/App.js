@@ -9,13 +9,21 @@ class App extends Component{
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-				counter :1,
 			gameState : {
 				//En attendant que le call asynchrone finisse besoin d'un player
 				players: [
 						{
+						hero: {
+							health:30
+						},
 						hand : [
 							{
+								name: "test",
+								initialPower: "test",
+								manaCost: "test",
+								initialHealth: "test",
+								initialSpeed: "test",
+								description: "test"
 
 							}
 						]
@@ -25,17 +33,22 @@ class App extends Component{
 		}
 	}
 	render(){
+		let selfHand = this.state.gameState.players[0].hand;
+		let selfHealth = this.state.gameState.players[0].hero.health;
 			return(
 				<div>
 					<div id="board">
-						<div id="opponentHand">
+						<div id="opponentHand" className="hand">
 							<div className="card">
 								Card back
 							</div>
 						</div>
-							<div id="selfHand">
-							{this.state.gameState.players[0].hand.map((card)=>{
-								return <div className="card">
+							<div id="selfHealth" className="heroHealth">
+							{selfHealth}
+							</div>
+							<div id="selfHand" className="hand">
+							{selfHand.map((card)=>{
+								return <div className="card" title={card.description}>
 								<div className="cardName">{card.name}</div>
 								<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {card.manaCost}</div>
 								<div title="The amount of damage this minion deals" className="cardPower">Power: {card.initialPower}</div>
@@ -60,6 +73,7 @@ class App extends Component{
 			  .then((response)=>{
 				  this.setState({gameState: response.data});
 				  this.forceUpdate();
+				  console.log(response.data);
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);

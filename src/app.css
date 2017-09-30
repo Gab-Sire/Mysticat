@@ -10,36 +10,39 @@
 	background-color:#f442d7;	
 }
 
-#opponentHand{
+.hand{
 	display: block;
-	position: relative;
 	border: 2px solid black;
-	width : 80%;
+	width : 90%;
 	height: 100px;
-	margin-left: 10%;
+	margin-left: 5%;
+}
+
+#opponentHand{
+	position: relative;
 }
 
 #selfHand{
-	display: block;
 	position: absolute;
-	border: 2px solid black;
 	bottom: 0;
-	width : 80%;
-	height: 100px;
-	margin-left: 10%;
 }
 
 .card{
 	display: inline-block;
 	border: 1px solid black;
 	position: relative;
-	width : 10%;
+	width : 9%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
+.card + .card{
+	margin-left: 1%;
+}
+
 #opponentHand .card{
-	background-color: red;
+	background-image: url("img/cardback.jpg");
+	background-size: 100% 100%;
 }
 
 #selfHand .card{
@@ -48,7 +51,6 @@
 	text-align: center;
 	font-weight: bold;
 }
-
 
 .cardName{
 	text-decoration: underline;
@@ -69,4 +71,22 @@
 
 .cardSpeed{
 	font-style: italic;
+}
+
+.heroHealth{
+	
+}
+
+#selfHealth{
+	position: absolute;
+	width:10%;
+	border: 2px solid black;
+	bottom: 100px;
+	margin-left: 45%;
+	height: 40px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 2em;
+	color: red;
+	background: blue;
 }
