@@ -11,7 +11,7 @@ class App extends Component{
 		this.state ={
 				counter :1,
 			gameState : {
-				//En attendant que le call asynchrone finisse besoin d'un objet player
+				//En attendant que le call asynchrone finisse besoin d'un player
 				players: [
 						{
 						hand : [
@@ -37,10 +37,10 @@ class App extends Component{
 							{this.state.gameState.players[0].hand.map((card)=>{
 								return <div className="card">
 								<div className="cardName">{card.name}</div>
-								Cost: {card.manaCost}<br/>
-								Power: {card.initialPower}<br/>
-								Health: {card.initialHealth}<br/>
-								Speed: {card.initialSpeed}<br/>
+								<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {card.manaCost}</div>
+								<div title="The amount of damage this minion deals" className="cardPower">Power: {card.initialPower}</div>
+								<div title="The amount of damage this minion can take" className="cardHealth">Health: {card.initialHealth}</div>
+								<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {card.initialSpeed}</div>
 								</div>
 							})}
 						</div>
