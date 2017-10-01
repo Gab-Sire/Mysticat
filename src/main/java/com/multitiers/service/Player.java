@@ -1,7 +1,5 @@
 package com.multitiers.service;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +25,7 @@ public class Player {
 		this.hand = new ArrayList<PlayableCard>();
 		this.deck = new ArrayList<PlayableCard>(); 
 		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
-		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
+		this.remainingMana = Constantes.STARTING_MANA;
 
 		Collections.shuffle(deck);
 		drawStartingHand();
@@ -46,7 +44,7 @@ public class Player {
 		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
 		this.hand = new ArrayList<PlayableCard>();
 		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
-		this.remainingMana = Constantes.STARTING_MANA; //Probablement assigned par le jeu
+		this.remainingMana = Constantes.STARTING_MANA;
 
 		Collections.shuffle(deck);
 		drawStartingHand();
