@@ -1,92 +1,133 @@
 @charset "ISO-8859-1";
 
-#board{
+#board {
 	position: relative;
 	border: 2px solid black;
 	margin-top: 1%;
 	margin-left: 2.5%;
 	width: 95%;
 	height: 625px;
-	background-color:#f442d7;	
+	background-color: #f442d7;
 }
 
-.hand{
+.hand {
 	display: block;
 	border: 2px solid black;
-	width : 90%;
-	height: 100px;
+	width: 90%;
+	height: 120px;
 	margin-left: 5%;
 }
 
-#opponentHand{
+#opponentHand {
 	position: relative;
 }
 
-#selfHand{
+#selfHand {
 	position: absolute;
 	bottom: 0;
 }
 
-.card{
+.card {
 	display: inline-block;
 	border: 1px solid black;
 	position: relative;
-	width : 9%;
+	width: 9%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
-.card + .card{
+.card+.card {
 	margin-left: 1%;
 }
 
-#opponentHand .card{
+#opponentHand .card {
 	background-image: url("img/cardback.jpg");
 	background-size: 100% 100%;
 }
 
-#selfHand .card{
+#selfHand .card {
 	font-size: 12px;
 	background-color: yellow;
 	text-align: center;
 	font-weight: bold;
 }
 
-.cardName{
+.cardName {
 	text-decoration: underline;
 	overflow: auto;
 }
 
-.cardManaCost{
+.cardManaCost {
 	color: blue;
 }
 
-.cardPower{
+.cardPower {
 	color: red;
 }
 
-.cardHealth{
+.cardHealth {
 	color: green;
 }
 
-.cardSpeed{
+.cardSpeed {
 	font-style: italic;
 }
 
-.heroHealth{
-	
-}
-
-#selfHealth{
-	position: absolute;
-	width:10%;
+.heroHealth {
+	width: 10%;
 	border: 2px solid black;
-	bottom: 100px;
 	margin-left: 45%;
-	height: 40px;
-	text-align: center;
 	line-height: 30px;
 	font-size: 2em;
-	color: red;
-	background: blue;
+	height: 40px;
+	text-align: center;
+	color: white;
+	background: black;
+}
+
+#selfHealth {
+	position: absolute;
+	bottom: 120px;
+}
+
+#opponentHealth{
+	position: relative;
+}
+
+#globalMana{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	margin-left: -25px;
+	margin-top: -25px;
+	border: 2px solid black;
+	background-color: blue;
+	 -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    color: white;
+    font-size: 2em;
+}
+
+#globalMana:hover{
+	transition: 1.2s;
+	background-color: #41aff4;
+}
+
+#globalMana div{
+	-webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    line-height: 50px;
+    text-align: center;
+}
+
+#selfMana{
+	
 }
