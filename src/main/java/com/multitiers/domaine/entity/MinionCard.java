@@ -1,46 +1,32 @@
-package com.multitiers.service;
+package com.multitiers.domaine.entity;
 
-import com.multitiers.domaine.MinionCard;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class PlayableMinionCard extends PlayableCard{
+@Entity
+@DiscriminatorValue(value = "minion")
+public class MinionCard extends Card{
 	private Integer initialPower;
 	private Integer initialHealth;
 	private Integer initialSpeed;
 	
-	public PlayableMinionCard(MinionCard entityCard) {
-		this.initialPower = entityCard.getInitialPower();
-		this.initialHealth = entityCard.getInitialHealth();
-		this.initialSpeed = entityCard.getInitialSpeed();
-		this.manaCost = entityCard.getManaCost();
-		this.description = entityCard.getCardDescription();
-		this.name = entityCard.getCardName();
-		this.key = entityCard.getCardId();
-	}
-	
 	public Integer getInitialPower() {
 		return initialPower;
 	}
-
 	public void setInitialPower(Integer initialPower) {
 		this.initialPower = initialPower;
 	}
-
 	public Integer getInitialHealth() {
 		return initialHealth;
 	}
-
 	public void setInitialHealth(Integer initialHealth) {
 		this.initialHealth = initialHealth;
 	}
-
 	public Integer getInitialSpeed() {
 		return initialSpeed;
 	}
-
 	public void setInitialSpeed(Integer initialSpeed) {
 		this.initialSpeed = initialSpeed;
 	}
-	
-	
 	
 }

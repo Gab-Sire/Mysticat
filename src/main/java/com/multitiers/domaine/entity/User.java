@@ -1,4 +1,4 @@
-package com.multitiers.domaine;
+package com.multitiers.domaine.entity;
 
 import java.util.List;
 import java.util.Set;

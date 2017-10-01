@@ -1,4 +1,4 @@
-package com.multitiers.domaine;
+package com.multitiers.domaine.entity;
 
 public class UserCredentials {
 	private String username;

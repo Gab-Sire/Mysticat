@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.multitiers.domaine.User;
-import com.multitiers.domaine.UserCredentials;
+import com.multitiers.domaine.entity.User;
+import com.multitiers.domaine.entity.UserCredentials;
+import com.multitiers.domaine.ingame.Game;
+import com.multitiers.domaine.ingame.Player;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
@@ -22,9 +23,7 @@ import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
-import com.multitiers.service.Game;
 import com.multitiers.service.InscriptionService;
-import com.multitiers.service.Player;
 import com.multitiers.util.Constantes;
 
 @RestController

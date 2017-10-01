@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.multitiers.domaine.MinionCard;
+import com.multitiers.domaine.entity.MinionCard;
 
 public interface MinionCardRepository extends JpaRepository<MinionCard, String>{
 	Set<MinionCard> findByInitialPower(Integer initialPower);

@@ -1,4 +1,4 @@
-package com.multitiers.service;
+package com.multitiers.domaine.ingame;
 
 public abstract class PlayableCard {
 	protected Integer manaCost;

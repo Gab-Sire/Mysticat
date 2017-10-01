@@ -13,7 +13,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.multitiers.domaine.User;
+import com.multitiers.domaine.entity.User;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;

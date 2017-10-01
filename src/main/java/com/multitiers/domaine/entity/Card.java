@@ -1,4 +1,4 @@
-package com.multitiers.domaine;
+package com.multitiers.domaine.entity;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;

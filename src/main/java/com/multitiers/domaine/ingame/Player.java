@@ -1,12 +1,12 @@
-package com.multitiers.service;
+package com.multitiers.domaine.ingame;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.multitiers.domaine.Card;
-import com.multitiers.domaine.MinionCard;
-import com.multitiers.domaine.User;
+import com.multitiers.domaine.entity.Card;
+import com.multitiers.domaine.entity.MinionCard;
+import com.multitiers.domaine.entity.User;
 import com.multitiers.util.Constantes;
 public class Player {
 	private String name;

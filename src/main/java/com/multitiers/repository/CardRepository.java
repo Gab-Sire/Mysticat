@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.multitiers.domaine.Card;
+import com.multitiers.domaine.entity.Card;
 
 public interface CardRepository extends JpaRepository<Card, String> {
 	Card findByCardName(String cardName);

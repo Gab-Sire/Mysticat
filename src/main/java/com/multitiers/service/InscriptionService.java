@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multitiers.ProjetMultitiersApplication;
-import com.multitiers.domaine.Card;
-import com.multitiers.domaine.Deck;
-import com.multitiers.domaine.MinionCard;
-import com.multitiers.domaine.User;
-import com.multitiers.domaine.UserCredentials;
+import com.multitiers.domaine.entity.Card;
+import com.multitiers.domaine.entity.Deck;
+import com.multitiers.domaine.entity.MinionCard;
+import com.multitiers.domaine.entity.User;
+import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
