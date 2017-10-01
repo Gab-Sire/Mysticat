@@ -23,14 +23,14 @@ export default class Login extends Component{
 	}
 	
 	handleSubmit(event){
-		console.log('Login form submitted');
+		console.log('Signup form submitted');
 		event.preventDefault();
 	}
 	
 	render(){
 		return (<div id="loginForm">
-		<h1>Login</h1>
-	    <form action="http://localhost:8089/attemptConnection" method="post" onSubmit={this.handleSubmit}>
+		<h1>Sign up</h1>
+	    <form action="http://localhost:8089/signUp" method="post" onSubmit={this.handleSubmit}>
 	    	<p>Nom d'utilisateur: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeUsername} required/></p>
 	        <p>Mot de passe: <input type="password" name="password" value={this.state.password} onChange={this.handleChangePassword} required/></p>
 	        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

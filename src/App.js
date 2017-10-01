@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
+import Login from './Login.js';
+import Signup from './Signup.js';
 
 
 class App extends Component{
@@ -8,8 +10,9 @@ class App extends Component{
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-			gameState : {
 				//En attendant que le call asynchrone finisse besoin d'un player
+			gameState : {
+				currentMana: 0,
 				players: [
 						{
 						hero: {
@@ -83,6 +86,8 @@ class App extends Component{
 							})}
 						</div>
 					</div>
+					<Signup />
+					<Login />
 				</div>
 					);
 	}
