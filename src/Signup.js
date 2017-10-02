@@ -24,7 +24,6 @@ export default class Login extends Component{
 	
 	handleSubmit(event){
 		console.log('Signup form submitted');
-		event.preventDefault();
 	}
 	
 	render(){
