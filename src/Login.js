@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import './App.css';
+import './app.css';
 
 export default class Login extends Component{
 	constructor(props){
