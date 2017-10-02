@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './app.css';
+import _ from 'lodash';
 import Login from './Login.js';
 import Signup from './Signup.js';
+import Card from './Card.js';
 
 
 class App extends Component{
@@ -10,7 +12,8 @@ class App extends Component{
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-				//En attendant que le call asynchrone finisse besoin d'un player
+				// En attendant que le call asynchrone finisse besoin d'un
+				// player
 			gameState : {
 				currentMana: 0,
 				players: [
@@ -51,7 +54,6 @@ class App extends Component{
 		}
 	}
 	render(){
-		let selfHand = this.state.gameState.players[0].hand;
 		let selfHealth = this.state.gameState.players[0].hero.health;
 		let opponentHealth = this.state.gameState.players[1].hero.health;
 		let globalMana = this.state.gameState.currentMana;
@@ -75,15 +77,7 @@ class App extends Component{
 								{selfHealth}
 							</div>
 							<div id="selfHand" className="hand">
-							{selfHand.map((card)=>{
-								return <div className="card" title={card.description}>
-								<div className="cardName">{card.name}</div>
-									<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {card.manaCost}</div>
-									<div title="The amount of damage this minion deals" className="cardPower">Power: {card.initialPower}</div>
-									<div title="The amount of damage this minion can take" className="cardHealth">Health: {card.initialHealth}</div>
-									<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {card.initialSpeed}</div>
-								</div>
-							})}
+							{this.renderSelfHand()}
 						</div>
 					</div>
 					<Signup />
@@ -92,7 +86,15 @@ class App extends Component{
 					);
 	}
 	
-	//Fonction qui fetch un game state fait par Spring avec valeurs par defaut
+	renderSelfHand(){
+		let selfHand = this.state.gameState.players[0].hand;
+		const props = (this.state.gameState.players[0].hand);
+		return _.map(selfHand, card=> <Card key={card.key} {...card}{...props}/>);
+		
+	}
+	
+	
+	// Fonction qui fetch un game state fait par Spring avec valeurs par defaut
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
