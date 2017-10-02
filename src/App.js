@@ -54,9 +54,12 @@ class App extends Component{
 		}
 	}
 	render(){
-		let selfHealth = this.state.gameState.players[0].hero.health;
-		let opponentHealth = this.state.gameState.players[1].hero.health;
+		let self = this.state.gameState.players[0];
+		let opponent = this.state.gameState.players[1];
+		let selfHealth = self.hero.health;
+		let opponentHealth = opponent.hero.health;
 		let globalMana = this.state.gameState.currentMana;
+		let selfMana = self.remainingMana;
 			return(
 				<div>
 					<div id="board">
@@ -68,7 +71,7 @@ class App extends Component{
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
 						</div>
-						<div id="globalMana" title="The amount of mana that you get per turn">
+						<div id="globalMana" className="manaCrystal" title="The amount of mana that you get per turn">
 							<div>
 								{globalMana}
 							</div>
@@ -78,6 +81,11 @@ class App extends Component{
 							</div>
 							<div id="selfHand" className="hand">
 							{this.renderSelfHand()}
+						</div>
+						<div id="selfMana" className="manaCrystal">
+							<div>
+								{selfMana}
+							</div>
 						</div>
 					</div>
 					<Signup />
