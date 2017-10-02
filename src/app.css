@@ -11,9 +11,9 @@ form{
 	position: relative;
 	border: 2px solid black;
 	margin-top: 1%;
-	margin-left: 2.5%;
-	width: 95%;
-	height: 625px;
+	margin-left: 1%;
+	width: 98%;
+	height: 710px;
 	background-color: #f442d7;
     cursor: default;
 }
@@ -21,9 +21,46 @@ form{
 .hand {
 	display: block;
 	border: 2px solid black;
-	width: 90%;
-	height: 120px;
-	margin-left: 5%;
+	width: 80%;
+	height: 24%;
+	margin-left: 10%;
+}
+
+.battleField .cardTile{
+	display: inline-block;
+	border: 1px solid red;
+	position: relative;
+	width: 8%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.graveyard{
+	
+}
+.battleField .graveyard .cardTile{
+	display: inline-block;
+	border: 1px solid red;
+	position: relative;
+	width: 8%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.cardTile{
+	
+}
+
+
+.battleField{
+	margin-top: 0.35%;
+	width: 100%;
+	height: 24%;
+	border: 1px blue solid;
+}
+
+.battleField .cardTile:first-of-type{
+	margin-left: 22%;
 }
 
 #opponentHand {
@@ -43,6 +80,16 @@ form{
 	height: 100%;
 	box-sizing: border-box;
 }
+
+.hand .cardTile {
+	display: inline-block;
+	border: 1px solid red;
+	width: 10%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+
 
 .card+.card {
 	margin-left: 1%;
@@ -84,22 +131,23 @@ form{
 .heroHealth {
 	width: 10%;
 	border: 2px solid black;
-	margin-left: 45%;
 	line-height: 30px;
 	font-size: 2em;
 	height: 40px;
 	text-align: center;
 	color: white;
 	background: black;
+	display: inline-block;
 }
 
 #selfHealth {
 	position: absolute;
-	bottom: 120px;
+	bottom: 0px;
 }
 
 #opponentHealth{
-	position: relative;
+	position: absolute;
+	top: 0px;
 }
 
 #globalMana{

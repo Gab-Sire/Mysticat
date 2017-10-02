@@ -56,26 +56,58 @@ class App extends Component{
 		let opponentHealth = this.state.gameState.players[1].hero.health;
 		let globalMana = this.state.gameState.currentMana;
 			return(
-				<div>
+				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
-							<div className="card">
-								Card back
-							</div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
 						</div>
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
 						</div>
-						<div id="globalMana" title="The amount of mana that you get per turn">
+						<div id="opponentGraveyard" className="graveyard">
+							<div className="cardTile"></div>
+						</div>
+						<div id="opponentField" className="battleField">
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+						</div>
+						<div id="opponentDeck" className="deck">
+							<div className="cardTile"></div>
+						</div>
+						{/*}<div id="globalMana" title="The amount of mana that you get per turn">
 							<div>
 								{globalMana}
 							</div>
-						</div>
-							<div id="selfHealth" className="heroHealth">
+						</div>*/}
+						<div id="selfHealth" className="heroHealth">
 								{selfHealth}
-							</div>
-							<div id="selfHand" className="hand">
-							{selfHand.map((card)=>{
+						</div>
+						<div id="selfHand" className="hand">
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							{/*{selfHand.map((card)=>{
 								return <div className="card" title={card.description}>
 								<div className="cardName">{card.name}</div>
 									<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {card.manaCost}</div>
@@ -83,11 +115,24 @@ class App extends Component{
 									<div title="The amount of damage this minion can take" className="cardHealth">Health: {card.initialHealth}</div>
 									<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {card.initialSpeed}</div>
 								</div>
-							})}
+							})}*/}
+						</div>
+						<div id="opponentGraveyard" className="graveyard">
+							<div className="cardTile"></div>
+						</div>
+						<div id="selfField" className="battleField">	
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+							<div className="cardTile"></div>
+						</div>
+						<div id="selfDeck" className="deck">
+							<div className="cardTile"></div>
 						</div>
 					</div>
-					<Signup />
-					<Login />
 				</div>
 					);
 	}
