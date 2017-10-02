@@ -1,4 +1,9 @@
 @charset "ISO-8859-1";
+
+*{
+	box-sizing: border-box;
+}
+
 form{
     margin: auto;
     width: 50%;
@@ -7,68 +12,92 @@ form{
     text-align: center;
 }
 
+/* Plateau de jeu général */
+
 #board {
 	position: relative;
 	border: 2px solid black;
-	margin-top: 1%;
 	margin-left: 1%;
 	width: 98%;
 	height: 710px;
-	background-color: #f442d7;
+	background-color: black;
     cursor: default;
 }
 
+/* mains de cartes */
+
 .hand {
 	display: block;
-	border: 2px solid black;
-	width: 80%;
-	height: 24%;
-	margin-left: 10%;
-}
-
-.battleField .cardTile{
-	display: inline-block;
-	border: 1px solid red;
-	position: relative;
-	width: 10%;
-	height: 100%;
-	box-sizing: border-box;
-}
-
-.graveyard{
-	
-}
-.battleField .graveyard .cardTile{
-	display: inline-block;
-	border: 1px solid red;
-	position: relative;
-	width: 10%;
-	height: 100%;
-	box-sizing: border-box;
-}
-
-
-
-
-.battleField{
-	margin-top: 0.35%;
-	width: 80%;
-	height: 24%;
-	border: 1px blue solid;
-	margin-left: 10%;
-}
-
-.battleField .cardTile:first-of-type{
+	border: 1px solid black;
+	width: 70%;
+	height: 21%;
 	margin-left: 15%;
+	background-color: white;
+}
+
+#selfHand .cardTile{
+	margin-top: 0.75%;
+}
+
+.hand .cardTile:first-of-type{
+	margin-left: 6%;
+}
+
+#opponentHand .cardTile{
+	margin-top: 10px;
 }
 
 #opponentHand {
-	position: relative;
+	margin-top: -40px;
+	margin-bottom: 5px;
 }
 
 #selfHand {
 	position: absolute;
 	bottom: 0;
+}
+
+/* champs de bataille */
+
+.battleField{
+	display:inline-block;
+	width: 60%;
+	height: 100%;
+	border: 1px blue solid;
+	margin: 0;
+}
+
+.battleField .cardTile{
+	width: 9.5%;
+	margin-top: 4.5%;
+}
+
+
+.battleField .cardTile:first-of-type{
+	margin-left: 15%;
+}
+
+#opponentFieldContainer{
+	margin-top: 10px;	
+}
+
+.fieldContainer{
+	border: 1px solid green;
+	height: 30%;
+}
+
+#opponentField{
+	border: 1px blue solid;
+}
+
+/* cimetières */
+
+.graveyard{
+	display:inline-block;
+	border: 2px orange solid;
+	width: 19.75%;
+	height: 100%;
+	margin: 0;
 }
 
 .card {
@@ -80,15 +109,28 @@ form{
 	box-sizing: border-box;
 }
 
-.hand .cardTile {
-	display: inline-block;
-	border: 1px solid red;
-	width: 10%;
+/* decks */
+
+.deck {
+	border: 2px purple solid;
+	display:inline-block;
+	width: 19.75%;
 	height: 100%;
-	box-sizing: border-box;
+	margin: 0;
 }
 
+.graveyard .cardTile{
+	margin-top: 4.5%; 
+	width: 30%;
+}
 
+.cardTile{
+	display: inline-block;
+	border: 1px solid red;
+	width: 8%;
+	height: 130px;
+	margin: 0 0.5% 0 0;
+}
 
 .card+.card {
 	margin-left: 1%;

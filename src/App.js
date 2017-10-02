@@ -70,32 +70,51 @@ class App extends Component{
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
 						</div>
-						<div id="opponentHealth" className="heroHealth">
+						{/*}<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
+						</div>*/}
+						<div id="opponentFieldContainer" className="fieldContainer">
+							<div id="opponentGraveyard" className="graveyard">
+								<div className="cardTile"></div>
+							</div>
+							<div id="opponentField" className="battleField">
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+							</div>
+							<div id="opponentDeck" className="deck">
+								<div className="cardTile"></div>
+							</div>
 						</div>
-						<div id="opponentGraveyard" className="graveyard">
-							<div className="cardTile"></div>
-						</div>
-						<div id="opponentField" className="battleField">
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-						</div>
-						<div id="opponentDeck" className="deck">
-							<div className="cardTile"></div>
+						<div id="selfFieldContainer" className="fieldContainer">
+							<div id="opponentGraveyard" className="graveyard">
+								<div className="cardTile"></div>
+							</div>
+							<div id="selfField" className="battleField">	
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+								<div className="cardTile"></div>
+							</div>
+							<div id="selfDeck" className="deck">
+								<div className="cardTile"></div>
+							</div>
 						</div>
 						{/*}<div id="globalMana" title="The amount of mana that you get per turn">
 							<div>
 								{globalMana}
 							</div>
 						</div>*/}
-						<div id="selfHealth" className="heroHealth">
+						{/*}<div id="selfHealth" className="heroHealth">
 								{selfHealth}
-						</div>
+						</div>*/}
 						<div id="selfHand" className="hand">
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
@@ -117,24 +136,9 @@ class App extends Component{
 								</div>
 							})}*/}
 						</div>
-						<div id="opponentGraveyard" className="graveyard">
-							<div className="cardTile"></div>
-						</div>
-						<div id="selfField" className="battleField">	
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-						</div>
-						<div id="selfDeck" className="deck">
-							<div className="cardTile"></div>
-						</div>
 					</div>
 				</div>
-					);
+			);
 	}
 	
 	//Fonction qui fetch un game state fait par Spring avec valeurs par defaut
