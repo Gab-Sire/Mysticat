@@ -30,7 +30,7 @@ form{
 	display: inline-block;
 	border: 1px solid red;
 	position: relative;
-	width: 8%;
+	width: 10%;
 	height: 100%;
 	box-sizing: border-box;
 }
@@ -42,25 +42,24 @@ form{
 	display: inline-block;
 	border: 1px solid red;
 	position: relative;
-	width: 8%;
+	width: 10%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
-.cardTile{
-	
-}
+
 
 
 .battleField{
 	margin-top: 0.35%;
-	width: 100%;
+	width: 80%;
 	height: 24%;
 	border: 1px blue solid;
+	margin-left: 10%;
 }
 
 .battleField .cardTile:first-of-type{
-	margin-left: 22%;
+	margin-left: 15%;
 }
 
 #opponentHand {
