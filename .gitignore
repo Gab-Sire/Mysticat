@@ -25,3 +25,5 @@ nbdist/
 /bin
 *.MF
 /node_modules
+*.jpg
+*.png

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './app.css';
+import _ from 'lodash';
 import Login from './Login.js';
 import Signup from './Signup.js';
+import Card from './Card.js';
 
 
 class App extends Component{
@@ -10,7 +12,8 @@ class App extends Component{
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-				//En attendant que le call asynchrone finisse besoin d'un player
+				// En attendant que le call asynchrone finisse besoin d'un
+				// player
 			gameState : {
 				currentMana: 0,
 				players: [
@@ -51,10 +54,12 @@ class App extends Component{
 		}
 	}
 	render(){
-		let selfHand = this.state.gameState.players[0].hand;
-		let selfHealth = this.state.gameState.players[0].hero.health;
-		let opponentHealth = this.state.gameState.players[1].hero.health;
+		let self = this.state.gameState.players[0];
+		let opponent = this.state.gameState.players[1];
+		let selfHealth = self.hero.health;
+		let opponentHealth = opponent.hero.health;
 		let globalMana = this.state.gameState.currentMana;
+		let selfMana = self.remainingMana;
 			return(
 				<div id="container">
 					<div id="board">
@@ -73,8 +78,12 @@ class App extends Component{
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
 						</div>
+<<<<<<< HEAD
 						<div id="opponentHero" className="hero"></div>
 						<div id="opponentMana" className="mana" title="The amount of mana that you get per turn">
+=======
+						<div id="globalMana" className="manaCrystal" title="The amount of mana that you get per turn">
+>>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 							<div>
 								{globalMana}
 							</div>
@@ -121,6 +130,7 @@ class App extends Component{
 							<div>
 								{globalMana}
 							</div>
+<<<<<<< HEAD
 						</div>
 						<div id="selfHero" className="hero"></div>
 						<div id="selfHand" className="hand">
@@ -143,13 +153,30 @@ class App extends Component{
 									<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {card.initialSpeed}</div>
 								</div>
 							})}*/}
+=======
+							<div id="selfHand" className="hand">
+							{this.renderSelfHand()}
+						</div>
+						<div id="selfMana" className="manaCrystal">
+							<div>
+								{selfMana}
+							</div>
+>>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 						</div>
 					</div>
 				</div>
 			);
 	}
 	
-	//Fonction qui fetch un game state fait par Spring avec valeurs par defaut
+	renderSelfHand(){
+		let selfHand = this.state.gameState.players[0].hand;
+		const props = (this.state.gameState.players[0].hand);
+		return _.map(selfHand, card=> <Card key={card.key} {...card}{...props}/>);
+		
+	}
+	
+	
+	// Fonction qui fetch un game state fait par Spring avec valeurs par defaut
 	getInitialGameInstance(){
 		axios({
 			  method:'get',

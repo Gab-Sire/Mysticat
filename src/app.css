@@ -260,12 +260,16 @@ form{
 	right: 8%;
 }
 
+<<<<<<< HEAD
 .mana{
 	position: absolute;
 	width: 50px;
 	height: 50px;
 	margin-left: -25px;
 	margin-top: -25px;
+=======
+.manaCrystal{
+>>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 	border: 2px solid black;
 	background-color: blue;
 	 -webkit-transform: rotate(45deg);
@@ -273,8 +277,18 @@ form{
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    color: white;
+    color: white;	
+}
+
+#globalMana{
     font-size: 2em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	margin-left: -25px;
+	margin-top: -25px;
 }
 
 .mana:hover{
@@ -291,3 +305,26 @@ form{
     line-height: 50px;
     text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+#selfMana div{
+	-webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    line-height: 26px;
+    text-align: center;
+}
+
+#selfMana{
+	position: absolute;
+	bottom: 10px;
+	right: 4px;
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	font-size: 1.5em;
+}
+>>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
