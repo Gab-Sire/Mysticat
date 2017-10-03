@@ -243,21 +243,6 @@ form{
 	left: 34%;
 }
 
-.manaCrystal{
-	position: absolute;
-	width: 26px;
-	height: 26px;
-	font-size: 1.5em;
-	border: 2px solid black;
-	background-color: blue;
-	 -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    color: white;	
-}
-
 #selfHealth {
 	position: absolute;
 	bottom: 155px;
@@ -269,25 +254,29 @@ form{
 	top: 118px;
 }
 
-#opponentMana{
-	top: 5%;
-	right: 8%;
-}
-
-
-
-.manaCrystal:hover{
+#selfMana:hover{
 	transition: 1.2s;
 	background-color: #41aff4;
 }
 
-
 #selfMana{
 	bottom: 2%;
 	right: 8%;
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	font-size: 1.5em;
+	border: 2px solid black;
+	background-color: blue;
+	 -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    color: white;
 }
 
-.manaCrystal div{
+#selfMana div{
 	-webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
