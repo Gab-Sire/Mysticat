@@ -239,6 +239,21 @@ form{
 	left: 34%;
 }
 
+.manaCrystal{
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	font-size: 1.5em;
+	border: 2px solid black;
+	background-color: blue;
+	 -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    color: white;	
+}
+
 #selfHealth {
 	position: absolute;
 	bottom: 155px;
@@ -255,20 +270,7 @@ form{
 	right: 8%;
 }
 
-.manaCrystal{
-	position: absolute;
-	width: 26px;
-	height: 26px;
-	font-size: 1.5em;
-	border: 2px solid black;
-	background-color: blue;
-	 -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    color: white;	
-}
+
 
 .manaCrystal:hover{
 	transition: 1.2s;
