@@ -61,9 +61,7 @@ public class RestControlleur {
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody User loginWithCredentials(@ModelAttribute UserCredentials userCredentials) {
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
-    	if(user==null) {
-    		throw new BadCredentialsLoginException();
-    	}
+
     	return user;
     }
 

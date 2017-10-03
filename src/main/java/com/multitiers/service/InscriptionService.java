@@ -16,6 +16,7 @@ import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
+import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
@@ -106,11 +107,14 @@ public class InscriptionService {
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
     	User user = userRepository.findByUsername(username);
+    	if(user==null) {
+    		throw new BadCredentialsLoginException();
+    	}
         String hashedSalt = user.getHashedSalt();
-         if(ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash())) {
-        	 return user;
-         }
-         return null;
+	     if(ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash())) {
+	    	 return user;
+	     }
+	     return null;
     }
     
 }
