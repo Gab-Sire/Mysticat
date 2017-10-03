@@ -19,7 +19,7 @@ form{
 	border: 2px solid black;
 	margin-left: 1%;
 	width: 98%;
-	height: 710px;
+	height: 740px;
 	background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url('./img/background.jpg');
     cursor: default;
 }
@@ -182,9 +182,9 @@ form{
 	background-color: black;
 }
 
-.cardTile:hover{
+#selfField .cardTile:hover, #opponentField .cardTile:hover, #selfHand .cardTile:hover{
 	background-color: white;
-	transform: scale(1.5);
+	transform: scale(1.5)
 }
 
 .card {
@@ -250,17 +250,16 @@ form{
 	top: 118px;
 }
 
-#selfMana{
-	bottom: 2%;
-	right: 8%;
-}
-
 #opponentMana{
 	top: 5%;
 	right: 8%;
 }
 
 .manaCrystal{
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	font-size: 1.5em;
 	border: 2px solid black;
 	background-color: blue;
 	 -webkit-transform: rotate(45deg);
@@ -271,18 +270,7 @@ form{
     color: white;	
 }
 
-#globalMana{
-    font-size: 2em;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 50px;
-	height: 50px;
-	margin-left: -25px;
-	margin-top: -25px;
-}
-
-.mana:hover{
+.manaCrystal:hover{
 	transition: 1.2s;
 	background-color: #41aff4;
 }
@@ -297,8 +285,12 @@ form{
     text-align: center;
 }
 
+#selfMana{
+	bottom: 2%;
+	right: 8%;
+}
 
-#selfMana div{
+.manaCrystal div{
 	-webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
@@ -306,15 +298,5 @@ form{
     transform: rotate(-45deg);
     line-height: 26px;
     text-align: center;
-}
-
-#selfMana{
-	position: absolute;
-	bottom: 10px;
-	right: 4px;
-	position: absolute;
-	width: 26px;
-	height: 26px;
-	font-size: 1.5em;
 }
 

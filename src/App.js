@@ -79,7 +79,7 @@ class App extends Component{
 						{opponentHealth}
 						</div>
 						<div id="opponentHero" className="hero"></div>
-						<div id="opponentMana" className="mana" title="The amount of mana that you get per turn">
+						<div id="opponentMana" className="manaCrystal" title="The amount of mana that you get per turn">
 							<div>
 								{globalMana}
 							</div>
@@ -124,16 +124,6 @@ class App extends Component{
 						</div>
 						<div id="selfHero" className="hero"></div>
 						<div id="selfHand" className="hand">
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
 							{this.renderSelfHand()}
 						</div>
 						<div id="selfMana" className="manaCrystal">
