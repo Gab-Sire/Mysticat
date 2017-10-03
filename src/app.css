@@ -228,7 +228,7 @@ form{
 }
 
 .heroHealth {
-	width: 10%;
+	width: 8%;
 	border: 2px solid black;
 	line-height: 30px;
 	font-size: 2em;
@@ -237,16 +237,21 @@ form{
 	color: white;
 	background: black;
 	display: inline-block;
+	border-bottom: white solid 1px;
+	border-left: white solid 1px;
+	border-right: white solid 1px;
+	left: 34%;
 }
 
 #selfHealth {
 	position: absolute;
-	bottom: 0px;
+	bottom: 155px;
+	
 }
 
 #opponentHealth{
 	position: absolute;
-	top: 0px;
+	top: 118px;
 }
 
 #selfMana{
