@@ -70,9 +70,15 @@ class App extends Component{
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
 						</div>
-						{/*}<div id="opponentHealth" className="heroHealth">
+						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
-						</div>*/}
+						</div>
+						<div id="opponentHero" className="hero"></div>
+						<div id="opponentMana" className="mana" title="The amount of mana that you get per turn">
+							<div>
+								{globalMana}
+							</div>
+						</div>
 						<div id="opponentFieldContainer" className="fieldContainer">
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
@@ -107,14 +113,16 @@ class App extends Component{
 								<div className="cardTile"></div>
 							</div>
 						</div>
-						{/*}<div id="globalMana" title="The amount of mana that you get per turn">
+						
+						<div id="selfHealth" className="heroHealth">
+								{selfHealth}
+						</div>
+						<div id="selfMana" className="mana" title="The amount of mana that you get per turn">
 							<div>
 								{globalMana}
 							</div>
-						</div>*/}
-						{/*}<div id="selfHealth" className="heroHealth">
-								{selfHealth}
-						</div>*/}
+						</div>
+						<div id="selfHero" className="hero"></div>
 						<div id="selfHand" className="hand">
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
