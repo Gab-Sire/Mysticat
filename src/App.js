@@ -78,12 +78,8 @@ class App extends Component{
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
 						</div>
-<<<<<<< HEAD
 						<div id="opponentHero" className="hero"></div>
 						<div id="opponentMana" className="mana" title="The amount of mana that you get per turn">
-=======
-						<div id="globalMana" className="manaCrystal" title="The amount of mana that you get per turn">
->>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 							<div>
 								{globalMana}
 							</div>
