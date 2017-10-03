@@ -122,12 +122,6 @@ class App extends Component{
 						<div id="selfHealth" className="heroHealth">
 								{selfHealth}
 						</div>
-						<div id="selfMana" className="mana" title="The amount of mana that you get per turn">
-							<div>
-								{globalMana}
-							</div>
-<<<<<<< HEAD
-						</div>
 						<div id="selfHero" className="hero"></div>
 						<div id="selfHand" className="hand">
 							<div className="cardTile"></div>
@@ -140,24 +134,12 @@ class App extends Component{
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
 							<div className="cardTile"></div>
-							{/*{selfHand.map((card)=>{
-								return <div className="card" title={card.description}>
-								<div className="cardName">{card.name}</div>
-									<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {card.manaCost}</div>
-									<div title="The amount of damage this minion deals" className="cardPower">Power: {card.initialPower}</div>
-									<div title="The amount of damage this minion can take" className="cardHealth">Health: {card.initialHealth}</div>
-									<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {card.initialSpeed}</div>
-								</div>
-							})}*/}
-=======
-							<div id="selfHand" className="hand">
 							{this.renderSelfHand()}
 						</div>
 						<div id="selfMana" className="manaCrystal">
 							<div>
 								{selfMana}
 							</div>
->>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 						</div>
 					</div>
 				</div>

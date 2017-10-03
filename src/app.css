@@ -260,16 +260,7 @@ form{
 	right: 8%;
 }
 
-<<<<<<< HEAD
-.mana{
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	margin-left: -25px;
-	margin-top: -25px;
-=======
 .manaCrystal{
->>>>>>> f87722797b5f5544d04bb99ecf1e9f9f9b695ad3
 	border: 2px solid black;
 	background-color: blue;
 	 -webkit-transform: rotate(45deg);
