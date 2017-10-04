@@ -1,5 +1,7 @@
 package com.multitiers.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,9 +61,9 @@ public class RestControlleur {
     }
     
     @PostMapping(value = "/attemptConnection")
-    public @ResponseBody User loginWithCredentials(@ModelAttribute UserCredentials userCredentials) {
+    public @ResponseBody User loginWithCredentials(@ModelAttribute UserCredentials userCredentials, HttpSession session) {
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
-
+    	session.setAttribute("userActif", user.getId());
     	return user;
     }
 
@@ -78,7 +80,7 @@ public class RestControlleur {
     */
     
     @PostMapping(value="/signUp")
-    public User createUserWithCredentials(@ModelAttribute UserCredentials userCredentials) {
+    public User createUserWithCredentials(@ModelAttribute UserCredentials userCredentials, HttpSession session) {
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
     	if(userRepository.findByUsername(username)!=null) {
@@ -86,6 +88,7 @@ public class RestControlleur {
     	}
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
+        session.setAttribute("userActif", user.getId());
     	return user;
     }
     
