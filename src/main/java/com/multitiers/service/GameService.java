@@ -32,7 +32,9 @@ public class GameService {
     
     private List<Player> playersInQueue;
     
-    public GameService() {
+    public GameService() {}
+    
+    public void initQueue() {
     	this.playersInQueue = new ArrayList<Player>(); 
     }
     

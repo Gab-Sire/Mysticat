@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.multitiers.service.GameService;
 import com.multitiers.service.InscriptionService;
 
 @SpringBootApplication
@@ -15,9 +16,10 @@ public class ProjetMultitiersApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner peuplement(InscriptionService demoService) {
+    public CommandLineRunner peuplement(InscriptionService inscriptionService, GameService gameService) {
         return (args) -> {
-            demoService.peuplement();
+            inscriptionService.peuplement();
+            gameService.initQueue();
         };
     }
 }
