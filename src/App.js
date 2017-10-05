@@ -3,6 +3,7 @@ import axios from 'axios';
 import './app.css';
 import _ from 'lodash';
 import Card from './Card.js';
+import CardTile from './CardTile.js';
 
 
 class App extends Component{
@@ -61,16 +62,6 @@ class App extends Component{
 				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
-							<div className="cardTile"></div>
 						</div>
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
@@ -81,13 +72,13 @@ class App extends Component{
 								<div className="cardTile"></div>
 							</div>
 							<div id="opponentField" className="battleField">
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
 							</div>
 							<div id="opponentDeck" className="deck">
 								<div className="cardTile"></div>
@@ -98,13 +89,13 @@ class App extends Component{
 								<div className="cardTile"></div>
 							</div>
 							<div id="selfField" className="battleField">	
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
-								<div className="cardTile"></div>
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
+								<CardTile />
 							</div>
 							<div id="selfDeck" className="deck">
 								<div className="cardTile"></div>
