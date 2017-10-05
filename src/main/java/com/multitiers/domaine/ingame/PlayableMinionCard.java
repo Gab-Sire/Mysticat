@@ -8,6 +8,13 @@ public class PlayableMinionCard extends PlayableCard{
 	private Integer initialHealth;
 	private Integer initialSpeed;
 	
+	
+	
+	public PlayableMinionCard() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public PlayableMinionCard(MinionCard entityCard) {
 		this.initialPower = entityCard.getInitialPower();
 		this.initialHealth = entityCard.getInitialHealth();
@@ -15,7 +22,6 @@ public class PlayableMinionCard extends PlayableCard{
 		this.manaCost = entityCard.getManaCost();
 		this.description = entityCard.getCardDescription();
 		this.name = entityCard.getCardName();
-		this.key = ConnectionUtils.generateUUID().toString();
 	}
 	
 	public Integer getInitialPower() {

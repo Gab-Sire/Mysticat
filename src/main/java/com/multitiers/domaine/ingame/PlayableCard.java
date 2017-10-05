@@ -1,10 +1,10 @@
 package com.multitiers.domaine.ingame;
 
-public abstract class PlayableCard {
+public class PlayableCard {
 	protected Integer manaCost;
 	protected String name;
 	protected String description;
-	protected String key;
+	
 	public Integer getManaCost() {
 		return manaCost;
 	}
@@ -22,12 +22,6 @@ public abstract class PlayableCard {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
 	}
 	
 }

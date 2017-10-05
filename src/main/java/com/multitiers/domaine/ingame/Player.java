@@ -17,20 +17,11 @@ public class Player {
 	private List<PlayableCard> hand;
 	private Integer remainingMana;
 	private Integer fatigueDamage;
-	
-	public Player() {
-		this.hero = new Hero();
-		this.graveyard = new ArrayList<PlayableCard>();
-		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
-		this.hand = new ArrayList<PlayableCard>();
-		this.deck = new ArrayList<PlayableCard>(); 
-		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
-		this.remainingMana = Constantes.STARTING_MANA;
 
-		Collections.shuffle(deck);
-		drawStartingHand();
+	public Player() {
+		super();
 	}
-	
+
 	public Player(User user) {
 		this.name = user.getUsername();
 		this.deck = new ArrayList<PlayableCard>();

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './app.css';
 import _ from 'lodash';
-import Login from './Login.js';
-import Signup from './Signup.js';
 import Card from './Card.js';
 
 
@@ -58,7 +56,6 @@ class App extends Component{
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
-		let globalMana = this.state.gameState.currentMana;
 		let selfMana = self.remainingMana;
 			return(
 				<div id="container">
@@ -127,6 +124,7 @@ class App extends Component{
 							</div>
 						</div>
 					</div>
+					<button onClick={this.updateGameState.bind(this)}>End turn</button>
 				</div>
 			);
 	}
@@ -134,7 +132,7 @@ class App extends Component{
 	renderSelfHand(){
 		let selfHand = this.state.gameState.players[0].hand;
 		const props = (this.state.gameState.players[0].hand);
-		return _.map(selfHand, card=> <Card key={card.key} {...card}{...props}/>);
+		return _.map(selfHand, card=> <Card {...card}{...props}/>);
 		
 	}
 	
@@ -146,6 +144,25 @@ class App extends Component{
 			  url:'http://localhost:8089/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  this.setState({gameState: response.data});
+				  this.forceUpdate();
+				  console.log(response.data);
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
+	}
+	
+	updateGameState(){
+		const data = this.state.gameState;
+		axios({
+			  method:'post',
+			  url:'http://localhost:8089/updateGame',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
 			})
 			  .then((response)=>{
 				  this.setState({gameState: response.data});

@@ -11,9 +11,7 @@ public class Game {
 	private Set<Action> actions;
 	
 	public Game() {
-		players = new Player[Constantes.MAX_NB_OF_PLAYERS];
-		currentMana = Constantes.STARTING_MANA;
-		actions = new TreeSet<Action>();
+		super();
 	}
 	
 	public Game(Player player1, Player player2) {

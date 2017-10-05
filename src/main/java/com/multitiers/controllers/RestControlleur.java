@@ -1,5 +1,7 @@
 package com.multitiers.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.ingame.Game;
@@ -23,6 +27,7 @@ import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
+import com.multitiers.service.GameService;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.Constantes;
 
@@ -41,21 +46,13 @@ public class RestControlleur {
 	@Autowired
 	private InscriptionService inscriptionService;
 	
+	@Autowired
+	private GameService gameService;
+	
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
         User user = userRepository.findByUsername(username);
         return user;
-    }
-    
-    @GetMapping(value="/getHardCodedGame")
-    public @ResponseBody Game getUserByName() {
-        User user1 = userRepository.findByUsername("Chat1");
-        User user2 = userRepository.findByUsername("Chat2");
-        Player player1 = new Player(user1);
-        Player player2 = new Player(user2);
-        
-    	Game game = new Game(player1, player2);
-        return game;
     }
     
     @PostMapping(value = "/attemptConnection")
@@ -131,5 +128,32 @@ public class RestControlleur {
     @ExceptionHandler(value=UsernameTakenException.class)
     public String handleUsernameTakenSignup(UsernameTakenException e) {
     	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
+    }
+    
+    @GetMapping(value="/getHardCodedGame")
+    public @ResponseBody Game getUserByName() {
+        User user1 = userRepository.findByUsername("Chat1");
+        User user2 = userRepository.findByUsername("Chat2");
+        Player player1 = new Player(user1);
+        Player player2 = new Player(user2);
+        
+    	Game game = new Game(player1, player2);
+        return game;
+    }
+    
+    
+    @PostMapping(value="updateGame")
+    public Game updateGame(@RequestBody String  jsonGame) {
+    	System.out.println(jsonGame);
+    	/*
+        User user1 = userRepository.findByUsername("Chat1");
+        User user2 = userRepository.findByUsername("Chat2");
+        Player player1 = new Player(user1);
+        Player player2 = new Player(user2);
+        
+    	Game game = new Game(player2, player1);
+		*/
+    	Game game = gameService.deserializeGame(jsonGame);
+        return game;
     }
 }

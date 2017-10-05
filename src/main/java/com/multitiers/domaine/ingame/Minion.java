@@ -4,6 +4,11 @@ public class Minion extends PlayableCharacter{
 	private Integer power;
 	private Boolean canAttack;
 	private PlayableMinionCard cardReference;
+
+	
+	public Minion() {
+		super();
+	}
 	public Integer getPower() {
 		return power;
 	}
@@ -22,7 +27,5 @@ public class Minion extends PlayableCharacter{
 	public void setCardReference(PlayableMinionCard cardReference) {
 		this.cardReference = cardReference;
 	}
-	
-	
-	
+
 }
