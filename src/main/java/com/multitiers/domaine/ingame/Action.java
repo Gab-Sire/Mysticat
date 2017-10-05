@@ -1,7 +1,10 @@
 package com.multitiers.domaine.ingame;
 
 public abstract class Action implements Comparable<Action>{
-	abstract void resolve();
+	protected Integer playerIndex;
+	
+	public abstract Integer getPlayerIndex();
+	public abstract void setPlayerIndex(Integer playerIndex);
 	
 	@Override
 	public int compareTo(Action a2) {
@@ -18,10 +21,10 @@ public abstract class Action implements Comparable<Action>{
 				return 1;
 			}
 			else if(a2 instanceof AttackAction) {
-				if(((AttackAction)this).getMinion().getSpeed() > ((AttackAction)a2).getMinion().getSpeed()) {
+				if(((AttackAction)this).getSpeed() > ((AttackAction)a2).getSpeed()) {
 					return -1;
 				}
-				else if(((AttackAction)this).getMinion().getSpeed() < ((AttackAction)a2).getMinion().getSpeed()) {
+				else if(((AttackAction)this).getSpeed() < ((AttackAction)a2).getSpeed()) {
 					return 1;
 				}
 				else {

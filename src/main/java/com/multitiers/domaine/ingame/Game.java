@@ -53,5 +53,4 @@ public class Game {
 	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
-	
 }

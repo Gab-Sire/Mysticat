@@ -1,22 +1,25 @@
 package com.multitiers.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.multitiers.domaine.entity.User;
+import com.multitiers.domaine.ingame.Action;
+import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.PlayableCard;
 import com.multitiers.domaine.ingame.Player;
+import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
+
 
 @Service
 public class GameService {
@@ -63,8 +66,18 @@ public class GameService {
     
     //Avec liste actions
     public Game updateGame(Game currentGame) {
+    	List<Action> actions = currentGame.getActions();
+    	Collections.sort(actions);
+    	
+    	for (Action action : actions) {
+			if(action instanceof SummonAction) {
+				
+			}
+			else if(action instanceof AttackAction) {
+				
+			}
+		}
     	
     	return currentGame;
     }
-    
 }

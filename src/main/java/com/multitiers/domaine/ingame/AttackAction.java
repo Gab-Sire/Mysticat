@@ -1,33 +1,47 @@
 package com.multitiers.domaine.ingame;
 
-public class AttackAction extends Action{
-	
-	private Minion minion;
-	private PlayableCharacter target;
-	
+public class AttackAction extends Action {
+
+	private Integer attackerIndex;
+	private Integer attackedIndex;
+	private Integer speed;
+
 	public AttackAction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Integer getAttackerIndex() {
+		return attackerIndex;
+	}
+
+	public void setAttackerIndex(Integer attackerIndex) {
+		this.attackerIndex = attackerIndex;
+	}
+
+	public Integer getAttackedIndex() {
+		return attackedIndex;
+	}
+
+	public void setAttackedIndex(Integer attackedIndex) {
+		this.attackedIndex = attackedIndex;
+	}
 	
-	public Minion getMinion() {
-		return minion;
+	public Integer getSpeed() {
+		return speed;
 	}
 
-	public void setMinion(Minion minion) {
-		this.minion = minion;
-	}
-
-	public PlayableCharacter getTarget() {
-		return target;
-	}
-
-	public void setTarget(PlayableCharacter target) {
-		this.target = target;
+	public void setSpeed(Integer speed) {
+		this.speed = speed;
 	}
 
 	@Override
-	void resolve() {
-		this.target.setHealth(this.target.getHealth()-this.minion.getPower());
+	public Integer getPlayerIndex() {
+		return this.playerIndex;
+	}
+
+	@Override
+	public void setPlayerIndex(Integer playedIndex) {
+		this.playerIndex = playerIndex;
 	}
 }

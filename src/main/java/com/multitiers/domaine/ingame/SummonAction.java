@@ -3,12 +3,10 @@ package com.multitiers.domaine.ingame;
 public class SummonAction extends Action{
 	
 	private Integer fieldCell;
-	private Player owner;
 	private PlayableMinionCard minionCard;
 	
 	public SummonAction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getFieldCell() {
@@ -28,19 +26,15 @@ public class SummonAction extends Action{
 	public void setMinionCard(PlayableMinionCard minionCard) {
 		this.minionCard = minionCard;
 	}
-
-	public Player getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Player owner) {
-		this.owner = owner;
+	
+	@Override
+	public Integer getPlayerIndex() {
+		return this.playerIndex;
 	}
 
 	@Override
-	void resolve() {
-		Minion minion = new Minion();
-		minion.setCardReference(this.minionCard);
-		minion.setHealth(this.minionCard.getInitialHealth());
+	public void setPlayerIndex(Integer playedIndex) {
+		this.playerIndex = playerIndex;
 	}
+	
 }

@@ -32,6 +32,8 @@ import com.multitiers.util.Constantes;
 @RestController
 @CrossOrigin
 public class RestControlleur {
+	private static final int PLAYER_TWO_INDEX = 1;
+	private static final int PLAYER_ONE_INDEX = 0;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -96,6 +98,8 @@ public class RestControlleur {
     	User userHardCoded = userRepository.findByUsername("Chat2");
     	Player player1 = new Player(user);
     	Player player2 = new Player(userHardCoded);
+        player1.setPlayerIndex(PLAYER_ONE_INDEX);
+        player2.setPlayerIndex(PLAYER_TWO_INDEX);
     	Game game = new Game(player1, player2);
     	return game;
     }
@@ -135,6 +139,8 @@ public class RestControlleur {
         User user2 = userRepository.findByUsername("Chat2");
         Player player1 = new Player(user1);
         Player player2 = new Player(user2);
+        player1.setPlayerIndex(PLAYER_ONE_INDEX);
+        player2.setPlayerIndex(PLAYER_TWO_INDEX);
         
     	Game game = new Game(player1, player2);
         return game;

@@ -17,6 +17,7 @@ public class Player {
 	private List<PlayableCard> hand;
 	private Integer remainingMana;
 	private Integer fatigueDamage;
+	private Integer playerIndex;
 
 	public Player() {
 		super();
@@ -29,7 +30,6 @@ public class Player {
 		for(int i=0; i<entityCardList.size(); i++) {
 			this.deck.add(new PlayableMinionCard((MinionCard) entityCardList.get(i)));
 		}
-		
 		this.hero = new Hero();
 		this.graveyard = new ArrayList<PlayableCard>();
 		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
@@ -128,4 +128,13 @@ public class Player {
 	public void setFatigueDamage(Integer fatigueDamage) {
 		this.fatigueDamage = fatigueDamage;
 	}
+
+	public Integer getPlayerIndex() {
+		return playerIndex;
+	}
+
+	public void setPlayerIndex(Integer playerIndex) {
+		this.playerIndex = playerIndex;
+	}
+	
 }

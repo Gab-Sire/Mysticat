@@ -51,11 +51,11 @@ public class TestService {
 		otherFastMinion.setHealth(1);
 
 		fastAttack = new AttackAction();
-		fastAttack.setMinion(fastMinion);
+		fastAttack.setSpeed(1);
 		slowAttack = new AttackAction();
-		slowAttack.setMinion(slowMinion);
+		slowAttack.setSpeed(0);
 		otherFastAttack = new AttackAction();
-		otherFastAttack.setMinion(otherFastMinion);
+		otherFastAttack.setSpeed(1);
 		
 		summon1 = new SummonAction();
 		summon2 = new SummonAction();
