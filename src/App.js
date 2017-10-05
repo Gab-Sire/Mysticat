@@ -55,6 +55,7 @@ class App extends Component{
 	}
 	render(){
 		let self = this.state.gameState.players[0];
+		let selfField = self.field;
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
@@ -86,7 +87,6 @@ class App extends Component{
 								<div className="cardTile"></div>
 							</div>
 						</div>
-						
 						<div id="selfHealth" className="heroHealth">
 								{selfHealth}
 						</div>

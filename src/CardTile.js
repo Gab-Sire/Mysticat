@@ -9,6 +9,6 @@ export default class CardTile extends Component{
 	render(){
 		
 		return (<div className="cardTile"></div>
-			);
+		);
 	}
 }

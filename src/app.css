@@ -67,6 +67,8 @@ form{
 }
 
 #selfHand .card {
+	margin-top: 0.75%;
+	font-size: 15px;
 	font-size: 12px;
 	text-align: center;
 	font-weight: bold;
@@ -194,12 +196,16 @@ form{
 	bottom: 50px;
 }
 
+#selfHand .card{
+	
+}
+
 .card {
 	display: inline-block;
 	border: 1px solid black;
 	position: relative;
-	width: 9%;
-	height: 100%;
+	width: 8%;
+	height: 130px;
 	box-sizing: border-box;
 	background-color: pink;
 }
