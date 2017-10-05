@@ -1,6 +1,8 @@
 package com.multitiers.domaine.ingame;
 
 public class Minion extends PlayableCharacter{
+	private String name;
+	private String description;
 	private Integer power;
 	private Integer speed;
 	private Boolean canAttack;
@@ -10,6 +12,18 @@ public class Minion extends PlayableCharacter{
 	public Minion() {
 		super();
 	}
+	
+	public Minion(PlayableMinionCard minionCard) {
+		super();
+		this.canAttack = true;
+		this.cardReference = minionCard;
+		this.power = minionCard.getInitialPower();
+		this.health = minionCard.getInitialHealth();
+		this.speed = minionCard.getInitialSpeed();
+		this.name = minionCard.getName();
+		this.description = minionCard.getDescription();
+	}
+	
 	public Integer getPower() {
 		return power;
 	}
@@ -34,4 +48,21 @@ public class Minion extends PlayableCharacter{
 	public void setSpeed(Integer speed) {
 		this.speed = speed;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }

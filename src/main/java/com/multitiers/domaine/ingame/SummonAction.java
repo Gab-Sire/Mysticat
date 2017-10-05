@@ -3,6 +3,7 @@ package com.multitiers.domaine.ingame;
 public class SummonAction extends Action{
 	
 	private Integer fieldCell;
+	private Player owner;
 	private PlayableMinionCard minionCard;
 	
 	public SummonAction() {
@@ -28,9 +29,18 @@ public class SummonAction extends Action{
 		this.minionCard = minionCard;
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
 	@Override
 	void resolve() {
-		// TODO Auto-generated method stub
-		
+		Minion minion = new Minion();
+		minion.setCardReference(this.minionCard);
+		minion.setHealth(this.minionCard.getInitialHealth());
 	}
 }
