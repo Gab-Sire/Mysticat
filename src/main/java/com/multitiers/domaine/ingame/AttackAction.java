@@ -3,7 +3,7 @@ package com.multitiers.domaine.ingame;
 public class AttackAction extends Action{
 	
 	private Minion minion;
-	private int attackedCell;
+	private PlayableCharacter target;
 	
 	public AttackAction() {
 		super();
@@ -18,16 +18,16 @@ public class AttackAction extends Action{
 		this.minion = minion;
 	}
 
-	public int getAttackedCell() {
-		return attackedCell;
+	public PlayableCharacter getTarget() {
+		return target;
 	}
 
-	public void setAttackedCell(int attackedCell) {
-		this.attackedCell = attackedCell;
+	public void setTarget(PlayableCharacter target) {
+		this.target = target;
 	}
 
 	@Override
 	void resolve() {
-		// TODO Auto-generated method stub
+		this.target.setHealth(this.target.getHealth()-this.minion.getPower());
 	}
 }
