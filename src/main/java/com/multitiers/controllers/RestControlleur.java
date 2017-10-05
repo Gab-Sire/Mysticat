@@ -1,13 +1,8 @@
 package com.multitiers.controllers;
 
-<<<<<<< HEAD
-import javax.servlet.http.HttpServletRequest;
-=======
 import javax.servlet.http.HttpSession;
->>>>>>> ac124652e8b83d98652612cfb011782742d396f8
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.ingame.Game;
