@@ -4,6 +4,7 @@ import './app.css';
 import _ from 'lodash';
 import Card from './Card.js';
 import CardTile from './CardTile.js';
+import Field from './Field.js';
 
 
 class App extends Component{
@@ -88,15 +89,7 @@ class App extends Component{
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
 							</div>
-							<div id="selfField" className="battleField">	
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-							</div>
+							<Field id="selfField" />
 							<div id="selfDeck" className="deck">
 								<div className="cardTile"></div>
 							</div>
