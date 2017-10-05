@@ -68,7 +68,6 @@ form{
 
 #selfHand .card {
 	font-size: 12px;
-	background-color: yellow;
 	text-align: center;
 	font-weight: bold;
 }
@@ -202,7 +201,7 @@ form{
 	width: 9%;
 	height: 100%;
 	box-sizing: border-box;
-	background-color: #FAEBD7;
+	background-color: pink;
 }
 
 .card:hover{

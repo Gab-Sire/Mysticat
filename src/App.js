@@ -72,15 +72,7 @@ class App extends Component{
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
 							</div>
-							<div id="opponentField" className="battleField">
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-								<CardTile />
-							</div>
+							<Field id="opponentField" />
 							<div id="opponentDeck" className="deck">
 								<div className="cardTile"></div>
 							</div>
