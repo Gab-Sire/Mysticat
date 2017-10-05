@@ -2,6 +2,7 @@ package com.multitiers.domaine.ingame;
 
 public class Minion extends PlayableCharacter{
 	private Integer power;
+	private Integer speed;
 	private Boolean canAttack;
 	private PlayableMinionCard cardReference;
 
@@ -27,5 +28,10 @@ public class Minion extends PlayableCharacter{
 	public void setCardReference(PlayableMinionCard cardReference) {
 		this.cardReference = cardReference;
 	}
-
+	public Integer getSpeed() {
+		return speed;
+	}
+	public void setSpeed(Integer speed) {
+		this.speed = speed;
+	}
 }

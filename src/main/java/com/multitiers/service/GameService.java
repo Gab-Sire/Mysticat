@@ -41,7 +41,9 @@ public class GameService {
     public synchronized void addToGameQueue(Player player) {
     	this.playersInQueue.add(player);
     	if(playersInQueue.size()>=NB_OF_PLAYERS_PER_GAME) {
-    		startGame(playersInQueue.get(0), playersInQueue.get(1));
+    		Player player1 = playersInQueue.get(0);
+    		Player player2 = playersInQueue.get(1);
+    		startGame(player1, player2);
     	}
     }
     
@@ -62,7 +64,7 @@ public class GameService {
     //Avec liste actions
     public Game updateGame(Game currentGame) {
     	
-    	return null;
+    	return currentGame;
     }
     
 }

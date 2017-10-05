@@ -1,5 +1,7 @@
 package com.multitiers.domaine.ingame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,7 +10,7 @@ import com.multitiers.util.Constantes;
 public class Game {
 	private Player[] players;
 	private Integer currentMana;
-	private Set<Action> actions;
+	private List<Action> actions;
 	
 	public Game() {
 		super();
@@ -19,7 +21,7 @@ public class Game {
 		players[0] = player1;
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
-		actions = new TreeSet<Action>();
+		actions = new ArrayList<Action>();
 	}
 	
 	public void nextTurn() {
@@ -46,11 +48,11 @@ public class Game {
 		this.currentMana = currentMana;
 	}
 
-	public Set<Action> getActions() {
+	public List<Action> getActions() {
 		return actions;
 	}
 
-	public void setActions(Set<Action> actions) {
+	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
 	
