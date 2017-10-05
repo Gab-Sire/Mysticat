@@ -42,7 +42,7 @@ form{
 	border-bottom-right-radius: 10px;
 }
 
-#opponentHand .card {
+.cardFacedDown {
 	background-image: url("img/cardback.jpg");
 	background-size: 100% 100%;
 }
@@ -184,9 +184,8 @@ form{
 	background-color: black;
 }
 
-#selfField .cardTile:hover, #opponentField .cardTile:hover, #selfHand .cardTile:hover{
+#selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover{
 	bottom: 50px;
-	transform: scale(1.5)
 }
 
 .card {
@@ -196,7 +195,11 @@ form{
 	width: 9%;
 	height: 100%;
 	box-sizing: border-box;
-	background-color: yellow;
+	background-color: #FAEBD7;
+}
+
+.card:hover{
+	transform: scale(1.5)
 }
 
 .card+.card {
