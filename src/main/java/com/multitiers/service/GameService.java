@@ -1,12 +1,18 @@
 package com.multitiers.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.PlayableCard;
+import com.multitiers.domaine.ingame.Player;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -14,7 +20,8 @@ import com.multitiers.repository.UserRepository;
 
 @Service
 public class GameService {
-    @Autowired
+    private static final int NB_OF_PLAYERS_PER_GAME = 2;
+	@Autowired
     private UserRepository userRepository;
     @Autowired
     private DeckRepository deckRepository;
@@ -23,8 +30,22 @@ public class GameService {
     @Autowired
     private MinionCardRepository minionCardRepository;
     
-    public GameService() {}
+    private List<Player> playersInQueue;
     
+    public GameService() {
+    	this.playersInQueue = new ArrayList<Player>(); 
+    }
+    
+    public synchronized void addToGameQueue(Player player) {
+    	this.playersInQueue.add(player);
+    	if(playersInQueue.size()>=NB_OF_PLAYERS_PER_GAME) {
+    		startGame(playersInQueue.get(0), playersInQueue.get(1));
+    	}
+    }
+    
+    public synchronized void startGame(Player player1, Player player2) {
+    	
+    }
     
     public Game deserializeGame(String json) {
     	GsonBuilder gsonBuilder = new GsonBuilder();

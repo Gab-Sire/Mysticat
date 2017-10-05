@@ -1,7 +1,6 @@
 package com.multitiers.domaine.ingame;
 
 import com.multitiers.domaine.entity.MinionCard;
-import com.multitiers.util.ConnectionUtils;
 
 public class PlayableMinionCard extends PlayableCard{
 	private Integer initialPower;
