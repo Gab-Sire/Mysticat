@@ -144,15 +144,6 @@ public class RestControlleur {
     
     @PostMapping(value="updateGame")
     public Game updateGame(@RequestBody String  jsonGame) {
-    	System.out.println(jsonGame);
-    	/*
-        User user1 = userRepository.findByUsername("Chat1");
-        User user2 = userRepository.findByUsername("Chat2");
-        Player player1 = new Player(user1);
-        Player player2 = new Player(user2);
-        
-    	Game game = new Game(player2, player1);
-		*/
     	Game game = gameService.deserializeGame(jsonGame);
         return game;
     }

@@ -37,8 +37,6 @@ public class PlayableCardDeserializer implements JsonDeserializer<PlayableCard>{
 			minionCard.setName(name);
 			return minionCard;
 		}
-			
-			
 		return null;
 	}
 

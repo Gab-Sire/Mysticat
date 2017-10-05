@@ -1,6 +1,6 @@
 package com.multitiers.domaine.ingame;
 
-public class PlayableCard {
+public abstract class PlayableCard {
 	protected Integer manaCost;
 	protected String name;
 	protected String description;
