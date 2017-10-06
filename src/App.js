@@ -3,6 +3,7 @@ import axios from 'axios';
 import './app.css';
 import _ from 'lodash';
 import Card from './Card.js';
+import Minion from './Minion.js';
 import CardTile from './CardTile.js';
 import Field from './Field.js';
 
@@ -129,7 +130,6 @@ class App extends Component{
 		return _.map(selfHand, card=> <Card {...card}{...props}/>);
 		
 	}
-	
 	
 	// Fonction qui fetch un game state fait par Spring avec valeurs par defaut
 	getInitialGameInstance(){

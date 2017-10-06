@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import CardTile from './CardTile.js';
+import _ from 'lodash';
+import Minion from './Minion.js';
 
 const MAX_CARDS_FIELD = 7; 
 
@@ -12,20 +14,11 @@ export default class Field extends Component{
 	}
 	
 	render(){
-		let fieldGrid = [];
-		
-		this.props.grid[0].forEach((fieldTile)=>{
-			if(null == fieldTile){
-				fieldGrid.push(<CardTile />);
-			}
-			else{
-				fieldGrid.push(fieldTile);
-			}
-		})
-	
-		return (<div id={this.props.id} className="battleField">
-					{fieldGrid}
-				</div>
+		let props = this.props;
+		return (
+		<div id={this.props.id} className="battleField">
+			{ _.map(this.props.grid[0], minion=> <Minion {...minion}{...props}/>) }
+		</div>
 		);
 	}
 }

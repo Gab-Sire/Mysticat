@@ -8,7 +8,6 @@ export default class Card extends Component{
 	
 	render(){
 		let isFaceUp = this.state.faceUp;
-		
 		if(isFaceUp){
 			return (<div className="card" title={this.state.description}>
 			<div className="cardName">{this.props.name}</div>
