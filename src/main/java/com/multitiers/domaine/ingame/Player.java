@@ -137,4 +137,7 @@ public class Player {
 		this.playerIndex = playerIndex;
 	}
 	
+	public void addMinion(Minion minion, int index) {
+		this.field[index] = minion;
+	}
 }
