@@ -3,9 +3,16 @@ package com.multitiers.domaine.ingame;
 public abstract class Action implements Comparable<Action>{
 	protected Integer playerIndex;
 	
-	public abstract Integer getPlayerIndex();
-	public abstract void setPlayerIndex(Integer playerIndex);
 	
+	public Integer getPlayerIndex() {
+		return playerIndex;
+	}
+
+	public void setPlayerIndex(Integer playerIndex) {
+		this.playerIndex = playerIndex;
+	}
+
+
 	@Override
 	public int compareTo(Action a2) {
 		if(this instanceof SummonAction) {

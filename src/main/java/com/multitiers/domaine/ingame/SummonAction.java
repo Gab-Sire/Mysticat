@@ -25,16 +25,5 @@ public class SummonAction extends Action{
 
 	public void setMinionCard(PlayableMinionCard minionCard) {
 		this.minionCard = minionCard;
-	}
-	
-	@Override
-	public Integer getPlayerIndex() {
-		return this.playerIndex;
-	}
-
-	@Override
-	public void setPlayerIndex(Integer playedIndex) {
-		this.playerIndex = playerIndex;
-	}
-	
+	}	
 }
