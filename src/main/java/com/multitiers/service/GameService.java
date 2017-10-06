@@ -103,13 +103,25 @@ public class GameService {
 		PlayableCharacter attacked;
 		if (attackedIndex==HERO_FACE_INDEX) {
 			attacked = opponentPlayer.getHero();
-
+			attacked.setHealth(attacked.getHealth()-attacker.getPower());
+			if(attacked.isDead()) {
+				System.out.println("Congratz grad, you won.");
+			}
+			return;
 		}
 		else {
 			attacked = opponentPlayer.getField()[attackedIndex];
-			attacker.setHealth(attacker.getHealth()-((Minion)attacked).getPower());
+			if(attacked!=null) {
+				attacker.setHealth(attacker.getHealth()-((Minion)attacked).getPower());
+				attacked.setHealth(attacked.getHealth()-attacker.getPower());
+				if(attacker.isDead()) {
+					attacker = null;
+				}
+				if(attacked.isDead()) {
+					attacked = null;
+				}
+			}
 		}
-		attacked.setHealth(attacked.getHealth()-attacker.getPower());
 	}
 
 	private void verifySpeed(int speed, Minion attacker) {
