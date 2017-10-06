@@ -203,6 +203,12 @@ form{
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 5px;
 	background-color: black;
+	font-size: 10px;
+}
+
+.minion{
+	background : darkblue;
+	
 }
 
 #selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover{

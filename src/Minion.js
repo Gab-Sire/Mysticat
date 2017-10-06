@@ -10,7 +10,7 @@ export default class Card extends Component{
 		let isFaceUp = this.state.faceUp;
 		isFaceUp = (this.props.name!=null) ? true : false;
 		if(isFaceUp){
-			return (<div className="card" title={this.state.description}>
+			return (<div className="cardTile minion" title={this.state.description}>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of damage this minion deals" className="cardPower">Power: {this.props.power}</div>
 				<div title="The amount of damage this minion can take" className="cardHealth">Health: {this.props.health}</div>
@@ -18,7 +18,7 @@ export default class Card extends Component{
 			</div>);
 		}
 		else{
-			return (<div className="cardFacedDown"></div>);
+			return (<div className="cardTile"></div>);
 		}	
 	}
 }
