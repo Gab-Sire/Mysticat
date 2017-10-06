@@ -31,6 +31,15 @@ class App extends Component{
 								description: "test"
 
 							}
+						], 
+						field : [
+							null, 
+							null, 
+							null, 
+							null, 
+							null, 
+							null, 
+							null
 						]
 						},
 						{
@@ -47,6 +56,15 @@ class App extends Component{
 									description: "test"
 
 								}
+							],
+							field : [
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null
 							]
 						}
 				]
@@ -55,7 +73,6 @@ class App extends Component{
 	}
 	render(){
 		let self = this.state.gameState.players[0];
-		let selfField = self.field;
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
@@ -73,7 +90,7 @@ class App extends Component{
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
 							</div>
-							<Field id="opponentField" />
+							<Field id="opponentField" grid={[opponent.field]} />
 							<div id="opponentDeck" className="deck">
 								<div className="cardTile"></div>
 							</div>
@@ -82,7 +99,7 @@ class App extends Component{
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
 							</div>
-							<Field id="selfField" grid={['selfField1']} />
+							<Field id="selfField" grid={[self.field]} />
 							<div id="selfDeck" className="deck">
 								<div className="cardTile"></div>
 							</div>

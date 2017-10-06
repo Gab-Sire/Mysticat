@@ -3,7 +3,7 @@ import CardTile from './CardTile.js';
 
 const MAX_CARDS_FIELD = 7; 
 
-export default class Card extends Component{
+export default class Field extends Component{
 	
 	constructor(props){
 		super(props);
@@ -12,13 +12,19 @@ export default class Card extends Component{
 	}
 	
 	render(){
-		let gridCardTiles = [];
-		for (var i=0; i < MAX_CARDS_FIELD; i++) {
-			gridCardTiles.push(<CardTile />);
-		}
+		let fieldGrid = [];
 		
+		this.props.grid[0].forEach((fieldTile)=>{
+			if(null == fieldTile){
+				fieldGrid.push(<CardTile />);
+			}
+			else{
+				fieldGrid.push(fieldTile);
+			}
+		})
+	
 		return (<div id={this.props.id} className="battleField">
-					{gridCardTiles}
+					{fieldGrid}
 				</div>
 		);
 	}
