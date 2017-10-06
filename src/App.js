@@ -64,6 +64,7 @@ class App extends Component{
 				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
+						<div className="cardFacedDown"></div>
 						</div>
 						<div id="opponentHealth" className="heroHealth">
 						{opponentHealth}
@@ -71,20 +72,20 @@ class App extends Component{
 						<div id="opponentHero" className="hero"></div>
 						<div id="opponentFieldContainer" className="fieldContainer">
 							<div id="opponentGraveyard" className="graveyard">
-								<div className="cardTile"></div>
+								<div className="cardTile full"></div>
 							</div>
 							<Field id="opponentField" />
 							<div id="opponentDeck" className="deck">
-								<div className="cardTile"></div>
+								<div className="cardTile full"></div>
 							</div>
 						</div>
 						<div id="selfFieldContainer" className="fieldContainer">
-							<div id="opponentGraveyard" className="graveyard">
-								<div className="cardTile"></div>
+							<div id="selfGraveyard" className="graveyard">
+								<div className="cardTile full"></div>
 							</div>
 							<Field id="selfField" grid={['selfField1']} />
 							<div id="selfDeck" className="deck">
-								<div className="cardTile"></div>
+								<div className="cardTile full"></div>
 							</div>
 						</div>
 						<div id="selfHealth" className="heroHealth">
