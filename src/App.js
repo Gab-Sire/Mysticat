@@ -82,7 +82,7 @@ class App extends Component{
 							<div id="opponentGraveyard" className="graveyard">
 								<div className="cardTile"></div>
 							</div>
-							<Field id="selfField" />
+							<Field id="selfField" grid={['selfField1']} />
 							<div id="selfDeck" className="deck">
 								<div className="cardTile"></div>
 							</div>
