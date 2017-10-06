@@ -78,18 +78,22 @@ public class GameService {
 			Player currentPlayer = currentGame.getPlayers()[playerIndex];
 			Player opponentPlayer = currentGame.getPlayers()[opponentIndex];
 			if (action instanceof SummonAction) {
-				int fieldCell = ((SummonAction) action).getFieldCell();
-				Minion minion = new Minion(((SummonAction) action).getMinionCard());
-				currentPlayer.getField()[fieldCell] = minion;
-				System.out.println(minion.getName() + " was played on: " + fieldCell);
+				resolveSummonAction(action, currentPlayer);
 			} else if (action instanceof AttackAction) {
-				calculateTrade(action, currentPlayer, opponentPlayer);
+				resolveAttackAction(action, currentPlayer, opponentPlayer);
 			}
 		}
 		return currentGame;
 	}
 
-	private void calculateTrade(Action action, Player currentPlayer, Player opponentPlayer) {
+	private void resolveSummonAction(Action action, Player currentPlayer) {
+		int fieldCell = ((SummonAction) action).getFieldCell();
+		Minion minion = new Minion(((SummonAction) action).getMinionCard());
+		currentPlayer.getField()[fieldCell] = minion;
+		System.out.println(minion.getName() + " was played on: " + fieldCell);
+	}
+
+	private void resolveAttackAction(Action action, Player currentPlayer, Player opponentPlayer) {
 		int attackerIndex = ((AttackAction) action).getAttackerIndex();
 		int attackedIndex = ((AttackAction) action).getAttackedIndex();
 		int speed = ((AttackAction) action).getSpeed();
