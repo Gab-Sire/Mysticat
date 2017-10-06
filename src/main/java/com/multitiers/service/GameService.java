@@ -68,22 +68,37 @@ public class GameService {
 	}
 
 	//TODO Refactor into functions.
-	public Game updateGame(Game currentGame) {
-		List<Action> actions = currentGame.getActions();
-		Collections.sort(actions);
-
+	/*
+	 * Updates game state, calculating and stashing all changes into Player1's game for further use.
+	 * */
+	public Game updateGame(Game playerOneGame, Game playerTwoGame) {
+		List<Action> actions = getCompleteSortedActionList(playerOneGame, playerTwoGame);
+		getPlayerTwoActualHand(playerOneGame, playerTwoGame);
+		
 		for (Action action : actions) {
 			int playerIndex = action.getPlayerIndex();
 			int opponentIndex = (playerIndex == 0) ? 1 : 0;
-			Player currentPlayer = currentGame.getPlayers()[playerIndex];
-			Player opponentPlayer = currentGame.getPlayers()[opponentIndex];
+			Player currentPlayer = playerOneGame.getPlayers()[playerIndex];
+			Player opponentPlayer = playerOneGame.getPlayers()[opponentIndex];
 			if (action instanceof SummonAction) {
 				resolveSummonAction(action, currentPlayer);
-			} else if (action instanceof AttackAction) {
+			} 
+			else if (action instanceof AttackAction) {
 				resolveAttackAction(action, currentPlayer, opponentPlayer);
 			}
 		}
-		return currentGame;
+		return playerOneGame;
+	}
+
+	private List<Action> getCompleteSortedActionList(Game playerOneGame, Game playerTwoGame) {
+		List<Action> actions = playerOneGame.getActions();
+		actions.addAll(playerTwoGame.getActions());
+		Collections.sort(actions);
+		return actions;
+	}
+
+	private void getPlayerTwoActualHand(Game playerOneGame, Game playerTwoGame) {
+		playerOneGame.setPlayerTwoHand(playerTwoGame.getPlayers()[1].getHand());
 	}
 
 	private void resolveSummonAction(Action action, Player currentPlayer) {

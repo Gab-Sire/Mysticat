@@ -9,6 +9,7 @@ public class Game {
 	private Player[] players;
 	private Integer currentMana;
 	private List<Action> actions;
+	private Integer currentPlayerIndex;
 	
 	public Game() {
 		super();
@@ -53,4 +54,18 @@ public class Game {
 	public void setActions(List<Action> actions) {
 		this.actions = actions;
 	}
+
+	public Integer getCurrentPlayerIndex() {
+		return currentPlayerIndex;
+	}
+
+	public void setCurrentPlayerIndex(Integer currentPlayerIndex) {
+		this.currentPlayerIndex = currentPlayerIndex;
+	}
+	
+	public void setPlayerTwoHand(List<PlayableCard> hand) {
+		this.players[1].setHand(hand);
+	}
+	
+
 }

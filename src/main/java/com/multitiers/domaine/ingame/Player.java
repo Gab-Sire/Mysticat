@@ -17,7 +17,6 @@ public class Player {
 	private List<PlayableCard> hand;
 	private Integer remainingMana;
 	private Integer fatigueDamage;
-	private Integer playerIndex;
 
 	public Player() {
 		super();
@@ -129,12 +128,4 @@ public class Player {
 		this.fatigueDamage = fatigueDamage;
 	}
 
-	public Integer getPlayerIndex() {
-		return playerIndex;
-	}
-
-	public void setPlayerIndex(Integer playerIndex) {
-		this.playerIndex = playerIndex;
-	}
-	
 }
