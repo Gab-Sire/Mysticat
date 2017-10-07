@@ -151,7 +151,6 @@ public class RestControlleur {
         return game;
     }
     
-    
     @PostMapping(value="/updateGame")
     public Game updateGame(@RequestBody String  jsonGame) {
     	Game game = gameService.deserializeGame(jsonGame);
