@@ -3,9 +3,11 @@ package com.multitiers.domaine.ingame;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 public class Game {
+	private String gameId;
 	private Player[] players;
 	private Integer currentMana;
 	private List<Action> actions;
@@ -16,7 +18,10 @@ public class Game {
 	}
 	
 	public Game(Player player1, Player player2) {
+		this.gameId = ConnectionUtils.generateUUID().toString();
 		players = new Player[Constantes.MAX_NB_OF_PLAYERS];
+		player1.setGameId(this.gameId);
+		player2.setGameId(this.gameId);
 		players[0] = player1;
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
@@ -66,6 +71,13 @@ public class Game {
 	public void setPlayerTwoHand(List<PlayableCard> hand) {
 		this.players[1].setHand(hand);
 	}
-	
 
+	public String getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
+	
 }
