@@ -1,31 +1,30 @@
 @charset "ISO-8859-1";
 
-*{
+* {
 	box-sizing: border-box;
 }
 
-form{
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-    text-align: center;
+form {
+	margin: auto;
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+	text-align: center;
 }
 
 /* Plateau de jeu général */
-
 #board {
 	position: relative;
 	border: 2px solid black;
 	margin-left: 1%;
 	width: 98%;
 	height: 740px;
-	background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url('./img/background.jpg');
-    cursor: default;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+		url('./img/background.jpg');
+	cursor: default;
 }
 
 /* mains de cartes */
-
 .hand {
 	display: block;
 	/*border: 1px solid black;*/
@@ -51,7 +50,6 @@ form{
 	width: 9%;
 	height: 100%;
 	box-sizing: border-box;
-	
 }
 
 #selfHand {
@@ -61,7 +59,7 @@ form{
 	border-top-right-radius: 10px;
 }
 
-#selfHand .cardTile{
+#selfHand .cardTile {
 	margin-top: 0.75%;
 	font-size: 15px;
 }
@@ -74,31 +72,30 @@ form{
 	font-weight: bold;
 }
 
-.hand .cardTile:first-of-type{
+.hand .cardTile:first-of-type {
 	margin-left: 5.5%;
 }
 
-#opponentHand .cardTile{
+#opponentHand .cardTile {
 	margin-top: 10px;
 }
 
 /* champs de bataille */
-
-.fieldContainer{
+.fieldContainer {
 	/*border: 1px solid green;*/
 	height: 22%;
 }
 
-#opponentFieldContainer{
-	margin-top: 0.75%;	
+#opponentFieldContainer {
+	margin-top: 0.75%;
 }
 
-#selfFieldContainer{
+#selfFieldContainer {
 	margin-bottom: 1%;
 }
 
-.battleField{
-	display:inline-block;
+.battleField {
+	display: inline-block;
 	width: 60%;
 	height: 100%;
 	/*border: 1px blue solid;*/
@@ -107,65 +104,62 @@ form{
 	border-radius: 10px;
 }
 
-.battleField .cardTile, .graveyard .cardTile, .deck .cardTile{
+.battleField .cardTile, .graveyard .cardTile, .deck .cardTile {
 	width: 9.5%;
 	margin-top: 1%;
 }
 
-.deck .cardTile{
+.deck .cardTile {
 	transform: rotate(90deg);
 	width: 30%;
 	margin-left: 30px;
 }
-.deck .full{
+
+.deck .full {
 	background-image: url("img/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;
 }
 
-.battleField .cardTile:first-of-type{
+.battleField .cardTile:first-of-type {
 	margin-left: 14%;
 }
 
 /* cimetières */
-
-.graveyard{
-	display:inline-block;
+.graveyard {
+	display: inline-block;
 	/*border: 2px orange solid;*/
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
 }
 
-.graveyard .cardTile{
-	
+.graveyard .cardTile {
 	width: 30%;
 	margin-left: 65%;
 }
-.graveyard .full{
+
+.graveyard .full {
 	background-image: url("img/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;
-
 }
 
 /* decks */
-
 .deck {
 	/*border: 2px purple solid;*/
-	display:inline-block;
+	display: inline-block;
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
 }
 
 /* héros */
-
-.hero{
+.hero {
 	border: 1px yellow solid;
-	display:block;
+	display: block;
 	width: 10%;
 	height: 12%;
 	margin: 0 auto;
@@ -175,26 +169,24 @@ form{
 	border-top-right-radius: 35%;
 }
 
-.hero:hover{
+.hero:hover {
 	border: 4px solid #FAFAD2;
-	box-shadow: 0 0 0 5px rgba(255,255,255,.25);
+	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
 }
 
-#opponentHero{
+#opponentHero {
 	background-image: url('./img/chatZorro.jpg');
 	background-size: cover;
 }
 
-#selfHero{
+#selfHero {
 	background-image: url('./img/chatgicien.jpg');
-	background-size: cover;	
+	background-size: cover;
 	background-position: center;
-
 }
 
 /* cartes */
-
-.cardTile{
+.cardTile {
 	position: relative;
 	display: inline-block;
 	border: 1px solid red;
@@ -206,16 +198,20 @@ form{
 	font-size: 10px;
 }
 
-.minion{
-	background : darkblue;
-	
+.minion {
+	background: darkblue;
 }
 
-#selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover{
+.minion:hover{
+	transform:scale(1.2);
+}
+
+#selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover
+	{
 	bottom: 50px;
 }
 
-#selfHand .card{
+#selfHand .card {
 	
 }
 
@@ -238,30 +234,38 @@ form{
 }
 
 .cardName {
-	text-decoration: underline;
+	position: absolute; text-decoration : underline;
 	overflow: auto;
 	color: white;
+	text-decoration: underline;
 }
 
 .cardManaCost {
+	top: 15px; position : absolute;
 	color: blue;
+	position: absolute;
 }
 
 .cardPower {
+	top: 30px;
+	position: absolute;
 	color: red;
 }
 
 .cardHealth {
+	top: 45px;
+	position: absolute;
 	color: green;
 }
 
 .cardSpeed {
+	top: 60px;
+	position: absolute;
 	font-style: italic;
 	color: white;
 }
 
 /* attributs joueur */
-
 .heroHealth {
 	width: 8%;
 	border: 2px solid black;
@@ -281,20 +285,19 @@ form{
 #selfHealth {
 	position: absolute;
 	bottom: 155px;
-	
 }
 
-#opponentHealth{
+#opponentHealth {
 	position: absolute;
 	top: 118px;
 }
 
-#selfMana:hover{
+#selfMana:hover {
 	transition: 1.2s;
 	background-color: #41aff4;
 }
 
-#selfMana{
+#selfMana {
 	bottom: 2%;
 	right: 8%;
 	position: absolute;
@@ -303,21 +306,20 @@ form{
 	font-size: 1.5em;
 	border: 2px solid black;
 	background-color: blue;
-	 -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    color: white;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	color: white;
 }
 
-#selfMana div{
+#selfMana div {
 	-webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    line-height: 26px;
-    text-align: center;
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	line-height: 26px;
+	text-align: center;
 }
-
