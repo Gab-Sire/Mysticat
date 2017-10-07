@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import './app.css';
+import './styles/app.css';
 import _ from 'lodash';
-import Card from './Card.js';
-import Minion from './Minion.js';
-import CardTile from './CardTile.js';
-import Field from './Field.js';
-import Graveyard from './Graveyard.js';
-import Deck from './Deck.js';
-import Hero from './Hero.js';
+import Card from './cardComponents/Card.js';
+import Minion from './cardComponents/Minion.js';
+import CardTile from './cardComponents/CardTile.js';
+import Field from './boardComponents/Field.js';
+import Graveyard from './boardComponents/Graveyard.js';
+import Deck from './boardComponents/Deck.js';
+import Hero from './boardComponents/Hero.js';
 
 class App extends Component{
 	constructor(props){
@@ -108,7 +108,6 @@ class App extends Component{
 						</div>
 						<button onClick={this.updateGameState.bind(this)}>End turn</button>
 					</div>
-					
 				</div>
 			);
 	}

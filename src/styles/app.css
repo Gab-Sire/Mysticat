@@ -20,7 +20,7 @@ form {
 	width: 98%;
 	height: 740px;
 	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-		url('./img/background.jpg');
+		url('../img/background.jpg');
 	cursor: default;
 }
 
@@ -111,7 +111,7 @@ form {
 }
 
 .deck .full {
-	background-image: url("img/cardback.jpg");
+	background-image: url("../img/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;
@@ -141,7 +141,7 @@ form {
 }
 
 .graveyard .full {
-	background-image: url("img/cardback.jpg");
+	background-image: url("../img/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;
@@ -175,18 +175,18 @@ form {
 }
 
 .zorroHero {
-	background-image: url('./img/chatZorro.jpg');
+	background-image: url('../img/chatZorro.jpg');
 	background-size: cover;
 }
 
 .wizardHero {
-	background-image: url('./img/chatgicien.jpg');
+	background-image: url('../img/chatgicien.jpg');
 	background-size: cover;
 	background-position: center;
 }
 
 .warriorHero {
-	background-image: url('./img/chatGuerrier.jpg');
+	background-image: url('../img/chatGuerrier.jpg');
 	background-size: cover;
 	background-position: center;
 }
@@ -217,7 +217,7 @@ form {
 }
 
 .cardFacedDown {
-	background-image: url("img/cardback.jpg");
+	background-image: url("../img/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;

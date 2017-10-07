@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import CardTile from './CardTile.js';
-import Card from './Card.js';
+import CardTile from '../cardComponents/CardTile.js';
+import Card from '../cardComponents/Card.js';
 
 export default class Graveyard extends Component{
 	constructor(props){
