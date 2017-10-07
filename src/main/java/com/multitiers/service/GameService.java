@@ -66,7 +66,10 @@ public class GameService implements QueueListener{
 	//TODO
 	public ActionList deserializeActionList(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
+		Gson gson = gsonBuilder
+				.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
+				.registerTypeAdapter(Action.class, new ActionDeserializer())
+				.create();
 		ActionList list = gson.fromJson(json, ActionList.class);
 		
 		return null;
