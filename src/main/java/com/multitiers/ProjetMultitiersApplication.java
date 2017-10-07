@@ -19,7 +19,7 @@ public class ProjetMultitiersApplication {
     public CommandLineRunner peuplement(InscriptionService inscriptionService, GameService gameService) {
         return (args) -> {
             inscriptionService.peuplement();
-            gameService.initQueue();
+            gameService.initGameQueue();
         };
     }
 }

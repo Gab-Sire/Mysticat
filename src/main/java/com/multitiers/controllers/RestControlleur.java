@@ -27,6 +27,7 @@ import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
+import com.multitiers.service.GameQueue;
 import com.multitiers.service.GameService;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.Constantes;
@@ -151,9 +152,17 @@ public class RestControlleur {
     }
     
     
-    @PostMapping(value="updateGame")
+    @PostMapping(value="/updateGame")
     public Game updateGame(@RequestBody String  jsonGame) {
     	Game game = gameService.deserializeGame(jsonGame);
         return game;
     }
+    
+    @PostMapping(value="/enterQueue")
+    public void enterQueue(@RequestBody String userId) {
+    	User user = userRepository.findById(userId);
+    	Player player = new Player(user);
+    	this.gameService.gameQueue.addToQueue(player);
+    }
+    
 }

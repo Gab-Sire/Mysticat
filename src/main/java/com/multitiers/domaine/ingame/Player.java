@@ -9,6 +9,8 @@ import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.util.Constantes;
 public class Player {
+	private String gameId;
+	private String playerId;
 	private String name;
 	private Hero hero;
 	private List<PlayableCard> graveyard;
@@ -17,13 +19,13 @@ public class Player {
 	private List<PlayableCard> hand;
 	private Integer remainingMana;
 	private Integer fatigueDamage;
-	private Integer playerIndex;
 
 	public Player() {
 		super();
 	}
 
 	public Player(User user) {
+		this.playerId = user.getId();
 		this.name = user.getUsername();
 		this.deck = new ArrayList<PlayableCard>();
 		List<Card> entityCardList = user.getDecks().get(0).getCardList();
@@ -129,12 +131,20 @@ public class Player {
 		this.fatigueDamage = fatigueDamage;
 	}
 
-	public Integer getPlayerIndex() {
-		return playerIndex;
+	public String getGameId() {
+		return gameId;
 	}
 
-	public void setPlayerIndex(Integer playerIndex) {
-		this.playerIndex = playerIndex;
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
+
+	public String getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
 	}
 	
 	public void addMinion(Minion minion, int index) {
