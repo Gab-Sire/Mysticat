@@ -89,45 +89,6 @@ public class RestControlleur {
     	return user;
     }
     
-    //TODO EQ1-49 Instancier une partie a partir du user qui la demande.
-    //Deuxieme user sera hardcoded pour tester 
-    //Demande les credentials, car on n'a pas de session
-    //Fonction test seulement, pas besoin de checker pour des exceptions
-    @PostMapping(value="/enterGame")
-    @ResponseBody
-    public Game enterGame(@ModelAttribute UserCredentials userCredentials) {
-    	User user = inscriptionService.getUserFromCredentials(userCredentials);
-    	User userHardCoded = userRepository.findByUsername("Chat2");
-    	Player player1 = new Player(user);
-    	Player player2 = new Player(userHardCoded);
-    	Game game = new Game(player1, player2);
-    	return game;
-    }
-
-    @ExceptionHandler(value=BadCredentialsLoginException.class)
-    public String handleBadCredentialsLogin() {
-    	return "Le nom d'utilisateur et le mot de passe que vous avez entre ne correspondent pas.";
-    }
-    
-    @ExceptionHandler(value=BadPasswordFormatException.class)
-    public String handleBadPasswordSignup() {
-    	return "Votre mot de passe est dans un format invalide.\n"+
-				"<h2>Le mot de passe doit comprendre:</h2> \n"+
-				"<ul><li>Entre "+Constantes.MIN_PASSWORD_LENGTH+" et "+Constantes.MAX_PASSWORD_LENGTH+" caracteres inclusivement</li>"+
-				"<li>Au moins 1 lettre minuscle</li>"+
-				"<li>Au moins 1 lettre majuscule</li>"+
-				"<li>Au moins un chiffre</li></ul>";
-    }
-    @ExceptionHandler(value=BadUsernameFormatException.class)
-    public String handleBadUsernameSignup() {
-    	return "Votre mot de passe est dans un format invalide.\n"+
-				"<h2>Le nom d'utilisateur doit comprendre:</h2> \n"+
-				"<ul><li>Entre "+Constantes.MIN_USERNAME_LENGTH+" et "+Constantes.MAX_USERNAME_LENGTH+" caracteres inclusivement</li>"
-				+ "<li>Au moins 1 chiffre</li>"
-				+ "<li>Au moins 1 lettre minuscule</li>"
-				+ "<li>Au moins 1 lettre majuscule</li></ul>";
-    }
-    
     @ExceptionHandler(value=UsernameTakenException.class)
     public String handleUsernameTakenSignup(UsernameTakenException e) {
     	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
@@ -158,6 +119,38 @@ public class RestControlleur {
     	User user = userRepository.findById(userId);
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);
+    }
+    
+    @GetMapping(value="/checkIfQueuePopped")
+    public Game checkIfQueuePopped(@RequestBody String userId) {
+    	if(gameService.newGameList.containsKey(userId)) {
+    		return gameService.newGameList.get(userId);
+    	}
+    	return null;
+    }
+    
+    @ExceptionHandler(value=BadCredentialsLoginException.class)
+    public String handleBadCredentialsLogin() {
+    	return "Le nom d'utilisateur et le mot de passe que vous avez entre ne correspondent pas.";
+    }
+    
+    @ExceptionHandler(value=BadPasswordFormatException.class)
+    public String handleBadPasswordSignup() {
+    	return "Votre mot de passe est dans un format invalide.\n"+
+				"<h2>Le mot de passe doit comprendre:</h2> \n"+
+				"<ul><li>Entre "+Constantes.MIN_PASSWORD_LENGTH+" et "+Constantes.MAX_PASSWORD_LENGTH+" caracteres inclusivement</li>"+
+				"<li>Au moins 1 lettre minuscle</li>"+
+				"<li>Au moins 1 lettre majuscule</li>"+
+				"<li>Au moins un chiffre</li></ul>";
+    }
+    @ExceptionHandler(value=BadUsernameFormatException.class)
+    public String handleBadUsernameSignup() {
+    	return "Votre mot de passe est dans un format invalide.\n"+
+				"<h2>Le nom d'utilisateur doit comprendre:</h2> \n"+
+				"<ul><li>Entre "+Constantes.MIN_USERNAME_LENGTH+" et "+Constantes.MAX_USERNAME_LENGTH+" caracteres inclusivement</li>"
+				+ "<li>Au moins 1 chiffre</li>"
+				+ "<li>Au moins 1 lettre minuscule</li>"
+				+ "<li>Au moins 1 lettre majuscule</li></ul>";
     }
     
 }

@@ -52,6 +52,7 @@ public class GameService implements QueueListener{
 		this.gameQueue.addToListeners(this);
 	}
 	
+	//Fonction pour tester la serialization et deserialization d'une Game
 	public Game deserializeGame(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer()).create();
@@ -61,8 +62,16 @@ public class GameService implements QueueListener{
 
 		return gameFromJson;
 	}
+	
+	//TODO
+	public ActionList deserializeActionList(String json) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		ActionList list = gson.fromJson(json, ActionList.class);
+		
+		return null;
+	}
 
-	//TODO Refactor into functions.
 	/*
 	 * Updates game state, calculating and stashing all changes into Player1's game for further use.
 	 * */
@@ -152,6 +161,8 @@ public class GameService implements QueueListener{
 		//Create game
 		//Assigner la game aux 2 joueurs qui devraient la recevoir
 		Game game  = this.gameQueue.matchFirstTwoPlayersInQueue();
-		this.newGameList.put(game.getGameId(), game);
+		for (Player player : game.getPlayers()) {
+			this.newGameList.put(player.getPlayerId(), game);
+		}
 	}
 }
