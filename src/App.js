@@ -86,24 +86,29 @@ class App extends Component{
 						<div id="opponentHand" className="hand">
 						<div className="cardFacedDown"></div>
 						</div>
+						
 						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
+							
 						<div id="opponentFieldContainer" className="fieldContainer">
 							<Graveyard id="opponentGraveyard" />
 							<Field id="opponentField" grid={[opponent.field]} />
 							<Deck id="opponentDeck" />
 						</div>
+						
 						<div id="selfFieldContainer" className="fieldContainer">
 							<Graveyard id="selfGraveyard" />
 							<Field id="selfField" grid={[self.field]} />
 							<Deck id="selfDeck" />
 						</div>
+							
 						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="warriorHero"/>
+							
 						<div id="selfHand" className="hand">
 							{this.renderSelfHand()}
 						</div>
-						
+						<button onClick={this.updateGameState.bind(this)}>End turn</button>
 					</div>
-					<button onClick={this.updateGameState.bind(this)}>End turn</button>
+					
 				</div>
 			);
 	}

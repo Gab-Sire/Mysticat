@@ -10,7 +10,6 @@ export default class Hero extends Component{
 		let heroId = this.props.id;
 		let health = this.props.health;
 		let mana = this.props.mana;
-		
 		this.state.heroName = this.props.heroName;
 		
 		if("selfHero" == heroId){
