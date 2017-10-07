@@ -93,12 +93,18 @@ form {
 	border-radius: 10px;
 }
 
-.battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown, .deck .cardTile {
+.battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown, .deck .cardTile, .deck .cardFacedDown {
 	width: 9.5%;
 	margin-top: 1%;
 }
 
 .deck .cardTile {
+	transform: rotate(90deg);
+	width: 30%;
+	margin-left: 30px;
+}
+
+.deck .cardFacedDown {
 	transform: rotate(90deg);
 	width: 30%;
 	margin-left: 30px;
