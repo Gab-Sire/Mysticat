@@ -1,5 +1,7 @@
 @charset "ISO-8859-1";
 
+/* GÉNÉRAL */
+
 * {
 	box-sizing: border-box;
 }
@@ -12,7 +14,8 @@ form {
 	text-align: center;
 }
 
-/* Plateau de jeu général */
+/* PLATEAU DE JEU */
+
 #board {
 	position: relative;
 	border: 2px solid black;
@@ -24,7 +27,11 @@ form {
 	cursor: default;
 }
 
-/* mains de cartes */
+/* MAINS DE CARTES */
+
+
+/* styles pour les mains */
+
 .hand {
 	display: block;
 	/*border: 1px solid black;*/
@@ -34,13 +41,6 @@ form {
 	background-color: rgba(255, 255, 255, 0.4);
 }
 
-#opponentHand {
-	margin-top: -80px;
-	margin-bottom: 5px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
 #selfHand {
 	position: absolute;
 	bottom: 0;
@@ -48,9 +48,22 @@ form {
 	border-top-right-radius: 10px;
 }
 
+#opponentHand {
+	margin-top: -80px;
+	margin-bottom: 5px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+/* styles pour les cartes dans les mains */
+
 #selfHand .cardTile {
 	margin-top: 0.75%;
 	font-size: 15px;
+}
+
+#opponentHand .cardTile {
+	margin-top: 10px;
 }
 
 #selfHand .card {
@@ -65,23 +78,24 @@ form {
 	margin-left: 5.5%;
 }
 
-#opponentHand .cardTile {
-	margin-top: 10px;
-}
+/* CHAMPS DE BATAILLE */
 
-/* champs de bataille */
+/* styles pour les conteneurs */
+
 .fieldContainer {
 	/*border: 1px solid green;*/
 	height: 22%;
+}
+
+#selfFieldContainer {
+	margin-bottom: 1%;
 }
 
 #opponentFieldContainer {
 	margin-top: 0.75%;
 }
 
-#selfFieldContainer {
-	margin-bottom: 1%;
-}
+/* styles pour les champs de bataille */
 
 .battleField {
 	display: inline-block;
@@ -92,6 +106,8 @@ form {
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 10px;
 }
+
+/* styles pour les cartes et emplacements sur le champ de bataille */
 
 .battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown, .deck .cardTile, .deck .cardFacedDown {
 	width: 9.5%;
@@ -110,18 +126,14 @@ form {
 	margin-left: 30px;
 }
 
-.deck .full {
-	background-image: url("../img/cardback.jpg");
-	background-size: 100% 100%;
-	display: inline-block;
-	border: 1px solid black;
-}
-
 .battleField .cardTile:first-of-type {
 	margin-left: 14%;
 }
 
-/* cimetières */
+/* CIMETIÈRE */
+
+/* styles pour les zones cimetière */
+
 .graveyard {
 	display: inline-block;
 	/*border: 2px orange solid;*/
@@ -129,6 +141,8 @@ form {
 	height: 100%;
 	margin: 0;
 }
+
+/* styles pour les cartes dans le cimetière */
 
 .graveyard .cardTile {
 	width: 30%;
@@ -140,14 +154,10 @@ form {
 	margin-left: 65%;
 }
 
-.graveyard .full {
-	background-image: url("../img/cardback.jpg");
-	background-size: 100% 100%;
-	display: inline-block;
-	border: 1px solid black;
-}
+/* DECK */
 
-/* decks */
+/* styles pour les zones deck */
+
 .deck {
 	/*border: 2px purple solid;*/
 	display: inline-block;
@@ -156,42 +166,9 @@ form {
 	margin: 0;
 }
 
-/* héros */
-.hero {
-	border: 1px yellow solid;
-	display: block;
-	width: 10%;
-	height: 12%;
-	margin: 0 auto;
-	padding: 0;
-	z-index: auto;
-	border-top-left-radius: 35%;
-	border-top-right-radius: 35%;
-}
+/* CARTES */
 
-.hero:hover {
-	border: 4px solid #FAFAD2;
-	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
-}
-
-.zorroHero {
-	background-image: url('../img/chatZorro.jpg');
-	background-size: cover;
-}
-
-.wizardHero {
-	background-image: url('../img/chatgicien.jpg');
-	background-size: cover;
-	background-position: center;
-}
-
-.warriorHero {
-	background-image: url('../img/chatGuerrier.jpg');
-	background-size: cover;
-	background-position: center;
-}
-
-/* cartes */
+/* style pour les emplacements de cartes */
 
 .cardTile {
 	position: relative;
@@ -205,6 +182,8 @@ form {
 	font-size: 10px;
 }
 
+/* styles pour une carte visible (de face) */
+
 .card {
 	display: inline-block;
 	border: 1px solid black;
@@ -216,41 +195,8 @@ form {
 	background-color: yellow;
 }
 
-.cardFacedDown {
-	background-image: url("../img/cardback.jpg");
-	background-size: 100% 100%;
-	display: inline-block;
-	border: 1px solid black;
-	position: relative;
-	width: 8%;
-	height: 130px;
-	margin: 0 0.5% 0 0.5%;
-	box-sizing: border-box;
-}
-
-.minion {
-	background: darkblue;
-}
-
-.minion:hover{
-	transform:scale(1.2);
-}
-
-#selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover
-	{
-	bottom: 50px;
-}
-
-#selfHand .card {
-	
-}
-
 .card:hover{
 	transform: scale(1.5)
-}
-
-.card+.card {
-	margin-left: 1%;
 }
 
 .cardName {
@@ -285,7 +231,81 @@ form {
 	color: white;
 }
 
-/* attributs joueur */
+.card+.card {
+	margin-left: 1%;
+}
+
+#selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover
+	{
+	bottom: 50px;
+}
+
+/* style pour une carte non visible (de dos) */
+
+.cardFacedDown {
+	background-image: url("../img/cardback.jpg");
+	background-size: 100% 100%;
+	display: inline-block;
+	border: 1px solid black;
+	position: relative;
+	width: 8%;
+	height: 130px;
+	margin: 0 0.5% 0 0.5%;
+	box-sizing: border-box;
+}
+
+/* styles pour les créatures invoquées sur le champ de bataille */
+
+.minion {
+	background: darkblue;
+}
+
+.minion:hover{
+	transform:scale(1.2);
+}
+
+/* HÉROS */
+
+/* styles pour les héros */
+
+.hero {
+	border: 1px yellow solid;
+	display: block;
+	width: 10%;
+	height: 12%;
+	margin: 0 auto;
+	padding: 0;
+	z-index: auto;
+	border-top-left-radius: 35%;
+	border-top-right-radius: 35%;
+}
+
+.hero:hover {
+	border: 4px solid #FAFAD2;
+	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
+}
+
+/* style pour les types de héros */
+
+.zorroHero {
+	background-image: url('../img/chatZorro.jpg');
+	background-size: cover;
+}
+
+.wizardHero {
+	background-image: url('../img/chatgicien.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.warriorHero {
+	background-image: url('../img/chatGuerrier.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+/* styles pour l'attribut vies du héros (joueur) */
+
 .heroHealth {
 	width: 8%;
 	border: 2px solid black;
@@ -312,10 +332,7 @@ form {
 	top: 118px;
 }
 
-#selfMana:hover {
-	transition: 1.2s;
-	background-color: #41aff4;
-}
+/* styles pour l'attribut mana du héros (joueur) */
 
 #selfMana {
 	bottom: 2%;
@@ -342,4 +359,9 @@ form {
 	transform: rotate(-45deg);
 	line-height: 26px;
 	text-align: center;
+}
+
+#selfMana:hover {
+	transition: 1.2s;
+	background-color: #41aff4;
 }
