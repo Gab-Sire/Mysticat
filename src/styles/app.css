@@ -57,15 +57,6 @@ form {
 
 /* styles pour les cartes dans les mains */
 
-#selfHand .cardTile {
-	margin-top: 0.75%;
-	font-size: 15px;
-}
-
-#opponentHand .cardTile {
-	margin-top: 10px;
-}
-
 #selfHand .card {
 	margin-top: 0.75%;
 	font-size: 15px;
@@ -83,7 +74,6 @@ form {
 /* styles pour les conteneurs */
 
 .fieldContainer {
-	/*border: 1px solid green;*/
 	height: 22%;
 }
 
@@ -101,7 +91,6 @@ form {
 	display: inline-block;
 	width: 60%;
 	height: 100%;
-	/*border: 1px blue solid;*/
 	margin: 0;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 10px;
@@ -136,7 +125,6 @@ form {
 
 .graveyard {
 	display: inline-block;
-	/*border: 2px orange solid;*/
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
@@ -159,7 +147,6 @@ form {
 /* styles pour les zones deck */
 
 .deck {
-	/*border: 2px purple solid;*/
 	display: inline-block;
 	width: 19.75%;
 	height: 100%;
