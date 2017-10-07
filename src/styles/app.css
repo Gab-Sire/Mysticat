@@ -183,6 +183,7 @@ form {
 	height: 130px;
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
+	border-radius: 5px;
 	background-color: yellow;
 }
 
@@ -242,6 +243,7 @@ form {
 	width: 8%;
 	height: 130px;
 	margin: 0 0.5% 0 0.5%;
+	border-radius: 5px;
 	box-sizing: border-box;
 }
 
@@ -360,6 +362,8 @@ form {
 /* Général overrides */
 
 .selected{
-	border: pink 3px solid;
-	
+	border: pink 4px solid;
+	outline: none;
+    box-shadow: 0 0 20px #9ecaed;
+    border-radius: 5px;
 }
