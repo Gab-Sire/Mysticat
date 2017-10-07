@@ -41,17 +41,6 @@ form {
 	border-bottom-right-radius: 10px;
 }
 
-.cardFacedDown {
-	background-image: url("img/cardback.jpg");
-	background-size: 100% 100%;
-	display: inline-block;
-	border: 1px solid black;
-	position: relative;
-	width: 9%;
-	height: 100%;
-	box-sizing: border-box;
-}
-
 #selfHand {
 	position: absolute;
 	bottom: 0;
@@ -104,7 +93,7 @@ form {
 	border-radius: 10px;
 }
 
-.battleField .cardTile, .graveyard .cardTile, .deck .cardTile {
+.battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown, .deck .cardTile {
 	width: 9.5%;
 	margin-top: 1%;
 }
@@ -136,6 +125,11 @@ form {
 }
 
 .graveyard .cardTile {
+	width: 30%;
+	margin-left: 65%;
+}
+
+.graveyard .cardFacedDown {
 	width: 30%;
 	margin-left: 65%;
 }
@@ -186,6 +180,7 @@ form {
 }
 
 /* cartes */
+
 .cardTile {
 	position: relative;
 	display: inline-block;
@@ -196,6 +191,29 @@ form {
 	border-radius: 5px;
 	background-color: black;
 	font-size: 10px;
+}
+
+.card {
+	display: inline-block;
+	border: 1px solid black;
+	position: relative;
+	width: 8%;
+	height: 130px;
+	margin: 0 0.5% 0 0.5%;
+	box-sizing: border-box;
+	background-color: yellow;
+}
+
+.cardFacedDown {
+	background-image: url("img/cardback.jpg");
+	background-size: 100% 100%;
+	display: inline-block;
+	border: 1px solid black;
+	position: relative;
+	width: 8%;
+	height: 130px;
+	margin: 0 0.5% 0 0.5%;
+	box-sizing: border-box;
 }
 
 .minion {
@@ -213,16 +231,6 @@ form {
 
 #selfHand .card {
 	
-}
-
-.card {
-	display: inline-block;
-	border: 1px solid black;
-	position: relative;
-	width: 8%;
-	height: 130px;
-	box-sizing: border-box;
-	background-color: yellow;
 }
 
 .card:hover{
