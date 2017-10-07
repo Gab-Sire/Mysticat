@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class Graveyard extends Component{
+export default class Card extends Component{
 	constructor(props){
 		super(props);
 		this.state={faceUp: true};

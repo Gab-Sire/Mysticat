@@ -6,6 +6,7 @@ import Card from './Card.js';
 import Minion from './Minion.js';
 import CardTile from './CardTile.js';
 import Field from './Field.js';
+import Graveyard from './Graveyard.js';
 
 
 class App extends Component{
@@ -89,18 +90,14 @@ class App extends Component{
 						</div>
 						<div id="opponentHero" className="hero"></div>
 						<div id="opponentFieldContainer" className="fieldContainer">
-							<div id="opponentGraveyard" className="graveyard">
-								<div className="cardTile full"></div>
-							</div>
+							<Graveyard id="opponentGraveyard" />
 							<Field id="opponentField" grid={[opponent.field]} />
 							<div id="opponentDeck" className="deck">
 								<div className="cardTile full"></div>
 							</div>
 						</div>
 						<div id="selfFieldContainer" className="fieldContainer">
-							<div id="selfGraveyard" className="graveyard">
-								<div className="cardTile full"></div>
-							</div>
+							<Graveyard id="selfGraveyard" />
 							<Field id="selfField" grid={[self.field]} />
 							<div id="selfDeck" className="deck">
 								<div className="cardTile full"></div>
