@@ -8,6 +8,7 @@ import CardTile from './CardTile.js';
 import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
+import Hero from './Hero.js';
 
 class App extends Component{
 	constructor(props){
@@ -85,10 +86,7 @@ class App extends Component{
 						<div id="opponentHand" className="hand">
 						<div className="cardFacedDown"></div>
 						</div>
-						<div id="opponentHealth" className="heroHealth">
-						{opponentHealth}
-						</div>
-						<div id="opponentHero" className="hero"></div>
+						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
 						<div id="opponentFieldContainer" className="fieldContainer">
 							<Graveyard id="opponentGraveyard" />
 							<Field id="opponentField" grid={[opponent.field]} />
@@ -99,18 +97,11 @@ class App extends Component{
 							<Field id="selfField" grid={[self.field]} />
 							<Deck id="selfDeck" />
 						</div>
-						<div id="selfHealth" className="heroHealth">
-								{selfHealth}
-						</div>
-						<div id="selfHero" className="hero"></div>
+						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="warriorHero"/>
 						<div id="selfHand" className="hand">
 							{this.renderSelfHand()}
 						</div>
-						<div id="selfMana">
-							<div>
-								{selfMana}
-							</div>
-						</div>
+						
 					</div>
 					<button onClick={this.updateGameState.bind(this)}>End turn</button>
 				</div>

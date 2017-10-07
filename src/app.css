@@ -174,13 +174,19 @@ form {
 	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
 }
 
-#opponentHero {
+.zorroHero {
 	background-image: url('./img/chatZorro.jpg');
 	background-size: cover;
 }
 
-#selfHero {
+.wizardHero {
 	background-image: url('./img/chatgicien.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.warriorHero {
+	background-image: url('./img/chatGuerrier.jpg');
 	background-size: cover;
 	background-position: center;
 }
