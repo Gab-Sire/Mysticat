@@ -7,7 +7,7 @@ import Minion from './Minion.js';
 import CardTile from './CardTile.js';
 import Field from './Field.js';
 import Graveyard from './Graveyard.js';
-
+import Deck from './Deck.js';
 
 class App extends Component{
 	constructor(props){
@@ -92,16 +92,12 @@ class App extends Component{
 						<div id="opponentFieldContainer" className="fieldContainer">
 							<Graveyard id="opponentGraveyard" />
 							<Field id="opponentField" grid={[opponent.field]} />
-							<div id="opponentDeck" className="deck">
-								<div className="cardTile full"></div>
-							</div>
+							<Deck id="opponentDeck" />
 						</div>
 						<div id="selfFieldContainer" className="fieldContainer">
 							<Graveyard id="selfGraveyard" />
 							<Field id="selfField" grid={[self.field]} />
-							<div id="selfDeck" className="deck">
-								<div className="cardTile full"></div>
-							</div>
+							<Deck id="selfDeck" />
 						</div>
 						<div id="selfHealth" className="heroHealth">
 								{selfHealth}

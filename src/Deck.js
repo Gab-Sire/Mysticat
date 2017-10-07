@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CardTile from './CardTile.js';
 import Card from './Card.js';
 
-export default class Graveyard extends Component{
+export default class Deck extends Component{
 	constructor(props){
 		super(props);
 		this.state={ isEmpty:true};
@@ -14,12 +14,12 @@ export default class Graveyard extends Component{
 		}
 		
 		if(true == this.state.isEmpty){
-			return (<div id={this.props.id} className="graveyard">
+			return (<div id={this.props.id} className="deck">
 	   			<CardTile />
 	   		</div>);
 		}
 		else{
-			return (<div id={this.props.id} className="graveyard">
+			return (<div id={this.props.id} className="deck">
 	   			<Card faceUp="false" />
 	   		</div>);
 		}

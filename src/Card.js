@@ -7,8 +7,11 @@ export default class Card extends Component{
 	}
 	
 	render(){
-		let isFaceUp = this.state.faceUp;
-		if(isFaceUp){
+		if(this.props.faceUp != null && this.props.faceUp != undefined){
+			this.state.faceUp = this.props.faceUp;
+		}
+
+		if(true == this.state.faceUp){
 			return (<div className="card" title={this.state.description}>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {this.props.manaCost}</div>
