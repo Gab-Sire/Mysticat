@@ -40,7 +40,10 @@ public class GameService implements QueueListener{
 	private MinionCardRepository minionCardRepository;
 	
 	public GameQueue gameQueue = new GameQueue();
-	public Map<String, Game> gameList = new HashMap<String, Game>();
+	//Key: GameId
+	public Map<String, Game> newGameList = new HashMap<String, Game>();
+	//Key: userId
+	public Map<String, Game> existingGameList = new HashMap<String, Game>();
 	
 	public GameService() {
 	}
@@ -70,7 +73,7 @@ public class GameService implements QueueListener{
 		String gameId = playerOneActions.getGameId();
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
 		
-		Game game = this.gameList.get(gameId);
+		Game game = this.newGameList.get(gameId);
 		
 		for (Action action : actions) {
 			if(action instanceof SummonAction) {
@@ -149,6 +152,6 @@ public class GameService implements QueueListener{
 		//Create game
 		//Assigner la game aux 2 joueurs qui devraient la recevoir
 		Game game  = this.gameQueue.matchFirstTwoPlayersInQueue();
-		this.gameList.put(game.getGameId(), game);
+		this.newGameList.put(game.getGameId(), game);
 	}
 }
