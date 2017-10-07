@@ -2,6 +2,13 @@ package com.multitiers.domaine.ingame;
 
 import java.util.List;
 
+/*
+ * Objet envoye par un joueur a la fin de son tour. Contient
+ * La reference a la partie, son index de joueur dans la partie
+ * Ses actions.
+ * Est cree en front end
+ * */
+
 public class ActionList {
 	private List<Action> playerActions;
 	private Integer playerIndex;
