@@ -13,15 +13,15 @@ public class Minion extends PlayableCharacter{
 		super();
 	}
 	
-	public Minion(PlayableMinionCard minionCard) {
+	public Minion(PlayableMinionCard playableMinionCard) {
 		super();
 		this.canAttack = true;
-		this.cardReference = minionCard;
-		this.power = minionCard.getInitialPower();
-		this.health = minionCard.getInitialHealth();
-		this.speed = minionCard.getInitialSpeed();
-		this.name = minionCard.getName();
-		this.description = minionCard.getDescription();
+		this.cardReference = playableMinionCard;
+		this.power = playableMinionCard.getInitialPower();
+		this.health = playableMinionCard.getInitialHealth();
+		this.speed = playableMinionCard.getInitialSpeed();
+		this.name = playableMinionCard.getName();
+		this.description = playableMinionCard.getDescription();
 	}
 	
 	public Integer getPower() {

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.ingame.Game;
+import com.multitiers.domaine.ingame.Minion;
+import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
@@ -137,6 +139,9 @@ public class RestControlleur {
         User user2 = userRepository.findByUsername("Chat2");
         Player player1 = new Player(user1);
         Player player2 = new Player(user2);
+        Minion minion = new Minion(((PlayableMinionCard)player1.getHand().get(0)));
+        player1.addMinion(minion, 0);
+        
         
     	Game game = new Game(player1, player2);
         return game;

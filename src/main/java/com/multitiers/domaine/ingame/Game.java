@@ -1,7 +1,5 @@
 package com.multitiers.domaine.ingame;
 
-import java.util.List;
-
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
@@ -9,7 +7,6 @@ public class Game {
 	private String gameId;
 	private Player[] players;
 	private Integer currentMana;
-	private Integer currentPlayerIndex;
 	
 	public Game() {
 		super();
@@ -48,19 +45,7 @@ public class Game {
 	public void setCurrentMana(Integer currentMana) {
 		this.currentMana = currentMana;
 	}
-
-	public Integer getCurrentPlayerIndex() {
-		return currentPlayerIndex;
-	}
-
-	public void setCurrentPlayerIndex(Integer currentPlayerIndex) {
-		this.currentPlayerIndex = currentPlayerIndex;
-	}
 	
-	public void setPlayerTwoHand(List<PlayableCard> hand) {
-		this.players[1].setHand(hand);
-	}
-
 	public String getGameId() {
 		return gameId;
 	}

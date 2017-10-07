@@ -10,8 +10,6 @@ public class GameQueue {
 	private List<Player> listOfPlayersInQueue;
 	private List<QueueListener> listeners;
 	
-	
-	
 	public synchronized void addToQueue(Player player) {
 		if(this.listOfPlayersInQueue==null) {
 			this.listOfPlayersInQueue = new ArrayList<Player>();
