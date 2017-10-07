@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CardTile from './CardTile.js';
 
 export default class Graveyard extends Component{
 	constructor(props){
@@ -7,8 +8,7 @@ export default class Graveyard extends Component{
 	
 	render(){
 		return <div id={this.props.id} className="graveyard">
-			   		<div className="cardTile">
-			   </div>
-	</div>	
+			   		<CardTile />
+			   	</div>	
 	}
 }
