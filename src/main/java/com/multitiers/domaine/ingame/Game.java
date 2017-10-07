@@ -1,6 +1,5 @@
 package com.multitiers.domaine.ingame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.multitiers.util.ConnectionUtils;
@@ -10,7 +9,6 @@ public class Game {
 	private String gameId;
 	private Player[] players;
 	private Integer currentMana;
-	private List<Action> actions;
 	private Integer currentPlayerIndex;
 	
 	public Game() {
@@ -25,7 +23,6 @@ public class Game {
 		players[0] = player1;
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
-		actions = new ArrayList<Action>();
 	}
 	
 	public void nextTurn() {
@@ -50,14 +47,6 @@ public class Game {
 
 	public void setCurrentMana(Integer currentMana) {
 		this.currentMana = currentMana;
-	}
-
-	public List<Action> getActions() {
-		return actions;
-	}
-
-	public void setActions(List<Action> actions) {
-		this.actions = actions;
 	}
 
 	public Integer getCurrentPlayerIndex() {

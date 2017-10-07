@@ -1,34 +1,31 @@
 package com.multitiers.domaine.ingame;
 
 public class AttackAction extends Action {
-	
-	private Integer attackerIndex;
-	private Integer attackedIndex;
+
+	private Integer attackingMinionIndex;
+	private Integer targetIndex;
 	private Integer speed;
 
-	
-	
 	public AttackAction() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getAttackerIndex() {
-		return attackerIndex;
+	public Integer getAttackingMinionIndex() {
+		return attackingMinionIndex;
 	}
 
-	public void setAttackerIndex(Integer attackerIndex) {
-		this.attackerIndex = attackerIndex;
+	public void setAttackingMinionIndex(Integer attackingMinionIndex) {
+		this.attackingMinionIndex = attackingMinionIndex;
 	}
 
-	public Integer getAttackedIndex() {
-		return attackedIndex;
+	public Integer getTargetIndex() {
+		return targetIndex;
 	}
 
-	public void setAttackedIndex(Integer attackedIndex) {
-		this.attackedIndex = attackedIndex;
+	public void setTargetIndex(Integer targetIndex) {
+		this.targetIndex = targetIndex;
 	}
-	
+
 	public Integer getSpeed() {
 		return speed;
 	}

@@ -7,17 +7,17 @@ import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Player;
 
 public class GameQueue {
-	private List<Player> gameQueue;
+	private List<Player> listOfPlayersInQueue;
 	private List<QueueListener> listeners;
 	
 	
 	
 	public synchronized void addToQueue(Player player) {
-		if(this.gameQueue==null) {
-			this.gameQueue = new ArrayList<Player>();
+		if(this.listOfPlayersInQueue==null) {
+			this.listOfPlayersInQueue = new ArrayList<Player>();
 		}
-		this.gameQueue.add(player);
-		if(this.gameQueue.size()>=2) {
+		this.listOfPlayersInQueue.add(player);
+		if(this.listOfPlayersInQueue.size()>=2) {
 		    for (QueueListener listener : this.listeners) {
 		    	listener.queueHasEnoughPlayers();
 		    }
@@ -25,7 +25,7 @@ public class GameQueue {
 	}
 	
 	public synchronized void removeFromQueue(Player player) {
-		gameQueue.remove(player);
+		listOfPlayersInQueue.remove(player);
 	}
 	
 	public void addToListeners(QueueListener listener) {
@@ -36,12 +36,15 @@ public class GameQueue {
 	}
 	
 	public Game matchFirstTwoPlayersInQueue() {
-		Player player1 = this.gameQueue.get(0);
-		Player player2 = this.gameQueue.get(1);
+		Player player1 = this.listOfPlayersInQueue.get(0);
+		Player player2 = this.listOfPlayersInQueue.get(1);
+		
 		Game game = new Game(player1, player2);
 		
+		this.listOfPlayersInQueue.remove(0);
+		this.listOfPlayersInQueue.remove(0);
 		
-		return null;
+		return game;
 	}
 
 }
