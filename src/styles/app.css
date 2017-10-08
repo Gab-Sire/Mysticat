@@ -187,6 +187,13 @@ form {
 	top: 28%;
 }
 
+#opponentDeck{
+	top: 8%;
+}
+
+#selfDeck{
+	top: 8%;
+}
 
 /* CARTES */
 
