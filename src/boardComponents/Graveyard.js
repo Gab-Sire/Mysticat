@@ -12,7 +12,7 @@ export default class Graveyard extends Component{
 		this.state.isEmpty = (this.props.size>0) ? false : true;
 		
 		if(true == this.state.isEmpty){
-			return (<div id={this.props.id} className="graveyard">
+			return (<div id={this.props.id} className="graveyard" title="Empty graveyard.">
 				<div className="graveyardCount">
 					{this.props.size}
 				</div>
@@ -20,7 +20,7 @@ export default class Graveyard extends Component{
 	   		</div>);
 		}
 		else{
-			return (<div id={this.props.id} className="graveyard">
+			return (<div id={this.props.id} className="graveyard" title="The graveyard contains the minions that have died during the game.">
 				<div className="graveyardCount">
 					{this.props.size}
 				</div>

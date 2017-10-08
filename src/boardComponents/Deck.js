@@ -12,7 +12,7 @@ export default class Deck extends Component{
 		this.state.isEmpty = (this.props.size>0) ? false : true;
 		
 		if(true == this.state.isEmpty){
-			return (<div id={this.props.id} className="deck">
+			return (<div id={this.props.id} className="deck" title="Empty deck.">
 				<div className="deckCount">
 					{this.props.size}
 				</div>
@@ -20,7 +20,7 @@ export default class Deck extends Component{
 	   		</div>);
 		}
 		else{
-			return (<div id={this.props.id} className="deck">
+			return (<div id={this.props.id} className="deck" title="Contains the remaining cards you can draw.">
 				<div className="deckCount">
 					{this.props.size}
 				</div>
