@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
@@ -115,6 +117,13 @@ public class InscriptionService {
 	    	 return user;
 	     }
 	     return null;
+    }
+    
+    public UserCredentials deserializeUserCredentialsFromJson(String json) {
+    	GsonBuilder builder = new GsonBuilder();
+    	Gson gson = builder.create();
+    	UserCredentials userCredentials = gson.fromJson(json, UserCredentials.class);
+    	return userCredentials;
     }
     
 }

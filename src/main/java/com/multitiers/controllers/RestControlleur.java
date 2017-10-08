@@ -57,8 +57,9 @@ public class RestControlleur {
         return user;
     }
     
-    @PostMapping(value = "/attemptConnection")
-    public @ResponseBody User loginWithCredentials(@ModelAttribute UserCredentials userCredentials, HttpSession session) {
+    @GetMapping(value = "/attemptConnection")
+    public @ResponseBody User loginWithCredentials(@RequestBody String json, HttpSession session) {
+    	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
     	session.setAttribute("userActif", user.getId());
     	return user;
@@ -77,7 +78,9 @@ public class RestControlleur {
     */
     
     @PostMapping(value="/signUp")
-    public User createUserWithCredentials(@ModelAttribute UserCredentials userCredentials, HttpSession session) {
+    public User createUserWithCredentials(@RequestBody String json, HttpSession session) {
+    	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
+    	
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
     	if(userRepository.findByUsername(username)!=null) {
@@ -102,9 +105,9 @@ public class RestControlleur {
         Player player2 = new Player(user2);
         Minion minion = new Minion(((PlayableMinionCard)player1.getHand().get(0)));
         player1.addMinion(minion, 0);
+        player2.addMinion(minion, 3);
         player1.sendCardToGraveyard(player1.getHand().get(0));
         player1.sendCardToGraveyard(player1.getHand().get(0));
-        
         
     	Game game = new Game(player1, player2);
         return game;
@@ -112,7 +115,7 @@ public class RestControlleur {
     
     @PostMapping(value="/updateGame")
     public Game updateGame(@RequestBody String  jsonGame) {
-    	Game game = gameService.deserializeGame(jsonGame);
+    	Game game = gameService.deserializeGameFromJson(jsonGame);
         return game;
     }
     

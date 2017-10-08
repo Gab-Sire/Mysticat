@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './styles/app.css';
 import _ from 'lodash';
+import Board from './boardComponents/Board.js';
 import Card from './cardComponents/Card.js';
 import Minion from './cardComponents/Minion.js';
 import CardTile from './cardComponents/CardTile.js';
@@ -9,18 +10,19 @@ import Field from './boardComponents/Field.js';
 import Graveyard from './boardComponents/Graveyard.js';
 import Deck from './boardComponents/Deck.js';
 import Hero from './boardComponents/Hero.js';
+import Login from "./Login.js";
+import Signup from "./Signup.js";
 
 class App extends Component{
 	constructor(props){
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-				// En attendant que le call asynchrone finisse besoin d'un
-				// player
+			inGame: true,
 			gameState : {
 				currentMana: 0,
 				players: [
-						{
+					{
 						hero: {
 							health:30
 						},
@@ -32,7 +34,6 @@ class App extends Component{
 								initialHealth: "test",
 								initialSpeed: "test",
 								description: "test"
-
 							}
 						], 
 						field : [
@@ -46,81 +47,48 @@ class App extends Component{
 						],
 						graveyard:[],
 						deck: []
+					},
+					{
+						hero:{
+							health:30
 						},
-						{
-							hero:{
-								health:30
-							},
-							hand : [
-								{
-									name: "test",
-									initialPower: "test",
-									manaCost: "test",
-									initialHealth: "test",
-									initialSpeed: "test",
-									description: "test"
+						hand : [
+							{
+								name: "test",
+								initialPower: "test",
+								manaCost: "test",
+								initialHealth: "test",
+								initialSpeed: "test",
+								description: "test"
 
-								}
-							],
-							field : [
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null
-							],
-							graveyard:[],
-							deck:[]
-						}
+							}
+						],
+						field : [
+							null, 
+							null, 
+							null, 
+							null, 
+							null, 
+							null, 
+							null
+						],
+						graveyard:[],
+						deck:[]
+					}
 				]
-			}
 		}
+		};
 	}
-	render(){
-		let self = this.state.gameState.players[0];
-		let opponent = this.state.gameState.players[1];
-		let selfHealth = self.hero.health;
-		let opponentHealth = opponent.hero.health;
-		let selfMana = self.remainingMana;
-			return(
-				<div id="container">
-					<div id="board">
-						<div id="opponentHand" className="hand">
-						<div className="cardFacedDown"></div>
-						</div>
-						
-						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
-							
-						<div id="opponentFieldContainer" className="fieldContainer">
-							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
-							<Field id="opponentField" grid={[opponent.field]} />
-							<Deck id="opponentDeck" size={opponent.deck.length}/>
-						</div>
-						
-						<div id="selfFieldContainer" className="fieldContainer">
-							<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
-							<Field id="selfField" grid={[self.field]} />
-							<Deck id="selfDeck" size={self.deck.length}/>
-						</div>
-							
-						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="warriorHero"/>
-							
-						<div id="selfHand" className="hand">
-							{this.renderSelfHand()}
-						</div>
-						<button onClick={this.updateGameState.bind(this)}>End turn</button>
-					</div>
-				</div>
-			);
-	}
-	
-	renderSelfHand(){
-		let selfHand = this.state.gameState.players[0].hand;
-		const props = (this.state.gameState.players[0].hand);
-		return _.map(selfHand, card=> <Card {...card}{...props}/>);
 		
+	render(){
+		if(true===this.state.inGame){
+			return(
+				<Board gameState={this.state.gameState}/>
+			);
+		}
+		else{
+			return <Signup />
+		}
 	}
 	
 	// Fonction qui fetch un game state fait par Spring avec valeurs par defaut

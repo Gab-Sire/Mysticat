@@ -53,7 +53,7 @@ public class GameService implements QueueListener{
 	}
 	
 	//Fonction pour tester la serialization et deserialization d'une Game
-	public Game deserializeGame(String json) {
+	public Game deserializeGameFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer()).create();
 		Gson gson = gsonBuilder.create();
@@ -64,7 +64,7 @@ public class GameService implements QueueListener{
 	}
 	
 	//TODO
-	public ActionList deserializeActionList(String json) {
+	public ActionList deserializeActionListFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder
 				.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
