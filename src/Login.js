@@ -7,7 +7,8 @@ export default class Login extends Component{
 		super(props);
 		this.state={
 			username:'',
-			password:''
+			password:'',
+			errorMessage:''
 		}
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -31,7 +32,7 @@ export default class Login extends Component{
 	attemptConnection(){
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
-			  method:'get',
+			  method:'post',
 			  url:'http://localhost:8089/attemptConnection',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
@@ -39,10 +40,12 @@ export default class Login extends Component{
 			})
 			  .then((response)=>{
 				  console.log(response.data);
-				  if(response!==null){
+				  if(response.data!==null){
+					  this.setState({errorMessage: ""});
 					  this.setState({gameState: response.data});
 					  this.forceUpdate();
-					  //TODO rediriger vers main menu
+				  }else{
+					  	this.setState({errorMessage: "Échec, le nom d'utilisateur et le mot de passe que vous avez entré ne correspondent pas."});
 				  }
 				})
 				.catch(error => {
@@ -57,7 +60,8 @@ export default class Login extends Component{
 	    	<p>Nom d'utilisateur: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeUsername} required/></p>
 	        <p>Mot de passe: <input type="password" name="password" value={this.state.password} onChange={this.handleChangePassword} required/></p>
 	        <p><button type="button" onClick={this.handleSubmit} >Submit</button> <input type="reset" value="Reset" /></p>
-	    </form>
+	        <p className="errorMessage">{this.state.errorMessage}</p>
+	        </form>
 	    </div>)
 	}
 }

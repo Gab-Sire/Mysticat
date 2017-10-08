@@ -57,7 +57,7 @@ public class RestControlleur {
         return user;
     }
     
-    @GetMapping(value = "/attemptConnection")
+    @PostMapping(value = "/attemptConnection")
     public @ResponseBody User loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
