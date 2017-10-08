@@ -302,12 +302,14 @@ form {
 	z-index: auto;
 	border-top-left-radius: 35%;
 	border-top-right-radius: 35%;
+	position: relative;
 }
 
 .hero:hover {
 	border: 4px solid #FAFAD2;
 	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
 }
+
 
 /* style pour les types de héros */
 
@@ -331,7 +333,7 @@ form {
 /* styles pour l'attribut vies du héros (joueur) */
 
 .heroHealth {
-	width: 8%;
+	width: 33%;
 	border: 2px solid black;
 	line-height: 30px;
 	font-size: 2em;
@@ -343,17 +345,15 @@ form {
 	border-bottom: white solid 1px;
 	border-left: white solid 1px;
 	border-right: white solid 1px;
-	left: 34%;
+	position: absolute;
+	top:55%;
 }
 
-#selfHealth {
-	position: absolute;
-	bottom: 155px;
+#selfHealth{
+	left:0%;
 }
-
-#opponentHealth {
-	position: absolute;
-	top: 118px;
+#opponentHealth{
+	right: 0%;
 }
 
 /* styles pour l'attribut mana du héros (joueur) */
