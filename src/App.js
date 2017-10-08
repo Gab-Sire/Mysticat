@@ -18,7 +18,7 @@ class App extends Component{
 		super(props);
 		this.getInitialGameInstance();
 		this.state ={
-			inGame: true,
+			inGame: false,
 			gameState : {
 				currentMana: 0,
 				players: [

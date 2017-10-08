@@ -64,8 +64,8 @@ export default class Board extends Component{
 	}
 	
 	//// Fonction qui fetch un game state fait par Spring avec valeurs par
-// defaut g et In it ia
-lGameInstance(){
+// defaut g et In it ial
+GameInstance(){
 		axios({
 			  method:'get',
 			  url:'http://localhost:8089/getHardCodedGame',

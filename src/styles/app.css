@@ -405,3 +405,15 @@ form {
     box-shadow: 0 0 20px #9ecaed;
     border-radius: 5px;
 }
+
+/* Formulaires */
+
+.expectedFormat{
+	
+}
+
+.expectedFormat div{
+	margin-left: 10%;
+		width: 40%;
+		display: inline-block;
+}

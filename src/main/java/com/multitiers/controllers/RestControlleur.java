@@ -53,7 +53,7 @@ public class RestControlleur {
 	
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
-        User user = userRepository.findByUsername(username);
+    	User user = userRepository.findByUsername(username);
         return user;
     }
     
@@ -150,6 +150,7 @@ public class RestControlleur {
     }
     @ExceptionHandler(value=BadUsernameFormatException.class)
     public String handleBadUsernameSignup() {
+    	System.out.println("BadUSername");
     	return "Votre mot de passe est dans un format invalide.\n"+
 				"<h2>Le nom d'utilisateur doit comprendre:</h2> \n"+
 				"<ul><li>Entre "+Constantes.MIN_USERNAME_LENGTH+" et "+Constantes.MAX_USERNAME_LENGTH+" caracteres inclusivement</li>"
