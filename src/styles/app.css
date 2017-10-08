@@ -136,7 +136,7 @@ form {
 }
 
 
-.graveyardCount{
+.graveyardCount, .deckCount{
 	color: white;
 	position: absolute;
 	font-size: 30px;
@@ -174,7 +174,19 @@ form {
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
+	position: relative;
 }
+
+#selfDeck .deckCount{
+	right: 30%;
+	top: 28%;
+}
+
+#opponentDeck .deckCount{
+	right: 30%;
+	top: 28%;
+}
+
 
 /* CARTES */
 
