@@ -9,17 +9,21 @@ export default class Graveyard extends Component{
 	}
 	
 	render(){
-		if(this.props.isEmpty != null && this.props.isEmpty != undefined){
-			this.state.isEmpty = this.props.isEmpty;
-		}
+		this.state.isEmpty = (this.props.size>0) ? false : true;
 		
 		if(true == this.state.isEmpty){
 			return (<div id={this.props.id} className="graveyard">
+				<div className="graveyardCount">
+					{this.props.size}
+				</div>
 	   			<CardTile />
 	   		</div>);
 		}
 		else{
 			return (<div id={this.props.id} className="graveyard">
+				<div className="graveyardCount">
+					{this.props.size}
+				</div>
 	   			<Card faceUp="false" />
 	   		</div>);
 		}

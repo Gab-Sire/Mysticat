@@ -128,10 +128,29 @@ form {
 /* styles pour les zones cimetière */
 
 .graveyard {
+	position: relative;
 	display: inline-block;
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
+}
+
+
+.graveyardCount{
+	color: white;
+	position: absolute;
+	font-size: 30px;
+	font-weight: 800;
+}
+
+#selfGraveyard .graveyardCount{
+	bottom: -5%;
+	right: 15.5%;
+}
+
+#opponentGraveyard .graveyardCount{
+	top: -23%;
+	right: 15.5%;
 }
 
 /* styles pour les cartes dans le cimetière */

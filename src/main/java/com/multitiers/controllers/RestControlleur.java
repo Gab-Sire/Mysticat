@@ -102,6 +102,8 @@ public class RestControlleur {
         Player player2 = new Player(user2);
         Minion minion = new Minion(((PlayableMinionCard)player1.getHand().get(0)));
         player1.addMinion(minion, 0);
+        player1.sendCardToGraveyard(player1.getHand().get(0));
+        player1.sendCardToGraveyard(player1.getHand().get(0));
         
         
     	Game game = new Game(player1, player2);

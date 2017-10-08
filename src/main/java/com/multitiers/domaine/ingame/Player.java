@@ -150,4 +150,8 @@ public class Player {
 	public void addMinion(Minion minion, int index) {
 		this.field[index] = minion;
 	}
+	
+	public void sendCardToGraveyard(PlayableCard card) {
+		this.graveyard.add(card);
+	}
 }

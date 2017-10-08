@@ -43,7 +43,8 @@ class App extends Component{
 							null, 
 							null, 
 							null
-						]
+						],
+						graveyard:[]
 						},
 						{
 							hero:{
@@ -68,7 +69,8 @@ class App extends Component{
 								null, 
 								null, 
 								null
-							]
+							],
+							graveyard:[]
 						}
 				]
 			}
@@ -90,13 +92,13 @@ class App extends Component{
 						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
 							
 						<div id="opponentFieldContainer" className="fieldContainer">
-							<Graveyard id="opponentGraveyard" />
+							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 							<Field id="opponentField" grid={[opponent.field]} />
 							<Deck id="opponentDeck" />
 						</div>
 						
 						<div id="selfFieldContainer" className="fieldContainer">
-							<Graveyard id="selfGraveyard" />
+							<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 							<Field id="selfField" grid={[self.field]} />
 							<Deck id="selfDeck" />
 						</div>
