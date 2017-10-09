@@ -79,7 +79,7 @@ class App extends Component{
 			);
 		}
 		else{
-			return <Login />
+			return <Signup />
 		}
 	}
 	

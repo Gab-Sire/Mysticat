@@ -123,6 +123,7 @@ public class InscriptionService {
     	GsonBuilder builder = new GsonBuilder();
     	Gson gson = builder.create();
     	UserCredentials userCredentials = gson.fromJson(json, UserCredentials.class);
+    	
     	return userCredentials;
     }
     

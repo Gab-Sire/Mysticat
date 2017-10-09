@@ -13,6 +13,11 @@ export default class Login extends Component{
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	
+	handleSubmit(event){
+		event.preventDefault();
 	}
 	
 	handleChangeUsername(event){
@@ -23,7 +28,7 @@ export default class Login extends Component{
 		this.setState({password: event.target.value});
 	}
 	
-	handleSubmit(event){
+	handleClick(event){
 		console.log('Login form submitted');
 		this.attemptConnection();
 		
@@ -56,10 +61,10 @@ export default class Login extends Component{
 	render(){
 		return (<div id="loginForm">
 		<h1>Login</h1>
-	    <form>
+	    <form onSubmit={this.handleSubmit}>
 	    	<p>Nom d'utilisateur: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeUsername} required/></p>
 	        <p>Mot de passe: <input type="password" name="password" value={this.state.password} onChange={this.handleChangePassword} required/></p>
-	        <p><button type="button" onClick={this.handleSubmit} >Submit</button> <input type="reset" value="Reset" /></p>
+	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/> <input type="reset" value="Reset" /></p>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
 	        </form>
 	    </div>)

@@ -12,6 +12,12 @@ export default class Login extends Component{
 		}
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	
+	handleSubmit(event){
+		event.preventDefault();
 	}
 	
 	handleChangeUsername(event){
@@ -22,13 +28,13 @@ export default class Login extends Component{
 		this.setState({password: event.target.value});
 	}
 	
-	handleSubmit(event){
+	handleClick(event){
 		console.log('Signup form submitted');
 		this.attemptSignup();
 	}
 	
 	attemptSignup(){
-		const data = {username: this.refs.username, password: this.refs.password}
+		const data = {username: this.state.username, password: this.state.password}
 		axios({
 			  method:'post',
 			  url:'http://localhost:8089/signUp',
@@ -37,12 +43,32 @@ export default class Login extends Component{
 			  data: data
 			})
 			  .then((response)=>{
+				  console.log(response.data);
 				  if(response.data!==null){
 					  this.setState({errorMessage: "We good."}); 
 				  }
 				  else{
 					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."}); 
 					  }
+				  this.forceUpdate();
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
+	}
+	
+	checkIfUsernameTaken(){
+		console.log("entering");
+		const data = {username: this.state.username}
+		axios({
+			  method:'post',
+			  url:'http://localhost:8089/usernameAvailability',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
+			})
+			  .then((response)=>{
+				  console.log("User avail: ",response)
 				  this.forceUpdate();
 				})
 				.catch(error => {
@@ -58,13 +84,13 @@ export default class Login extends Component{
 		const PASSWORD_MAX_LENGTH = 100;
 		return (<div id="loginForm">
 		<h1>Sign up</h1>
-	    <form>
-	    	<p>Nom d'utilisateur: <input type="text" name="username" ref="username"/></p>
-	        <p>Mot de passe: <input type="password" name="password" ref="password"/></p>
-	        <p><button type="button" onClick={this.handleSubmit}>Submit</button> <input type="reset" value="Reset" /></p>
+	    <form onSubmit={this.handleSubmit}>
+	    	<p>Nom d'utilisateur: <input type="text" name="username" ref="username"onChange={this.handleChangeUsername}/></p>
+	        <p>Mot de passe: <input type="password" name="password" ref="password" onChange={this.handleChangePassword}/></p>
+	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/>  <input type="reset" value="Reset" /></p>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
 	    </form>
-        <p className="expectedFormat">
+        <div className="expectedFormat">
         	<div id="usernameFormat">
 				<h4>Votre nom d'utilisateur doit être unique et doit comprendre:</h4>
 				<ul>
@@ -83,7 +109,7 @@ export default class Login extends Component{
 					<li>Au moins 1 lettre majuscule</li>
 				</ul>
 			</div>
-        </p>
+        </div>
 	    </div>)
 	}
 }

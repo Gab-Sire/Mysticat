@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,7 +70,7 @@ public class RestControlleur {
     	
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
-    	if(userRepository.findByUsername(username)!=null) {
+        if(userRepository.findByUsername(username)!=null) {
     		throw new UsernameTakenException(username);
     	}
     	User user = inscriptionService.createUser(username, password);
@@ -99,6 +98,13 @@ public class RestControlleur {
         
     	Game game = new Game(player1, player2);
         return game;
+    }
+    
+    
+    @GetMapping(value="/usernameAvailability")
+    public Boolean isUsernameAvailable(@RequestBody String jsonUsername) {
+    	String username = gameService.deserializeUsernameFromJson(jsonUsername);
+    	return userRepository.findByUsername(username)!=null;
     }
     
     @PostMapping(value="/updateGame")

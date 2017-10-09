@@ -72,12 +72,20 @@ public class GameService implements QueueListener{
 				.create();
 		ActionList list = gson.fromJson(json, ActionList.class);
 		
-		return null;
+		return list;
 	}
 
-	/*
-	 * Updates game state, calculating and stashing all changes into Player1's game for further use.
-	 * */
+	
+	public String deserializeUsernameFromJson(String json) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		
+		String username = gson.fromJson(json, String.class);
+		
+		return username;
+		
+	}
+	
 	public Game updateGame(ActionList playerOneActions, ActionList playerTwoActions) {
 		if(playerOneActions.getGameId()!=playerTwoActions.getGameId()) {
 			throw new RuntimeException("Game id mismatch.");
