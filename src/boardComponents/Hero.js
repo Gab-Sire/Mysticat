@@ -10,9 +10,9 @@ export default class Hero extends Component{
 		let heroId = this.props.id;
 		let health = this.props.health;
 		let mana = this.props.mana;
-		this.state.heroName = this.props.heroName;
+		this.setState({heroName: this.props.heroName});
 		
-		if("selfHero" == heroId){
+		if("selfHero" === heroId){
 			return(<div id={heroId} className={"hero " + this.state.heroName}>
 						<div id="selfHealth" className="heroHealth">
 							{health}
@@ -24,7 +24,7 @@ export default class Hero extends Component{
 						</div>
 					</div>);
 		}
-		else if("opponentHero" == heroId){
+		else if("opponentHero" === heroId){
 			return(<div id={heroId} className={"hero " + this.state.heroName}>
 						<div id="opponentHealth" className="heroHealth">
 							{health}

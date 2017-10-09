@@ -9,9 +9,8 @@ export default class Deck extends Component{
 	}
 	
 	render(){
-		this.state.isEmpty = (this.props.size>0) ? false : true;
-		
-		if(true == this.state.isEmpty){
+		this.setState({isEmpty: (this.props.size>0) ? false : true});
+		if(true === this.state.isEmpty){
 			return (<div id={this.props.id} className="deck" title="Empty deck.">
 				<div className="deckCount">
 					{this.props.size}

@@ -187,6 +187,13 @@ form {
 	top: 28%;
 }
 
+#opponentDeck{
+	top: 8%;
+}
+
+#selfDeck{
+	top: 8%;
+}
 
 /* CARTES */
 
@@ -397,4 +404,16 @@ form {
 	outline: none;
     box-shadow: 0 0 20px #9ecaed;
     border-radius: 5px;
+}
+
+/* Formulaires */
+
+.expectedFormat{
+	
+}
+
+.expectedFormat div{
+	margin-left: 10%;
+		width: 40%;
+		display: inline-block;
 }

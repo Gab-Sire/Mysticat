@@ -3,8 +3,6 @@ import axios from 'axios';
 import '../styles/app.css';
 import _ from 'lodash';
 import Card from '../cardComponents/Card.js';
-import Minion from '../cardComponents/Minion.js';
-import CardTile from '../cardComponents/CardTile.js';
 import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
@@ -14,12 +12,11 @@ export default class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state={}
-			
 	}
 	
 	render(){
 		
-		this.state.gameState = this.props.gameState;
+		this.setState({gameState: this.props.gameState});
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
@@ -65,8 +62,8 @@ export default class Board extends Component{
 	}
 	
 	//// Fonction qui fetch un game state fait par Spring avec valeurs par
-// defaut g et In it ia
-lGameInstance(){
+// defaut g et In it ial
+GameInstance(){
 		axios({
 			  method:'get',
 			  url:'http://localhost:8089/getHardCodedGame',
