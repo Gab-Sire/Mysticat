@@ -60,7 +60,9 @@ public class RestControlleur {
     public @ResponseBody User loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
-    	session.setAttribute("userActif", user.getId());
+    	if(user != null) {
+    		session.setAttribute("userActif", user.getId());
+    	}
     	return user;
     }
     
@@ -75,7 +77,9 @@ public class RestControlleur {
     	}
     	User user = inscriptionService.createUser(username, password);
         userRepository.save(user);
-        session.setAttribute("userActif", user.getId());
+        if(user != null) {
+            session.setAttribute("userActif", user.getId());	
+        }
     	return user;
     }
     
