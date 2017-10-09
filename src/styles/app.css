@@ -165,7 +165,7 @@ form {
 	display: inline-block;
 	width: 19.75%;
 	height: 100%;
-	margin: 0;
+	bottom: 5px;
 	border: 1px solid black;
 }
 
@@ -217,8 +217,8 @@ form {
 	display: inline-block;
 	width: 19.75%;
 	height: 100%;
-	margin: 0;
 	position: relative;
+	bottom: 7px;
 }
 
 #selfDeck .deckCount{
@@ -232,11 +232,11 @@ form {
 }
 
 #opponentDeck{
-	top: 8%;
+	background-image: url('../img/woodenBackground1.jpg');
 }
 
 #selfDeck{
-	top: 8%;
+	background-image: url('../img/woodenBackground2.jpg');
 }
 
 /* CARTES */
