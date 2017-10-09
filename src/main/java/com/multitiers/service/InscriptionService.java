@@ -116,7 +116,7 @@ public class InscriptionService {
 	     if(ConnectionUtils.hashPassword(password, hashedSalt).equals(user.getPasswordHash())) {
 	    	 return user;
 	     }
-	     return null;
+	     throw new BadCredentialsLoginException();
     }
     
     public UserCredentials deserializeUserCredentialsFromJson(String json) {
