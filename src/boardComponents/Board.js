@@ -83,7 +83,7 @@ export default class Board extends Component{
 				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
-						<div className="cardFacedDown"></div>
+							{this.renderHand(0, true)}
 						</div>
 						
 						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
@@ -103,7 +103,7 @@ export default class Board extends Component{
 						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="warriorHero"/>
 							
 						<div id="selfHand" className="hand">
-							{this.renderSelfHand()}
+							{this.renderHand(0, false)}
 						</div>
 						<button onClick={this.updateGameState.bind(this)}>End turn</button>
 					</div>
@@ -111,10 +111,10 @@ export default class Board extends Component{
 			);
 	}
 	
-	renderSelfHand(){
-		let selfHand = this.state.gameState.players[0].hand;
-		const props = (this.state.gameState.players[0].hand);
-		return _.map(selfHand, card=> <Card {...card}{...props}/>);
+	renderHand(playerIndex, faceUp){
+		let selfHand = this.state.gameState.players[playerIndex].hand;
+		const props = (this.state.gameState.players[playerIndex].hand);
+		return _.map(selfHand, card=> <Card faceUp={faceUp} {...card}{...props}/>);
 		
 	}
 
