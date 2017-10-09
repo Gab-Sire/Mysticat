@@ -39,7 +39,8 @@ export default class Board extends Component{
 								null
 							],
 							graveyard:[],
-							deck: []
+							deck: [],
+							name: ""
 						},
 						{
 							hero:{
@@ -66,7 +67,8 @@ export default class Board extends Component{
 								null
 							],
 							graveyard:[],
-							deck:[]
+							deck:[],
+							name: ""
 						}
 					]
 			}

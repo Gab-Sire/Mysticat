@@ -418,6 +418,10 @@ form {
 	
 }
 
+.errorMessage{
+	color: red;
+}
+
 .expectedFormat div{
 	margin-left: 10%;
 		width: 40%;
