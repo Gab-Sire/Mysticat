@@ -39,18 +39,19 @@ form {
 	left: 90.5%;
 }
 #menuGame {
-	color: white;
 	background-color:red;
 	position: absolute;
 	top: 47%;
-	left: 3.5%;
+	left: 1.5%;
+	width: 125px;
+	border-radius: 20px;
 }
 
-[class=listeMenuHidden]{
-	display:none;
+#listeMenuHidden{
+	display: none;
 }
 
-#menuGame:hover p.listeMenu{
+#menuGame:hover #listeMenuHidden{
 	display: block;
 }
 

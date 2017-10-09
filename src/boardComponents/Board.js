@@ -109,7 +109,7 @@ export default class Board extends Component{
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
 						<div id="menuGame"><p>Menu</p>
-							<p class="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirm.bind(this)}>J'abandonne</button></p>
+							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirm.bind(this)}>J'abandonne</button></p>
 						</div>
 					</div>
 				</div>
