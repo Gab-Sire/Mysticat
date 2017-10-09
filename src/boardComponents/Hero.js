@@ -17,16 +17,18 @@ export default class Hero extends Component{
 
 		
 		if("selfHero" === heroId){
-			return(<div id={heroId} className={"hero " + this.state.heroName}>
-						<div id="selfHealth" className="heroHealth">
-							{health}
+			return(<div>
+						<div id={heroId} className={"hero " + this.state.heroName}>
+							<div id="selfHealth" className="heroHealth">
+								{health}
+							</div>
 						</div>
 						<div id="selfMana">
 							<div>
 								{mana}
 							</div>
 						</div>
-					</div>);
+				  </div>);
 		}
 		else if("opponentHero" === heroId){
 			return(<div id={heroId} className={"hero " + this.state.heroName}>

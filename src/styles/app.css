@@ -311,7 +311,7 @@ form {
 	border: 1px yellow solid;
 	display: block;
 	width: 10%;
-	height: 12%;
+	height: 100px;
 	margin: 0 auto;
 	padding: 0;
 	z-index: auto;
@@ -351,24 +351,22 @@ form {
 	width: 33%;
 	border: 2px solid black;
 	line-height: 30px;
-	font-size: 2em;
+	font-size: 1.5em;
 	height: 40px;
 	text-align: center;
 	color: white;
 	background: black;
 	display: inline-block;
-	border-bottom: white solid 1px;
-	border-left: white solid 1px;
-	border-right: white solid 1px;
+	border: white solid 1px;
 	position: absolute;
 	top:55%;
 }
 
-#selfHealth{
-	left:0%;
-}
-#opponentHealth{
-	right: 0%;
+#selfHealth, #opponentHealth{
+	padding: 5px;
+	border-radius:50%;
+	right:-11%;
+	top: 70px;
 }
 
 /* styles pour l'attribut mana du héros (joueur) */
