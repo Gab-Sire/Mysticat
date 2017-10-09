@@ -87,10 +87,10 @@ export default class Board extends Component{
 						<div id="opponentHand" className="hand">
 							{this.renderHand(0, true)}
 						</div>
-						
+						<div id="opponentHandUnderLayer"></div>
 						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
 							
-						<div id="opponentFieldContainer" className="fieldContainer">
+						<div id="fieldContainer" className="fieldContainer">
 							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 							<Field id="opponentField" grid={[opponent.field]} />
 							<Deck id="opponentDeck" size={opponent.deck.length}/>
@@ -101,6 +101,7 @@ export default class Board extends Component{
 							<Field id="selfField" grid={[self.field]} />
 							<Deck id="selfDeck" size={self.deck.length}/>
 						</div>
+						<div id="selfFieldUnderLayer"></div>
 							
 						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="zorroHero"/>
 							

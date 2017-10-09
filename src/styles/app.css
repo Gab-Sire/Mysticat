@@ -48,9 +48,9 @@ form {
 	display: block;
 	/*border: 1px solid black;*/
 	width: 70%;
-	height: 21%;
+	height: 19%;
 	margin-left: 15%;
-	background-color: rgba(255, 255, 255, 0.4);
+	background-color: rgb(255, 210, 150);
 }
 
 #selfHand {
@@ -61,10 +61,17 @@ form {
 }
 
 #opponentHand {
+	height: 19%;
 	margin-top: -80px;
-	margin-bottom: 5px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+}
+
+#opponentHandUnderLayer{
+	height:10px;
+	width: 70%;
+	margin-left: 15%;
+	background-color: orange;
+	border-bottom-left-radius: 60px;
+	border-bottom-right-radius: 60px;
 }
 
 /* styles pour les cartes dans les mains */
@@ -86,15 +93,7 @@ form {
 /* styles pour les conteneurs */
 
 .fieldContainer {
-	height: 22%;
-}
-
-#selfFieldContainer {
-	margin-bottom: 1%;
-}
-
-#opponentFieldContainer {
-	margin-top: 0.75%;
+	height: 21%;
 }
 
 /* styles pour les champs de bataille */
@@ -104,8 +103,7 @@ form {
 	width: 60%;
 	height: 100%;
 	margin: 0;
-	background-color: rgba(255, 255, 255, 0.3);
-	border-radius: 10px;
+	background-color: rgba(255, 210, 150, 1);
 }
 
 /* styles pour les cartes et emplacements sur le champ de bataille */
@@ -131,6 +129,15 @@ form {
 	margin-left: 14%;
 }
 
+#selfFieldUnderLayer{
+	height: 10px;
+	background-color: orange;
+	width: 60%;
+	margin-left: 19.75%;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
 /* CIMETIÈRE */
 
 /* styles pour les zones cimetière */
@@ -141,6 +148,7 @@ form {
 	width: 19.75%;
 	height: 100%;
 	margin: 0;
+	border: 1px solid black;
 }
 
 
@@ -152,13 +160,23 @@ form {
 }
 
 #selfGraveyard .graveyardCount{
-	bottom: -5%;
-	right: 15.5%;
+	bottom: 35%;
+	right: 42.5%;
 }
 
 #opponentGraveyard .graveyardCount{
-	top: -23%;
-	right: 15.5%;
+	top: 35%;
+	right: 42.5%;
+}
+
+#selfGraveyard{
+	background-image: url('../img/backgroundCemetery2.jpg');
+	background-position: -60px;
+}
+
+#opponentGraveyard{
+	background-image: url('../img/backgroundCemetery3.jpg');
+	background-position: -65px;
 }
 
 /* styles pour les cartes dans le cimetière */
@@ -312,15 +330,12 @@ form {
 	display: block;
 	width: 10%;
 	height: 90px;
-	margin: 0 auto;
+	margin: 7px auto;
 	padding: 0;
 	z-index: auto;
 	border-top-left-radius: 35%;
 	border-top-right-radius: 35%;
 	position: relative;
-}
-#selfHero{
-	margin-top: -10px;
 }
 
 .hero:hover {
