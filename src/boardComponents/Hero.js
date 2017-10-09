@@ -6,11 +6,15 @@ export default class Hero extends Component{
 		this.state={heroName:"zorroHero"};
 	}
 	
+	componentWillMount(){
+		this.setState({heroName: this.props.heroName});
+	}
+	
 	render(){
 		let heroId = this.props.id;
 		let health = this.props.health;
 		let mana = this.props.mana;
-		this.setState({heroName: this.props.heroName});
+
 		
 		if("selfHero" === heroId){
 			return(<div id={heroId} className={"hero " + this.state.heroName}>

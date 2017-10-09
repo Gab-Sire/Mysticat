@@ -10,15 +10,14 @@ export default class Card extends Component{
 		this.setState(prevState =>({ selected: !this.state.selected }));
 	};
 	
+	
 	render(){
 		let isSelected = "";
-		this.setState({faceUp: this.props.faceUp});
-
 		if(true === this.state.selected){
 			isSelected = "selected";
 		}
 
-		if(true === this.state.faceUp){
+		if(!this.props.faceUp){
 			return (<div className={"card " + isSelected} title={this.props.description} onClick={this.handleClick}>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of mana crystals consumed when summoning this minion" className="cardManaCost">Cost: {this.props.manaCost}</div>

@@ -5,13 +5,12 @@ import Card from '../cardComponents/Card.js';
 export default class Graveyard extends Component{
 	constructor(props){
 		super(props);
-		this.state={ isEmpty:true};
+		this.state={ isEmpty:true };
 	}
 	
 	render(){
-		this.setState({isEmpty: (this.props.size>0) ? false : true})
 		
-		if(true === this.state.isEmpty){
+		if(this.props.size===0){
 			return (<div id={this.props.id} className="graveyard" title="Empty graveyard.">
 				<div className="graveyardCount">
 					{this.props.size}

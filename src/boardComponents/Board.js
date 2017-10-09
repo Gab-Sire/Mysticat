@@ -11,12 +11,69 @@ import Hero from './Hero.js';
 export default class Board extends Component{
 	constructor(props){
 		super(props);
-		this.state={}
+		this.state ={
+				gameState : {
+					currentMana: 0,
+					players: [
+						{
+							hero: {
+								health:30
+							},
+							hand : [
+								{
+									name: "test",
+									initialPower: "test",
+									manaCost: "test",
+									initialHealth: "test",
+									initialSpeed: "test",
+									description: "test"
+								}
+							], 
+							field : [
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null
+							],
+							graveyard:[],
+							deck: []
+						},
+						{
+							hero:{
+								health:30
+							},
+							hand : [
+								{
+									name: "test",
+									initialPower: "test",
+									manaCost: "test",
+									initialHealth: "test",
+									initialSpeed: "test",
+									description: "test"
+
+								}
+							],
+							field : [
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null, 
+								null
+							],
+							graveyard:[],
+							deck:[]
+						}
+					]
+			}
+			};
 	}
 	
 	render(){
-		
-		this.setState({gameState: this.props.gameState});
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
@@ -60,10 +117,13 @@ export default class Board extends Component{
 		return _.map(selfHand, card=> <Card {...card}{...props}/>);
 		
 	}
+
+	componentWillMount(){
+		this.getInitialGameInstance();
+	}
 	
-	//// Fonction qui fetch un game state fait par Spring avec valeurs par
-// defaut g et In it ial
-GameInstance(){
+	
+	getInitialGameInstance(){
 		axios({
 			  method:'get',
 			  url:'http://localhost:8089/getHardCodedGame',
@@ -79,6 +139,7 @@ GameInstance(){
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
+	
 	
 	updateGameState(){
 		const data = this.state.gameState;
