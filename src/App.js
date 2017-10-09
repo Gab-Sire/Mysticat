@@ -9,7 +9,7 @@ class App extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-			inGame: true
+			inGame: false
 
 		};
 	}
@@ -21,7 +21,7 @@ class App extends Component{
 			);
 		}
 		else{
-			return <Login />
+			return <Signup />
 		}
 	}
 
