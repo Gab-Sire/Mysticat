@@ -38,6 +38,21 @@ form {
 	top: 47%;
 	left: 90.5%;
 }
+#menuGame {
+	color: white;
+	background-color:red;
+	position: absolute;
+	top: 47%;
+	left: 3.5%;
+}
+
+.listeMenuHidden{
+	display:none;
+}
+
+#menuGame:hover p.listeMenu{
+	display: block;
+}
 
 /* MAINS DE CARTES */
 

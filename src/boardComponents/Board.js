@@ -108,6 +108,9 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
+						<div id="menuGame"><p>Menu</p>
+							<p class="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirm.bind(this)}>J'abandonne</button></p>
+						</div>
 					</div>
 				</div>
 			);
@@ -142,6 +145,9 @@ export default class Board extends Component{
 				});
 	}
 	
+	SurrenderGameConfirm(){
+		
+	}
 	
 	updateGameState(){
 		const data = this.state.gameState;
