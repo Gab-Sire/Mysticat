@@ -38,6 +38,24 @@ form {
 	top: 47%;
 	left: 90.5%;
 }
+#menuGame {
+	text-align:center;
+	background-color:darkred;
+	position: absolute;
+	top: 47%;
+	left: 1.5%;
+	width: 125px;
+	border-radius: 20px;
+}
+
+#listeMenuHidden{
+	display: none;
+}
+
+#menuGame:hover #listeMenuHidden{
+	display: block;
+}
+
 
 /* MAINS DE CARTES */
 
@@ -248,7 +266,7 @@ form {
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
 	border-radius: 5px;
-	background-color: yellow;
+	background-color: orange;
 }
 
 .card:hover{
@@ -277,7 +295,7 @@ form {
 .cardHealth {
 	top: 45px;
 	position: absolute;
-	color: green;
+	color: lightgreen;
 }
 
 .cardSpeed {

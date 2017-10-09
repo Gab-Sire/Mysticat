@@ -7,6 +7,7 @@ import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
+import Surrender from './Surrender.js';
 
 export default class Board extends Component{
 	constructor(props){
@@ -68,10 +69,11 @@ export default class Board extends Component{
 							],
 							graveyard:[],
 							deck:[],
-							name: ""
+							name: "",
 						}
 					]
-			}
+			},
+			IsThinkingToGiveUp: false
 			};
 	}
 	
@@ -81,6 +83,7 @@ export default class Board extends Component{
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
 		let selfMana = self.remainingMana;
+		this.setState({ IsThinkingToGiveUp: false});
 			return(
 				<div id="container">
 					<div id="board">
@@ -109,6 +112,10 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
+						//<Surrender status={this.state.IsThinkingToGiveUp} />
+						<div id="menuGame"><p>Menu</p>
+							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirm.bind(this)}>J'abandonne</button></p>
+						</div>
 					</div>
 				</div>
 			);
@@ -143,6 +150,9 @@ export default class Board extends Component{
 				});
 	}
 	
+	SurrenderGameConfirm(){
+		this.setState({ IsThinkingToGiveUp: true});
+	}
 	
 	updateGameState(){
 		const data = this.state.gameState;
