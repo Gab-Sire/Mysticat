@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './styles/app.css';
 import axios from 'axios';
+import _ from 'lodash';
 
 export default class Login extends Component{
 	constructor(props){
@@ -12,7 +13,8 @@ export default class Login extends Component{
 		}
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		//this.handleSubmit = this.handleSubmit.bind(this);
+		//this.handleChangePassword = this.attemptSignup.bind(this)
 	}
 	
 	handleChangeUsername(event){
@@ -24,12 +26,15 @@ export default class Login extends Component{
 	}
 	
 	handleSubmit(event){
+		const attemptSignup= this.attemptSignup();
+		event.preventDefault();
 		console.log('Signup form submitted');
-		this.attemptSignup();
+		//this.attemptSignup = this.attemptSignup.bind(this);
+		attemptSignup;
 	}
 	
 	attemptSignup(){
-		const data = {username: this.state.username, password: this.state.password}
+		const data = {username: this.refs.username, password: this.refs.password}
 		axios({
 			  method:'post',
 			  url:'http://localhost:8089/signUp',
@@ -51,6 +56,7 @@ export default class Login extends Component{
 				});
 	}
 	
+	
 	render(){
 		const USERNAME_MIN_LENGTH = 5;
 		const USERNAME_MAX_LENGTH = 30;
@@ -58,9 +64,9 @@ export default class Login extends Component{
 		const PASSWORD_MAX_LENGTH = 100;
 		return (<div id="loginForm">
 		<h1>Sign up</h1>
-	    <form>
-	    	<p>Nom d'utilisateur: <input type="text" name="username" value={this.state.username} onChange={this.handleChangeUsername} required/></p>
-	        <p>Mot de passe: <input type="password" name="password" value={this.state.password} onChange={this.handleChangePassword} required/></p>
+	    <form onSubmit={this.handleSubmit.bind(this)}>
+	    	<p>Nom d'utilisateur: <input type="text" name="username" ref="username"/></p>
+	        <p>Mot de passe: <input type="password" name="password" ref="password"/></p>
 	        <p><button type="button" onClick={this.handleSubmit}>Submit</button> <input type="reset" value="Reset" /></p>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
 	    </form>
