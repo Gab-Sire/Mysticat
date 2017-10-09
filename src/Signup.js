@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './styles/app.css';
 import axios from 'axios';
-import _ from 'lodash';
 
 export default class Login extends Component{
 	constructor(props){
@@ -13,8 +12,6 @@ export default class Login extends Component{
 		}
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
-		//this.handleSubmit = this.handleSubmit.bind(this);
-		//this.handleChangePassword = this.attemptSignup.bind(this)
 	}
 	
 	handleChangeUsername(event){
@@ -26,11 +23,8 @@ export default class Login extends Component{
 	}
 	
 	handleSubmit(event){
-		const attemptSignup= this.attemptSignup();
-		event.preventDefault();
 		console.log('Signup form submitted');
-		//this.attemptSignup = this.attemptSignup.bind(this);
-		attemptSignup;
+		this.attemptSignup();
 	}
 	
 	attemptSignup(){
@@ -64,7 +58,7 @@ export default class Login extends Component{
 		const PASSWORD_MAX_LENGTH = 100;
 		return (<div id="loginForm">
 		<h1>Sign up</h1>
-	    <form onSubmit={this.handleSubmit.bind(this)}>
+	    <form>
 	    	<p>Nom d'utilisateur: <input type="text" name="username" ref="username"/></p>
 	        <p>Mot de passe: <input type="password" name="password" ref="password"/></p>
 	        <p><button type="button" onClick={this.handleSubmit}>Submit</button> <input type="reset" value="Reset" /></p>

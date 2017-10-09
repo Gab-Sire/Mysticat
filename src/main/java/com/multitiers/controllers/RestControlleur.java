@@ -64,18 +64,6 @@ public class RestControlleur {
     	session.setAttribute("userActif", user.getId());
     	return user;
     }
-
-    /*
-    @PostMapping(value = "/Connection")
-    public @ResponseBody Boolean ConnectionPost(@ModelAttribute UserCredentials userCredentials) {
-        boolean authentication = attemptConnectionPost(userCredentials);
-        if(authentication) {
-        	String username = userCredentials.getUsername();
-        	user = userRepository.findByUsername(username);
-        }
-        return authentication;
-    }
-    */
     
     @PostMapping(value="/signUp")
     public User createUserWithCredentials(@RequestBody String json, HttpSession session) {
