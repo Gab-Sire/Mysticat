@@ -38,12 +38,10 @@ export default class Login extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-				  console.log(response.data);
 				  if(response.data!==null){
 					  this.setState({errorMessage: "We good."}); 
 				  }
 				  else{
-						console.log('its null fam');
 					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."}); 
 					  }
 				  this.forceUpdate();

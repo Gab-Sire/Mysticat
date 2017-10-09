@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './styles/app.css';
-import _ from 'lodash';
 import Board from './boardComponents/Board.js';
-import Card from './cardComponents/Card.js';
-import Minion from './cardComponents/Minion.js';
-import CardTile from './cardComponents/CardTile.js';
-import Field from './boardComponents/Field.js';
-import Graveyard from './boardComponents/Graveyard.js';
-import Deck from './boardComponents/Deck.js';
-import Hero from './boardComponents/Hero.js';
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 

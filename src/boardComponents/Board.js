@@ -3,8 +3,6 @@ import axios from 'axios';
 import '../styles/app.css';
 import _ from 'lodash';
 import Card from '../cardComponents/Card.js';
-import Minion from '../cardComponents/Minion.js';
-import CardTile from '../cardComponents/CardTile.js';
 import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
@@ -18,7 +16,7 @@ export default class Board extends Component{
 	
 	render(){
 		
-		this.state.gameState = this.props.gameState;
+		this.setState({gameState: this.props.gameState});
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;

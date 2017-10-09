@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import CardTile from '../cardComponents/CardTile.js';
 import _ from 'lodash';
 import Minion from '../cardComponents/Minion.js';
-
-const MAX_CARDS_FIELD = 7; 
 
 export default class Field extends Component{
 	
