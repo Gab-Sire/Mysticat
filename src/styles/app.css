@@ -31,6 +31,14 @@ form {
 	cursor: default;
 }
 
+/* BOUTTONS DU JEU */
+
+#buttonEndTurn {
+	position: absolute;
+	top: 47%;
+	left: 90.5%;
+}
+
 /* MAINS DE CARTES */
 
 

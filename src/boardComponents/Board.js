@@ -105,7 +105,7 @@ export default class Board extends Component{
 						<div id="selfHand" className="hand">
 							{this.renderHand(0, false)}
 						</div>
-						<button onClick={this.updateGameState.bind(this)}>End turn</button>
+						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
 					</div>
 				</div>
 			);
