@@ -372,20 +372,22 @@ form {
 /* styles pour l'attribut mana du héros (joueur) */
 
 #selfMana {
-	bottom: 0%;
-	right: 0%;
+	bottom: 40px;
+	padding: 5px;
+	right: 5.75%;
 	position: absolute;
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	font-size: 2em;
 	border: 2px solid black;
-	background-color: blue;
+	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 	color: white;
+	box-shadow: 0 0 5px white ;
 }
 
 #selfMana div {

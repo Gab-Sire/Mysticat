@@ -102,7 +102,7 @@ export default class Board extends Component{
 							<Deck id="selfDeck" size={self.deck.length}/>
 						</div>
 							
-						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="warriorHero"/>
+						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="zorroHero"/>
 							
 						<div id="selfHand" className="hand">
 							{this.renderHand(0, false)}
