@@ -46,7 +46,7 @@ form {
 	left: 3.5%;
 }
 
-.listeMenuHidden{
+[class=listeMenuHidden]{
 	display:none;
 }
 
