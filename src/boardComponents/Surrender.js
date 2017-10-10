@@ -19,21 +19,19 @@ export default class Surrender extends Component {
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
 			            	<p>Es-tu sur de vouloir abandonner?</p>
-			            	<button onClick={this.IGiveUp.bind(this)}>Oui</button><button onClick={this.NotGivingUP.bind(this)}>Non</button>
+			            	<button onClick={this.giveUp.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
 			            </div>
 		            </div>
 		        );  
-	  }else{
-		    return (null);
 	  }
   }
   
-  IGiveUp(){
+  giveUp(){
 	  this.props.enough();
   }
   
-  NotGivingUP(){
-	  this.props.Never();
+  stayInTheGame(){
+	  this.props.never();
   }
 
 }

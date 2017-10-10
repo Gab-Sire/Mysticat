@@ -113,8 +113,8 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
-						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} Never={this.surrenderGameConfirmStateChange.bind(this)} />
-						<Lost status={this.state.lost} />
+						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
+						<Lost status={this.state.hasLostGame} />
 
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
@@ -169,6 +169,7 @@ export default class Board extends Component{
 		this.setState({ hasLostGame: true});
 	}
 	
+	//Fonction pour tester
 	updateGameState(){
 		const data = this.state.gameState;
 		axios({

@@ -14,7 +14,7 @@ export default class Lost extends Component {
   }
   
   createMessage(){
-	  if(this.props.status){
+	  if(true===this.props.status){
 		    return (
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
@@ -28,11 +28,11 @@ export default class Lost extends Component {
 	  }
   }
   
-  IGiveUp(){
+  giveUp(){
 	  this.props.enough();
   }
   
-  NotGivingUP(){
+  stayInTheGame(){
 	  this.props.Never();
   }
 
