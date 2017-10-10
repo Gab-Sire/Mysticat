@@ -154,13 +154,9 @@ export default class Board extends Component{
 	}
 	
 	surrenderGameConfirmStateChange(){
-<<<<<<< HEAD
 		let status =this.state.isThinkingToGiveUp;
 		this.setState({ isThinkingToGiveUp: !status});
-=======
-		let status =this.state.IsThinkingToGiveUp;
-		this.setState({ IsThinkingToGiveUp: !status});
->>>>>>> d113806e436c547e43fce005c295016b17392d09
+
 	}
 	surrender(){
 		let self = this.state.gameState.players[0].hero;
