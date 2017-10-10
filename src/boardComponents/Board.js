@@ -113,10 +113,10 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
-						<Surrender status={this.state.IsThinkingToGiveUp} enough={this.Surrender.bind(this)} Never={this.SurrenderGameConfirmStatChange.bind(this)} />
+						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} Never={this.surrenderGameConfirmStateChange.bind(this)} />
 						<Lost status={this.state.lost} />
 						<div id="menuGame"><p>Menu</p>
-							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirmStatChange.bind(this)}>J'abandonne</button></p>
+							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
 						</div>
 					</div>
 				</div>
@@ -152,14 +152,14 @@ export default class Board extends Component{
 				});
 	}
 	
-	SurrenderGameConfirmStatChange(){
-		let status =this.state.IsThinkingToGiveUp;
-		this.setState({ IsThinkingToGiveUp: !status});
+	surrenderGameConfirmStateChange(){
+		let status =this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status});
 	}
-	Surrender(){
+	surrender(){
 		let self = this.state.gameState.players[0].hero;
 		self.health = 0;
-		this.SurrenderGameConfirmStatChange();
+		this.surrenderGameConfirmStateChange();
 		this.updateGameState();
 		this.loser();
 	}
