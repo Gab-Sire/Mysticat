@@ -11,11 +11,15 @@ public class GameQueue {
 	private List<QueueListener> listeners;
 	
 	public synchronized void addToQueue(Player player) {
-		if(this.listOfPlayersInQueue==null) {
+		if (this.listOfPlayersInQueue==null) {
 			this.listOfPlayersInQueue = new ArrayList<Player>();
 		}
+		else if(this.listOfPlayersInQueue.contains(player)) {
+			return;
+		}
+		
 		this.listOfPlayersInQueue.add(player);
-		if(this.listOfPlayersInQueue.size()>=2) {
+		if (this.listOfPlayersInQueue.size()>=2) {
 		    for (QueueListener listener : this.listeners) {
 		    	listener.queueHasEnoughPlayers();
 		    }
