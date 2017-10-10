@@ -19,14 +19,20 @@ export default class Surrender extends Component {
 		    return (
 		            <div id='GiveUP'>
 			            <div id='blocGiveUp'>
-			            	<p>Es-tu sure de vouloir abondonné?</p>
-			            	<button>Oui</button><button>Non</button>
+			            	<p>Es-tu sur de vouloir abandonner?</p>
+			            	<button onClick={this.IGiveUp.bind(this)}>Oui</button><button>Non</button>
 			            </div>
 		            </div>
 		        );  
 	  }else{
 		    return (null);
 	  }
+  }
+  IGiveUp(){
+	  this.props.enough();
+  }
+  INotGivingUP(){
+	  
   }
 
 }

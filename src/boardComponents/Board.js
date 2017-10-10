@@ -111,9 +111,9 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
-						//<Surrender status={this.state.IsThinkingToGiveUp} />
+						<Surrender status={this.state.IsThinkingToGiveUp} enough={this.Surrender.bind(this)} />
 						<div id="menuGame"><p>Menu</p>
-							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirm.bind(this)}>J'abandonne</button></p>
+							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirmStatChange.bind(this)}>J'abandonne</button></p>
 						</div>
 					</div>
 				</div>
@@ -149,11 +149,14 @@ export default class Board extends Component{
 				});
 	}
 	
-	SurrenderGameConfirm(){
-		this.setState({ IsThinkingToGiveUp: true});
-		//this.state.gameState.players[0].hero.setState({health: 0});
+	SurrenderGameConfirmStatChange(){
+		let status =this.state.IsThinkingToGiveUp;
+		this.setState({ IsThinkingToGiveUp: !status});
+	}
+	Surrender(){
 		let self = this.state.gameState.players[0].hero;
 		self.health = 0;
+		this.SurrenderGameConfirmStatChange();
 		this.updateGameState();
 	}
 	
