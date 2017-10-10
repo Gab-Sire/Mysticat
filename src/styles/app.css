@@ -57,7 +57,7 @@ form {
 #menuGame:hover #listeMenuHidden{
 	display: block;
 }
-#GiveUP{
+#FullScreenRED{
 	position:absolute;
 	top:0px;
 	width: 100%;

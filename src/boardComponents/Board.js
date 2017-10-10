@@ -8,6 +8,7 @@ import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
 import Surrender from './Surrender.js';
+import Lost from './Lost.js';
 
 export default class Board extends Component{
 	constructor(props){
@@ -74,6 +75,7 @@ export default class Board extends Component{
 					]
 			},
 			IsThinkingToGiveUp: false,
+			lost : false
 			};
 	}
 	
@@ -111,7 +113,8 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
-						<Surrender status={this.state.IsThinkingToGiveUp} enough={this.Surrender.bind(this)} />
+						<Surrender status={this.state.IsThinkingToGiveUp} enough={this.Surrender.bind(this)} Never={this.SurrenderGameConfirmStatChange.bind(this)} />
+						<Lost status={this.state.lost} />
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.SurrenderGameConfirmStatChange.bind(this)}>J'abandonne</button></p>
 						</div>
@@ -158,6 +161,10 @@ export default class Board extends Component{
 		self.health = 0;
 		this.SurrenderGameConfirmStatChange();
 		this.updateGameState();
+		this.loser();
+	}
+	loser(){
+		this.setState({ lost: true});
 	}
 	
 	updateGameState(){
