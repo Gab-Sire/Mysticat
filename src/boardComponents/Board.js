@@ -9,6 +9,7 @@ import Deck from './Deck.js';
 import Hero from './Hero.js';
 import Surrender from './Surrender.js';
 import Lost from './Lost.js';
+import LoadingScreen from './LoadingScreen';
 
 export default class Board extends Component{
 	constructor(props){
@@ -22,7 +23,7 @@ export default class Board extends Component{
 	
 	render(){
 		if(!this.state.isLoaded){
-			return null;
+			return <LoadingScreen />;
 		}
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
