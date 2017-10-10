@@ -55,6 +55,9 @@ form {
 	left: 90.5%;
 }
 
+#loading{
+	text-align: center;
+}
 /*Menu et Abandon*/
 #menuGame {
 	text-align:center;
