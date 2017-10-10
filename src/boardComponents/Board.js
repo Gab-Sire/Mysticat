@@ -14,72 +14,16 @@ export default class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-				gameState : {
-					currentMana: 0,
-					players: [
-						{
-							hero: {
-								health:30
-							},
-							hand : [
-								{
-									name: "test",
-									initialPower: "test",
-									manaCost: "test",
-									initialHealth: "test",
-									initialSpeed: "test",
-									description: "test"
-								}
-							], 
-							field : [
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null
-							],
-							graveyard:[],
-							deck: [],
-							name: ""
-						},
-						{
-							hero:{
-								health:30
-							},
-							hand : [
-								{
-									name: "test",
-									initialPower: "test",
-									manaCost: "test",
-									initialHealth: "test",
-									initialSpeed: "test",
-									description: "test"
-
-								}
-							],
-							field : [
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null, 
-								null
-							],
-							graveyard:[],
-							deck:[],
-							name: "",
-						}
-					]
-			},
+			isLoaded: false,
 			isThinkingToGiveUp: false,
 			hasLostGame : false
 			};
 	}
 	
 	render(){
+		if(!this.state.isLoaded){
+			return null;
+		}
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
 		let selfHealth = self.hero.health;
@@ -145,6 +89,7 @@ export default class Board extends Component{
 			})
 			  .then((response)=>{
 				  this.setState({gameState: response.data});
+				  this.setState({isLoaded: true});
 				  this.forceUpdate();
 				  console.log(response.data);
 				})

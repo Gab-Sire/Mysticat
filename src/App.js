@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './styles/app.css';
 import Board from './boardComponents/Board.js';
 import Login from "./Login.js";
