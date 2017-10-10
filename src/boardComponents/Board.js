@@ -83,7 +83,6 @@ export default class Board extends Component{
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
 		let selfMana = self.remainingMana;
-		this.setState({ IsThinkingToGiveUp: false});
 			return(
 				<div id="container">
 					<div id="board">
