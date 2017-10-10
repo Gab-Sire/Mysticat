@@ -74,8 +74,8 @@ export default class Board extends Component{
 						}
 					]
 			},
-			IsThinkingToGiveUp: false,
-			lost : false
+			isThinkingToGiveUp: false,
+			hasLostGame : false
 			};
 	}
 	
@@ -115,6 +115,7 @@ export default class Board extends Component{
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
 						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} Never={this.surrenderGameConfirmStateChange.bind(this)} />
 						<Lost status={this.state.lost} />
+
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
 						</div>
@@ -153,18 +154,23 @@ export default class Board extends Component{
 	}
 	
 	surrenderGameConfirmStateChange(){
+<<<<<<< HEAD
 		let status =this.state.isThinkingToGiveUp;
 		this.setState({ isThinkingToGiveUp: !status});
+=======
+		let status =this.state.IsThinkingToGiveUp;
+		this.setState({ IsThinkingToGiveUp: !status});
+>>>>>>> d113806e436c547e43fce005c295016b17392d09
 	}
 	surrender(){
 		let self = this.state.gameState.players[0].hero;
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
 		this.updateGameState();
-		this.loser();
+		this.loseGame();
 	}
-	loser(){
-		this.setState({ lost: true});
+	loseGame(){
+		this.setState({ hasLostGame: true});
 	}
 	
 	updateGameState(){
