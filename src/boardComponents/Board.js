@@ -63,6 +63,9 @@ export default class Board extends Component{
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
 						</div>
+						
+						<div id="opponentUserName"><p>{opponent.name}</p></div>
+						<div id="selfUserName"><p>{self.name}</p></div>
 					</div>
 				</div>
 			);

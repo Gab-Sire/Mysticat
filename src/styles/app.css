@@ -485,3 +485,21 @@ form {
 		width: 40%;
 		display: inline-block;
 }
+
+/* NOM JOUEURS DE LA PARTIE */
+
+#selfUserName, #opponentUserName {
+	position: absolute;
+	left: 6%;
+	color: white;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 29px;
+}
+
+#selfUserName {
+	top: 83%;
+}
+
+#opponentUserName {
+	top: 0;
+}
