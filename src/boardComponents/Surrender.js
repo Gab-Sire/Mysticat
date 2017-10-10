@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+/**
+ * Pop up menu si on a besoin plus tard
+ */
 export default class Surrender extends Component {
   constructor(props) {
     super(props);

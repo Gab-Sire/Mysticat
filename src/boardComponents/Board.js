@@ -73,7 +73,7 @@ export default class Board extends Component{
 						}
 					]
 			},
-			IsThinkingToGiveUp: false
+			IsThinkingToGiveUp: false,
 			};
 	}
 	
@@ -151,6 +151,10 @@ export default class Board extends Component{
 	
 	SurrenderGameConfirm(){
 		this.setState({ IsThinkingToGiveUp: true});
+		//this.state.gameState.players[0].hero.setState({health: 0});
+		let self = this.state.gameState.players[0].hero;
+		self.health = 0;
+		this.updateGameState();
 	}
 	
 	updateGameState(){
