@@ -6,18 +6,22 @@ export default class Surrender extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      surrender: false
     }
   }
 
   
 
   render() {
+	  return (<div>{this.createFrom()}</div>);
+  }
+  createFrom(){
 	  if(this.props.status){
 		    return (
 		            <div id='GiveUP'>
-		            <p>Es-tu sure de vouloir abondonné?</p>
-		            <button>Oui</button><button>Non</button>
+			            <div id='blocGiveUp'>
+			            	<p>Es-tu sure de vouloir abondonné?</p>
+			            	<button>Oui</button><button>Non</button>
+			            </div>
 		            </div>
 		        );  
 	  }else{
