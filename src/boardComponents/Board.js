@@ -96,6 +96,7 @@ export default class Board extends Component{
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+				  setTimeout(this.getInitialGameInstance(), 10000);
 				});
 	}
 	
