@@ -7,7 +7,7 @@ import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
-import Surrender from './Surrender.js';
+import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import LoadingScreen from './LoadingScreen';
 
@@ -20,6 +20,7 @@ export default class Board extends Component{
 			hasLostGame : false
 			};
 	}
+	 
 	
 	render(){
 		if(!this.state.isLoaded){
@@ -58,7 +59,7 @@ export default class Board extends Component{
 							{this.renderHand(0, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
-						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
+						<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
 						<EndGameScreen status={this.state.hasLostGame} />
 
 						<div id="menuGame"><p>Menu</p>
