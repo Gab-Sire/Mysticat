@@ -33,8 +33,6 @@ import com.multitiers.util.Constantes;
 @RestController
 @CrossOrigin
 public class RestControlleur {
-	private static final int PLAYER_TWO_INDEX = 1;
-	private static final int PLAYER_ONE_INDEX = 0;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired

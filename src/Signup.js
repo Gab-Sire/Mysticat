@@ -45,7 +45,7 @@ export default class Login extends Component{
 			  .then((response)=>{
 				  console.log(response.data);
 				  if(response.data!==null){
-					  this.setState({errorMessage: "We good."}); 
+					  this.setState({errorMessage: ""}); 
 				  }
 				  else{
 					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."}); 
