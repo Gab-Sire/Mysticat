@@ -8,7 +8,8 @@ import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
 import Surrender from './Surrender.js';
-import Lost from './Lost.js';
+import EndGameScreen from './EndGameScreen.js';
+import LoadingScreen from './LoadingScreen';
 
 export default class Board extends Component{
 	constructor(props){
@@ -22,7 +23,7 @@ export default class Board extends Component{
 	
 	render(){
 		if(!this.state.isLoaded){
-			return null;
+			return <LoadingScreen />;
 		}
 		let self = this.state.gameState.players[0];
 		let opponent = this.state.gameState.players[1];
@@ -58,7 +59,7 @@ export default class Board extends Component{
 						</div>
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
 						<Surrender status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
-						<Lost status={this.state.hasLostGame} />
+						<EndGameScreen status={this.state.hasLostGame} />
 
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
@@ -98,6 +99,9 @@ export default class Board extends Component{
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+				  setTimeout(()=>{
+							  this.getInitialGameInstance();
+						  }, 5000)
 				});
 	}
 	

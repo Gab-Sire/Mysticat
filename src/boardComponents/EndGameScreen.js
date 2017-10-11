@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 /**
  * Pop up menu si on a besoin plus tard
  */
-export default class Lost extends Component {
+export default class EndGameScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

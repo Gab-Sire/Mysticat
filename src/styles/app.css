@@ -1,9 +1,25 @@
 @charset "ISO-8859-1";
 
 /* GÉNÉRAL */
-
 * {
 	box-sizing: border-box;
+}
+
+#loadingScreen{
+	background: url('../img/loading.gif');
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 100%;
+}
+
+#loadingScreenContainer{
+	position: relative;
+	width: 500px;
+	height: 500px;
+	margin-left: 50%;
+	left: -250px;
+	margin-top: 5%;
 }
 
 form {
@@ -39,6 +55,9 @@ form {
 	left: 90.5%;
 }
 
+#loading{
+	text-align: center;
+}
 /*Menu et Abandon*/
 #menuGame {
 	text-align:center;
