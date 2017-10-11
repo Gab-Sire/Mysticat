@@ -23,5 +23,5 @@ dist/
 nbdist/
 .nb-gradle/
 /bin
-/target
+**/target
 /node_modules
