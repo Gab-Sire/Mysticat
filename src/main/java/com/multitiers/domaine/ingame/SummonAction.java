@@ -3,7 +3,7 @@ package com.multitiers.domaine.ingame;
 public class SummonAction extends Action{
 	
 	private Integer fieldCellWhereTheMinionIsBeingSummoned;
-	private PlayableMinionCard minionCard;
+	private Integer indexOfCardInHand;
 	
 	public SummonAction() {
 		super();
@@ -17,11 +17,13 @@ public class SummonAction extends Action{
 		this.fieldCellWhereTheMinionIsBeingSummoned = fieldCellWhereTheMinionIsBeingSummoned;
 	}
 
-	public PlayableMinionCard getMinionCard() {
-		return minionCard;
+	public Integer getIndexOfCardInHand() {
+		return indexOfCardInHand;
 	}
 
-	public void setMinionCard(PlayableMinionCard minionCard) {
-		this.minionCard = minionCard;
-	}	
+	public void setIndexOfCardInHand(Integer indexOfCardInHand) {
+		this.indexOfCardInHand = indexOfCardInHand;
+	}
+
+	
 }

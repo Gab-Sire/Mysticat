@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.multitiers.domaine.entity.MinionCard;
 
 public interface MinionCardRepository extends JpaRepository<MinionCard, String>{
+	MinionCard findMinionCardByCardId(String cardId);
 	Set<MinionCard> findByInitialPower(Integer initialPower);
 	Set<MinionCard> findByInitialSpeed(Integer initialSpeed);
 	Set<MinionCard> findByInitialHealth(Integer initialHealth);

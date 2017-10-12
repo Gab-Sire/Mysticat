@@ -29,7 +29,7 @@ public class ActionDeserializer implements JsonDeserializer<Action>{
 			attackAction.setPlayerIndex(playerIndex);
 			attackAction.setTargetIndex(targetIndex);
 		}
-		if(jsonObj.has("fieldCellWhereTheMinionIsBeingSummoned")) {
+		else if(jsonObj.has("fieldCellWhereTheMinionIsBeingSummoned")) {
 			int playerIndex = jsonObj.get("playerIndex").getAsInt();
 			int fieldCellWhereTheMinionIsBeingSummoned = jsonObj.get("fieldCellWhereTheMinionIsBeingSummoned").getAsInt();
 			JsonObject jsonMinionCard = jsonObj.get("minionCard").getAsJsonObject();

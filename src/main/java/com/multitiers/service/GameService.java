@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.AttackAction;
@@ -17,6 +18,7 @@ import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableCard;
 import com.multitiers.domaine.ingame.PlayableCharacter;
+import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.repository.CardRepository;
@@ -116,7 +118,9 @@ public class GameService implements QueueListener{
 	private void resolveSummonAction(SummonAction summonAction, Game game) {
 		Player playerSummoningTheMinion = game.getPlayers()[summonAction.getPlayerIndex()];
 		int fieldCell = summonAction.getFieldCellWhereTheMinionIsBeingSummoned();
-		Minion minion = new Minion(summonAction.getMinionCard());
+		
+		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getDeck().get(summonAction.getIndexOfCardInHand());
+		Minion minion = new Minion(playableMinionCard);
 		playerSummoningTheMinion.getField()[fieldCell] = minion;
 		System.out.println(playerSummoningTheMinion.getName()+" played "+minion.getName() + " on: " + fieldCell);
 		
