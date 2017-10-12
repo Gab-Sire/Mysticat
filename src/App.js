@@ -4,12 +4,13 @@ import Board from './boardComponents/Board.js';
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 import Connection from "./Connection.js";
+import MainMenu from './menuComponents/MainMenu.js';
 
 class App extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-			inGame: true,
+			inGame: false,
 			playerId: null,
 			signupMode:false,
 			tagLoginSignUp:"Sign Up"
@@ -28,7 +29,8 @@ class App extends Component{
 	}
 	
 	render(){
-		if(false===this.state.inGame && null !=this.state.playerId){
+		return <MainMenu />
+		if(false===this.state.inGame && null !==this.state.playerId){
 			return null;
 		}else if(true===this.state.inGame){
 			return(
@@ -42,7 +44,7 @@ class App extends Component{
 				return <Login />
 			}*/
 			return (<div><Connection signupMode={this.state.signupMode} />
-			<div className='linkConnection'>Allez à la page: 
+			<div className='linkConnection'>Aller à la page: 
 				<button onClick={this.changeSignUpMode.bind(this)}>{this.state.tagLoginSignUp}</button>
 			</div>
 					</div>)

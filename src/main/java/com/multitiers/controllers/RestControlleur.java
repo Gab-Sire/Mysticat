@@ -102,10 +102,10 @@ public class RestControlleur {
         return game;
     }
     
-    
+    // TODO use in front end
     @GetMapping(value="/usernameAvailability")
     public Boolean isUsernameAvailable(@RequestBody String jsonUsername) {
-    	String username = gameService.deserializeUsernameFromJson(jsonUsername);
+    	String username = gameService.deserializeStringFromJson(jsonUsername);
     	return userRepository.findByUsername(username)!=null;
     }
     
@@ -117,16 +117,18 @@ public class RestControlleur {
     
     @PostMapping(value="/enterQueue")
     public void enterQueue(@RequestBody String userId) {
-    	User user = userRepository.findById(userId);
+    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);
     }
     
-    @GetMapping(value="/checkIfQueuePopped")
+    @PostMapping(value="/checkIfQueuePopped")
     public Game checkIfQueuePopped(@RequestBody String userId) {
+    	userId = userId.substring(0, userId.length()-1);
     	if(gameService.newGameList.containsKey(userId)) {
     		return gameService.newGameList.get(userId);
     	}
+    	//Throw erreur a la place.
     	return null;
     }
     

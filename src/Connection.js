@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './styles/app.css';
-import axios from 'axios';
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 

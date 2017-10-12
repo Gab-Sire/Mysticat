@@ -9,7 +9,6 @@ import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.util.Constantes;
 public class Player {
-	private String gameId;
 	private String playerId;
 	private String name;
 	private Hero hero;
@@ -129,14 +128,6 @@ public class Player {
 
 	public void setFatigueDamage(Integer fatigueDamage) {
 		this.fatigueDamage = fatigueDamage;
-	}
-
-	public String getGameId() {
-		return gameId;
-	}
-
-	public void setGameId(String gameId) {
-		this.gameId = gameId;
 	}
 
 	public String getPlayerId() {

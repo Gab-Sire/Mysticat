@@ -78,7 +78,7 @@ public class GameService implements QueueListener{
 	}
 
 	
-	public String deserializeUsernameFromJson(String json) {
+	public String deserializeStringFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		

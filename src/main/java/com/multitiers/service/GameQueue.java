@@ -14,9 +14,12 @@ public class GameQueue {
 		if (this.listOfPlayersInQueue==null) {
 			this.listOfPlayersInQueue = new ArrayList<Player>();
 		}
-		else if(this.listOfPlayersInQueue.contains(player)) {
-			return;
-		}
+		
+	    for (Player playerAlreadyInQueue : this.listOfPlayersInQueue) {
+	    	if(playerAlreadyInQueue.getPlayerId()==player.getPlayerId()) {
+	    		return;
+	    	}
+	    }
 		
 		this.listOfPlayersInQueue.add(player);
 		if (this.listOfPlayersInQueue.size()>=2) {
