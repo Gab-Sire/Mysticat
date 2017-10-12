@@ -59,6 +59,11 @@ form {
 	text-align: center;
 }
 /*Menu et Abandon*/
+.linkConnection{
+	position: absolute;
+	top: 5%;
+	right: 5%;
+}
 #menuGame {
 	z-index: 1;
 	text-align:center;
