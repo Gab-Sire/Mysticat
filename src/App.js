@@ -20,7 +20,7 @@ class App extends Component{
 			);
 		}
 		else{
-			return <Signup />
+			return <Login />
 		}
 	}
 
