@@ -9,7 +9,7 @@ class App extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-			inGame: false,
+			inGame: true,
 			playerId: null,
 			signupMode:false,
 			tagLoginSignUp:"Sign Up"

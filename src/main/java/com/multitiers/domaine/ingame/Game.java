@@ -23,11 +23,13 @@ public class Game {
 	}
 	
 	public void nextTurn() {
-		if(currentMana<Constantes.MAX_MANA) {
-			currentMana++;
+		if(this.currentMana<Constantes.MAX_MANA) {
+			this.currentMana++;
 		}
 		players[0].drawCard();
 		players[1].drawCard();
+		players[0].setRemainingMana(this.currentMana);
+		players[1].setRemainingMana(this.currentMana);
 	}
 
 	public Player[] getPlayers() {
