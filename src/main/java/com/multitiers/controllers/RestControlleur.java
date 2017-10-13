@@ -132,6 +132,11 @@ public class RestControlleur {
     	//Throw erreur a la place.
     	return null;
     }
+
+    
+    @GetMapping(value="/getServerStatus")
+    public void getServerStatus() {
+    }
     
     @ExceptionHandler(value=BadCredentialsLoginException.class)
     public String handleBadCredentialsLogin() {
