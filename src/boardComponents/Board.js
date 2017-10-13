@@ -15,6 +15,7 @@ export default class Board extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
+			playerId: null,
 			isLoaded: false,
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
@@ -27,8 +28,10 @@ export default class Board extends Component{
 		if(!this.state.isLoaded){
 			return <LoadingScreen />;
 		}
-		let self = this.state.gameState.players[0];
-		let opponent = this.state.gameState.players[1];
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		let opponentIndex = (selfIndex===0) ? 1 : 0;
+		let self = this.state.gameState.players[selfIndex];
+		let opponent = this.state.gameState.players[opponentIndex];
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
 		let selfMana = self.remainingMana;
@@ -83,7 +86,7 @@ export default class Board extends Component{
 	}
 
 	componentWillMount(){
-		this.getInitialGameInstance();
+		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 	}
 	
 	

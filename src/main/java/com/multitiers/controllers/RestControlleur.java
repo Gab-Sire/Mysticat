@@ -99,7 +99,6 @@ public class RestControlleur {
         player1.sendCardToGraveyard(player1.getHand().get(0));
         player1.sendCardToGraveyard(player1.getHand().get(0));
     	Game game = new Game(player1, player2);
-    	game.nextTurn();
         return game;
     }
     

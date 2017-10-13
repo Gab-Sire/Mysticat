@@ -18,6 +18,7 @@ public class Game {
 		players[0] = player1;
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
+    	this.nextTurn();
 	}
 	
 	public void nextTurn() {

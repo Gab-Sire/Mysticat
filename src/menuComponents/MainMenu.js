@@ -52,8 +52,7 @@ export default class MainMenu extends Component{
 				  }, 1000)
 			  }
 			  else{
-				  this.setState({gameState: response.data});
-				  this.forceUpdate();
+				  this.props.getQueueForParent(response.data);
 			  }
 			})
 			.catch(error => {

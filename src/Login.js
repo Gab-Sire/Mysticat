@@ -31,11 +31,6 @@ export default class Login extends Component{
 	handleClick(event){
 		console.log('Login form submitted');
 		this.attemptConnection();
-		//if(this.state.gameState !=null){
-			//let id = this.state.gameState;
-			//this.props.connectPlayer(id);
-		//}
-		
 	}
 	
 	attemptConnection(){

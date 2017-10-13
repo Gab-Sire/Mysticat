@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './styles/app.css';
 import Board from './boardComponents/Board.js';
-import Login from "./Login.js";
-import Signup from "./Signup.js";
 import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './boardComponents/LoadingScreen.js';
@@ -16,9 +14,14 @@ class App extends Component{
 			inGame: false,
 			playerId: null,
 			signupMode:false,
-			tagLoginSignUp:"Sign Up"
+			tagLoginSignUp:"Sign Up",
+			gameState: null
 
 		};
+	}
+	
+	getGameFromQueue = (gameState)=>{
+		this.setState({gameState: gameState, inGame: true})
 	}
 	
 	changeSignUpMode(){
@@ -34,10 +37,10 @@ class App extends Component{
 	render(){
 		if(true===this.state.isServerAvailable){
 			if(false===this.state.inGame && null !==this.state.playerId){
-				return <MainMenu playerId={this.state.playerId}/>
+				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue}/>
 			}else if(true===this.state.inGame){
 				return(
-					<Board />
+					<Board gameState={this.state.gameState} playerId={this.state.playerId}/>
 				);
 			}
 			else{
@@ -65,8 +68,6 @@ class App extends Component{
 			})
 			  .then((response)=>{
 				  this.setState({isServerAvailable: true});
-				  this.forceUpdate();
-				  console.log(response.data);
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
