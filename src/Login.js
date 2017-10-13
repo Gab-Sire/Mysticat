@@ -33,7 +33,7 @@ export default class Login extends Component{
 		this.attemptConnection();
 		if(this.state.gameState !=null){
 			let id = this.state.gameState.USR_ID;
-			this.props.handleConnectPlayer(id);
+			this.props.connectPlayer(id);
 		}
 		
 	}
@@ -53,6 +53,7 @@ export default class Login extends Component{
 					  this.setState({errorMessage: ""});
 					  this.setState({gameState: response.data});
 					  this.forceUpdate();
+					
 				  }else{
 					  	this.setState({errorMessage: "Échec, le nom d'utilisateur et le mot de passe que vous avez entré ne correspondent pas."});
 				  }

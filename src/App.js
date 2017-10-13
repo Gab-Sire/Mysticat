@@ -42,7 +42,7 @@ class App extends Component{
 			}else{
 				return <Login />
 			}*/
-			return (<div><Connection signupMode={this.state.signupMode} connectPlayer="{this.setIdPlayer.bind(this)}"/>
+			return (<div><Connection signupMode={this.state.signupMode} connectPlayer={this.setIdPlayer.bind(this)}/>
 			<div className='linkConnection'>Aller à la page: 
 				<button onClick={this.changeSignUpMode.bind(this)}>{this.state.tagLoginSignUp}</button>
 			</div>

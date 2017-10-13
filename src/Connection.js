@@ -13,13 +13,13 @@ export default class Connection extends Component{
 	}
 	render(){
 		if(this.props.signupMode){
-			return <Signup handleConnectPlayer="{this.connectPlayer}" />
+			return <Signup connectPlayer={this.connectPlayer} />
 		}else{
-			return <Login handleConnectPlayer="{this.connectPlayer}" />
+			return <Login connectPlayer={this.connectPlayer} />
 		}
 	}
 	connectPlayer(playerId){
-		super.props.connectPlayer(playerId);
+		this.props.connectPlayer(playerId);
 	}
 	
 }
