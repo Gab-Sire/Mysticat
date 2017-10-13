@@ -32,10 +32,10 @@ export default class Login extends Component{
 	handleClick(event){
 		console.log('Login form submitted');
 		this.attemptConnection();
-		if(this.state.gameState !=null){
-			let id = this.state.gameState.USR_ID;
-			this.props.connectPlayer(id);
-		}
+		//if(this.state.gameState !=null){
+			//let id = this.state.gameState;
+			//this.props.connectPlayer(id);
+		//}
 		
 	}
 	connexionPlayer
@@ -52,7 +52,8 @@ export default class Login extends Component{
 				  console.log(response);
 				  if(response.data!==null){
 					  this.setState({errorMessage: ""});
-					  this.setState({gameState: response.data});
+					  //this.setState({gameState: response.data});
+					  this.props.connectPlayer(response.data);
 					  this.forceUpdate();
 					
 				  }else{

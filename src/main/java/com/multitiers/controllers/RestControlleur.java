@@ -66,7 +66,7 @@ public class RestControlleur {
     }
     
     @PostMapping(value="/signUp")
-    public User createUserWithCredentials(@RequestBody String json, HttpSession session) {
+    public String createUserWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
     	
     	String username = userCredentials.getUsername();
@@ -79,7 +79,7 @@ public class RestControlleur {
         if(user != null) {
             session.setAttribute("userActif", user.getId());	
         }
-    	return user;
+    	return new Gson().toJson(user.getId());
     }
     
     @ExceptionHandler(value=UsernameTakenException.class)
