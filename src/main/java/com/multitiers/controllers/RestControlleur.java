@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.ingame.Game;
@@ -55,13 +56,13 @@ public class RestControlleur {
     }
     
     @PostMapping(value = "/attemptConnection")
-    public @ResponseBody User loginWithCredentials(@RequestBody String json, HttpSession session) {
+    public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
     	}
-    	return user;
+    	return new Gson().toJson(user.getId());
     }
     
     @PostMapping(value="/signUp")

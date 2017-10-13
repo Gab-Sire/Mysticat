@@ -5,7 +5,7 @@ export default class MainMenu extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-				playerId: "d6048179-5969-4f6d-b4f1-6ddaace1568e"
+				playerId: null
 			}
 	}
 	render(){

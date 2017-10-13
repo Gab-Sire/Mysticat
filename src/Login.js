@@ -6,6 +6,7 @@ export default class Login extends Component{
 	constructor(props){
 		super(props);
 		this.state={
+			userId:'',
 			username:'',
 			password:'',
 			errorMessage:''
@@ -48,7 +49,7 @@ export default class Login extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-				  console.log(response.data);
+				  console.log(response);
 				  if(response.data!==null){
 					  this.setState({errorMessage: ""});
 					  this.setState({gameState: response.data});
