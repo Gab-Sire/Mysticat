@@ -31,9 +31,13 @@ export default class Login extends Component{
 	handleClick(event){
 		console.log('Login form submitted');
 		this.attemptConnection();
+		if(this.state.gameState !=null){
+			let id = this.state.gameState.USR_ID;
+			this.props.handleConnectPlayer(id);
+		}
 		
 	}
-	
+	connexionPlayer
 	attemptConnection(){
 		const data = {username: this.state.username, password: this.state.password}
 		axios({

@@ -29,9 +29,8 @@ class App extends Component{
 	}
 	
 	render(){
-		return <MainMenu />
 		if(false===this.state.inGame && null !==this.state.playerId){
-			return null;
+			return <MainMenu />
 		}else if(true===this.state.inGame){
 			return(
 				<Board />
@@ -43,13 +42,16 @@ class App extends Component{
 			}else{
 				return <Login />
 			}*/
-			return (<div><Connection signupMode={this.state.signupMode} />
+			return (<div><Connection signupMode={this.state.signupMode} connectPlayer="{this.setIdPlayer.bind(this)}"/>
 			<div className='linkConnection'>Aller à la page: 
 				<button onClick={this.changeSignUpMode.bind(this)}>{this.state.tagLoginSignUp}</button>
 			</div>
 					</div>)
 			
 		}
+	}
+	setIdPlayer(idplayer){
+		this.setState("playerId" : idplayer);
 	}
 	
 }

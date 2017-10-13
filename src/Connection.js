@@ -9,13 +9,17 @@ export default class Connection extends Component{
 		this.state={
 			signupMode:false
 		}
+		this.connectPlayer =this.connectPlayer.bind(this);
 	}
 	render(){
 		if(this.props.signupMode){
-			return <Signup />
+			return <Signup handleConnectPlayer="{this.connectPlayer}" />
 		}else{
-			return <Login />
+			return <Login handleConnectPlayer="{this.connectPlayer}" />
 		}
+	}
+	connectPlayer(playerId){
+		super.props.connectPlayer(playerId);
 	}
 	
 }
