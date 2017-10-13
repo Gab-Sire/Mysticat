@@ -6,7 +6,6 @@ export default class Login extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			userId:'',
 			username:'',
 			password:'',
 			errorMessage:''
@@ -38,7 +37,7 @@ export default class Login extends Component{
 		//}
 		
 	}
-	connexionPlayer
+	
 	attemptConnection(){
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
@@ -52,9 +51,7 @@ export default class Login extends Component{
 				  console.log(response);
 				  if(response.data!==null){
 					  this.setState({errorMessage: ""});
-					  this.setState({playerId: response.data});
 					  this.props.connectPlayer(response.data);
-					  this.forceUpdate();
 					
 				  }else{
 					  	this.setState({errorMessage: "Échec, le nom d'utilisateur et le mot de passe que vous avez entré ne correspondent pas."});

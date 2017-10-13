@@ -30,7 +30,7 @@ class App extends Component{
 	
 	render(){
 		if(false===this.state.inGame && null !==this.state.playerId){
-			return <MainMenu />
+			return <MainMenu playerId={this.state.playerId}/>
 		}else if(true===this.state.inGame){
 			return(
 				<Board />
@@ -50,8 +50,8 @@ class App extends Component{
 			
 		}
 	}
-	setIdPlayer(idplayer){
-		this.setState({"playerId" : idplayer});
+	setIdPlayer(idPlayer){
+		this.setState({"playerId" : idPlayer});
 	}
 	
 }

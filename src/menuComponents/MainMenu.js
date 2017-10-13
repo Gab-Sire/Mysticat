@@ -13,7 +13,7 @@ export default class MainMenu extends Component{
 	}
 	
 	enterQueue(){
-		let data = this.state.playerId;
+		let data = this.props.playerId;
 		console.log(data);
 		axios({
 		  method:'post',
@@ -35,7 +35,7 @@ export default class MainMenu extends Component{
 	
 	
 	checkIfQueuePopped(){
-		let data = this.state.playerId;
+		let data = this.props.playerId;
 		console.log(data);
 		axios({
 		  method:'post',
@@ -59,6 +59,10 @@ export default class MainMenu extends Component{
 			.catch(error => {
 			  console.log('Error fetching and parsing data', error);
 			});
+	}
+	
+	componentWillMount(){
+		this.setState({playerId: this.props.playerId});
 	}
 	
 }
