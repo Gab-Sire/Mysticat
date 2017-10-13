@@ -51,7 +51,7 @@ class App extends Component{
 		}
 	}
 	setIdPlayer(idplayer){
-		this.setState("playerId" : idplayer);
+		this.setState({"playerId" : idplayer});
 	}
 	
 }

@@ -52,7 +52,7 @@ export default class Login extends Component{
 				  console.log(response);
 				  if(response.data!==null){
 					  this.setState({errorMessage: ""});
-					  //this.setState({gameState: response.data});
+					  this.setState({playerId: response.data});
 					  this.props.connectPlayer(response.data);
 					  this.forceUpdate();
 					
