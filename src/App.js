@@ -29,7 +29,6 @@ class App extends Component{
 	}
 	
 	render(){
-		return <MainMenu />
 		if(false===this.state.inGame && null !==this.state.playerId){
 			return null;
 		}else if(true===this.state.inGame){

@@ -17,7 +17,8 @@ export default class Board extends Component{
 		this.state ={
 			isLoaded: false,
 			isThinkingToGiveUp: false,
-			hasLostGame : false
+			hasLostGame : false,
+			actionList : []
 			};
 	}
 	 
@@ -116,9 +117,9 @@ export default class Board extends Component{
 		let self = this.state.gameState.players[0].hero;
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
-		this.updateGameState();
 		this.loseGame();
 	}
+	
 	loseGame(){
 		this.setState({ hasLostGame: true});
 	}
@@ -141,5 +142,25 @@ export default class Board extends Component{
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
-		}
 	}
+		//TODO EQ1-96
+		sendActions(){
+			const data = this.state.actionList;
+			axios({
+				  method:'post',
+				  url:'http://localhost:8089/sendActions',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data: data
+				})
+				  .then((response)=>{
+					  this.setState({gameState: response.data});
+					  this.forceUpdate();
+					  console.log(response.data);
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+					});
+		}
+		
+}
