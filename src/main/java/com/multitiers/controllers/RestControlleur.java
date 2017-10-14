@@ -179,7 +179,11 @@ public class RestControlleur {
     
     @PostMapping(value="/checkIfGameUpdated")
     public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
-    	Game game = this.gameService.updatedGameList.get(userId.substring(0, userId.length()-1));
+    	userId = userId.substring(0, userId.length()-1);
+    	Game game = this.gameService.updatedGameList.get(userId);
+    	if(game!=null) {
+    		this.gameService.updatedGameList.remove(userId);
+    	}
     	return game;
     }
     
