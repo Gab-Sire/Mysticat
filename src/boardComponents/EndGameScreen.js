@@ -19,7 +19,7 @@ export default class EndGameScreen extends Component {
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
 			            	<p>Vous Avez Perdu</p>
-			            	<button>Menu Principal</button>
+			            	<button onClick={this.goingMainMenu.bind(this)}>Menu Principal</button>
 			            </div>
 		            </div>
 		        );  
@@ -28,12 +28,8 @@ export default class EndGameScreen extends Component {
 	  }
   }
   
-  giveUp(){
-	  this.props.enough();
-  }
-  
-  stayInTheGame(){
-	  this.props.Never();
+  goingMainMenu(){
+	  this.props.goingMainMenu();
   }
 
 }

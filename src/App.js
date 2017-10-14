@@ -40,7 +40,7 @@ class App extends Component{
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectConnectPlayer={this.setIdPlayer.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
-					<Board gameState={this.state.gameState} playerId={this.state.playerId} />
+					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} />
 				);
 			}
 			else{
@@ -57,6 +57,9 @@ class App extends Component{
 	}
 	setIdPlayer(idPlayer){
 		this.setState({"playerId" : idPlayer});
+	}
+	endGameMode(){
+		this.setState({"inGame" : false});
 	}
 	
 	checkServerAvailability(){

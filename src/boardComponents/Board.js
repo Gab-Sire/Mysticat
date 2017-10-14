@@ -65,7 +65,7 @@ export default class Board extends Component{
 						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
 						
 						<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
-						<EndGameScreen status={this.state.hasLostGame} />
+						<EndGameScreen status={this.state.hasLostGame} goingMainMenu={this.goingMainMenu.bind(this)}/>
 
 						<div id="menuGame"><p>Menu</p>
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
@@ -125,6 +125,10 @@ export default class Board extends Component{
 	
 	loseGame(){
 		this.setState({ hasLostGame: true});
+	}
+
+	goingMainMenu(){
+		this.props.endGame();
 	}
 	
 	//Fonction pour tester
