@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ActionList {
 	private List<Action> playerActions;
-	private Integer playerIndex;
+	private String playerId;
 	private String gameId;
 	
 	public ActionList() {
@@ -23,11 +23,13 @@ public class ActionList {
 	public void setPlayerActions(List<Action> playerActions) {
 		this.playerActions = playerActions;
 	}
-	public Integer getPlayerIndex() {
-		return playerIndex;
+
+	public String getPlayerId() {
+		return playerId;
 	}
-	public void setPlayerIndex(Integer playerIndex) {
-		this.playerIndex = playerIndex;
+
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
 	}
 
 	public String getGameId() {

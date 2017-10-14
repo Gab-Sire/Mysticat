@@ -16,7 +16,6 @@ export default class Board extends Component{
 		super(props);
 		this.state ={
 			playerId: null,
-			isLoaded: false,
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : []
@@ -25,9 +24,6 @@ export default class Board extends Component{
 	 
 	
 	render(){
-		if(!this.state.isLoaded){
-			return <LoadingScreen />;
-		}
 		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 		let opponentIndex = (selfIndex===0) ? 1 : 0;
 		let self = this.state.gameState.players[selfIndex];
@@ -62,7 +58,7 @@ export default class Board extends Component{
 						<div id="selfHand" className="hand">
 							{this.renderHand(0, false)}
 						</div>
-						<button id="buttonEndTurn" onClick={this.updateGameState.bind(this)}>Fin de tour</button>
+						<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 						
 						<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
 						<EndGameScreen status={this.state.hasLostGame} goingMainMenu={this.goingMainMenu.bind(this)}/>
@@ -130,44 +126,28 @@ export default class Board extends Component{
 	goingMainMenu(){
 		this.props.endGame();
 	}
-	
-	//Fonction pour tester
-	updateGameState(){
-		const data = this.state.gameState;
+
+	//TODO EQ1-96
+	sendActions(){
+		const data = {
+					gameId: this.state.gameState.gameId,
+					playerActions: this.state.actionList,
+					playerId: this.state.playerId
+			};
+		console.log("Sending actions: ", data);
 		axios({
 			  method:'post',
-			  url:'http://localhost:8089/updateGame',
+			  url:'http://localhost:8089/sendActions',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
 			})
 			  .then((response)=>{
-				  this.setState({gameState: response.data});
-				  this.forceUpdate();
 				  console.log(response.data);
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-		//TODO EQ1-96
-		sendActions(){
-			const data = this.state.actionList;
-			axios({
-				  method:'post',
-				  url:'http://localhost:8089/sendActions',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data: data
-				})
-				  .then((response)=>{
-					  this.setState({gameState: response.data});
-					  this.forceUpdate();
-					  console.log(response.data);
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-					});
-		}
 		
 }

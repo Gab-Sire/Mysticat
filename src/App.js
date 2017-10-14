@@ -68,6 +68,24 @@ class App extends Component{
 		this.setState({"inGame" : false});
 	}
 	
+	getTestActionList(){
+		axios({
+			  method:'get',
+			  url:'http://localhost:8089/getHardCodedActionSample',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  console.log(response.data);
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				  setTimeout(()=>{
+							  this.checkServerAvailability();
+						  }, 5000)
+				});
+	}
+	
 	checkServerAvailability(){
 		axios({
 			  method:'get',
@@ -87,6 +105,7 @@ class App extends Component{
 	}
 	componentWillMount(){
 		this.checkServerAvailability();
+		this.getTestActionList();
 	}
 	
 }

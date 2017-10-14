@@ -46,6 +46,8 @@ public class GameService implements QueueListener{
 	public Map<String, Game> newGameList = new HashMap<String, Game>();
 	//Key: userId
 	public Map<String, Game> existingGameList = new HashMap<String, Game>();
+	//Key: gameId
+	public Map<String, ActionList> sentActionLists = new HashMap<String, ActionList>();
 	
 	public GameService() {
 	}
@@ -179,5 +181,6 @@ public class GameService implements QueueListener{
 		for (Player player : game.getPlayers()) {
 			this.newGameList.put(player.getPlayerId(), game);
 		}
+		this.existingGameList.put(game.getGameId(), game);
 	}
 }

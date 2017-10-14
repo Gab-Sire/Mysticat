@@ -1,5 +1,8 @@
 package com.multitiers.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
+import com.multitiers.domaine.ingame.Action;
+import com.multitiers.domaine.ingame.ActionList;
+import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
+import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
@@ -131,7 +138,45 @@ public class RestControlleur {
     	//Throw erreur a la place.
     	return null;
     }
-
+    
+    @GetMapping(value="/getHardCodedActionSample")
+    public @ResponseBody ActionList getHardCodedActionSample() {
+		ActionList retour = new ActionList();
+		retour.setGameId("game1");
+		List<Action> actionList = new ArrayList<Action>();
+		SummonAction summonAction = new SummonAction();
+		summonAction.setFieldCellWhereTheMinionIsBeingSummoned(1);
+		summonAction.setIndexOfCardInHand(0);
+		summonAction.setPlayerIndex(0);
+		
+		AttackAction attackAction = new AttackAction();
+		attackAction.setAttackingMinionIndex(0);
+		attackAction.setPlayerIndex(0);
+		attackAction.setSpeed(3);
+		attackAction.setTargetIndex(5);
+		
+		actionList.add(attackAction);
+		actionList.add(summonAction);
+		
+		retour.setPlayerActions(actionList);
+		retour.setPlayerId("player1");
+		retour.setGameId("game1");
+		
+    	return retour;
+    } 
+    
+    @PostMapping(value="/sendActions")
+    public void sendActions(@RequestBody String actionListJson) {
+    	ActionList actionList = gameService.deserializeActionListFromJson(actionListJson);
+    	String gameId = actionList.getGameId();
+    	/*
+    	if(this.gameService.sentActionLists.containsKey(gameId)){
+    		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
+    	}
+    	*/
+    	this.gameService.sentActionLists.put(gameId, actionList);
+    	System.out.println(gameId);
+    }
     
     @GetMapping(value="/getServerStatus")
     public void getServerStatus() {
