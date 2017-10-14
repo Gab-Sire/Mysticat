@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import PopUpQueue from './PopUpQueue.js'
 
 export default class MainMenu extends Component{
 	constructor(props){
@@ -24,10 +25,10 @@ export default class MainMenu extends Component{
 						}
 					}
 					>Déconnexion</button></p>
-					<p><button onClick={this.cancelQueue.bind(this)}>Quitter la queue</button></p>
 					<div className={this.state.TAG}>Pas encore disponible</div> 
 				</div>
 				<div id="imgMenuPrincipal"></div>
+				<PopUpQueue iSQueueingUp={this.state.lookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
 			</div>);
 	}
 	deconnexion(){
