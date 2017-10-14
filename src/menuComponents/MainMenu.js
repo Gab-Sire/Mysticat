@@ -16,9 +16,6 @@ export default class MainMenu extends Component{
 					{(this.state.lookingForGame===false) ? 
 							<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p> : 
 							<p><button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button></p> }
-					
-			
-					<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
 					<p><button>Consulter ses decks</button></p>
 					<p><button>Regarder une Partie</button></p>
 					<p><button onClick={(event)=>{this.cancelQueue(); 
