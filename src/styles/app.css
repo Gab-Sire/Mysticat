@@ -89,10 +89,17 @@ form {
 	background: url('../img/BackgroundSpace.jpg') no-repeat center center fixed;
 	overflow: hidden;
 }
+.hidden{
+	display: none;
+}
+.visible{
+	display:block;
+	color:red;
+}
 #menuBox{
 	position:absolute;
 	width:40%;
-	height: 270px;
+	height: 300px;
 	top:20%;
 	left: 30%;
 	text-align:center;

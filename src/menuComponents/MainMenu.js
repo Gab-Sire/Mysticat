@@ -6,7 +6,8 @@ export default class MainMenu extends Component{
 		super(props);
 		this.state={
 				playerId: null,
-				lookingForGame: false
+				lookingForGame: false,
+				TAG:"hidden"
 			}
 	}
 	render(){
@@ -14,8 +15,8 @@ export default class MainMenu extends Component{
 				<div id='menuBox'>
 					<h2> Mysticat</h2>
 					<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
-					<p><button>Consulter ses decks</button></p>
-					<p><button>Regarder une Partie</button></p>
+					<p><button onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
+					<p><button onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
 					<p><button onClick={(event)=>{this.cancelQueue(); 
 							setTimeout(()=>{
 								this.deconnexion();
@@ -24,14 +25,17 @@ export default class MainMenu extends Component{
 					}
 					>Déconnexion</button></p>
 					<p><button onClick={this.cancelQueue.bind(this)}>Quitter la queue</button></p>
+					<div className={this.state.TAG}>Pas encore disponible</div> 
 				</div>
 				<div id="imgMenuPrincipal"></div>
 			</div>);
 	}
 	deconnexion(){
+		this.hideUnderContruction();
 		this.props.disconnectPlayer();
 	}
 	enterQueue(){
+		this.hideUnderContruction();
 		this.setState({lookingForGame: true})
 		let data = this.props.playerId;
 		console.log("Entering queue");
@@ -86,6 +90,12 @@ export default class MainMenu extends Component{
 	
 	componentWillMount(){
 		this.setState({playerId: this.props.playerId});
+	}
+	displayUnderContruction(){
+		this.setState({TAG: "visible"});
+	}
+	hideUnderContruction(){
+		this.setState({TAG: "hidden"});
 	}
 	
 }
