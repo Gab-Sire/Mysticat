@@ -13,17 +13,14 @@ export default class MainMenu extends Component{
 		return (<div id='MainMenu'>
 				<div id='menuBox'>
 					<h2> Mysticat</h2>
-<<<<<<< HEAD
 					{(this.state.lookingForGame===false) ? 
 							<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p> : 
 							<p><button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button></p> }
 					
 			
-=======
 					<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
 					<p><button>Consulter ses decks</button></p>
 					<p><button>Regarder une Partie</button></p>
->>>>>>> d7451a308b0a1f6f0ec475e4a8ccbe5721a4d4cf
 					<p><button onClick={(event)=>{this.cancelQueue(); 
 					setTimeout(()=>{
 						this.deconnexion();
