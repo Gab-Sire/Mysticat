@@ -9,9 +9,15 @@ export default class MainMenu extends Component{
 			}
 	}
 	render(){
-		return <div><button onClick={this.enterQueue.bind(this)}>Enter queue</button></div>
+		return (<div>
+				<h2> Mysticat</h2>
+				<p><button onClick={this.enterQueue.bind(this)}>Enter queue</button></p>
+				<p><button onClick={this.deconnexion.bind(this)}>Déconnection</button></p>
+			</div>);
 	}
-	
+	deconnexion(){
+		this.props.disconnectConnectPlayer(null);
+	}
 	enterQueue(){
 		let data = this.props.playerId;
 		console.log(data);

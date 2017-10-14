@@ -1,4 +1,4 @@
-	package com.multitiers.controllers;
+package com.multitiers.controllers;
 
 import javax.servlet.http.HttpSession;
 
