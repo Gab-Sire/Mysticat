@@ -59,13 +59,15 @@ export default class Login extends Component{
 	
 	render(){
 		return (<div id="loginForm">
-		<h1 className='centerTitle'>Login</h1>
+		
 	    <form onSubmit={this.handleSubmit}>
+	    <h1>Login</h1>
 	    	<p>Nom d'utilisateur: <input type="text" name="username" ref="username" onChange={this.handleChangeUsername} required/></p>
 	        <p>Mot de passe: <input type="password" name="password" ref="password" onChange={this.handleChangePassword} required/></p>
 	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/> <input type="reset" value="Reset"/></p>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
 	        </form>
+	        
 	    </div>)
 	}
 }
