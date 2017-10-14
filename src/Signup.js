@@ -83,7 +83,7 @@ export default class Login extends Component{
 		const PASSWORD_MIN_LENGTH = 5;
 		const PASSWORD_MAX_LENGTH = 100;
 		return (<div id="loginForm">
-		<h1>Sign up</h1>
+		<h1 className='centerTitle'>Sign up</h1>
 	    <form onSubmit={this.handleSubmit}>
 	    	<p>Nom d'utilisateur: <input required type="text" name="username" ref="username" onChange={this.handleChangeUsername}/></p>
 	        <p>Mot de passe: <input required type="password" name="password" ref="password" onChange={this.handleChangePassword}/></p>

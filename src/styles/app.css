@@ -34,6 +34,10 @@ form {
 	min-width: 1200px;
 }
 
+.centerTitle{
+	padding-left:45%;
+}
+
 /* PLATEAU DE JEU */
 
 #board {

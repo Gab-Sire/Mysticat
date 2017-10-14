@@ -9,7 +9,7 @@ export default class MainMenu extends Component{
 			}
 	}
 	render(){
-		return (<div>
+		return (<div className='centerTitle'>
 				<h2> Mysticat</h2>
 				<p><button onClick={this.enterQueue.bind(this)}>Enter queue</button></p>
 				<p><button onClick={this.deconnexion.bind(this)}>Déconnection</button></p>
