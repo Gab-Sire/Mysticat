@@ -40,4 +40,8 @@ public class ActionList {
 		this.gameId = gameId;
 	}
 	
+	public void combineActionList(ActionList otherList) {
+		this.playerActions.addAll(otherList.playerActions);
+	}
+	
 }

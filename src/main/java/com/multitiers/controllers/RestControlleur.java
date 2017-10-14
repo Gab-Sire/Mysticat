@@ -167,15 +167,14 @@ public class RestControlleur {
     
     @PostMapping(value="/sendActions")
     public void sendActions(@RequestBody String actionListJson) {
-    	ActionList actionList = gameService.deserializeActionListFromJson(actionListJson);
-    	String gameId = actionList.getGameId();
-    	/*
+    	ActionList currentPlayerActionList = gameService.deserializeActionListFromJson(actionListJson);
+    	String gameId = currentPlayerActionList.getGameId();
+    	
     	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
+    		this.gameService.updateGameFromActionLists(otherPlayerAction, currentPlayerActionList);
     	}
-    	*/
-    	this.gameService.sentActionLists.put(gameId, actionList);
-    	System.out.println(gameId);
+    	this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
     }
     
     @GetMapping(value="/getServerStatus")

@@ -27,7 +27,7 @@ import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 
 @Service
-public class GameService implements QueueListener{
+public class GameService implements QueueListener {
 	private static final int PLAYER_ONE_INDEX = 0;
 	private static final int PLAYER_TWO_INDEX = 1;
 	private static final int HERO_FACE_INDEX = -1;
@@ -40,23 +40,25 @@ public class GameService implements QueueListener{
 	private CardRepository cardRepository;
 	@Autowired
 	private MinionCardRepository minionCardRepository;
-	
+
 	public GameQueue gameQueue = new GameQueue();
-	//Key: GameId
+	// Key: GameId
 	public Map<String, Game> newGameList = new HashMap<String, Game>();
-	//Key: userId
-	public Map<String, Game> existingGameList = new HashMap<String, Game>();
-	//Key: gameId
+	// Key: gameId
 	public Map<String, ActionList> sentActionLists = new HashMap<String, ActionList>();
-	
+	// Key: userId
+	public Map<String, Game> existingGameList = new HashMap<String, Game>();
+	// Key: UserId
+	public Map<String, Game> updatedGameList = new HashMap<String, Game>();
+
 	public GameService() {
 	}
 
 	public void initGameQueue() {
 		this.gameQueue.addToListeners(this);
 	}
-	
-	//Fonction pour tester la serialization et deserialization d'une Game
+
+	// Fonction pour tester la serialization et deserialization d'une Game
 	public Game deserializeGameFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer()).create();
@@ -66,48 +68,60 @@ public class GameService implements QueueListener{
 
 		return gameFromJson;
 	}
-	
-	//TODO
+
+	// TODO
 	public ActionList deserializeActionListFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder
-				.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
-				.registerTypeAdapter(Action.class, new ActionDeserializer())
-				.create();
+		Gson gson = gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
+				.registerTypeAdapter(Action.class, new ActionDeserializer()).create();
 		ActionList list = gson.fromJson(json, ActionList.class);
-		
+
 		return list;
 	}
 
-	
 	public String deserializeStringFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		
+
 		String username = gson.fromJson(json, String.class);
-		
+
 		return username;
-		
+
 	}
-	
-	public Game updateGame(ActionList playerOneActions, ActionList playerTwoActions) {
-		if(playerOneActions.getGameId()!=playerTwoActions.getGameId()) {
+
+	public void updateGameFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
+		String playerOneId = playerOneActions.getPlayerId();
+		String playerTwoId = playerTwoActions.getPlayerId();
+		String gameId = playerOneActions.getGameId();
+		if (gameId != playerTwoActions.getGameId()) {
 			throw new RuntimeException("Game id mismatch.");
 		}
-		String gameId = playerOneActions.getGameId();
+		if (playerOneId == playerTwoId) {
+			throw new RuntimeException("Duplicate action submission.");
+		}
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
+
+		Game game = this.existingGameList.get(gameId);
+		resolveAllActions(actions, game);	
+		this.existingGameList.put(gameId, game);
+		this.updatedGameList.put(playerOneId, game);
+		this.updatedGameList.put(playerTwoId, game);
 		
-		Game game = this.newGameList.get(gameId);
+		System.out.println("Next turn calculated...");
 		
+		this.sentActionLists.remove(gameId);
+		this.newGameList.remove(playerOneId);
+		this.newGameList.remove(playerTwoId);
+	}
+
+	private void resolveAllActions(List<Action> actions, Game game) {
 		for (Action action : actions) {
-			if(action instanceof SummonAction) {
-				resolveSummonAction((SummonAction)action, game);
-			}
-			else if(action instanceof AttackAction) {
-				resolveAttackAction((AttackAction)action, game);
+			if (action instanceof SummonAction) {
+				resolveSummonAction((SummonAction) action, game);
+			} else if (action instanceof AttackAction) {
+				resolveAttackAction((AttackAction) action, game);
 			}
 		}
-		return game;
 	}
 
 	private List<Action> getCompleteSortedActionList(ActionList playerOneActions, ActionList playerTwoActions) {
@@ -120,44 +134,45 @@ public class GameService implements QueueListener{
 	private void resolveSummonAction(SummonAction summonAction, Game game) {
 		Player playerSummoningTheMinion = game.getPlayers()[summonAction.getPlayerIndex()];
 		int fieldCell = summonAction.getFieldCellWhereTheMinionIsBeingSummoned();
-		
-		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getDeck().get(summonAction.getIndexOfCardInHand());
+
+		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getDeck()
+				.get(summonAction.getIndexOfCardInHand());
 		Minion minion = new Minion(playableMinionCard);
 		playerSummoningTheMinion.getField()[fieldCell] = minion;
-		System.out.println(playerSummoningTheMinion.getName()+" played "+minion.getName() + " on: " + fieldCell);
-		
+		System.out.println(playerSummoningTheMinion.getName() + " played " + minion.getName() + " on: " + fieldCell);
+
 	}
 
 	private void resolveAttackAction(AttackAction attackAction, Game game) {
 		Integer playerDeclaringAttackIndex = attackAction.getPlayerIndex();
-		Integer opponentPlayerIndex = (playerDeclaringAttackIndex==PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX : PLAYER_ONE_INDEX;
+		Integer opponentPlayerIndex = (playerDeclaringAttackIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
+				: PLAYER_ONE_INDEX;
 		Player playerDeclaringAttack = game.getPlayers()[playerDeclaringAttackIndex];
 		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
-		
+
 		int attackerIndex = attackAction.getAttackingMinionIndex();
 		int attackedIndex = attackAction.getTargetIndex();
 		int speed = attackAction.getSpeed();
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
 		verifySpeed(speed, attacker);
-		
+
 		PlayableCharacter targetOfTheAttack;
-		if (attackedIndex==HERO_FACE_INDEX) {
+		if (attackedIndex == HERO_FACE_INDEX) {
 			targetOfTheAttack = opponentPlayer.getHero();
-			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth()-attacker.getPower());
-			if(targetOfTheAttack.isDead()) {
+			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+			if (targetOfTheAttack.isDead()) {
 				System.out.println("Congratz grad, you won.");
 			}
 			return;
-		}
-		else {
+		} else {
 			targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
-			if(targetOfTheAttack!=null) {
-				attacker.setHealth(attacker.getHealth()-((Minion)targetOfTheAttack).getPower());
-				targetOfTheAttack.setHealth(targetOfTheAttack.getHealth()-attacker.getPower());
-				if(attacker.isDead()) {
+			if (targetOfTheAttack != null) {
+				attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
+				targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+				if (attacker.isDead()) {
 					attacker = null;
 				}
-				if(targetOfTheAttack.isDead()) {
+				if (targetOfTheAttack.isDead()) {
 					targetOfTheAttack = null;
 				}
 			}
@@ -170,14 +185,13 @@ public class GameService implements QueueListener{
 			System.out.println("Error: Mismatch in speed for minion " + attacker.getName());
 		}
 	}
-	
 
 	@Override
 	public void queueHasEnoughPlayers() {
 		System.out.println("Queue pop");
-		//Create game
-		//Assigner la game aux 2 joueurs qui devraient la recevoir
-		Game game  = this.gameQueue.matchFirstTwoPlayersInQueue();
+		// Create game
+		// Assigner la game aux 2 joueurs qui devraient la recevoir
+		Game game = this.gameQueue.matchFirstTwoPlayersInQueue();
 		for (Player player : game.getPlayers()) {
 			this.newGameList.put(player.getPlayerId(), game);
 		}
