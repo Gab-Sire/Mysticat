@@ -4,7 +4,7 @@ import './styles/app.css';
 import Board from './boardComponents/Board.js';
 import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
-import LoadingScreen from './boardComponents/LoadingScreen.js';
+import LoadingScreen from './menuComponents/LoadingScreen.js';
 
 class App extends Component{
 	constructor(props){
@@ -37,7 +37,7 @@ class App extends Component{
 	render(){
 		if(true===this.state.isServerAvailable){
 			if(false===this.state.inGame && null !==this.state.playerId){
-				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectConnectPlayer={this.setIdPlayer.bind(this)} />
+				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
 					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} />
@@ -52,9 +52,15 @@ class App extends Component{
 				
 			}	
 		}
-		else return (<LoadingScreen />)
+		else return (<LoadingScreen text={"Contacting server..."}/>)
 		
 	}
+	
+	disconnectPlayer(){
+		this.setState({"playerId" : null});
+	}
+	
+	
 	setIdPlayer(idPlayer){
 		this.setState({"playerId" : idPlayer});
 	}

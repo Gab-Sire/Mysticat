@@ -10,7 +10,7 @@ export default class LoadingScreen extends Component{
 		return(
 				<div id="loadingScreenContainer">
 					<div id="loadingScreen"></div>
-					<h3 id='loading'>Loading ...</h3>
+					<h3 id='loading'>{this.props.text}</h3>
 				</div>
 		);
 	}

@@ -9,7 +9,7 @@ import Deck from './Deck.js';
 import Hero from './Hero.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../menuComponents/LoadingScreen';
 
 export default class Board extends Component{
 	constructor(props){
