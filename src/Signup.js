@@ -85,8 +85,8 @@ export default class Login extends Component{
 		return (<div id="loginForm">
 	    <form onSubmit={this.handleSubmit}>
 	    <h1>Sign up</h1>
-	    	<p>Nom d'utilisateur: <input required type="text" name="username" ref="username" onChange={this.handleChangeUsername}/></p>
-	        <p>Mot de passe: <input required type="password" name="password" ref="password" onChange={this.handleChangePassword}/></p>
+	    	<p><label htmlFor="username">Nom d'utilisateur: </label><input required type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername}/></p>
+	    	<p><label htmlFor="password">Mot de passe: </label><input required type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword}/></p>
 	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/>  <input type="reset" value="Reset" /></p>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
 	    </form>

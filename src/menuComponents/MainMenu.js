@@ -15,9 +15,11 @@ export default class MainMenu extends Component{
 		return (<div id='MainMenu'>
 				<div id='menuBox'>
 					<h2> Mysticat</h2>
-					<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
-					<p><button onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
+					{(this.state.lookingForGame===false) ? 
+							<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p> : 
+							<p><button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button></p> }
 					<p><button onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
+					<p><button onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
 					<p><button onClick={(event)=>{this.cancelQueue(); 
 							setTimeout(()=>{
 								this.deconnexion();
@@ -38,6 +40,7 @@ export default class MainMenu extends Component{
 	enterQueue(){
 		this.hideUnderContruction();
 		this.setState({lookingForGame: true})
+		this.forceUpdate();
 		let data = this.props.playerId;
 		console.log("Entering queue");
 		axios({
@@ -61,7 +64,6 @@ export default class MainMenu extends Component{
 	
 	checkIfQueuePopped(){
 		let data = this.props.playerId;
-		console.log("Checking if queue popped", this.state.lookingForGame);
 		axios({
 		  method:'post',
 		  url:'http://localhost:8089/checkIfQueuePopped',
