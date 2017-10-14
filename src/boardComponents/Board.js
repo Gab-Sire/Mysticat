@@ -143,11 +143,36 @@ export default class Board extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-				  console.log(response.data);
+				  this.checkIfGameUpdated();
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
+	
+		checkIfGameUpdated(){
+			const data = this.state.playerId;
+			axios({
+				  method:'post',
+				  url:'http://localhost:8089/checkIfGameUpdated',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data: data
+				})
+				  .then((response)=>{
+					  console.log(response.data);
+					  if(response.data!==null){
+						  this.setState({gameState: response.data});
+					  }
+					  else{
+						  setTimeout(()=>{
+							  this.checkIfGameUpdated();
+						  }, 5000)
+					  }
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+					});
+		}
 		
 }

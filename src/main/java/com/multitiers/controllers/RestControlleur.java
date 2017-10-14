@@ -177,6 +177,12 @@ public class RestControlleur {
     	this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
     }
     
+    @PostMapping(value="/checkIfGameUpdated")
+    public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
+    	Game game = this.gameService.updatedGameList.get(userId.substring(0, userId.length()-1));
+    	return game;
+    }
+    
     @GetMapping(value="/getServerStatus")
     public void getServerStatus() {
     }
@@ -204,5 +210,4 @@ public class RestControlleur {
 				+ "<li>Au moins 1 lettre minuscule</li>"
 				+ "<li>Au moins 1 lettre majuscule</li></ul>";
     }
-    
 }

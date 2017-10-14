@@ -42,14 +42,14 @@ public class GameService implements QueueListener {
 	private MinionCardRepository minionCardRepository;
 
 	public GameQueue gameQueue = new GameQueue();
-	// Key: GameId
+	// Key: userId
 	public Map<String, Game> newGameList = new HashMap<String, Game>();
+	// Key: userId
+	public Map<String, Game> updatedGameList = new HashMap<String, Game>();
+	// Key: gameId
+	public Map<String, Game> existingGameList = new HashMap<String, Game>();
 	// Key: gameId
 	public Map<String, ActionList> sentActionLists = new HashMap<String, ActionList>();
-	// Key: userId
-	public Map<String, Game> existingGameList = new HashMap<String, Game>();
-	// Key: UserId
-	public Map<String, Game> updatedGameList = new HashMap<String, Game>();
 
 	public GameService() {
 	}
@@ -93,10 +93,10 @@ public class GameService implements QueueListener {
 		String playerOneId = playerOneActions.getPlayerId();
 		String playerTwoId = playerTwoActions.getPlayerId();
 		String gameId = playerOneActions.getGameId();
-		if (gameId != playerTwoActions.getGameId()) {
+		if (!gameId.equals(playerTwoActions.getGameId())) {
 			throw new RuntimeException("Game id mismatch.");
 		}
-		if (playerOneId == playerTwoId) {
+		if (playerOneId.equals(playerTwoId)) {
 			throw new RuntimeException("Duplicate action submission.");
 		}
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
