@@ -15,6 +15,7 @@ import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
+import com.multitiers.domaine.ingame.Hero;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableCard;
 import com.multitiers.domaine.ingame.PlayableCharacter;
@@ -89,7 +90,7 @@ public class GameService implements QueueListener {
 
 	}
 
-	public void updateGameFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
+	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
 		String playerOneId = playerOneActions.getPlayerId();
 		String playerTwoId = playerTwoActions.getPlayerId();
 		String gameId = playerOneActions.getGameId();
@@ -103,6 +104,7 @@ public class GameService implements QueueListener {
 
 		Game game = this.existingGameList.get(gameId);
 		resolveAllActions(actions, game);	
+		game.nextTurn();
 		this.existingGameList.put(gameId, game);
 		this.updatedGameList.put(playerOneId, game);
 		this.updatedGameList.put(playerTwoId, game);
@@ -112,6 +114,8 @@ public class GameService implements QueueListener {
 		this.sentActionLists.remove(gameId);
 		this.newGameList.remove(playerOneId);
 		this.newGameList.remove(playerTwoId);
+		
+		
 	}
 
 	private void resolveAllActions(List<Action> actions, Game game) {
@@ -140,7 +144,7 @@ public class GameService implements QueueListener {
 		Minion minion = new Minion(playableMinionCard);
 		playerSummoningTheMinion.getField()[fieldCell] = minion;
 		System.out.println(playerSummoningTheMinion.getName() + " played " + minion.getName() + " on: " + fieldCell);
-
+		
 	}
 
 	private void resolveAttackAction(AttackAction attackAction, Game game) {
@@ -156,26 +160,35 @@ public class GameService implements QueueListener {
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
 		verifySpeed(speed, attacker);
 
-		PlayableCharacter targetOfTheAttack;
 		if (attackedIndex == HERO_FACE_INDEX) {
-			targetOfTheAttack = opponentPlayer.getHero();
-			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
-			if (targetOfTheAttack.isDead()) {
-				System.out.println("Congratz grad, you won.");
-			}
+			attackFace(opponentPlayer, attacker);
 			return;
 		} else {
-			targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
-			if (targetOfTheAttack != null) {
-				attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
-				targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
-				if (attacker.isDead()) {
-					attacker = null;
-				}
-				if (targetOfTheAttack.isDead()) {
-					targetOfTheAttack = null;
-				}
+			attackMinion(opponentPlayer, attackedIndex, attacker);
+		}
+	}
+
+	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
+		Minion targetOfTheAttack;
+		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
+		if (targetOfTheAttack != null) {
+			attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
+			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+			if (attacker.isDead()) {
+				attacker = null;
 			}
+			if (targetOfTheAttack.isDead()) {
+				targetOfTheAttack = null;
+			}
+		}
+	}
+
+	private void attackFace(Player opponentPlayer, Minion attacker) {
+		Hero targetOfTheAttack;
+		targetOfTheAttack = opponentPlayer.getHero();
+		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+		if (targetOfTheAttack.isDead()) {
+			System.out.println("Congratz grad, you won.");
 		}
 	}
 

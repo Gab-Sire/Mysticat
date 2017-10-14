@@ -172,7 +172,7 @@ public class RestControlleur {
     	
     	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
-    		this.gameService.updateGameFromActionLists(otherPlayerAction, currentPlayerActionList);
+    		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
     	}
     	this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
     }

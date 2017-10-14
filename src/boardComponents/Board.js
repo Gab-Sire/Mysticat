@@ -167,7 +167,7 @@ export default class Board extends Component{
 					  else{
 						  setTimeout(()=>{
 							  this.checkIfGameUpdated();
-						  }, 5000)
+						  }, 1000)
 					  }
 					})
 					.catch(error => {
