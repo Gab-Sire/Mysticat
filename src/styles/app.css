@@ -92,8 +92,8 @@ form {
 #menuBox{
 	position:absolute;
 	width:40%;
-	height: 200px;
-	top:30%;
+	height: 270px;
+	top:20%;
 	left: 30%;
 	text-align:center;
 	background-color: rgba(100, 100, 200, 0.5);
