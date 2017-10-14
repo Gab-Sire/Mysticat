@@ -68,6 +68,35 @@ form {
 	top: 5%;
 	right: 5%;
 }
+#MainMenu{
+	position: relative;
+	width: 100%;
+	height: 600px;
+	background: url('../img/BackgroundSpace.jpg') no-repeat center center fixed;
+	overflow: hidden;
+}
+#menuBox{
+	position:absolute;
+	width:40%;
+	height: 200px;
+	top:30%;
+	left: 30%;
+	text-align:center;
+	background-color: rgba(100, 100, 200, 0.5);
+	border-radius: 40px;
+}
+#imgMenuPrincipal{
+	position:absolute;
+	z-index:3;
+	top:50%;
+	left: 10%;
+	width:300px;
+	height:300px;
+	background-image: url('../img/flyingCat.gif');
+	background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center; 
+}
 #menuGame {
 	z-index: 1;
 	text-align:center;
