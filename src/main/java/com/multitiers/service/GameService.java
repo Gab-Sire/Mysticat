@@ -1,5 +1,6 @@
 package com.multitiers.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +71,7 @@ public class GameService implements QueueListener {
 		return gameFromJson;
 	}
 
-	// TODO
+	
 	public ActionList deserializeActionListFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
@@ -93,6 +94,7 @@ public class GameService implements QueueListener {
 	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
 		String playerOneId = playerOneActions.getPlayerId();
 		String playerTwoId = playerTwoActions.getPlayerId();
+		
 		String gameId = playerOneActions.getGameId();
 		if (!gameId.equals(playerTwoActions.getGameId())) {
 			throw new RuntimeException("Game id mismatch.");
@@ -101,21 +103,40 @@ public class GameService implements QueueListener {
 			throw new RuntimeException("Duplicate action submission.");
 		}
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
-
 		Game game = this.existingGameList.get(gameId);
-		resolveAllActions(actions, game);	
+		
+		resolveAllActions(actions, game);
+		
+		removePlayedMinionCardsFromPlayerHand(playerOneActions, playerOneId, game);
+		removePlayedMinionCardsFromPlayerHand(playerOneActions, playerTwoId, game);
 		game.nextTurn();
+		
 		this.existingGameList.put(gameId, game);
 		this.updatedGameList.put(playerOneId, game);
 		this.updatedGameList.put(playerTwoId, game);
-		
-		System.out.println("Next turn calculated...");
-		
+				
 		this.sentActionLists.remove(gameId);
+				
 		this.newGameList.remove(playerOneId);
 		this.newGameList.remove(playerTwoId);
+		System.out.println("Next turn calculated...");		
 		
-		
+	}
+
+	private void removePlayedMinionCardsFromPlayerHand(ActionList playerOneActions, String playerId, Game game) {
+		Integer playerOneIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1;
+		Player currentPlayer = game.getPlayers()[playerOneIndex];
+
+		List<Integer> indexesOfCardsThatWerePlayed = new ArrayList<Integer>();
+		for(Action action : playerOneActions.getPlayerActions()) {
+			if(action instanceof SummonAction) {
+				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getFieldCellWhereTheMinionIsBeingSummoned());
+			}
+		}
+		Collections.sort(indexesOfCardsThatWerePlayed);
+		for(int i = indexesOfCardsThatWerePlayed.size()-1; i>=0; --i) {
+			currentPlayer.removeCardFromHand(i);
+		}
 	}
 
 	private void resolveAllActions(List<Action> actions, Game game) {

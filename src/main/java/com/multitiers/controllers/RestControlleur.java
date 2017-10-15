@@ -169,12 +169,13 @@ public class RestControlleur {
     public void sendActions(@RequestBody String actionListJson) {
     	ActionList currentPlayerActionList = gameService.deserializeActionListFromJson(actionListJson);
     	String gameId = currentPlayerActionList.getGameId();
-    	
-    	if(this.gameService.sentActionLists.containsKey(gameId)){
+    	if(this.gameService.sentActionLists.containsKey(gameId) && this.gameService.sentActionLists.get(gameId)!=null){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
     		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
     	}
-    	this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
+    	else {
+    		this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
+    	}
     }
     
     @PostMapping(value="/checkIfGameUpdated")

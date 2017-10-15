@@ -145,4 +145,8 @@ public class Player {
 	public void sendCardToGraveyard(PlayableCard card) {
 		this.graveyard.add(card);
 	}
+	
+	public void removeCardFromHand(int indexInHand) {
+		this.hand.remove(indexInHand);
+	}
 }
