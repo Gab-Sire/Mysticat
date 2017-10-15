@@ -31,32 +31,40 @@ export default class Board extends Component{
 		let selfHealth = self.hero.health;
 		let opponentHealth = opponent.hero.health;
 		let selfMana = self.remainingMana;
+		let selfName = self.name;
+		let opponentName = opponent.name;
+		let selfDeck = self.deck;
+		let opponentDeck = opponent.deck;
+		let selfField = self.field;
+		let opponentField = opponent.field;
+		let selfGraveyard = self.graveyard;
+		let opponentGraveyard = opponent.graveyard;
 			return(
 				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
-							{this.renderHand(0, true)}
+							{this.renderHand(opponentIndex, true)}
 						</div>
 						<div id="opponentHandUnderLayer"></div>
 						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
 							
 						<div id="fieldContainer" className="fieldContainer">
-							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
-							<Field id="opponentField" grid={[opponent.field]} />
-							<Deck id="opponentDeck" size={opponent.deck.length}/>
+							<Graveyard id="opponentGraveyard" size={opponentGraveyard.length} identity={"opponent"}/>
+							<Field id="opponentField" grid={[opponentField]} />
+							<Deck id="opponentDeck" size={opponentDeck.length}/>
 						</div>
 						
 						<div id="selfFieldContainer" className="fieldContainer">
-							<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
-							<Field id="selfField" grid={[self.field]} />
-							<Deck id="selfDeck" size={self.deck.length}/>
+							<Graveyard id="selfGraveyard" size={selfGraveyard.length} identity={"self"}/>
+							<Field id="selfField" grid={[selfField]} />
+							<Deck id="selfDeck" size={selfDeck.length}/>
 						</div>
 						<div id="selfFieldUnderLayer"></div>
 							
 						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="zorroHero"/>
 							
 						<div id="selfHand" className="hand">
-							{this.renderHand(0, false)}
+							{this.renderHand(selfIndex, false)}
 						</div>
 						<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 						
@@ -67,8 +75,8 @@ export default class Board extends Component{
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
 						</div>
 						
-						<div id="opponentUserName"><p>{opponent.name}</p></div>
-						<div id="selfUserName"><p>{self.name}</p></div>
+						<div id="opponentUserName"><p>{opponentName}</p></div>
+						<div id="selfUserName"><p>{selfName}</p></div>
 					</div>
 				</div>
 			);
