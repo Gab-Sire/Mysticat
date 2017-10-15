@@ -65,7 +65,7 @@ public class RestControlleur {
     
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
-    	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
+    	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
@@ -75,7 +75,7 @@ public class RestControlleur {
     
     @PostMapping(value="/signUp")
     public String createUserWithCredentials(@RequestBody String json, HttpSession session) {
-    	UserCredentials userCredentials = inscriptionService.deserializeUserCredentialsFromJson(json);
+    	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
     	
     	String username = userCredentials.getUsername();
         String password = userCredentials.getPassword();
@@ -170,7 +170,7 @@ public class RestControlleur {
     public void sendActions(@RequestBody String actionListJson) {
     	ActionList currentPlayerActionList = JsonUtils.deserializeActionListFromJson(actionListJson);
     	String gameId = currentPlayerActionList.getGameId();
-    	if(this.gameService.sentActionLists.containsKey(gameId) && this.gameService.sentActionLists.get(gameId)!=null){
+    	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
     		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
     	}

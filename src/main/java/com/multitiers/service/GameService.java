@@ -82,7 +82,7 @@ public class GameService implements QueueListener {
 		this.updatedGameList.put(playerTwoId, game);
 				
 		this.sentActionLists.remove(gameId);
-		
+
 		this.newGameList.remove(playerOneId);
 		this.newGameList.remove(playerTwoId);		
 		

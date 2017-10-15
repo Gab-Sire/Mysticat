@@ -23,12 +23,17 @@ public class GameQueue {
 		
 		this.listOfPlayersInQueue.add(player);
 		if (this.listOfPlayersInQueue.size()>=2) {
-		    for (QueueListener listener : this.listeners) {
-		    	listener.queueHasEnoughPlayers();
-		    }
+		    notifyAllListeners();
+		}
+	}
+
+	private void notifyAllListeners() {
+		for (QueueListener listener : this.listeners) {
+			listener.queueHasEnoughPlayers();
 		}
 	}
 	
+	// TODO Utiliser dans la fonction de cancellation de la queue.
 	public synchronized void removeFromQueue(Player player) {
 		listOfPlayersInQueue.remove(player);
 	}

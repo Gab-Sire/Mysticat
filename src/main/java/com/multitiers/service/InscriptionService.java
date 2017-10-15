@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
@@ -43,9 +41,9 @@ public class InscriptionService {
     public InscriptionService() {}
     
     @Transactional
-    public void peuplement() {
+    public void bootStrapTwoUsersAndTestCardSet() {
     	//Methode qu'on va utiliser pour Bootstrapper
-        for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; i++) {
+        for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; ++i) {
             MinionCard card = createMinionCard("Minion"+i, i, i, i, i, i+" mana"+" "+i+"/"+i);
             cardRepository.save(card);
         }
@@ -95,7 +93,7 @@ public class InscriptionService {
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	List<Card> defaultCards = new ArrayList<Card>();
     	
-    	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; i++) {
+    	for(int i=1; i<=Constantes.CONSTRUCTED_DECK_MAX_SIZE; ++i) {
     		Integer cardIndex = (int) (Math.random()*Constantes.NB_OF_CARDS_IN_TEST_SET)+1;
     		Card cardToAdd = cardRepository.findByCardName("Minion"+cardIndex);
     		defaultCards.add(cardToAdd);
@@ -117,14 +115,6 @@ public class InscriptionService {
 	    	 return user;
 	     }
 	     throw new BadCredentialsLoginException();
-    }
-    
-    public UserCredentials deserializeUserCredentialsFromJson(String json) {
-    	GsonBuilder builder = new GsonBuilder();
-    	Gson gson = builder.create();
-    	UserCredentials userCredentials = gson.fromJson(json, UserCredentials.class);
-    	
-    	return userCredentials;
     }
     
 }
