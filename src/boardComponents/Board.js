@@ -182,5 +182,28 @@ export default class Board extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
+		//TODO EQ1-89 et EQ1-91
+		isThisFieldCellAvailableForSummon(){
+			return null;
+		}
+
+		//TODO EQ1-93
+		doesThisFieldCellHaveAMinion(){
+			return null;
+		}
+		
+		//TODO EQ1-88
+		addSummonActionToList(playerIndex, indexOfCardPlayed, indexOfFieldCell){
+			return null;
+		}
+		
+		//TODO EQ1-94
+		addAttackActionToList(playerIndex, attackingMinionIndex, targetIndex, speed){
+			return null;
+		}
 		
 }
+
+
+
+
