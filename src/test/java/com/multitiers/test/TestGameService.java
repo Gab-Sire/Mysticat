@@ -18,7 +18,7 @@ import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
 
-public class TestService {
+public class TestGameService {
 	User user1;
 	User user2;
 

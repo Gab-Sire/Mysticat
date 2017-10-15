@@ -73,8 +73,8 @@ public class GameService implements QueueListener {
 		
 		resolveAllActions(actions, game);
 		
-		removePlayedMinionCardsFromPlayerHand(playerOneActions, playerOneId, game);
-		removePlayedMinionCardsFromPlayerHand(playerOneActions, playerTwoId, game);
+		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
+		removePlayedCardsFromPlayerHand(playerOneActions, playerTwoId, game);
 		game.nextTurn();
 		
 		this.existingGameList.put(gameId, game);
@@ -88,19 +88,28 @@ public class GameService implements QueueListener {
 		
 	}
 
-	private void removePlayedMinionCardsFromPlayerHand(ActionList playerOneActions, String playerId, Game game) {
-		Integer playerOneIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1;
-		Player currentPlayer = game.getPlayers()[playerOneIndex];
+	private void removePlayedCardsFromPlayerHand(ActionList playerActionList, String playerId, Game game) {
+		Integer playerIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1;
+		Player currentPlayer = game.getPlayers()[playerIndex];
 
 		List<Integer> indexesOfCardsThatWerePlayed = new ArrayList<Integer>();
-		for(Action action : playerOneActions.getPlayerActions()) {
-			if(action instanceof SummonAction) {
-				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getFieldCellWhereTheMinionIsBeingSummoned());
-			}
-		}
+		gatherIndexesOfPlayedCards(playerActionList, indexesOfCardsThatWerePlayed);
+		
+		removePlayedCards(currentPlayer, indexesOfCardsThatWerePlayed);
+	}
+
+	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
 		Collections.sort(indexesOfCardsThatWerePlayed);
 		for(int i = indexesOfCardsThatWerePlayed.size()-1; i>=0; --i) {
 			currentPlayer.removeCardFromHand(i);
+		}
+	}
+
+	private void gatherIndexesOfPlayedCards(ActionList playerActionList, List<Integer> indexesOfCardsThatWerePlayed) {
+		for(Action action : playerActionList.getPlayerActions()) {
+			if(action instanceof SummonAction) {
+				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getIndexOfCardInHand());
+			}
 		}
 	}
 
