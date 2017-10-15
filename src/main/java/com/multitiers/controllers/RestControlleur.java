@@ -37,6 +37,7 @@ import com.multitiers.repository.UserRepository;
 import com.multitiers.service.GameService;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.Constantes;
+import com.multitiers.util.JsonUtils;
 
 @RestController
 @CrossOrigin
@@ -112,13 +113,13 @@ public class RestControlleur {
     // TODO use in front end
     @GetMapping(value="/usernameAvailability")
     public Boolean isUsernameAvailable(@RequestBody String jsonUsername) {
-    	String username = gameService.deserializeStringFromJson(jsonUsername);
+    	String username = JsonUtils.deserializeStringFromJson(jsonUsername);
     	return userRepository.findByUsername(username)!=null;
     }
     
     @PostMapping(value="/updateGame")
     public Game updateGame(@RequestBody String  jsonGame) {
-    	Game game = gameService.deserializeGameFromJson(jsonGame);
+    	Game game = JsonUtils.deserializeGameFromJson(jsonGame);
         return game;
     }
     
@@ -167,7 +168,7 @@ public class RestControlleur {
     
     @PostMapping(value="/sendActions")
     public void sendActions(@RequestBody String actionListJson) {
-    	ActionList currentPlayerActionList = gameService.deserializeActionListFromJson(actionListJson);
+    	ActionList currentPlayerActionList = JsonUtils.deserializeActionListFromJson(actionListJson);
     	String gameId = currentPlayerActionList.getGameId();
     	if(this.gameService.sentActionLists.containsKey(gameId) && this.gameService.sentActionLists.get(gameId)!=null){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);

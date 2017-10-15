@@ -1,4 +1,4 @@
-package com.multitiers.service;
+package com.multitiers.util;
 
 import java.lang.reflect.Type;
 
@@ -7,9 +7,11 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.PlayableCard;
+import com.multitiers.domaine.ingame.SummonAction;
 
 public class ActionDeserializer implements JsonDeserializer<Action>{
 
@@ -28,12 +30,21 @@ public class ActionDeserializer implements JsonDeserializer<Action>{
 			attackAction.setAttackingMinionIndex(attackingMinionIndex);
 			attackAction.setPlayerIndex(playerIndex);
 			attackAction.setTargetIndex(targetIndex);
+			
+			return attackAction;
 		}
 		else if(jsonObj.has("fieldCellWhereTheMinionIsBeingSummoned")) {
 			int playerIndex = jsonObj.get("playerIndex").getAsInt();
 			int fieldCellWhereTheMinionIsBeingSummoned = jsonObj.get("fieldCellWhereTheMinionIsBeingSummoned").getAsInt();
-			JsonObject jsonMinionCard = jsonObj.get("minionCard").getAsJsonObject();
-			context.deserialize(jsonMinionCard, PlayableCard.class);
+			int indexOfCardInHand = jsonObj.get("indexOfCardInHand").getAsInt();
+			//JsonObject jsonMinionCard = jsonObj.get("minionCard").getAsJsonObject();
+			//MinionCard minionCard = context.deserialize(jsonMinionCard, PlayableCard.class);
+			SummonAction summonAction = new SummonAction();
+			summonAction.setPlayerIndex(playerIndex);
+			summonAction.setFieldCellWhereTheMinionIsBeingSummoned(fieldCellWhereTheMinionIsBeingSummoned);
+			summonAction.setIndexOfCardInHand(indexOfCardInHand);
+			
+			return summonAction;
 		}
 		
 		return null;

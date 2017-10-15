@@ -1,4 +1,4 @@
-package com.multitiers.service;
+package com.multitiers.util;
 
 import java.lang.reflect.Type;
 

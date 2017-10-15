@@ -9,17 +9,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Hero;
 import com.multitiers.domaine.ingame.Minion;
-import com.multitiers.domaine.ingame.PlayableCard;
-import com.multitiers.domaine.ingame.PlayableCharacter;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
@@ -60,36 +55,7 @@ public class GameService implements QueueListener {
 		this.gameQueue.addToListeners(this);
 	}
 
-	// Fonction pour tester la serialization et deserialization d'une Game
-	public Game deserializeGameFromJson(String json) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer()).create();
-		Gson gson = gsonBuilder.create();
-
-		Game gameFromJson = gson.fromJson(json, Game.class);
-
-		return gameFromJson;
-	}
-
 	
-	public ActionList deserializeActionListFromJson(String json) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.registerTypeAdapter(PlayableCard.class, new PlayableCardDeserializer())
-				.registerTypeAdapter(Action.class, new ActionDeserializer()).create();
-		ActionList list = gson.fromJson(json, ActionList.class);
-
-		return list;
-	}
-
-	public String deserializeStringFromJson(String json) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-
-		String username = gson.fromJson(json, String.class);
-
-		return username;
-
-	}
 
 	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
 		String playerOneId = playerOneActions.getPlayerId();
@@ -116,10 +82,9 @@ public class GameService implements QueueListener {
 		this.updatedGameList.put(playerTwoId, game);
 				
 		this.sentActionLists.remove(gameId);
-				
+		
 		this.newGameList.remove(playerOneId);
-		this.newGameList.remove(playerTwoId);
-		System.out.println("Next turn calculated...");		
+		this.newGameList.remove(playerTwoId);		
 		
 	}
 
