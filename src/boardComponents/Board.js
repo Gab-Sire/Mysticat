@@ -187,8 +187,8 @@ export default class Board extends Component{
 			return null;
 		}
 
-		//TODO EQ1-93
-		doesThisFieldCellHaveAMinion(){
+		//TODO EQ1-93 et EQ1-95
+		doesThisFieldCellHaveAMinionThatCanAttack(){
 			return null;
 		}
 		
