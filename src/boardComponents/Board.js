@@ -100,7 +100,7 @@ export default class Board extends Component{
 	}
 	
 	handleSelectMinion = (index) => {
-		let isEmpty = this.isThisFieldCellAvailableForSummon(index);
+		let isEmpty = this.isThisFieldCellEmpty(index);
 	
 		if(index === this.state.selectedMinionIndex){
 			this.setState({ selectedMinionIndex: null })
@@ -232,7 +232,7 @@ export default class Board extends Component{
 					});
 		}
 		//TODO EQ1-89 et EQ1-91
-		isThisFieldCellAvailableForSummon = (index) => {
+		isThisFieldCellEmpty = (index) => {
 			let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 			let self = this.state.gameState.players[selfIndex];
 			return (null === self.field[index]);
