@@ -25,6 +25,7 @@ export default class MainMenu extends Component{
 						}
 					}
 					>Déconnexion</button></p>
+					<p><button onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
 					<div className={this.state.TAG}>Pas encore disponible</div> 
 				</div>
 				<div id="imgMenuPrincipal"></div>
@@ -34,9 +35,6 @@ export default class MainMenu extends Component{
 	deconnexion(){
 		this.hideUnderContruction();
 		this.props.disconnectPlayer();
-		/*{(this.state.lookingForGame===false) ? 
-							<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p> : 
-							<p><button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button></p> }*/
 	}
 	enterQueue(){
 		this.hideUnderContruction();
@@ -62,6 +60,21 @@ export default class MainMenu extends Component{
 			});
 	}
 	
+	getHardCodedGame(){
+		axios({
+			  method:'get',
+			  url:'http://localhost:8089/getHardCodedGame',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  this.props.getQueueForParent(response.data);
+				  console.log(response.data);
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
+	}
 	
 	checkIfQueuePopped(){
 		let data = this.props.playerId;

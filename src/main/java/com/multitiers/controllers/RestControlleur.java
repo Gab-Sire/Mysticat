@@ -136,7 +136,6 @@ public class RestControlleur {
     	if(gameService.newGameList.containsKey(userId)) {
     		return gameService.newGameList.get(userId);
     	}
-    	//Throw erreur a la place.
     	return null;
     }
     
