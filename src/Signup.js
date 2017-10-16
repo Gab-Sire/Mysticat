@@ -91,7 +91,7 @@ export default class Login extends Component{
 	        		<h3 id="titlePageConnexion"> Signup </h3>
 	        		<form className="form-signin" onSubmit={this.handleSubmit}>
 	            		<span id="reauth-email" className="reauth-email"></span>
-	            		<input className="form-control" placeholder="Nom d'utilisateur" type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required autofocus/>
+	            		<input className="form-control" placeholder="Nom d'utilisateur" type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required autoFocus/>
 	            		<input className="form-control" placeholder="Mot de passe" type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword} required/>
 	                    <input className="btn btn-lg btn-primary btn-block btn-signin" type="Submit" onClick={this.handleClick} value="Signup" readOnly={true} /> <input className="btn btn-lg btn-primary btn-block btn-signin" type="reset" value="Reset"/><br />
 	                    <a className="changeConnexionMode" onClick={this.changeSignUpMode.bind(this)} >Cliquez ici pour se connecter</a>
