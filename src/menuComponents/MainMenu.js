@@ -72,7 +72,6 @@ export default class MainMenu extends Component{
 		  data: data
 		})
 		  .then((response)=>{
-			  console.log(this.state.playerId);
 			  if(response.data===null && this.state.lookingForGame=== true){
 				  setTimeout(()=>{
 					  this.checkIfQueuePopped();
