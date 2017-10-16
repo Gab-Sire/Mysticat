@@ -58,16 +58,18 @@ export default class Login extends Component{
 	}
 	
 	render(){
-		return (<div id="loginForm">
-		
-	    <form onSubmit={this.handleSubmit}>
-	    <h1>Login</h1>
-	    	<p><label htmlFor="username">Nom d'utilisateur: </label><input type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required/></p>
-	        <p><label htmlFor="password">Mot de passe: </label><input type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword} required/></p>
-	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/> <input type="reset" value="Reset"/></p>
-	        <p className="errorMessage">{this.state.errorMessage}</p>
-	        </form>
-	        
-	    </div>)
+		return (<div id="loginForm" className="container">
+        	<div className="boiteConnexion card-container">
+        		<img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        		<p id="profile-name" className="profile-name-card"></p>
+        		<form className="form-signin" onSubmit={this.handleSubmit}>
+            		<span id="reauth-email" className="reauth-email"></span>
+            		<input className="form-control" placeholder="Nom d'utilisateur" type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required autofocus/>
+            		<input className="form-control" placeholder="Mot de passe" type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword} required/>
+                    <input className="btn btn-lg btn-primary btn-block btn-signin" type="Submit" onClick={this.handleClick} value="Login" readOnly={true} /> <input className="btn btn-lg btn-primary btn-block btn-signin" type="reset" value="Reset"/><br />
+                    <p className="errorMessage">{this.state.errorMessage}</p>
+            	</form>
+            </div>
+    	</div>)
 	}
 }
