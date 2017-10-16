@@ -18,8 +18,7 @@ export default class Field extends Component{
 		    return (
 		     <Minion
 		       key={"fieldMinion" + index}
-		       active={index === this.state.activeIndex}
-		       onClick={() => this.handleClick(index)} {...minion}{...props}/>
+		       {...minion}{...props}/>
 		    )
 		   }, this)
 		

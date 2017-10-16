@@ -19,7 +19,7 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			activeIndex : 20
+			activeIndex : null
 			};
 	}
 	 
@@ -83,7 +83,11 @@ export default class Board extends Component{
 			);
 	}
 						
-	handleClick = (index) => {
+	handleSelectHandCard = (index) => {
+		  if(index === this.state.activeIndex){
+			  this.setState({ activeIndex: null })
+			  return;
+		  }
 		  this.setState({ activeIndex: index })
 	}
 	
@@ -96,13 +100,12 @@ export default class Board extends Component{
 		     <Card
 		       key={"handCard" + index}
 		       active={index === this.state.activeIndex}
-		       onClick={() => this.handleClick(index)} faceUp={faceUp} {...card}{...props}/>
+		       onClick={() => this.handleSelectHandCard(index)} faceUp={faceUp} {...card}{...props}/>
 		    )
 		   }, this)
 		return handCards;
-	       
 	}
-
+	
 	componentWillMount(){
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 	}
