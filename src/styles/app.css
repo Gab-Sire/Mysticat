@@ -551,6 +551,14 @@ form {
     border-radius: 5px;
 }
 
+.fiedlCellSelected{
+	border: pink 4px green;
+	background-color: green;
+	outline: none;
+    box-shadow: 0 0 20px #9ecaed;
+    border-radius: 5px;
+}
+
 /* Formulaires */
 
 .expectedFormat{

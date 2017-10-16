@@ -19,7 +19,6 @@ export default class Card extends Component{
 		let isSelected = "";
 		if(true === this.props.active){
 			isSelected = "selected";
-			console.log(this.props.active);
 		}
 
 		if(!this.props.faceUp){

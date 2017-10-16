@@ -100,13 +100,22 @@ export default class Board extends Component{
 	}
 	
 	handleSelectMinion = (index) => {
+		
 		let isEmpty = this.isThisFieldCellEmpty(index);
+		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
+		
+		if(true === isEmpty && false === isAssigned){
+			let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
+			cellsClone[index] = true;
+			this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+		}
 	
 		if(index === this.state.selectedMinionIndex){
 			this.setState({ selectedMinionIndex: null })
 			return;
 		}
-		this.setState({ selectedMinionIndex: index })  
+		this.setState({ selectedMinionIndex: index })
+		
 	}
 	
 	renderHand = (playerIndex, faceUp) => {
@@ -132,6 +141,7 @@ export default class Board extends Component{
 		    return (
 		     <Minion
 		       	key={"fieldMinion" + index}
+		     	active = {this.state.cellsOfSummonedMinionsThisTurn[index]}
 		     	onClick={() => this.handleSelectMinion(index)} {...minion}{...props}/>
 		    )
 		   }, this)
@@ -231,11 +241,15 @@ export default class Board extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
-		//TODO EQ1-89 et EQ1-91
+		
 		isThisFieldCellEmpty = (index) => {
 			let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 			let self = this.state.gameState.players[selfIndex];
 			return (null === self.field[index]);
+		}
+		
+		isThisFieldCellAssignedToPreviousSummon = (index) => {
+			return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
 		}
 
 		//TODO EQ1-93 et EQ1-95

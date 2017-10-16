@@ -8,9 +8,16 @@ export default class Card extends Component{
 	
 	render(){
 		let isEmpty = this.state.isEmpty;
+		let isSelected = "";
+		
+		if(true === this.props.active){
+			isSelected = "fiedlCellSelected";
+			console.log(isSelected);
+		}
+		
 		isEmpty = (this.props.name!=null) ? true : false;
 		if(isEmpty){
-			return (<div className="cardTile minion" title={this.props.description} onClick={this.props.onClick}>
+			return (<div className={"cardTile minion"} title={this.props.description} onClick={this.props.onClick}>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of damage this minion deals" className="cardPower">Power: {this.props.power}</div>
 				<div title="The amount of damage this minion can take" className="cardHealth">Health: {this.props.health}</div>
@@ -18,7 +25,7 @@ export default class Card extends Component{
 			</div>);
 		}
 		else{
-			return (<div className="cardTile" onClick={this.props.onClick}></div>);
+			return (<div className={"cardTile " + isSelected} onClick={this.props.onClick}></div>);
 		}	
 	}
 }
