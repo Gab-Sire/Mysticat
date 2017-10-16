@@ -12,6 +12,12 @@ import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import LoadingScreen from '../menuComponents/LoadingScreen';
 
+let players;
+let selfIndex;
+let self;
+let opponent;
+let opponentIndex;
+
 export default class Board extends Component{
 	
 	constructor(props){
@@ -27,9 +33,18 @@ export default class Board extends Component{
 			};		
 	}
 	
+	componentWillMount(){
+		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
+		
+		//initializing players main attributes from the gamestate
+		players = this.state.gameState.players;
+		selfIndex = (players[0].playerId===this.state.playerId) ? 0 : 1;
+		opponentIndex = (selfIndex===0) ? 1 : 0;
+		self = players[selfIndex];
+		opponent = players[opponentIndex];
+	}
+	
 	isThisFieldCellEmpty = (index) => {
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		let self = this.state.gameState.players[selfIndex];
 		return (null === self.field[index]);
 	}
 	
@@ -46,7 +61,6 @@ export default class Board extends Component{
 	}
 	
 	handleSelectMinion = (index, indexPlayer) => {
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 		let isEmpty = this.isThisFieldCellEmpty(index);
 		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
 		
@@ -67,15 +81,14 @@ export default class Board extends Component{
 	}
 	
 	renderHand = (playerIndex, faceUp) => {
-		let selfHand = this.state.gameState.players[playerIndex].hand;
 		const props = (this.state.gameState.players[playerIndex].hand);
 		
-		var handCards = selfHand.map(function(card, index){
+		let handCards = players[playerIndex].hand.map(function(card, index){
 		    return (
 		     <Card
 		       key={"handCard" + index}
 		       active={index === this.state.selectedHandCardIndex}
-		       onClick={() => this.handleSelectHandCard(index)} faceUp={faceUp} {...card}{...props}/>
+		       onClick={() => this.handleSelectHandCard(index)} faceUp={playerIndex === selfIndex ? true : false} {...card}{...props}/>
 		    )
 		   }, this)
 		return handCards;
@@ -83,7 +96,6 @@ export default class Board extends Component{
 	
 	renderField = (playerIndex) => {
 		let fieldGrid = this.state.gameState.players[playerIndex].field;
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 		const props = (this.state.gameState.players[playerIndex].field);
 		
 		var fieldMinions = fieldGrid.map(function(minion, index){
@@ -98,51 +110,25 @@ export default class Board extends Component{
 	}
 	
 	surrenderGameConfirmStateChange(){
-		let status =this.state.isThinkingToGiveUp;
-		this.setState({ isThinkingToGiveUp: !status});
-
+		let status = this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status });
 	}
 	
 	surrender(){
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		let self = this.state.gameState.players[selfIndex].hero;
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
 		this.loseGame();
 	}
 	
 	loseGame(){
-		this.setState({ hasLostGame: true});
+		this.setState({ hasLostGame: true });
 	}
 
 	goingMainMenu(){
 		this.props.endGame();
 	}
 	
-	componentWillMount(){
-		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
-	}
-	
 	render(){
-		
-			//user player attributes
-			const selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-			const self = this.state.gameState.players[selfIndex];
-			const selfName = self.name;
-			const selfHealth = self.hero.health;
-			const selfMana = self.remainingMana;
-			const selfField = self.field;
-			const selfDeck = self.deck;
-			const selfGraveyard = self.graveyard;
-				
-			//opponent attributes
-			const opponent = this.state.gameState.players[opponentIndex];
-			const opponentName = opponent.name;
-			const opponentIndex = (selfIndex===0) ? 1 : 0;
-			const opponentHealth = opponent.hero.health;
-			const opponentField = opponent.field;
-			const opponentDeck = opponent.deck;
-			const opponentGraveyard = opponent.graveyard;	
 		
 			return(
 				<div id="container">
@@ -151,26 +137,26 @@ export default class Board extends Component{
 							{this.renderHand(opponentIndex, true)}
 						</div>
 						<div id="opponentHandUnderLayer"></div>
-						<Hero id="opponentHero" health={opponentHealth} heroName="wizardHero"/>
+						<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
 							
 						<div id="fieldContainer" className="fieldContainer">
-							<Graveyard id="opponentGraveyard" size={opponentGraveyard.length} identity={"opponent"}/>
+							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 							<div id="opponentField" className="battleField">
 								{this.renderField(opponentIndex)}
 							</div>
-							<Deck id="opponentDeck" size={opponentDeck.length}/>
+							<Deck id="opponentDeck" size={opponent.deck.length}/>
 						</div>
 						
 						<div id="selfFieldContainer" className="fieldContainer">
-							<Graveyard id="selfGraveyard" size={selfGraveyard.length} identity={"self"}/>
+							<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 							<div id="selfField" className="battleField">
 								{this.renderField(selfIndex)}
 							</div>
-							<Deck id="selfDeck" size={selfDeck.length}/>
+							<Deck id="selfDeck" size={self.deck.length}/>
 						</div>
 						<div id="selfFieldUnderLayer"></div>
 							
-						<Hero id="selfHero" health={selfHealth} mana={selfMana} heroName="zorroHero"/>
+						<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
 							
 						<div id="selfHand" className="hand">
 							{this.renderHand(selfIndex, false)}
@@ -184,8 +170,8 @@ export default class Board extends Component{
 							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
 						</div>
 						
-						<div id="opponentUserName"><p>{opponentName}</p></div>
-						<div id="selfUserName"><p>{selfName}</p></div>
+						<div id="opponentUserName"><p>{opponent.name}</p></div>
+						<div id="selfUserName"><p>{self.name}</p></div>
 					</div>
 				</div>
 			);
@@ -210,6 +196,7 @@ export default class Board extends Component{
 							  this.getInitialGameInstance();
 						  }, 5000)
 				});
+		}
 
 	//TODO EQ1-96
 	sendActions(){
@@ -272,10 +259,5 @@ export default class Board extends Component{
 		//TODO EQ1-94
 		addAttackActionToList(playerIndex, attackingMinionIndex, targetIndex, speed){
 			return null;
-		}
-		
+		}		
 }
-
-
-
-
