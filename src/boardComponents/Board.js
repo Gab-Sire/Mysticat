@@ -13,6 +13,7 @@ import EndGameScreen from './EndGameScreen.js';
 import LoadingScreen from '../menuComponents/LoadingScreen';
 
 export default class Board extends Component{
+	
 	constructor(props){
 		super(props);
 		this.state ={
@@ -20,11 +21,11 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			selectedHandCardIndex : null
-			selectedMinionIndex : null
+			selectedHandCardIndex : null,
+			selectedMinionIndex : null,
+			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
 			};
 	}
-	 
 	
 	render(){
 		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
@@ -42,6 +43,7 @@ export default class Board extends Component{
 		let opponentField = opponent.field;
 		let selfGraveyard = self.graveyard;
 		let opponentGraveyard = opponent.graveyard;
+		
 			return(
 				<div id="container">
 					<div id="board">
@@ -98,11 +100,13 @@ export default class Board extends Component{
 	}
 	
 	handleSelectMinion = (index) => {
-		  if(index === this.state.selectedHandCardIndex){
-			  this.setState({ selectedHandCardIndex: null })
-			  return;
-		  }
-		  this.setState({ selectedHandCardIndex: index })
+		let isEmpty = this.isThisFieldCellAvailableForSummon(index);
+	
+		if(index === this.state.selectedMinionIndex){
+			this.setState({ selectedMinionIndex: null })
+			return;
+		}
+		this.setState({ selectedMinionIndex: index })  
 	}
 	
 	renderHand = (playerIndex, faceUp) => {
@@ -228,8 +232,10 @@ export default class Board extends Component{
 					});
 		}
 		//TODO EQ1-89 et EQ1-91
-		isThisFieldCellAvailableForSummon(){
-			return null;
+		isThisFieldCellAvailableForSummon = (index) => {
+			let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+			let self = this.state.gameState.players[selfIndex];
+			return (null === self.field[index]);
 		}
 
 		//TODO EQ1-93 et EQ1-95

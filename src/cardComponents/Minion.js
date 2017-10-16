@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 export default class Card extends Component{
 	constructor(props){
 		super(props);
-		this.state={faceUp: true};
+		this.state={isEmpty: true};
 	}
 	
 	render(){
-		let isFaceUp = this.state.faceUp;
-		isFaceUp = (this.props.name!=null) ? true : false;
-		if(isFaceUp){
-			return (<div className="cardTile minion" title={this.props.description}>
+		let isEmpty = this.state.isEmpty;
+		isEmpty = (this.props.name!=null) ? true : false;
+		if(isEmpty){
+			return (<div className="cardTile minion" title={this.props.description} onClick={this.props.onClick}>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of damage this minion deals" className="cardPower">Power: {this.props.power}</div>
 				<div title="The amount of damage this minion can take" className="cardHealth">Health: {this.props.health}</div>
@@ -18,7 +18,7 @@ export default class Card extends Component{
 			</div>);
 		}
 		else{
-			return (<div className="cardTile"></div>);
+			return (<div className="cardTile" onClick={this.props.onClick}></div>);
 		}	
 	}
 }
