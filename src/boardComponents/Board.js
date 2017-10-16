@@ -134,7 +134,8 @@ export default class Board extends Component{
 
 	}
 	surrender(){
-		let self = this.state.gameState.players[0].hero;
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		let self = this.state.gameState.players[selfIndex].hero;
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
 		this.loseGame();
