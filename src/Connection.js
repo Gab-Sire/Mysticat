@@ -10,16 +10,26 @@ export default class Connection extends Component{
 			signupMode:false
 		}
 		this.connectPlayer =this.connectPlayer.bind(this);
+		this.changeSignUpMode=this.changeSignUpMode.bind(this);
 	}
 	render(){
-		if(this.props.signupMode){
-			return <Signup connectPlayer={this.connectPlayer} />
+		if(this.state.signupMode){
+			return <Signup connectPlayer={this.connectPlayer} changeSignUpMode={this.changeSignUpMode}/>
 		}else{
-			return <Login connectPlayer={this.connectPlayer} />
+			return <Login connectPlayer={this.connectPlayer} changeSignUpMode={this.changeSignUpMode}/>
 		}
 	}
 	connectPlayer(playerId){
 		this.props.connectPlayer(playerId);
+	}
+	changeSignUpMode(){
+		let statut = this.state.signupMode;
+		this.setState({ signupMode: !statut});
+		if(this.state.signupMode){
+			this.setState({ tagLoginSignUp: "Sign Up"});
+		}else{
+			this.setState({ tagLoginSignUp: "Login"});
+		}
 	}
 	
 }

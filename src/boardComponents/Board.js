@@ -59,9 +59,10 @@ export default class Board extends Component{
 		
 			if(index === this.state.selectedMinionIndex){
 				this.setState({ selectedMinionIndex: null })
-				return;
 			}
-			this.setState({ selectedMinionIndex: index })
+			else{
+				this.setState({ selectedMinionIndex: index })
+			}
 		}
 	}
 	
@@ -209,7 +210,6 @@ export default class Board extends Component{
 							  this.getInitialGameInstance();
 						  }, 5000)
 				});
-	}
 
 	//TODO EQ1-96
 	sendActions(){

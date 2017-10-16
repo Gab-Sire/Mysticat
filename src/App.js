@@ -14,24 +14,12 @@ class App extends Component{
 			isServerAvailable: false,
 			inGame: false,
 			playerId: null,
-			signupMode:false,
-			tagLoginSignUp:"Sign Up",
 			gameState: null
 		};
 	}
 	
 	getGameFromQueue = (gameState)=>{
 		this.setState({gameState: gameState, inGame: true})
-	}
-	
-	changeSignUpMode(){
-		let statut = this.state.signupMode;
-		this.setState({ signupMode: !statut});
-		if(this.state.signupMode){
-			this.setState({ tagLoginSignUp: "Sign Up"});
-		}else{
-			this.setState({ tagLoginSignUp: "Login"});
-		}
 	}
 	
 	render(){
@@ -45,9 +33,6 @@ class App extends Component{
 			}
 			else{
 				return (<div><Connection signupMode={this.state.signupMode} connectPlayer={this.setIdPlayer.bind(this)}/>
-				<div className='linkConnection'>Aller à la page: 
-					<button onClick={this.changeSignUpMode.bind(this)}>{this.state.tagLoginSignUp}</button>
-				</div>
 						</div>)
 				
 			}	

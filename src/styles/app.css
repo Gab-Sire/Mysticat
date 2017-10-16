@@ -30,6 +30,21 @@
 	padding-left:45%;
 }
 
+#titlePageConnexion {
+	color: white;
+	text-align: center;
+	margin: 0px;
+}
+
+.changeConnexionMode {
+	color: white;
+	cursor: pointer;
+}
+
+.changeConnexionMode:hover {
+	color: white;
+}
+
 /* PLATEAU DE JEU */
 
 #board {
@@ -548,17 +563,17 @@
 /* Formulaires */
 
 .expectedFormat{
-	position:absolute;
-	width:60%;
-	height: 230px;
-	top:60%;
-	left: 5%;
+	position:relative;
+	width:65%;
+	height: 25%;
 	margin: auto;
-	border: 3px solid green;
+	border: 2px solid white;
 	padding: 10px;
 	text-align: center;
-	background-color: rgba(50, 100, 50, 0.5);
+	background-color: rgba(0, 71, 179,0.75);
 	border-radius: 40px;
+	font-weight: bold;
+	color: white;
 }
 
 .errorMessage{
