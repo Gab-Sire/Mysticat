@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestSerialization {
+public class TestJson {
 
 	@Test
 	public void test() {
