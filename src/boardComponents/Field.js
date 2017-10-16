@@ -11,8 +11,7 @@ export default class Field extends Component{
 	}
 	
 	render(){
-		let props = this.props;
-		let keyIndex = 20;
+		/*let props = this.props;
 		
 		var fieldMinions = this.props.grid[0].map(function(minion, index){
 		    return (
@@ -26,6 +25,7 @@ export default class Field extends Component{
 		<div id={this.props.id} className="battleField">
 			 {fieldMinions}
 		</div>
-		);
+		);*/
+		return;
 	}
 }

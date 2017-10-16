@@ -7,6 +7,7 @@ import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
+import Minion from '../cardComponents/Minion.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import LoadingScreen from '../menuComponents/LoadingScreen';
@@ -19,7 +20,8 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			activeIndex : null
+			selectedHandCardIndex : null
+			selectedMinionIndex : null
 			};
 	}
 	 
@@ -51,13 +53,17 @@ export default class Board extends Component{
 							
 						<div id="fieldContainer" className="fieldContainer">
 							<Graveyard id="opponentGraveyard" size={opponentGraveyard.length} identity={"opponent"}/>
-							<Field id="opponentField" grid={[opponentField]} />
+							<div id="opponentField" className="battleField">
+								{this.renderField(opponentIndex)}
+							</div>
 							<Deck id="opponentDeck" size={opponentDeck.length}/>
 						</div>
 						
 						<div id="selfFieldContainer" className="fieldContainer">
 							<Graveyard id="selfGraveyard" size={selfGraveyard.length} identity={"self"}/>
-							<Field id="selfField" grid={[selfField]} />
+							<div id="selfField" className="battleField">
+								{this.renderField(selfIndex)}
+							</div>
 							<Deck id="selfDeck" size={selfDeck.length}/>
 						</div>
 						<div id="selfFieldUnderLayer"></div>
@@ -84,11 +90,19 @@ export default class Board extends Component{
 	}
 						
 	handleSelectHandCard = (index) => {
-		  if(index === this.state.activeIndex){
-			  this.setState({ activeIndex: null })
+		  if(index === this.state.selectedHandCardIndex){
+			  this.setState({ selectedHandCardIndex: null })
 			  return;
 		  }
-		  this.setState({ activeIndex: index })
+		  this.setState({ selectedHandCardIndex: index })
+	}
+	
+	handleSelectMinion = (index) => {
+		  if(index === this.state.selectedHandCardIndex){
+			  this.setState({ selectedHandCardIndex: null })
+			  return;
+		  }
+		  this.setState({ selectedHandCardIndex: index })
 	}
 	
 	renderHand = (playerIndex, faceUp) => {
@@ -99,11 +113,25 @@ export default class Board extends Component{
 		    return (
 		     <Card
 		       key={"handCard" + index}
-		       active={index === this.state.activeIndex}
+		       active={index === this.state.selectedHandCardIndex}
 		       onClick={() => this.handleSelectHandCard(index)} faceUp={faceUp} {...card}{...props}/>
 		    )
 		   }, this)
 		return handCards;
+	}
+	
+	renderField = (playerIndex) => {
+		let fieldGrid = this.state.gameState.players[playerIndex].field;
+		const props = (this.state.gameState.players[playerIndex].field);
+		
+		var fieldMinions = fieldGrid.map(function(minion, index){
+		    return (
+		     <Minion
+		       	key={"fieldMinion" + index}
+		     	onClick={() => this.handleSelectMinion(index)} {...minion}{...props}/>
+		    )
+		   }, this)
+		return fieldMinions;
 	}
 	
 	componentWillMount(){
