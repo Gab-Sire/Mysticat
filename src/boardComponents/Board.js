@@ -99,22 +99,24 @@ export default class Board extends Component{
 		  this.setState({ selectedHandCardIndex: index })
 	}
 	
-	handleSelectMinion = (index) => {
-		
+	handleSelectMinion = (index, indexPlayer) => {
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 		let isEmpty = this.isThisFieldCellEmpty(index);
 		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
 		
-		if(true === isEmpty && false === isAssigned){
-			let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
-			cellsClone[index] = true;
-			this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+		if(indexPlayer === selfIndex){
+			if(true === isEmpty && false === isAssigned){
+				let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
+				cellsClone[index] = true;
+				this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+			}
+		
+			if(index === this.state.selectedMinionIndex){
+				this.setState({ selectedMinionIndex: null })
+				return;
+			}
+			this.setState({ selectedMinionIndex: index })
 		}
-	
-		if(index === this.state.selectedMinionIndex){
-			this.setState({ selectedMinionIndex: null })
-			return;
-		}
-		this.setState({ selectedMinionIndex: index })
 		
 	}
 	
@@ -143,7 +145,7 @@ export default class Board extends Component{
 		     <Minion
 		       	key={"fieldMinion" + index}
 		     	active = {playerIndex === selfIndex ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
-		     	onClick={() => this.handleSelectMinion(index)} {...minion}{...props}/>
+		     	onClick={() => this.handleSelectMinion(index, playerIndex)} {...minion}{...props}/>
 		    )
 		   }, this)
 		return fieldMinions;
