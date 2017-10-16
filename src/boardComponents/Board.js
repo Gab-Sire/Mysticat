@@ -87,7 +87,7 @@ export default class Board extends Component{
 		  this.setState({ activeIndex: index })
 	}
 	
-	renderHand(playerIndex, faceUp){
+	renderHand = (playerIndex, faceUp) => {
 		let selfHand = this.state.gameState.players[playerIndex].hand;
 		const props = (this.state.gameState.players[playerIndex].hand);
 		

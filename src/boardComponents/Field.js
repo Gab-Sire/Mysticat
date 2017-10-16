@@ -12,9 +12,20 @@ export default class Field extends Component{
 	
 	render(){
 		let props = this.props;
+		let keyIndex = 20;
+		
+		var fieldMinions = this.props.grid[0].map(function(minion, index){
+		    return (
+		     <Minion
+		       key={"fieldMinion" + index}
+		       active={index === this.state.activeIndex}
+		       onClick={() => this.handleClick(index)} {...minion}{...props}/>
+		    )
+		   }, this)
+		
 		return (
 		<div id={this.props.id} className="battleField">
-			{ _.map(this.props.grid[0], minion=> <Minion {...minion}{...props}/>) }
+			 {fieldMinions}
 		</div>
 		);
 	}
