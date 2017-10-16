@@ -30,12 +30,13 @@ export default class MainMenu extends Component{
 					<div className={this.state.TAG}>Pas encore disponible</div> 
 				</div>
 				<div id="imgMenuPrincipal"></div>
+				<PopUpQueue iSQueueingUp={this.state.lookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
 			</div>);
 	}
 	deconnexion(){
 		this.hideUnderContruction();
 		this.props.disconnectPlayer();
-		//<PopUpQueue iSQueueingUp={this.state.lookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
+		
 	}
 	enterQueue(){
 		this.hideUnderContruction();
