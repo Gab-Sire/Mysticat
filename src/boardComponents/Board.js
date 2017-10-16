@@ -24,25 +24,124 @@ export default class Board extends Component{
 			selectedHandCardIndex : null,
 			selectedMinionIndex : null,
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
-			};
+			};		
+	}
+	
+	isThisFieldCellEmpty = (index) => {
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		let self = this.state.gameState.players[selfIndex];
+		return (null === self.field[index]);
+	}
+	
+	isThisFieldCellAssignedToPreviousSummon = (index) => {
+		return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
+	}
+	
+	handleSelectHandCard = (index) => {
+		  if(index === this.state.selectedHandCardIndex){
+			  this.setState({ selectedHandCardIndex: null })
+			  return;
+		  }
+		  this.setState({ selectedHandCardIndex: index })
+	}
+	
+	handleSelectMinion = (index, indexPlayer) => {
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		let isEmpty = this.isThisFieldCellEmpty(index);
+		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
+		
+		if(indexPlayer === selfIndex){
+			if(true === isEmpty && false === isAssigned){
+				let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
+				cellsClone[index] = true;
+				this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+			}
+		
+			if(index === this.state.selectedMinionIndex){
+				this.setState({ selectedMinionIndex: null })
+				return;
+			}
+			this.setState({ selectedMinionIndex: index })
+		}
+	}
+	
+	renderHand = (playerIndex, faceUp) => {
+		let selfHand = this.state.gameState.players[playerIndex].hand;
+		const props = (this.state.gameState.players[playerIndex].hand);
+		
+		var handCards = selfHand.map(function(card, index){
+		    return (
+		     <Card
+		       key={"handCard" + index}
+		       active={index === this.state.selectedHandCardIndex}
+		       onClick={() => this.handleSelectHandCard(index)} faceUp={faceUp} {...card}{...props}/>
+		    )
+		   }, this)
+		return handCards;
+	}
+	
+	renderField = (playerIndex) => {
+		let fieldGrid = this.state.gameState.players[playerIndex].field;
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		const props = (this.state.gameState.players[playerIndex].field);
+		
+		var fieldMinions = fieldGrid.map(function(minion, index){
+		    return (
+		     <Minion
+		       	key={"fieldMinion" + index}
+		     	active = {playerIndex === selfIndex ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
+		     	onClick={() => this.handleSelectMinion(index, playerIndex)} {...minion}{...props}/>
+		    )
+		   }, this)
+		return fieldMinions;
+	}
+	
+	surrenderGameConfirmStateChange(){
+		let status =this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status});
+
+	}
+	
+	surrender(){
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+		let self = this.state.gameState.players[selfIndex].hero;
+		self.health = 0;
+		this.surrenderGameConfirmStateChange();
+		this.loseGame();
+	}
+	
+	loseGame(){
+		this.setState({ hasLostGame: true});
+	}
+
+	goingMainMenu(){
+		this.props.endGame();
+	}
+	
+	componentWillMount(){
+		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 	}
 	
 	render(){
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		let opponentIndex = (selfIndex===0) ? 1 : 0;
-		let self = this.state.gameState.players[selfIndex];
-		let opponent = this.state.gameState.players[opponentIndex];
-		let selfHealth = self.hero.health;
-		let opponentHealth = opponent.hero.health;
-		let selfMana = self.remainingMana;
-		let selfName = self.name;
-		let opponentName = opponent.name;
-		let selfDeck = self.deck;
-		let opponentDeck = opponent.deck;
-		let selfField = self.field;
-		let opponentField = opponent.field;
-		let selfGraveyard = self.graveyard;
-		let opponentGraveyard = opponent.graveyard;
+		
+			//user player attributes
+			const selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
+			const self = this.state.gameState.players[selfIndex];
+			const selfName = self.name;
+			const selfHealth = self.hero.health;
+			const selfMana = self.remainingMana;
+			const selfField = self.field;
+			const selfDeck = self.deck;
+			const selfGraveyard = self.graveyard;
+				
+			//opponent attributes
+			const opponent = this.state.gameState.players[opponentIndex];
+			const opponentName = opponent.name;
+			const opponentIndex = (selfIndex===0) ? 1 : 0;
+			const opponentHealth = opponent.hero.health;
+			const opponentField = opponent.field;
+			const opponentDeck = opponent.deck;
+			const opponentGraveyard = opponent.graveyard;	
 		
 			return(
 				<div id="container">
@@ -90,71 +189,7 @@ export default class Board extends Component{
 				</div>
 			);
 	}
-						
-	handleSelectHandCard = (index) => {
-		  if(index === this.state.selectedHandCardIndex){
-			  this.setState({ selectedHandCardIndex: null })
-			  return;
-		  }
-		  this.setState({ selectedHandCardIndex: index })
-	}
-	
-	handleSelectMinion = (index, indexPlayer) => {
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		let isEmpty = this.isThisFieldCellEmpty(index);
-		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
-		
-		if(indexPlayer === selfIndex){
-			if(true === isEmpty && false === isAssigned){
-				let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
-				cellsClone[index] = true;
-				this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
-			}
-		
-			if(index === this.state.selectedMinionIndex){
-				this.setState({ selectedMinionIndex: null })
-				return;
-			}
-			this.setState({ selectedMinionIndex: index })
-		}
-		
-	}
-	
-	renderHand = (playerIndex, faceUp) => {
-		let selfHand = this.state.gameState.players[playerIndex].hand;
-		const props = (this.state.gameState.players[playerIndex].hand);
-		
-		var handCards = selfHand.map(function(card, index){
-		    return (
-		     <Card
-		       key={"handCard" + index}
-		       active={index === this.state.selectedHandCardIndex}
-		       onClick={() => this.handleSelectHandCard(index)} faceUp={faceUp} {...card}{...props}/>
-		    )
-		   }, this)
-		return handCards;
-	}
-	
-	renderField = (playerIndex) => {
-		let fieldGrid = this.state.gameState.players[playerIndex].field;
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		const props = (this.state.gameState.players[playerIndex].field);
-		
-		var fieldMinions = fieldGrid.map(function(minion, index){
-		    return (
-		     <Minion
-		       	key={"fieldMinion" + index}
-		     	active = {playerIndex === selfIndex ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
-		     	onClick={() => this.handleSelectMinion(index, playerIndex)} {...minion}{...props}/>
-		    )
-		   }, this)
-		return fieldMinions;
-	}
-	
-	componentWillMount(){
-		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
-	}
-	
+					
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
@@ -174,27 +209,6 @@ export default class Board extends Component{
 							  this.getInitialGameInstance();
 						  }, 5000)
 				});
-	}
-	
-	surrenderGameConfirmStateChange(){
-		let status =this.state.isThinkingToGiveUp;
-		this.setState({ isThinkingToGiveUp: !status});
-
-	}
-	surrender(){
-		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-		let self = this.state.gameState.players[selfIndex].hero;
-		self.health = 0;
-		this.surrenderGameConfirmStateChange();
-		this.loseGame();
-	}
-	
-	loseGame(){
-		this.setState({ hasLostGame: true});
-	}
-
-	goingMainMenu(){
-		this.props.endGame();
 	}
 
 	//TODO EQ1-96
@@ -245,16 +259,6 @@ export default class Board extends Component{
 					});
 		}
 		
-		isThisFieldCellEmpty = (index) => {
-			let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
-			let self = this.state.gameState.players[selfIndex];
-			return (null === self.field[index]);
-		}
-		
-		isThisFieldCellAssignedToPreviousSummon = (index) => {
-			return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
-		}
-
 		//TODO EQ1-93 et EQ1-95
 		doesThisFieldCellHaveAMinionThatCanAttack(){
 			return null;
