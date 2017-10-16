@@ -75,7 +75,9 @@ export default class Login extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	
+	changeSignUpMode(){
+		this.props.changeSignUpMode();
+		}
 	
 	render(){
 		const USERNAME_MIN_LENGTH = 5;
@@ -88,7 +90,9 @@ export default class Login extends Component{
 	    	<p><label htmlFor="username">Nom d'utilisateur: </label><input required type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername}/></p>
 	    	<p><label htmlFor="password">Mot de passe: </label><input required type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword}/></p>
 	        <p><input type="Submit" onClick={this.handleClick} value="Submit" readOnly={true}/>  <input type="reset" value="Reset" /></p>
+	        <a onClick={this.changeSignUpMode.bind(this)} >Cliquez ici pour se connecter</a>
 	        <p className="errorMessage">{this.state.errorMessage}</p>
+	        
 	    </form>
         <div className="expectedFormat">
         	<div id="usernameFormat">

@@ -56,6 +56,9 @@ export default class Login extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
+	changeSignUpMode(){
+		this.props.changeSignUpMode();
+		}
 	
 	render(){
 		return (<div id="loginForm" className="container">
@@ -67,6 +70,7 @@ export default class Login extends Component{
             		<input className="form-control" placeholder="Nom d'utilisateur" type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required autofocus/>
             		<input className="form-control" placeholder="Mot de passe" type="password" name="password" id="password" ref="password" onChange={this.handleChangePassword} required/>
                     <input className="btn btn-lg btn-primary btn-block btn-signin" type="Submit" onClick={this.handleClick} value="Login" readOnly={true} /> <input className="btn btn-lg btn-primary btn-block btn-signin" type="reset" value="Reset"/><br />
+                    <a onClick={this.changeSignUpMode.bind(this)} >Cliquez ici pour vous inscrire</a>
                     <p className="errorMessage">{this.state.errorMessage}</p>
             	</form>
             </div>
