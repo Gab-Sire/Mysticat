@@ -16,7 +16,6 @@ class App extends Component{
 			signupMode:false,
 			tagLoginSignUp:"Sign Up",
 			gameState: null
-
 		};
 	}
 	

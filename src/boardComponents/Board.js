@@ -18,7 +18,8 @@ export default class Board extends Component{
 			playerId: null,
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
-			actionList : []
+			actionList : [],
+			activeIndex : 20
 			};
 	}
 	 
@@ -73,18 +74,30 @@ export default class Board extends Component{
 				</div>
 			);
 	}
+						
+	handleClick = (index) => {
+		  this.setState({ activeIndex: index })
+	}
 	
 	renderHand(playerIndex, faceUp){
 		let selfHand = this.state.gameState.players[playerIndex].hand;
 		const props = (this.state.gameState.players[playerIndex].hand);
-		return _.map(selfHand, card=> <Card faceUp={faceUp} {...card}{...props}/>);
 		
+		var handCards = selfHand.map(function(card, index){
+		    return (
+		     <Card
+		       key={"handCard" + index}
+		       active={index === this.state.activeIndex}
+		       onClick={() => this.handleClick(index)} faceUp={faceUp} {...card}{...props}/>
+		    )
+		   }, this)
+		return handCards;
+	       
 	}
 
 	componentWillMount(){
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 	}
-	
 	
 	getInitialGameInstance(){
 		axios({
