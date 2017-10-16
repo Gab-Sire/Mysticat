@@ -11,7 +11,6 @@ public class PlayableMinionCard extends PlayableCard{
 	
 	public PlayableMinionCard() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public PlayableMinionCard(MinionCard entityCard) {

@@ -156,27 +156,6 @@ export default class Board extends Component{
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 	}
 	
-	getInitialGameInstance(){
-		axios({
-			  method:'get',
-			  url:'http://localhost:8089/getHardCodedGame',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
-			})
-			  .then((response)=>{
-				  this.setState({gameState: response.data});
-				  this.setState({isLoaded: true});
-				  this.forceUpdate();
-				  console.log(response.data);
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				  setTimeout(()=>{
-							  this.getInitialGameInstance();
-						  }, 5000)
-				});
-	}
-	
 	surrenderGameConfirmStateChange(){
 		let status =this.state.isThinkingToGiveUp;
 		this.setState({ isThinkingToGiveUp: !status});
