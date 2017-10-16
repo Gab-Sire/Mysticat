@@ -135,13 +135,14 @@ export default class Board extends Component{
 	
 	renderField = (playerIndex) => {
 		let fieldGrid = this.state.gameState.players[playerIndex].field;
+		let selfIndex = (this.state.gameState.players[0].playerId===this.state.playerId) ? 0 : 1;
 		const props = (this.state.gameState.players[playerIndex].field);
 		
 		var fieldMinions = fieldGrid.map(function(minion, index){
 		    return (
 		     <Minion
 		       	key={"fieldMinion" + index}
-		     	active = {this.state.cellsOfSummonedMinionsThisTurn[index]}
+		     	active = {playerIndex === selfIndex ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
 		     	onClick={() => this.handleSelectMinion(index)} {...minion}{...props}/>
 		    )
 		   }, this)
