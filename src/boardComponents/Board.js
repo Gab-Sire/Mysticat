@@ -23,7 +23,6 @@ let minionToBeSummonedIndex;
 let cardIndex;
 
 export default class Board extends Component{
-	
 	constructor(props){
 		super(props);
 		this.state ={
@@ -40,7 +39,7 @@ export default class Board extends Component{
 		
 		//initializing players main attributes from the gamestate
 		players = this.props.gameState.players;
-		selfIndex = (players[0].playerId === this.state.playerId) ? 0 : 1;
+		selfIndex = (players[0].playerId === this.props.playerId) ? 0 : 1;
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
