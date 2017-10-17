@@ -28,8 +28,6 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			selectedMinionIndex : null,
-			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
 		};		
 	}
 	
@@ -65,105 +63,52 @@ export default class Board extends Component{
 		this.props.endGame();
 	}
 	
-	/* methods to validate/assign a cell for summoning */
-	
-	isThisFieldCellEmpty = (index) => {
-		return (null === self.field[index]);
-	}
-	
-	isThisFieldCellAssignedToPreviousSummon = (index) => {
-		return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
-	}
-	
-	assignFieldCellToSummon = (index) => {
-		let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
-		cellsClone[index] = true;
-		this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
-	}
-	
-	/* methods to handle clicks events */
-	
-	handleSelectMinion = (index, indexPlayer) => {
-		let isEmpty = this.isThisFieldCellEmpty(index);
-		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
-		
-		if(indexPlayer === selfIndex){
-			if(true === isEmpty && false === isAssigned){
-				this.assignFieldCellToSummon(index); 
-			}
-		
-			if(index === this.state.selectedMinionIndex){
-				this.setState({ selectedMinionIndex: null })
-			}
-			else{
-				this.setState({ selectedMinionIndex: index })
-			}
-		}
-	}
-	
-	/* methods to render  */
-	
-	renderField = (playerIndex) => {
-		let fieldGrid = this.state.gameState.players[playerIndex].field;
-		const props = (this.state.gameState.players[playerIndex].field);
-		
-		var fieldMinions = fieldGrid.map(function(minion, index){
-		    return (
-		     <Minion
-		       	key={"fieldMinion" + index}
-		     	active = {playerIndex === selfIndex ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
-		     	onClick={() => this.handleSelectMinion(index, playerIndex)} {...minion}{...props}/>
-		    )
-		   }, this)
-		return fieldMinions;
-	}
-	
 	render(){
-			return(
-				<div id="container">
-					<div id="board">
-						<div id="opponentHand" className="hand">
-							<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
-						</div>
-						<div id="opponentHandUnderLayer"></div>
-						<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
-							
-						<div id="fieldContainer" className="fieldContainer">
-							<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
-							<div id="opponentField" className="battleField">
-								{this.renderField(opponentIndex)}
-							</div>
-							<Deck id="opponentDeck" size={opponent.deck.length}/>
-						</div>
-						
-						<div id="selfFieldContainer" className="fieldContainer">
-							<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
-							<div id="selfField" className="battleField">
-								{this.renderField(selfIndex)}
-							</div>
-							<Deck id="selfDeck" size={self.deck.length}/>
-						</div>
-						<div id="selfFieldUnderLayer"></div>
-							
-						<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
-							
-						<div id="selfHand" className="hand">
-							<Hand players={players} playerIndex={selfIndex} faceUp={true} />
-						</div>
-						<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
-						
-						<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
-						<EndGameScreen status={this.state.hasLostGame} goingMainMenu={this.goingMainMenu.bind(this)}/>
-
-						<div id="menuGame"><p>Menu</p>
-							<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
-						</div>
-						
-						<div id="opponentUserName"><p>{opponent.name}</p></div>
-						<div id="selfUserName"><p>{self.name}</p></div>
+		return(
+			<div id="container">
+				<div id="board">
+					<div id="opponentHand" className="hand">
+						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
 					</div>
+					<div id="opponentHandUnderLayer"></div>
+					<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
+							
+					<div id="fieldContainer" className="fieldContainer">
+						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
+						<div id="opponentField" className="battleField">
+							<Field players={players} playerIndex={opponentIndex} active={false} />
+						</div>
+						<Deck id="opponentDeck" size={opponent.deck.length}/>
+					</div>
+						
+					<div id="selfFieldContainer" className="fieldContainer">
+						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
+						<div id="selfField" className="battleField">
+							<Field players={players} playerIndex={selfIndex} active={true} self={self} />
+						</div>
+						<Deck id="selfDeck" size={self.deck.length}/>
+					</div>
+					<div id="selfFieldUnderLayer"></div>
+							
+					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
+							
+					<div id="selfHand" className="hand">
+						<Hand players={players} playerIndex={selfIndex} faceUp={true} />
+					</div>
+					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
+						
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
+					<EndGameScreen status={this.state.hasLostGame} goingMainMenu={this.goingMainMenu.bind(this)}/>
+
+					<div id="menuGame"><p>Menu</p>
+						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
+					</div>
+						
+					<div id="opponentUserName"><p>{opponent.name}</p></div>
+					<div id="selfUserName"><p>{self.name}</p></div>
 				</div>
-			);
+			</div>
+		);
 	}
 					
 	getInitialGameInstance(){
@@ -182,10 +127,10 @@ export default class Board extends Component{
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
-							  this.getInitialGameInstance();
-						  }, 5000)
-				});
-		}
+					  this.getInitialGameInstance();
+				  }, 5000)
+		});
+	}
 
 	//TODO EQ1-96
 	sendActions(){
@@ -237,18 +182,18 @@ export default class Board extends Component{
 					});
 		}
 		
-		//TODO EQ1-93 et EQ1-95
-		doesThisFieldCellHaveAMinionThatCanAttack(){
-			return null;
-		}
+	//TODO EQ1-93 et EQ1-95
+	doesThisFieldCellHaveAMinionThatCanAttack(){
+		return null;
+	}
 		
-		//TODO EQ1-88
-		addSummonActionToList(playerIndex, indexOfCardPlayed, indexOfFieldCell){
-			return null;
-		}
+	//TODO EQ1-88
+	addSummonActionToList(playerIndex, indexOfCardPlayed, indexOfFieldCell){
+		return null;
+	}
 		
-		//TODO EQ1-94
-		addAttackActionToList(playerIndex, attackingMinionIndex, targetIndex, speed){
-			return null;
-		}		
+	//TODO EQ1-94
+	addAttackActionToList(playerIndex, attackingMinionIndex, targetIndex, speed){
+		return null;
+	}		
 }

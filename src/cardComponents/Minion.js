@@ -12,7 +12,6 @@ export default class Card extends Component{
 		
 		if(true === this.props.active){
 			isSelected = "fiedlCellSelected";
-			console.log(isSelected);
 		}
 		
 		isEmpty = (this.props.name!=null) ? true : false;
