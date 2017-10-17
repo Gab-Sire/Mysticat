@@ -6,7 +6,7 @@ import Board from './boardComponents/Board.js';
 import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
-
+const TIME_BETWEEN_POLLS = 5000;
 class App extends Component{
 	constructor(props){
 		super(props);
@@ -67,7 +67,7 @@ class App extends Component{
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
 							  this.checkServerAvailability();
-						  }, 5000)
+						  }, TIME_BETWEEN_POLLS)
 				});
 	}
 	
@@ -85,7 +85,7 @@ class App extends Component{
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
 							  this.checkServerAvailability();
-						  }, 5000)
+						  }, TIME_BETWEEN_POLLS)
 				});
 	}
 	componentWillMount(){

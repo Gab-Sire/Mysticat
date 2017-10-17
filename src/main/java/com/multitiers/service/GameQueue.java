@@ -56,5 +56,15 @@ public class GameQueue {
 		
 		return game;
 	}
+	
+	public Player getPlayerInQueueById(String playerId) {
+		for(Player player : this.listOfPlayersInQueue) {
+			if(player.getPlayerId().equals(playerId)) {
+				return player;
+			}
+		}
+		return null;
+	}
+	
 
 }

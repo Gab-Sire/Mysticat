@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PopUpQueue from './PopUpQueue.js'
 
+const TIME_BETWEEN_POLLS = 1000;
 export default class MainMenu extends Component{
 	constructor(props){
 		super(props);
@@ -22,7 +23,7 @@ export default class MainMenu extends Component{
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue(); 
 								setTimeout(()=>{
 									this.deconnexion();
-								}, 1000)
+								}, TIME_BETWEEN_POLLS)
 							}
 						}
 						>Déconnexion</button></p>
@@ -55,7 +56,7 @@ export default class MainMenu extends Component{
 			  console.log(response);
 			  setTimeout(()=>{
 				  this.checkIfQueuePopped();
-			  }, 1000)
+			  }, TIME_BETWEEN_POLLS)
 			})
 			.catch(error => {
 			  console.log('Error fetching and parsing data', error);
@@ -91,7 +92,7 @@ export default class MainMenu extends Component{
 			  if(response.data===null && this.state.lookingForGame=== true){
 				  setTimeout(()=>{
 					  this.checkIfQueuePopped();
-				  }, 1000)
+				  }, TIME_BETWEEN_POLLS)
 			  }
 			  else if(this.state.lookingForGame===true){
 				  this.props.getQueueForParent(response.data);
@@ -104,6 +105,21 @@ export default class MainMenu extends Component{
 	
 	cancelQueue(){
 		this.setState({lookingForGame: false});
+		//Contacter le serveur pour etre removed.
+		let data = this.props.playerId;
+		axios({
+		  method:'post',
+		  url:'http://localhost:8089/cancelQueue',
+		  responseType:'json',
+		  headers: {'Access-Control-Allow-Origin': "true"},
+		  data: data
+		})
+		  .then((response)=>{
+			  console.log(response);
+			})
+			.catch(error => {
+			  console.log('Error fetching and parsing data', error);
+			});
 	}
 	
 	componentWillMount(){

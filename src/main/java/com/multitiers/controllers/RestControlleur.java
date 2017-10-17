@@ -34,6 +34,7 @@ import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
+import com.multitiers.service.GameQueue;
 import com.multitiers.service.GameService;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.Constantes;
@@ -128,6 +129,14 @@ public class RestControlleur {
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);
+    }
+    
+    @PostMapping(value="/cancelQueue")
+    public void cancelQueue(@RequestBody String playerId) {
+    	Player player = this.gameService.gameQueue.getPlayerInQueueById(playerId.substring(0, playerId.length()-1));
+    	if(player!=null) {
+    		this.gameService.gameQueue.removeFromQueue(player);
+    	}
     }
     
     @PostMapping(value="/checkIfQueuePopped")
