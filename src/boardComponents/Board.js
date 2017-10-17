@@ -38,8 +38,8 @@ export default class Board extends Component{
 		
 		//initializing players main attributes from the gamestate
 		players = this.state.gameState.players;
-		selfIndex = (players[0].playerId===this.state.playerId) ? 0 : 1;
-		opponentIndex = (selfIndex===0) ? 1 : 0;
+		selfIndex = (players[0].playerId === this.state.playerId) ? 0 : 1;
+		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
 	}
@@ -50,6 +50,12 @@ export default class Board extends Component{
 	
 	isThisFieldCellAssignedToPreviousSummon = (index) => {
 		return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
+	}
+	
+	assignFieldCellToSummon = (index) => {
+		let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
+		cellsClone[index] = true;
+		this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
 	}
 	
 	handleSelectHandCard = (index) => {
@@ -66,9 +72,7 @@ export default class Board extends Component{
 		
 		if(indexPlayer === selfIndex){
 			if(true === isEmpty && false === isAssigned){
-				let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
-				cellsClone[index] = true;
-				this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+				assignFieldCellToSummon(index); 
 			}
 		
 			if(index === this.state.selectedMinionIndex){
@@ -129,7 +133,6 @@ export default class Board extends Component{
 	}
 	
 	render(){
-		
 			return(
 				<div id="container">
 					<div id="board">
