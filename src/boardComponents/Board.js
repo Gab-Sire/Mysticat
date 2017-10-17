@@ -97,7 +97,7 @@ export default class Board extends Component{
 		
 		if(indexPlayer === selfIndex){
 			if(true === isEmpty && false === isAssigned){
-				assignFieldCellToSummon(index); 
+				this.assignFieldCellToSummon(index); 
 			}
 		
 			if(index === this.state.selectedMinionIndex){
