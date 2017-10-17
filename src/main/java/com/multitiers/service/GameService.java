@@ -74,7 +74,7 @@ public class GameService implements QueueListener {
 		resolveAllActions(actions, game);
 		
 		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
-		removePlayedCardsFromPlayerHand(playerOneActions, playerTwoId, game);
+		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
 		game.nextTurn();
 		
 		this.existingGameList.put(gameId, game);
