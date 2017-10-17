@@ -155,7 +155,10 @@ export default class Board extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  this.setState({gameState: response.data});
+				  this.setState({gameState: response.data,
+					  actionList:[],
+					  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false]
+					  });
 				  this.setState({isLoaded: true});
 				  this.forceUpdate();
 				  console.log(response.data);
