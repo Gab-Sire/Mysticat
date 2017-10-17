@@ -15,18 +15,20 @@ export default class MainMenu extends Component{
 		return (<div id='MainMenu'>
 				<div id='menuBox'>
 					<h2> Mysticat</h2>
-					<p><button onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
-					<p><button onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
-					<p><button onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
-					<p><button onClick={(event)=>{this.cancelQueue(); 
-							setTimeout(()=>{
-								this.deconnexion();
-							}, 1000)
+					<div className='menuContainer'>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue(); 
+								setTimeout(()=>{
+									this.deconnexion();
+								}, 1000)
+							}
 						}
-					}
-					>Déconnexion</button></p>
-					<p><button onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
-					<div className={this.state.TAG}>Pas encore disponible</div> 
+						>Déconnexion</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
+						<div className={this.state.TAG}>Pas encore disponible</div> 
+					</div>
 				</div>
 				<div id="imgMenuPrincipal"></div>
 				<PopUpQueue iSQueueingUp={this.state.lookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
