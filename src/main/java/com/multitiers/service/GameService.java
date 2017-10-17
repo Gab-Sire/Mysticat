@@ -101,7 +101,7 @@ public class GameService implements QueueListener {
 	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
 		Collections.sort(indexesOfCardsThatWerePlayed);
 		for(int i = indexesOfCardsThatWerePlayed.size()-1; i>=0; --i) {
-			currentPlayer.removeCardFromHand(i);
+			currentPlayer.removeCardFromHand(indexesOfCardsThatWerePlayed.get(i));
 		}
 	}
 
