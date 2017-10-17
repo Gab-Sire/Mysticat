@@ -8,6 +8,7 @@ import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
 import Minion from '../cardComponents/Minion.js';
+import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import LoadingScreen from '../menuComponents/LoadingScreen';
@@ -27,10 +28,9 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			selectedHandCardIndex : null,
 			selectedMinionIndex : null,
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
-			};		
+		};		
 	}
 	
 	componentWillMount(){
@@ -83,14 +83,6 @@ export default class Board extends Component{
 	
 	/* methods to handle clicks events */
 	
-	handleSelectHandCard = (index) => {
-		  if(index === this.state.selectedHandCardIndex){
-			  this.setState({ selectedHandCardIndex: null })
-			  return;
-		  }
-		  this.setState({ selectedHandCardIndex: index })
-	}
-	
 	handleSelectMinion = (index, indexPlayer) => {
 		let isEmpty = this.isThisFieldCellEmpty(index);
 		let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
@@ -110,20 +102,6 @@ export default class Board extends Component{
 	}
 	
 	/* methods to render  */
-	
-	renderHand = (playerIndex, faceUp) => {
-		const props = (this.state.gameState.players[playerIndex].hand);
-		
-		let handCards = players[playerIndex].hand.map(function(card, index){
-		    return (
-		     <Card
-		       key={"handCard" + index}
-		       active={index === this.state.selectedHandCardIndex}
-		       onClick={() => this.handleSelectHandCard(index)} faceUp={playerIndex === selfIndex ? true : false} {...card}{...props}/>
-		    )
-		   }, this)
-		return handCards;
-	}
 	
 	renderField = (playerIndex) => {
 		let fieldGrid = this.state.gameState.players[playerIndex].field;
@@ -145,7 +123,7 @@ export default class Board extends Component{
 				<div id="container">
 					<div id="board">
 						<div id="opponentHand" className="hand">
-							{this.renderHand(opponentIndex, true)}
+							<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
 						</div>
 						<div id="opponentHandUnderLayer"></div>
 						<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
@@ -170,7 +148,7 @@ export default class Board extends Component{
 						<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
 							
 						<div id="selfHand" className="hand">
-							{this.renderHand(selfIndex, false)}
+							<Hand players={players} playerIndex={selfIndex} faceUp={true} />
 						</div>
 						<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 						
