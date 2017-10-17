@@ -236,7 +236,9 @@ export default class Board extends Component{
 				  .then((response)=>{
 					  console.log(response.data);
 					  if(response.data!==null){
-						  this.setState({gameState: response.data});
+						  this.setState({gameState: response.data, 
+							  cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
+							  selectedHandCardIndex: null});
 					  }
 					  else{
 						  setTimeout(()=>{
