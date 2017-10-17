@@ -65,13 +65,14 @@ export default class Board extends Component{
 	}
 	
 	addSummonAction = () => {
+		console.log(cardIndex);
+	
 		let actions = this.state.actionList;
 		actions.push({ 	playerIndex : selfIndex, 
 						indexOfCardInHand : cardIndex,
 						fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
 					});
 		this.setState({ actionList: actions })
-		console.log(this.state.actionList);
 		
 		minionIndexRetrieved = false;	cardIndexRetrieved = false;
 	}
