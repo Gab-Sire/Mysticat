@@ -21,6 +21,8 @@ let opponentIndex;
 
 let minionToBeSummonedIndex;
 let cardIndex;
+let minionIndexRetrieved;
+let cardIndexRetrieved;
 
 export default class Board extends Component{
 	constructor(props){
@@ -43,23 +45,35 @@ export default class Board extends Component{
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
+		
+		minionIndexRetrieved = false;
+		cardIndexRetrieved = false;
 	}
 	
-	retrieveSelectedIndex = (selectedIndex) => {
+	retrieveCardSelectedIndex = (selectedIndex) => {
 		cardIndex = selectedIndex;
+		cardIndexRetrieved = true;
 	}
 	
 	retrieveMinion = (selectedIndex) =>{
 		minionToBeSummonedIndex = selectedIndex;
+		minionIndexRetrieved = true;
+		
+		if(true === minionIndexRetrieved && true === cardIndexRetrieved){
+			this.addSummonAction();
+		}
 	}
 	
-	addSummonAction(){
+	addSummonAction = () => {
 		let actions = this.state.actionList;
 		actions.push({ 	playerIndex : selfIndex, 
-						fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex, 
-						indexOfCardInHand : cardIndex 
+						indexOfCardInHand : cardIndex,
+						fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
 					});
 		this.setState({ actionList: actions })
+		console.log(this.state.actionList);
+		
+		minionIndexRetrieved = false;	cardIndexRetrieved = false;
 	}
 	
 	/* methods to surrender/quit the game */
@@ -114,7 +128,7 @@ export default class Board extends Component{
 					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
 							
 					<div id="selfHand" className="hand">
-						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveSelectedIndex}
+						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
 						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
