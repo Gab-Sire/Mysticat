@@ -55,7 +55,7 @@ export default class Board extends Component{
 		cardIndexRetrieved = true;
 	}
 	
-	retrieveMinion = (selectedIndex) =>{
+	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		minionToBeSummonedIndex = selectedIndex;
 		minionIndexRetrieved = true;
 		
@@ -119,7 +119,7 @@ export default class Board extends Component{
 					<div id="selfFieldContainer" className="fieldContainer">
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
-							<Field players={players} playerIndex={selfIndex} active={true} self={self} callBackSelectedMinion={this.retrieveMinion}
+							<Field players={players} playerIndex={selfIndex} active={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} />
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
