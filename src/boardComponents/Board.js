@@ -206,9 +206,10 @@ export default class Board extends Component{
 					  if(response.data!==null){
 						  	this.setState({gameState: response.data,
 								  actionList : [],
-								  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false]
+								  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
+								  activeIndex : null
 						  	});
-						  	
+						  	cardIndex = null;
 							players = this.state.gameState.players;
 							self = this.state.gameState.players[selfIndex];
 							opponent = this.state.gameState.players[opponentIndex];
