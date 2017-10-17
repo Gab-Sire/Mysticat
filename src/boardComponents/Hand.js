@@ -17,6 +17,7 @@ export default class Hand extends Component{
 			  return;
 		  }
 		  this.setState({ selectedHandCardIndex : index })
+		  this.props.callBackSelectedCardIndex(index);
 	}
 	
 	render(){

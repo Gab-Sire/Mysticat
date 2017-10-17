@@ -19,6 +19,9 @@ let self;
 let opponent;
 let opponentIndex;
 
+let minionToBeSummonedIndex;
+let cardIndex;
+
 export default class Board extends Component{
 	
 	constructor(props){
@@ -28,6 +31,7 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
+			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
 		};		
 	}
 	
@@ -40,6 +44,23 @@ export default class Board extends Component{
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
+	}
+	
+	retrieveSelectedIndex = (selectedIndex) => {
+		cardIndex = selectedIndex;
+	}
+	
+	retrieveMinion = (selectedIndex) =>{
+		minionToBeSummonedIndex = selectedIndex;
+	}
+	
+	addSummonAction(){
+		let actions = this.state.actionList;
+		actions.push({ 	playerIndex : selfIndex, 
+						fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex, 
+						indexOfCardInHand : cardIndex 
+					});
+		this.setState({ actionList: actions })
 	}
 	
 	/* methods to surrender/quit the game */
@@ -84,7 +105,8 @@ export default class Board extends Component{
 					<div id="selfFieldContainer" className="fieldContainer">
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
-							<Field players={players} playerIndex={selfIndex} active={true} self={self} />
+							<Field players={players} playerIndex={selfIndex} active={true} self={self} callBackSelectedMinion={this.retrieveMinion}
+							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} />
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
 					</div>
@@ -93,7 +115,8 @@ export default class Board extends Component{
 					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
 							
 					<div id="selfHand" className="hand">
-						<Hand players={players} playerIndex={selfIndex} faceUp={true} />
+						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveSelectedIndex}
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 						

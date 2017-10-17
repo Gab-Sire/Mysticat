@@ -14,7 +14,6 @@ export default class Card extends Component{
 		this.setState(prevState => ({ selected: false }));
 	}
 	
-	
 	render(){
 		let isSelected = "";
 		if(true === this.props.active){

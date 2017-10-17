@@ -8,7 +8,6 @@ export default class Field extends Component{
 		super(props);
 		this.state={
 			selectedMinionIndex : null,
-			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
 		}
 	}
 	
@@ -17,13 +16,11 @@ export default class Field extends Component{
 	}
 	
 	isThisFieldCellAssignedToPreviousSummon = (index) => {
-		return (true === this.state.cellsOfSummonedMinionsThisTurn[index]);
+		return (true === this.props.cellsOfSummonedMinionsThisTurn[index]);
 	}
 	
 	assignFieldCellToSummon = (index) => {
-		let cellsClone = this.state.cellsOfSummonedMinionsThisTurn.slice();
-		cellsClone[index] = true;
-		this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
+		this.props.cellsOfSummonedMinionsThisTurn[index] = true;
 	}
 	
 	handleSelectMinion = (index, indexPlayer) => {
@@ -41,6 +38,7 @@ export default class Field extends Component{
 			}
 			else{
 				this.setState({ selectedMinionIndex: index })
+				this.props.callBackSelectedMinion(index);
 			}
 		}
 	}
@@ -51,7 +49,7 @@ export default class Field extends Component{
 		    return (
 		     <Minion
 		       	key={"fieldMinion" + index}
-		     	active = {true === this.props.active ? this.state.cellsOfSummonedMinionsThisTurn[index] : false}
+		     	active = {true === this.props.active ? this.props.cellsOfSummonedMinionsThisTurn[index] : false}
 		     	onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
 		    )
 		   }, this)
