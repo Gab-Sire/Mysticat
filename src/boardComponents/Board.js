@@ -29,7 +29,7 @@ export default class Board extends Component{
 			actionList : [],
 			selectedHandCardIndex : null,
 			selectedMinionIndex : null,
-			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
+			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
 			};		
 	}
 	
@@ -37,7 +37,7 @@ export default class Board extends Component{
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 		
 		//initializing players main attributes from the gamestate
-		players = this.state.gameState.players;
+		players = this.props.gameState.players;
 		selfIndex = (players[0].playerId === this.state.playerId) ? 0 : 1;
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
