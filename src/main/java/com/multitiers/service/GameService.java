@@ -134,12 +134,11 @@ public class GameService implements QueueListener {
 		Player playerSummoningTheMinion = game.getPlayers()[summonAction.getPlayerIndex()];
 		int fieldCell = summonAction.getFieldCellWhereTheMinionIsBeingSummoned();
 
-		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getDeck()
+		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getHand()
 				.get(summonAction.getIndexOfCardInHand());
 		Minion minion = new Minion(playableMinionCard);
 		playerSummoningTheMinion.getField()[fieldCell] = minion;
 		System.out.println(playerSummoningTheMinion.getName() + " played " + minion.getName() + " on: " + fieldCell);
-		
 	}
 
 	private void resolveAttackAction(AttackAction attackAction, Game game) {
@@ -157,7 +156,6 @@ public class GameService implements QueueListener {
 
 		if (attackedIndex == HERO_FACE_INDEX) {
 			attackFace(opponentPlayer, attacker);
-			return;
 		} else {
 			attackMinion(opponentPlayer, attackedIndex, attacker);
 		}

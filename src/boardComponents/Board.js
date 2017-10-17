@@ -156,7 +156,8 @@ export default class Board extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  this.setState({gameState: response.data});
+				  this.setState({gameState: response.data,
+					  });
 				  this.setState({isLoaded: true});
 				  this.forceUpdate();
 				  console.log(response.data);
@@ -204,7 +205,11 @@ export default class Board extends Component{
 				  .then((response)=>{
 					  console.log(response.data);
 					  if(response.data!==null){
-						  	this.setState({gameState: response.data});
+						  	this.setState({gameState: response.data,
+								  actionList : [],
+								  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false]
+						  	});
+						  	
 							players = this.state.gameState.players;
 							self = this.state.gameState.players[selfIndex];
 							opponent = this.state.gameState.players[opponentIndex];
