@@ -44,6 +44,29 @@ export default class Board extends Component{
 		opponent = players[opponentIndex];
 	}
 	
+	/* methods to surrender/quit the game */
+	
+	surrenderGameConfirmStateChange(){
+		let status = this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status });
+	}
+	
+	surrender(){
+		self.health = 0;
+		this.surrenderGameConfirmStateChange();
+		this.loseGame();
+	}
+	
+	loseGame(){
+		this.setState({ hasLostGame: true });
+	}
+
+	goingMainMenu(){
+		this.props.endGame();
+	}
+	
+	/* methods to validate/assign a cell for summoning */
+	
 	isThisFieldCellEmpty = (index) => {
 		return (null === self.field[index]);
 	}
@@ -57,6 +80,8 @@ export default class Board extends Component{
 		cellsClone[index] = true;
 		this.setState({ cellsOfSummonedMinionsThisTurn: cellsClone });
 	}
+	
+	/* methods to handle clicks events */
 	
 	handleSelectHandCard = (index) => {
 		  if(index === this.state.selectedHandCardIndex){
@@ -83,6 +108,8 @@ export default class Board extends Component{
 			}
 		}
 	}
+	
+	/* methods to render  */
 	
 	renderHand = (playerIndex, faceUp) => {
 		const props = (this.state.gameState.players[playerIndex].hand);
@@ -111,25 +138,6 @@ export default class Board extends Component{
 		    )
 		   }, this)
 		return fieldMinions;
-	}
-	
-	surrenderGameConfirmStateChange(){
-		let status = this.state.isThinkingToGiveUp;
-		this.setState({ isThinkingToGiveUp: !status });
-	}
-	
-	surrender(){
-		self.health = 0;
-		this.surrenderGameConfirmStateChange();
-		this.loseGame();
-	}
-	
-	loseGame(){
-		this.setState({ hasLostGame: true });
-	}
-
-	goingMainMenu(){
-		this.props.endGame();
 	}
 	
 	render(){
