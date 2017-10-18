@@ -72,7 +72,7 @@ export default class Board extends Component{
 		let selfMana = self.remainingMana;
 		
 		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost){
-			console.log("Card played from position in hand: "+cardIndex);
+			console.log("Card played in hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex, 
