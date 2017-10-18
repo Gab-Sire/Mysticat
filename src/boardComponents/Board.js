@@ -32,7 +32,8 @@ export default class Board extends Component{
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
 			actionList : [],
-			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false]
+			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
+			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
 		};		
 	}
 	
@@ -52,7 +53,16 @@ export default class Board extends Component{
 	
 	retrieveCardSelectedIndex = (selectedIndex) => {
 		cardIndex = selectedIndex;
-		cardIndexRetrieved = true;
+		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let wasThisCardAlreadyPlayedThisTurn = !wereTheseCardsPlayedThisTurn[selectedIndex];
+		if(true===wasThisCardAlreadyPlayedThisTurn){
+			cardIndexRetrieved = true;
+			wereTheseCardsPlayedThisTurn[selectedIndex] = true;
+			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
+		}
+		else{
+			cardIndexRetrieved = false;
+		}
 	}
 	
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
