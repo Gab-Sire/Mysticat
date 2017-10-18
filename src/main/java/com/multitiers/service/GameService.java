@@ -124,7 +124,8 @@ public class GameService implements QueueListener {
 	}
 
 	private List<Action> getCompleteSortedActionList(ActionList playerOneActions, ActionList playerTwoActions) {
-		List<Action> actions = playerOneActions.getPlayerActions();
+		List<Action> actions = new ArrayList<>();
+		actions.addAll(playerOneActions.getPlayerActions());
 		actions.addAll(playerTwoActions.getPlayerActions());
 		Collections.sort(actions);
 		return actions;
