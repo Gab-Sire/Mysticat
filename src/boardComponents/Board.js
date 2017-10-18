@@ -53,16 +53,7 @@ export default class Board extends Component{
 	
 	retrieveCardSelectedIndex = (selectedIndex) => {
 		cardIndex = selectedIndex;
-		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
-		let wasThisCardAlreadyPlayedThisTurn = !wereTheseCardsPlayedThisTurn[selectedIndex];
-		if(true===wasThisCardAlreadyPlayedThisTurn){
-			cardIndexRetrieved = true;
-			wereTheseCardsPlayedThisTurn[selectedIndex] = true;
-			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
-		}
-		else{
-			cardIndexRetrieved = false;
-		}
+		cardIndexRetrieved = true;
 	}
 	
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
@@ -75,16 +66,24 @@ export default class Board extends Component{
 	}
 	
 	addSummonAction = () => {
-		console.log(cardIndex);
-	
-		let actions = this.state.actionList;
-		actions.push({ 	playerIndex : selfIndex, 
-						indexOfCardInHand : cardIndex,
-						fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
-					});
-		this.setState({ actionList: actions })
+		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
+		let manaCost = self.hand[cardIndex].manaCost;
+		let selfMana = self.remainingMana;
 		
-		minionIndexRetrieved = false;	cardIndexRetrieved = false;
+		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost){
+			console.log("Card played from position in hand: "+cardIndex);
+			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
+			let actions = this.state.actionList;
+			actions.push({ 	playerIndex : selfIndex, 
+							indexOfCardInHand : cardIndex,
+							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
+						});
+			this.setState({ actionList: actions })
+			minionIndexRetrieved = false;	cardIndexRetrieved = false;
+			self.remainingMana = selfMana - manaCost;
+			wereTheseCardsPlayedThisTurn[cardIndex] = true;
+		}
 	}
 	
 	/* methods to surrender/quit the game */
@@ -218,7 +217,8 @@ export default class Board extends Component{
 						  	this.setState({gameState: response.data,
 								  actionList : [],
 								  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
-								  activeIndex : null
+								  activeIndex : null,
+								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
 						  	});
 						  	cardIndex = null;
 							players = this.state.gameState.players;
