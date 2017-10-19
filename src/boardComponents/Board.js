@@ -17,7 +17,6 @@ let opponentIndex;
 
 let minionToBeSummonedIndex;
 let cardIndex;
-let minionIndexRetrieved;
 let cardIndexRetrieved;
 
 export default class Board extends Component{
@@ -41,9 +40,7 @@ export default class Board extends Component{
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
-	
-		
-		minionIndexRetrieved = false;
+
 		cardIndexRetrieved = false;
 	}
 	
@@ -81,7 +78,7 @@ export default class Board extends Component{
 							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
 						});
 			this.setState({ actionList: actions })
-			minionIndexRetrieved = false;	cardIndexRetrieved = false;
+			cardIndexRetrieved = false;
 			self.remainingMana = selfMana - manaCost;
 			wereTheseCardsPlayedThisTurn[cardIndex] = true;
 		}
