@@ -45,7 +45,8 @@ public class InscriptionService {
     	//Methode qu'on va utiliser pour Bootstrapper
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; ++i) {
         	Integer stats = (((i/5)<=0)) ? 1 : i/5;
-            MinionCard card = createMinionCard("Minion"+i, stats, stats, stats, stats, stats+" mana"+" "+stats+"/"+stats);
+        	int manaCost = 1;
+            MinionCard card = createMinionCard("Minion"+i, stats, stats, stats, manaCost, stats+" mana"+" "+stats+"/"+stats);
             cardRepository.save(card);
         }
         

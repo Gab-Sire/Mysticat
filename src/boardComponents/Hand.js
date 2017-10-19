@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
 import Card from '../cardComponents/Card.js';
 
 export default class Hand extends Component{

@@ -63,7 +63,7 @@ export default class Login extends Component{
 	render(){
 		return (<div id="loginForm" className="container">
         	<div className="boiteConnexion card-container">
-        		<img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        		<img alt="profile-img" id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         		<p id="profile-name" className="profile-name-card"></p>
         		<h3 id="titlePageConnexion"> Login </h3>
         		<form className="form-signin" onSubmit={this.handleSubmit}>

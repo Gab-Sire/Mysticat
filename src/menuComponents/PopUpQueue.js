@@ -31,5 +31,4 @@ export default class PopUpQueue extends Component {
   cancelQueue(){
 	  this.props.cancelQueue();
   }
-
 }

@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import '../styles/app.css';
-import _ from 'lodash';
-import Card from '../cardComponents/Card.js';
 import Field from './Field.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js';
 import Hero from './Hero.js';
-import Minion from '../cardComponents/Minion.js';
 import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
-import LoadingScreen from '../menuComponents/LoadingScreen';
 
 let players;
 let selfIndex;
@@ -39,13 +35,13 @@ export default class Board extends Component{
 	
 	componentWillMount(){
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
-		
 		//initializing players main attributes from the gamestate
 		players = this.props.gameState.players;
 		selfIndex = (players[0].playerId === this.props.playerId) ? 0 : 1;
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
+	
 		
 		minionIndexRetrieved = false;
 		cardIndexRetrieved = false;
@@ -59,8 +55,7 @@ export default class Board extends Component{
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		minionToBeSummonedIndex = selectedIndex;
 		minionIndexRetrieved = true;
-		
-		if(true === minionIndexRetrieved && true === cardIndexRetrieved){
+		if(true === minionIndexRetrieved && true === cardIndexRetrieved && null!==cardIndex){
 			this.addSummonAction();
 		}
 	}
@@ -72,7 +67,7 @@ export default class Board extends Component{
 		let selfMana = self.remainingMana;
 		
 		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost && null===self.field[minionToBeSummonedIndex]){
-			console.log("Card played in hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
+			//console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex, 
@@ -169,7 +164,6 @@ export default class Board extends Component{
 					  });
 				  this.setState({isLoaded: true});
 				  this.forceUpdate();
-				  console.log(response.data);
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);

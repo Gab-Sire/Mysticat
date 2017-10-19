@@ -44,7 +44,6 @@ export default class MainMenu extends Component{
 		this.setState({lookingForGame: true})
 		this.forceUpdate();
 		let data = this.props.playerId;
-		console.log("Entering queue");
 		axios({
 		  method:'post',
 		  url:'http://localhost:8089/enterQueue',
@@ -53,7 +52,6 @@ export default class MainMenu extends Component{
 		  data: data
 		})
 		  .then((response)=>{
-			  console.log(response);
 			  setTimeout(()=>{
 				  this.checkIfQueuePopped();
 			  }, TIME_BETWEEN_POLLS)
@@ -72,7 +70,6 @@ export default class MainMenu extends Component{
 			})
 			  .then((response)=>{
 				  this.props.getQueueForParent(response.data);
-				  console.log(response.data);
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -113,11 +110,7 @@ export default class MainMenu extends Component{
 		  responseType:'json',
 		  headers: {'Access-Control-Allow-Origin': "true"},
 		  data: data
-		})
-		  .then((response)=>{
-			  console.log(response);
-			})
-			.catch(error => {
+		}).catch(error => {
 			  console.log('Error fetching and parsing data', error);
 			});
 	}
