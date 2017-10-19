@@ -48,8 +48,14 @@ export default class Board extends Component{
 	}
 	
 	retrieveCardSelectedIndex = (selectedIndex) => {
-		cardIndex = selectedIndex;
-		cardIndexRetrieved = true;
+		if(selectedIndex===cardIndex){
+			cardIndex = null;
+			cardIndexRetrieved = false;
+		}
+		else{
+			cardIndex = selectedIndex;
+			cardIndexRetrieved = true;
+		}
 	}
 	
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
