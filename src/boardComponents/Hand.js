@@ -13,10 +13,11 @@ export default class Hand extends Component{
 	handleSelectHandCard = (index) => {
 		  if(index === this.state.selectedHandCardIndex){
 			  this.setState({ selectedHandCardIndex: null })
-			  return;
 		  }
-		  this.setState({ selectedHandCardIndex : index })
-		  this.props.callBackSelectedCardIndex(index);
+		  else{
+			  this.setState({ selectedHandCardIndex : index })
+			  this.props.callBackSelectedCardIndex(index);  
+		  }
 	}
 	
 	render(){

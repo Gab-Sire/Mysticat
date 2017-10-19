@@ -54,8 +54,8 @@ export default class Board extends Component{
 	
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		minionToBeSummonedIndex = selectedIndex;
-		minionIndexRetrieved = true;
-		if(true === minionIndexRetrieved && true === cardIndexRetrieved && null!==cardIndex){
+		console.log("CardIndex:", cardIndex);
+		if(null!==cardIndex && undefined!==cardIndex){
 			this.addSummonAction();
 		}
 	}
