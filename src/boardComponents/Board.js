@@ -19,7 +19,6 @@ let opponentIndex;
 
 let minionToBeSummonedIndex;
 let cardIndex;
-let cardIndexRetrieved;
 
 export default class Board extends Component{
 	constructor(props){
@@ -44,17 +43,16 @@ export default class Board extends Component{
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
 
-		cardIndexRetrieved = false;
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
 		if(selectedIndex===cardIndex){
 			cardIndex = null;
-			cardIndexRetrieved = false;
+
 		}
 		else{
 			cardIndex = selectedIndex;
-			cardIndexRetrieved = true;
+
 		}
 	}
 
@@ -87,7 +85,7 @@ export default class Board extends Component{
 							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
 						});
 			this.setState({ actionList: actions })
-			cardIndexRetrieved = false;
+
 			self.remainingMana = selfMana - manaCost;
 			cardIndex = null;
 		}
@@ -130,7 +128,7 @@ export default class Board extends Component{
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} active={false} />
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} />
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
 					</div>
@@ -138,7 +136,7 @@ export default class Board extends Component{
 					<div id="selfFieldContainer" className="fieldContainer">
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
-							<Field players={players} playerIndex={selfIndex} active={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
+							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} />
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
