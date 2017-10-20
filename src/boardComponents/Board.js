@@ -65,13 +65,19 @@ export default class Board extends Component{
 
 	addSummonAction = () => {
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
 		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
+		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex];
 		let manaCost = self.hand[cardIndex].manaCost;
 		let selfMana = self.remainingMana;
 
-		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost && null===self.field[minionToBeSummonedIndex]){
-			//console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
-			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
+		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
+			&& null===self.field[minionToBeSummonedIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
+			console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
+			wereTheseCardsPlayedThisTurn[cardIndex] = true;
+			areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex] = true;
+			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
+										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
 							indexOfCardInHand : cardIndex,
@@ -80,7 +86,6 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 			cardIndexRetrieved = false;
 			self.remainingMana = selfMana - manaCost;
-			wereTheseCardsPlayedThisTurn[cardIndex] = true;
 		}
 	}
 
@@ -191,6 +196,7 @@ export default class Board extends Component{
 			  data: data
 			})
 			  .then((response)=>{
+					cardIndex=null;
 				  this.checkIfGameUpdated();
 				})
 				.catch(error => {
@@ -216,7 +222,6 @@ export default class Board extends Component{
 									cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
 								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
 						  	});
-						  	cardIndex = null;
 							players = this.state.gameState.players;
 							self = this.state.gameState.players[selfIndex];
 							opponent = this.state.gameState.players[opponentIndex];
