@@ -12,24 +12,24 @@ export default class EndGameScreen extends Component {
   render() {
 	  return (<div>{this.createMessage()}</div>);
   }
-  
+
   createMessage(){
 	  if(true===this.props.status){
 		    return (
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
 			            	<p>Vous Avez Perdu</p>
-			            	<button onClick={this.goingMainMenu.bind(this)}>Menu Principal</button>
+			            	<button onClick={this.backToMainMenu.bind(this)}>Menu Principal</button>
 			            </div>
 		            </div>
-		        );  
+		        );
 	  }else{
 		    return (null);
 	  }
   }
-  
-  goingMainMenu(){
-	  this.props.goingMainMenu();
+
+  backToMainMenu(){
+	  this.props.backToMainMenu();
   }
 
 }

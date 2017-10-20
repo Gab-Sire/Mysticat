@@ -5,9 +5,8 @@ import Card from '../cardComponents/Card.js';
 export default class Deck extends Component{
 	constructor(props){
 		super(props);
-		this.state={ isEmpty:true};
 	}
-	
+
 	render(){
 		if(this.props.size===0){
 			return (<div id={this.props.id} className="deck" title="Empty deck.">

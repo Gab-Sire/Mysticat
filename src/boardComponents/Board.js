@@ -29,9 +29,9 @@ export default class Board extends Component{
 			actionList : [],
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
 			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
-		};		
+		};
 	}
-	
+
 	componentWillMount(){
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 		//initializing players main attributes from the gamestate
@@ -43,7 +43,7 @@ export default class Board extends Component{
 
 		cardIndexRetrieved = false;
 	}
-	
+
 	retrieveCardSelectedIndex = (selectedIndex) => {
 		if(selectedIndex===cardIndex){
 			cardIndex = null;
@@ -54,7 +54,7 @@ export default class Board extends Component{
 			cardIndexRetrieved = true;
 		}
 	}
-	
+
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		minionToBeSummonedIndex = selectedIndex;
 		console.log("CardIndex:", cardIndex);
@@ -62,18 +62,18 @@ export default class Board extends Component{
 			this.addSummonAction();
 		}
 	}
-	
+
 	addSummonAction = () => {
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
 		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
 		let manaCost = self.hand[cardIndex].manaCost;
 		let selfMana = self.remainingMana;
-		
+
 		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost && null===self.field[minionToBeSummonedIndex]){
 			//console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn});
 			let actions = this.state.actionList;
-			actions.push({ 	playerIndex : selfIndex, 
+			actions.push({ 	playerIndex : selfIndex,
 							indexOfCardInHand : cardIndex,
 							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
 						});
@@ -83,28 +83,28 @@ export default class Board extends Component{
 			wereTheseCardsPlayedThisTurn[cardIndex] = true;
 		}
 	}
-	
+
 	/* methods to surrender/quit the game */
-	
+
 	surrenderGameConfirmStateChange(){
 		let status = this.state.isThinkingToGiveUp;
 		this.setState({ isThinkingToGiveUp: !status });
 	}
-	
+
 	surrender(){
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
 		this.loseGame();
 	}
-	
+
 	loseGame(){
 		this.setState({ hasLostGame: true });
 	}
 
-	goingMainMenu(){
+	backToMainMenu(){
 		this.props.endGame();
 	}
-	
+
 	render(){
 		return(
 			<div id="container">
@@ -114,7 +114,7 @@ export default class Board extends Component{
 					</div>
 					<div id="opponentHandUnderLayer"></div>
 					<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
-							
+
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
@@ -122,7 +122,7 @@ export default class Board extends Component{
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
 					</div>
-						
+
 					<div id="selfFieldContainer" className="fieldContainer">
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
@@ -132,29 +132,29 @@ export default class Board extends Component{
 						<Deck id="selfDeck" size={self.deck.length}/>
 					</div>
 					<div id="selfFieldUnderLayer"></div>
-							
+
 					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
-							
+
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
 						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
-						
+
 					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
-					<EndGameScreen status={this.state.hasLostGame} goingMainMenu={this.goingMainMenu.bind(this)}/>
+					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
-						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>J'abandonne</button></p>
+						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
 					</div>
-						
+
 					<div id="opponentUserName"><p>{opponent.name}</p></div>
 					<div id="selfUserName"><p>{self.name}</p></div>
 				</div>
 			</div>
 		);
 	}
-					
+
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
@@ -176,7 +176,6 @@ export default class Board extends Component{
 		});
 	}
 
-	//TODO EQ1-96
 	sendActions(){
 		const data = {
 					gameId: this.state.gameState.gameId,
@@ -198,7 +197,7 @@ export default class Board extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	
+	//Periodically calls the back end to know if both players have posted their actions
 		checkIfGameUpdated(){
 			const data = this.state.playerId;
 			axios({
@@ -213,8 +212,8 @@ export default class Board extends Component{
 					  if(response.data!==null){
 						  	this.setState({gameState: response.data,
 								  actionList : [],
-								  cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
 								  activeIndex : null,
+									cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
 								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
 						  	});
 						  	cardIndex = null;
@@ -233,19 +232,4 @@ export default class Board extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
-		
-	//TODO EQ1-93 et EQ1-95
-	doesThisFieldCellHaveAMinionThatCanAttack(){
-		return null;
-	}
-		
-	//TODO EQ1-88
-	addSummonActionToList(playerIndex, indexOfCardPlayed, indexOfFieldCell){
-		return null;
-	}
-		
-	//TODO EQ1-94
-	addAttackActionToList(playerIndex, attackingMinionIndex, targetIndex, speed){
-		return null;
-	}		
 }
