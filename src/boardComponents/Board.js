@@ -9,6 +9,8 @@ import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 
+const TIME_BETWEEN_POLLS = 1000;
+
 let players;
 let selfIndex;
 let self;
@@ -26,6 +28,7 @@ export default class Board extends Component{
 			playerId: null,
 			isThinkingToGiveUp: false,
 			hasLostGame : false,
+			waitingForOpponentToEndTurn: false,
 			actionList : [],
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
 			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
@@ -86,6 +89,7 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 			cardIndexRetrieved = false;
 			self.remainingMana = selfMana - manaCost;
+			cardIndex = null;
 		}
 	}
 
@@ -99,7 +103,10 @@ export default class Board extends Component{
 	surrender(){
 		self.health = 0;
 		this.surrenderGameConfirmStateChange();
-		this.loseGame();
+		this.cancelActionSubmission();
+		setTimeout(()=>{
+			this.loseGame();
+		}, TIME_BETWEEN_POLLS);
 	}
 
 	loseGame(){
@@ -146,7 +153,7 @@ export default class Board extends Component{
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 
-					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} enough={this.surrender.bind(this)} never={this.surrenderGameConfirmStateChange.bind(this)} />
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
@@ -177,7 +184,7 @@ export default class Board extends Component{
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
 					  this.getInitialGameInstance();
-				  }, 5000)
+				  }, TIME_BETWEEN_POLLS)
 		});
 	}
 
@@ -196,7 +203,8 @@ export default class Board extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-					cardIndex=null;
+					this.setState({waitingForOpponentToEndTurn:true});
+					cardIndex = null;
 				  this.checkIfGameUpdated();
 				})
 				.catch(error => {
@@ -220,7 +228,8 @@ export default class Board extends Component{
 								  actionList : [],
 								  activeIndex : null,
 									cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
-								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
+								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+									waitingForOpponentToEndTurn: false
 						  	});
 							players = this.state.gameState.players;
 							self = this.state.gameState.players[selfIndex];
@@ -228,13 +237,19 @@ export default class Board extends Component{
 							this.forceUpdate();
 					  }
 					  else{
-						  setTimeout(()=>{
-							  this.checkIfGameUpdated();
-						  }, 1000)
+							if(true===this.state.waitingForOpponentToEndTurn){
+								setTimeout(()=>{
+									this.checkIfGameUpdated();
+								}, TIME_BETWEEN_POLLS)
+							}
 					  }
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
 					});
+		}
+
+		cancelActionSubmission(){
+				this.setState({waitingForOpponentToEndTurn:false});
 		}
 }

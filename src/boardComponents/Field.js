@@ -15,8 +15,7 @@ export default class Field extends Component{
 	}
 
 	isThisFieldCellAssignedToPreviousSummon = (index) => {
-
-	//	return (true === this.props.cellsOfSummonedMinionsThisTurn[index]);
+		//	return (true === this.props.cellsOfSummonedMinionsThisTurn[index]);
 	}
 
 	assignFieldCellToSummon = (index) => {

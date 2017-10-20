@@ -8,7 +8,7 @@ export default class MainMenu extends Component{
 		super(props);
 		this.state={
 				playerId: null,
-				lookingForGame: false,
+				isLookingForGame: false,
 				TAG:"hidden"
 			}
 	}
@@ -20,7 +20,7 @@ export default class MainMenu extends Component{
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue(); 
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue();
 								setTimeout(()=>{
 									this.deconnexion();
 								}, TIME_BETWEEN_POLLS)
@@ -28,11 +28,11 @@ export default class MainMenu extends Component{
 						}
 						>Déconnexion</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
-						<div className={this.state.TAG}>Pas encore disponible</div> 
+						<div className={this.state.TAG}>Pas encore disponible</div>
 					</div>
 				</div>
 				<div id="imgMenuPrincipal"></div>
-				<PopUpQueue iSQueueingUp={this.state.lookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
+				<PopUpQueue iSQueueingUp={this.state.isLookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
 			</div>);
 	}
 	deconnexion(){
@@ -41,7 +41,7 @@ export default class MainMenu extends Component{
 	}
 	enterQueue(){
 		this.hideUnderContruction();
-		this.setState({lookingForGame: true})
+		this.setState({isLookingForGame: true})
 		this.forceUpdate();
 		let data = this.props.playerId;
 		axios({
@@ -60,7 +60,7 @@ export default class MainMenu extends Component{
 			  console.log('Error fetching and parsing data', error);
 			});
 	}
-	
+
 	getHardCodedGame(){
 		axios({
 			  method:'get',
@@ -75,7 +75,7 @@ export default class MainMenu extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	
+
 	checkIfQueuePopped(){
 		let data = this.props.playerId;
 		axios({
@@ -86,12 +86,12 @@ export default class MainMenu extends Component{
 		  data: data
 		})
 		  .then((response)=>{
-			  if(response.data===null && this.state.lookingForGame=== true){
+			  if(response.data===null && this.state.isLookingForGame=== true){
 				  setTimeout(()=>{
 					  this.checkIfQueuePopped();
 				  }, TIME_BETWEEN_POLLS)
 			  }
-			  else if(this.state.lookingForGame===true){
+			  else if(this.state.isLookingForGame===true){
 				  this.props.getQueueForParent(response.data);
 			  }
 			})
@@ -99,7 +99,7 @@ export default class MainMenu extends Component{
 			  console.log('Error fetching and parsing data', error);
 			});
 	}
-	
+
 	cancelQueue(){
 		this.setState({lookingForGame: false});
 		//Contacter le serveur pour etre removed.
@@ -114,7 +114,7 @@ export default class MainMenu extends Component{
 			  console.log('Error fetching and parsing data', error);
 			});
 	}
-	
+
 	componentWillMount(){
 		this.setState({playerId: this.props.playerId});
 	}
@@ -124,5 +124,5 @@ export default class MainMenu extends Component{
 	hideUnderContruction(){
 		this.setState({TAG: "hidden"});
 	}
-	
+
 }
