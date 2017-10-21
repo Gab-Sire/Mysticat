@@ -169,15 +169,17 @@ public class GameService implements QueueListener {
 		int attackedIndex = attackAction.getTargetIndex();
 		int speed = attackAction.getSpeed();
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
-		verifySpeed(speed, attacker);
-
 		if (attacker == null) {
 			System.out.println("The minion on " + attackerIndex + " for " + playerDeclaringAttack.getName()
 					+ " had previously declared an attack but was killed before it could resolve");
-		} else if (attackedIndex == HERO_FACE_INDEX) {
-			attackFace(opponentPlayer, attacker);
-		} else {
-			attackMinion(opponentPlayer, attackedIndex, attacker);
+		} 
+		else {
+			verifySpeed(speed, attacker);
+			if (attackedIndex == HERO_FACE_INDEX) {
+				attackFace(opponentPlayer, attacker);
+			} else {
+				attackMinion(opponentPlayer, attackedIndex, attacker);
+			}
 		}
 	}
 
