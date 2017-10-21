@@ -171,10 +171,8 @@ public class GameService implements QueueListener {
 			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
 			if (attacker.isDead()) {
 				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
-				attacker = null;
 			}
 			if (targetOfTheAttack.isDead()) {
-				targetOfTheAttack = null;
 				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
 						+ " was killed by " + attacker.getName());
 			}
