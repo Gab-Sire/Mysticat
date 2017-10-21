@@ -86,7 +86,7 @@ export default class MainMenu extends Component{
 		  data: data
 		})
 		  .then((response)=>{
-			  if(response.data===null && this.state.isLookingForGame=== true){
+			  if(response.data===null && this.state.isLookingForGame === true){
 				  setTimeout(()=>{
 					  this.checkIfQueuePopped();
 				  }, TIME_BETWEEN_POLLS)
@@ -101,7 +101,7 @@ export default class MainMenu extends Component{
 	}
 
 	cancelQueue(){
-		this.setState({lookingForGame: false});
+		this.setState({isLookingForGame: false});
 		//Contacter le serveur pour etre removed.
 		let data = this.props.playerId;
 		axios({

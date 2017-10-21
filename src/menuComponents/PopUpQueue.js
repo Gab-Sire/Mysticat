@@ -12,7 +12,7 @@ export default class PopUpQueue extends Component {
   render() {
 	  return (<div>{this.createMessage()}</div>);
   }
-  
+
   createMessage(){
 	  if(true===this.props.iSQueueingUp){
 		    return (
@@ -22,12 +22,10 @@ export default class PopUpQueue extends Component {
 			            	<button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button>
 			            </div>
 		            </div>
-		        );  
-	  }else{
-		    return (null);
+		        );
 	  }
   }
-  
+
   cancelQueue(){
 	  this.props.cancelQueue();
   }
