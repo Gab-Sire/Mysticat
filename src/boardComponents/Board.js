@@ -59,6 +59,7 @@ export default class Board extends Component{
 	changeTargetSelected(index){
 		if(null!==opponent.field[index]){
 			this.setState({targetMinion : index});
+			selectedOpponentFieldCellIndex = index;
 			this.addAttackAction();
 		}
 	}
@@ -147,19 +148,18 @@ export default class Board extends Component{
 		let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
 		let hasThisMinionAlreadyAttacked = !cellsOfAttackingMinion[this.state.attackerSelected];
 		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
-		let isThereAnOpponentMinionThere = (null!==opponent.field[this.state.targetMinion]);
+		let isThereAnOpponentMinionThere = (null!==opponent.field[selectedOpponentFieldCellIndex]);
 
-		console.log("And then idk:", this.state.targetMinion);
+		console.log("And then idk:", selectedOpponentFieldCellIndex);
 
 		if(isThereAMinionOnThisCell && isThereAnOpponentMinionThere && !hasThisMinionAlreadyAttacked){
-			console.log(self.field[this.state.attackerSelected].name, this.state.targetMinion, opponent.field);
 			cellsOfAttackingMinion[selectedFieldCellIndex] = true;
 			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
 							attackingMinionIndex : this.state.attackerSelected,
 							speed : self.field[this.state.attackerSelected].speed,
-							targetIndex: this.state.targetMinion
+							targetIndex: selectedOpponentFieldCellIndex
 						});
 			this.setState({ actionList: actions })
 		}
