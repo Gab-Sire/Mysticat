@@ -7,6 +7,8 @@ export default class Field extends Component{
 		super(props);
 		this.state={
 			selectedMinionIndex : null,
+			isAttacking: null,
+			attackClass: ""
 		}
 	}
 
@@ -22,6 +24,11 @@ export default class Field extends Component{
 		this.props.cellsOfSummonedMinionsThisTurn[index] = true;
 	}
 
+	assignAttaque = (index) => {
+		this.props.cellsOfAttaquingMinion[index] = true;
+		this.props.changeAttackerSelected();
+	}
+	
 	handleSelectMinion = (index, indexPlayer) => {
 
 		if(true === this.props.belongsToSelf){
@@ -30,6 +37,8 @@ export default class Field extends Component{
 
 			if(true === isEmpty && false === isAssigned){
 				this.assignFieldCellToSummon(index);
+			}else if(false === isEmpty){
+				this.assignAttaque(index);
 			}
 
 
@@ -46,7 +55,9 @@ export default class Field extends Component{
 		     <Minion
 		       	key={"fieldMinion" + index}
 		     	active = {true === this.props.belongsToSelf ? this.props.cellsOfSummonedMinionsThisTurn[index] : false}
-		     	onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
+		     	activeAtacker = {true === this.props.belongsToSelf ? this.props.cellsOfAttaquingMinion[index] : false}
+		     attackerSelected = {false === this.props.belongsToSelf ? this.props.attackerSelecter : false}	
+		     onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
 		    )
 		   }, this)
 		return <div> {fieldMinions} </div>;

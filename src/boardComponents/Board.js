@@ -30,7 +30,10 @@ export default class Board extends Component{
 			waitingForOpponentToEndTurn: false,
 			actionList : [],
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
-			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false]
+			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+			cellsOfAttaquingMinion: [false, false, false, false, false, false, false],
+			targetMinion:null,
+			attackerSelected:false
 		};
 	}
 
@@ -43,6 +46,9 @@ export default class Board extends Component{
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
 
+	}
+	changeAtackingSelected(){
+		this.setState({attackerSelected : !this.state.attackerSelected});
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
@@ -127,7 +133,7 @@ export default class Board extends Component{
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} />
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelecter={this.state.attackerSelected}/>
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
 					</div>
@@ -136,7 +142,8 @@ export default class Board extends Component{
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
-							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} />
+							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttaquingMinion={this.state.cellsOfAttaquingMinion} 
+							changeAttackerSelected={this.changeAtackingSelected.bind(this)}/>
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
 					</div>

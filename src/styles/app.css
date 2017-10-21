@@ -567,6 +567,22 @@
     box-shadow: 0 0 30px #CAED9E;
     border-radius: 5px;
 }
+/*
+*	Minion Attaqueur
+*/
+.attacker{
+	border: red 4px solid;
+	outline: none;
+    box-shadow: 0 0 20px  #d35400;
+    border-radius: 5px;
+}
+.target{
+	border: white 4px solid;
+	outline: none;
+    box-shadow: 0 0 20px  #c0392b;
+    border-radius: 5px;
+}
+
 
 /* Formulaires */
 
