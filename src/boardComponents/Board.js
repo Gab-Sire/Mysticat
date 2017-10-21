@@ -45,75 +45,6 @@ export default class Board extends Component{
 
 	}
 
-	retrieveCardSelectedIndex = (selectedIndex) => {
-		if(selectedIndex===cardIndex){
-			cardIndex = null;
-
-		}
-		else{
-			cardIndex = selectedIndex;
-
-		}
-	}
-
-	retrieveMinionSelectedIndex = (selectedIndex) =>{
-		if(null!==cardIndex && undefined!==cardIndex){
-			minionToBeSummonedIndex = selectedIndex;
-			this.addSummonAction();
-		}
-	}
-
-	addSummonAction = () => {
-		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
-		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
-		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
-		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex];
-		let manaCost = self.hand[cardIndex].manaCost;
-		let selfMana = self.remainingMana;
-
-		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
-			&& null===self.field[minionToBeSummonedIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
-			console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
-			wereTheseCardsPlayedThisTurn[cardIndex] = true;
-			areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex] = true;
-			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
-										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
-			let actions = this.state.actionList;
-			actions.push({ 	playerIndex : selfIndex,
-							indexOfCardInHand : cardIndex,
-							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
-						});
-			this.setState({ actionList: actions })
-
-			self.remainingMana = selfMana - manaCost;
-			cardIndex = null;
-		}
-	}
-
-	/* methods to surrender/quit the game */
-
-	surrenderGameConfirmStateChange(){
-		let status = this.state.isThinkingToGiveUp;
-		this.setState({ isThinkingToGiveUp: !status });
-	}
-
-	surrender(){
-		self.health = 0;
-		this.surrenderGameConfirmStateChange();
-		this.cancelActionSubmission();
-		setTimeout(()=>{
-			this.loseGame();
-		}, TIME_BETWEEN_POLLS);
-	}
-
-	loseGame(){
-		this.setState({ hasLostGame: true });
-	}
-
-	backToMainMenu(){
-		this.props.endGame();
-	}
-
 	render(){
 		return(
 			<div id="container">
@@ -164,6 +95,33 @@ export default class Board extends Component{
 		);
 	}
 
+	addSummonAction = () => {
+		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
+		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
+		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex];
+		let manaCost = self.hand[cardIndex].manaCost;
+		let selfMana = self.remainingMana;
+
+		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
+			&& null===self.field[minionToBeSummonedIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
+			console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
+			wereTheseCardsPlayedThisTurn[cardIndex] = true;
+			areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex] = true;
+			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
+										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
+			let actions = this.state.actionList;
+			actions.push({ 	playerIndex : selfIndex,
+							indexOfCardInHand : cardIndex,
+							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
+						});
+			this.setState({ actionList: actions })
+
+			self.remainingMana = selfMana - manaCost;
+			cardIndex = null;
+		}
+	}
+
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
@@ -183,6 +141,44 @@ export default class Board extends Component{
 					  this.getInitialGameInstance();
 				  }, TIME_BETWEEN_POLLS)
 		});
+	}
+
+	//Periodically calls the back end to know if both players have posted their actions
+	checkIfGameUpdated(){
+		const data = this.state.playerId;
+		axios({
+			  method:'post',
+			  url:'http://localhost:8089/checkIfGameUpdated',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
+			})
+			  .then((response)=>{
+				  console.log(response.data);
+				  if(response.data!==null){
+					  	this.setState({gameState: response.data,
+							  actionList : [],
+							  activeIndex : null,
+								cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
+							  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+								waitingForOpponentToEndTurn: false
+					  	});
+						players = this.state.gameState.players;
+						self = this.state.gameState.players[selfIndex];
+						opponent = this.state.gameState.players[opponentIndex];
+						this.forceUpdate();
+				  }
+				  else{
+						if(true===this.state.waitingForOpponentToEndTurn){
+							setTimeout(()=>{
+								this.checkIfGameUpdated();
+							}, TIME_BETWEEN_POLLS)
+						}
+				  }
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
 	}
 
 	sendActions(){
@@ -208,45 +204,47 @@ export default class Board extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	//Periodically calls the back end to know if both players have posted their actions
-		checkIfGameUpdated(){
-			const data = this.state.playerId;
-			axios({
-				  method:'post',
-				  url:'http://localhost:8089/checkIfGameUpdated',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data: data
-				})
-				  .then((response)=>{
-					  console.log(response.data);
-					  if(response.data!==null){
-						  	this.setState({gameState: response.data,
-								  actionList : [],
-								  activeIndex : null,
-									cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
-								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
-									waitingForOpponentToEndTurn: false
-						  	});
-							players = this.state.gameState.players;
-							self = this.state.gameState.players[selfIndex];
-							opponent = this.state.gameState.players[opponentIndex];
-							this.forceUpdate();
-					  }
-					  else{
-							if(true===this.state.waitingForOpponentToEndTurn){
-								setTimeout(()=>{
-									this.checkIfGameUpdated();
-								}, TIME_BETWEEN_POLLS)
-							}
-					  }
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-					});
-		}
 
-		cancelActionSubmission(){
-				this.setState({waitingForOpponentToEndTurn:false});
+	retrieveCardSelectedIndex = (selectedIndex) => {
+		if(selectedIndex===cardIndex){
+			cardIndex = null;
 		}
+		else{
+			cardIndex = selectedIndex;
+		}
+	}
+
+	retrieveMinionSelectedIndex = (selectedIndex) =>{
+		if(null!==cardIndex && undefined!==cardIndex){
+			minionToBeSummonedIndex = selectedIndex;
+			this.addSummonAction();
+		}
+	}
+
+	cancelActionSubmission(){
+			this.setState({waitingForOpponentToEndTurn:false});
+	}
+
+	/* methods to surrender/quit the game */
+	surrenderGameConfirmStateChange(){
+		let status = this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status });
+	}
+
+	surrender(){
+		self.health = 0;
+		this.surrenderGameConfirmStateChange();
+		this.cancelActionSubmission();
+		setTimeout(()=>{
+			this.loseGame();
+		}, TIME_BETWEEN_POLLS);
+	}
+
+	loseGame(){
+		this.setState({ hasLostGame: true });
+	}
+
+	backToMainMenu(){
+		this.props.endGame();
+	}
 }

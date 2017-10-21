@@ -5,9 +5,8 @@ export default class CardTile extends Component{
 		super(props);
 		this.state={};
 	}
-	
+
 	render(){
-		
 		return (<div className="cardTile"></div>
 		);
 	}

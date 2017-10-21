@@ -31,5 +31,4 @@ export default class EndGameScreen extends Component {
   backToMainMenu(){
 	  this.props.backToMainMenu();
   }
-
 }

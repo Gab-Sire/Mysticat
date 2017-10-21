@@ -8,11 +8,11 @@ export default class Surrender extends Component {
     this.state = {
     }
   }
-  
+
   render() {
 	  return (<div>{this.createFrom()}</div>);
   }
-  
+
   createFrom(){
 	  if(this.props.status){
 		    return (
@@ -22,16 +22,15 @@ export default class Surrender extends Component {
 			            	<button onClick={this.giveUp.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
 			            </div>
 		            </div>
-		        );  
+		        );
 	  }
   }
-  
+
   giveUp(){
 	  this.props.enough();
   }
-  
+
   stayInTheGame(){
 	  this.props.never();
   }
-
 }

@@ -7,9 +7,8 @@ export default class Graveyard extends Component{
 		super(props);
 		this.state={ isEmpty:true };
 	}
-	
-	render(){
-		
+
+	render(){	
 		if(this.props.size===0){
 			return (<div id={this.props.id} className="graveyard" title="Empty graveyard.">
 				<div className="graveyardCount">

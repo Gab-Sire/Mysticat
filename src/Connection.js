@@ -19,9 +19,11 @@ export default class Connection extends Component{
 			return <Login connectPlayer={this.connectPlayer} changeSignUpMode={this.changeSignUpMode}/>
 		}
 	}
+	
 	connectPlayer(playerId){
 		this.props.connectPlayer(playerId);
 	}
+
 	changeSignUpMode(){
 		let statut = this.state.signupMode;
 		this.setState({ signupMode: !statut});
@@ -31,5 +33,4 @@ export default class Connection extends Component{
 			this.setState({ tagLoginSignUp: "Login"});
 		}
 	}
-	
 }

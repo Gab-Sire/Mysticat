@@ -6,14 +6,6 @@ export default class Card extends Component{
 		this.state={faceUp: true, selected:false};
 	}
 	
-	handleClick = () => {
-		this.setState(prevState =>({ selected: !this.state.selected }));
-	};
-	
-	unselect = () => {
-		this.setState(prevState => ({ selected: false }));
-	}
-	
 	render(){
 		let isSelected = "";
 		if(true === this.props.active){
@@ -31,6 +23,14 @@ export default class Card extends Component{
 		}
 		else{
 			return (<div className="cardFacedDown"></div>);
-		}	
+		}
+	}
+
+	handleClick = () => {
+		this.setState(prevState =>({ selected: !this.state.selected }));
+	};
+
+	unselect = () => {
+		this.setState(prevState => ({ selected: false }));
 	}
 }
