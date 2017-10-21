@@ -41,6 +41,7 @@ export default class Board extends Component{
 	componentWillMount(){
 		this.setState({gameState: this.props.gameState, isLoaded: true, playerId: this.props.playerId})
 		//initializing players main attributes from the gamestate
+
 		players = this.props.gameState.players;
 		selfIndex = (players[0].playerId === this.props.playerId) ? 0 : 1;
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
@@ -53,14 +54,13 @@ export default class Board extends Component{
 			this.setState({attackerSelected : index});
 		}else if(index === this.state.attackerSelected ){
 			this.setState({attackerSelected : null});
-			this.state.cellsOfAttackingMinion[index]=false;
 		}
 	}
 	changeTargetSelected(index){
-		this.setState({targetMinion : index});
-		//Add to array here
-		this.setState({attackerSelected : null});
-		this.setState({targetMinion : null});
+		if(null!==opponent.field[index]){
+			this.setState({targetMinion : index});
+			this.addAttackAction();
+		}
 	}
 
 	render(){
@@ -76,7 +76,7 @@ export default class Board extends Component{
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} 
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false}
 							attackerSelected={this.state.attackerSelected} targetSelected={this.changeTargetSelected.bind(this)}/>
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
@@ -143,20 +143,23 @@ export default class Board extends Component{
 	}
 
 	addAttackAction = () => {
+
 		let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
-		let hasThisMinionAlreadyAttacked = cellsOfAttackingMinion[selectedFieldCellIndex];
+		let hasThisMinionAlreadyAttacked = !cellsOfAttackingMinion[this.state.attackerSelected];
 		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
-		let isThereAnOpponentMinionThere = (null!==opponent.field[selectedOpponentFieldCellIndex]);
+		let isThereAnOpponentMinionThere = (null!==opponent.field[this.state.targetMinion]);
+
+		console.log("And then idk:", this.state.targetMinion);
 
 		if(isThereAMinionOnThisCell && isThereAnOpponentMinionThere && !hasThisMinionAlreadyAttacked){
-			console.log(self.field[selectedFieldCellIndex].name + " is going to attack " + opponent.field[selectedOpponentFieldCellIndex].name);
+			console.log(self.field[this.state.attackerSelected].name, this.state.targetMinion, opponent.field);
 			cellsOfAttackingMinion[selectedFieldCellIndex] = true;
 			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
-							attackingMinionIndex : selectedFieldCellIndex,
-							speed : self.field[selectedFieldCellIndex].speed,
-							targetIndex: selectedOpponentFieldCellIndex
+							attackingMinionIndex : this.state.attackerSelected,
+							speed : self.field[this.state.attackerSelected].speed,
+							targetIndex: this.state.targetMinion
 						});
 			this.setState({ actionList: actions })
 		}
