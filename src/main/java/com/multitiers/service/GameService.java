@@ -55,12 +55,10 @@ public class GameService implements QueueListener {
 		this.gameQueue.addToListeners(this);
 	}
 
-	
-
 	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
 		String playerOneId = playerOneActions.getPlayerId();
 		String playerTwoId = playerTwoActions.getPlayerId();
-		
+
 		String gameId = playerOneActions.getGameId();
 		if (!gameId.equals(playerTwoActions.getGameId())) {
 			throw new RuntimeException("Game id mismatch.");
@@ -70,22 +68,22 @@ public class GameService implements QueueListener {
 		}
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
 		Game game = this.existingGameList.get(gameId);
-		
+
 		resolveAllActions(actions, game);
-		
+
 		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
 		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
 		game.nextTurn();
-		
+
 		this.existingGameList.put(gameId, game);
 		this.updatedGameList.put(playerOneId, game);
 		this.updatedGameList.put(playerTwoId, game);
-				
+
 		this.sentActionLists.remove(gameId);
 
 		this.newGameList.remove(playerOneId);
-		this.newGameList.remove(playerTwoId);		
-		
+		this.newGameList.remove(playerTwoId);
+
 	}
 
 	private void removePlayedCardsFromPlayerHand(ActionList playerActionList, String playerId, Game game) {
@@ -94,20 +92,20 @@ public class GameService implements QueueListener {
 
 		List<Integer> indexesOfCardsThatWerePlayed = new ArrayList<Integer>();
 		gatherIndexesOfPlayedCards(playerActionList, indexesOfCardsThatWerePlayed);
-		
+
 		removePlayedCards(currentPlayer, indexesOfCardsThatWerePlayed);
 	}
 
 	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
 		Collections.sort(indexesOfCardsThatWerePlayed);
-		for(int i = indexesOfCardsThatWerePlayed.size()-1; i>=0; --i) {
+		for (int i = indexesOfCardsThatWerePlayed.size() - 1; i >= 0; --i) {
 			currentPlayer.removeCardFromHand(indexesOfCardsThatWerePlayed.get(i));
 		}
 	}
 
 	private void gatherIndexesOfPlayedCards(ActionList playerActionList, List<Integer> indexesOfCardsThatWerePlayed) {
-		for(Action action : playerActionList.getPlayerActions()) {
-			if(action instanceof SummonAction) {
+		for (Action action : playerActionList.getPlayerActions()) {
+			if (action instanceof SummonAction) {
 				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getIndexOfCardInHand());
 			}
 		}
@@ -155,7 +153,10 @@ public class GameService implements QueueListener {
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
 		verifySpeed(speed, attacker);
 
-		if (attackedIndex == HERO_FACE_INDEX) {
+		if (attacker == null) {
+			System.out.println("The minion on " + attackerIndex + " for " + playerDeclaringAttack.getName()
+					+ " had previously declared an attack but was killed before it could resolve");
+		} else if (attackedIndex == HERO_FACE_INDEX) {
 			attackFace(opponentPlayer, attacker);
 		} else {
 			attackMinion(opponentPlayer, attackedIndex, attacker);
@@ -169,12 +170,18 @@ public class GameService implements QueueListener {
 			attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
 			if (attacker.isDead()) {
+				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
 				attacker = null;
 			}
 			if (targetOfTheAttack.isDead()) {
 				targetOfTheAttack = null;
+				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
+						+ " was killed by " + attacker.getName());
 			}
+		} else {
+			System.out.println("Target is missing or dead.");
 		}
+
 	}
 
 	private void attackFace(Player opponentPlayer, Minion attacker) {
