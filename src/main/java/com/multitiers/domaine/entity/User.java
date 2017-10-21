@@ -33,6 +33,9 @@ public class User {
 	@Column(name="usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
 
+	@Column(name="usr_hero_img_path")
+	protected HeroPortrait heroPortrait;
+	
 	public User(String username, String passwordHash, String hashedSalt) {
 		super();
 		this.username = username;
@@ -76,11 +79,18 @@ public class User {
 		this.decks = decks;
 	}
 
+	public HeroPortrait getHeroPortrait() {
+		return heroPortrait;
+	}
+
+	public void setHeroPortrait(HeroPortrait heroPortrait) {
+		this.heroPortrait = heroPortrait;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", passwordHash=" + passwordHash + ", decks=" + decks
-				+ ", hashedSalt=" + hashedSalt + "]";
+				+ ", hashedSalt=" + hashedSalt + ", heroPortrait=" + heroPortrait + "]";
 	}
-	
-	
+
 }

@@ -101,7 +101,7 @@ export default class MainMenu extends Component{
 			  console.log('Error fetching and parsing data', error);
 			});
 	}
-	
+
 	getHardCodedGame(){
 		axios({
 			  method:'get',
@@ -110,6 +110,7 @@ export default class MainMenu extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
+									console.log(response.data);
 				  this.props.getQueueForParent(response.data);
 				})
 				.catch(error => {

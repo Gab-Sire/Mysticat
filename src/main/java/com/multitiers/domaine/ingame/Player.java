@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.multitiers.domaine.entity.Card;
+import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.util.Constantes;
@@ -18,6 +19,7 @@ public class Player {
 	private List<PlayableCard> hand;
 	private Integer remainingMana;
 	private Integer fatigueDamage;
+	private HeroPortrait heroPortrait;
 
 	public Player() {
 		super();
@@ -37,6 +39,7 @@ public class Player {
 		this.hand = new ArrayList<PlayableCard>();
 		this.fatigueDamage = Constantes.STARTING_FATIGUE_DAMAGE;
 		this.remainingMana = Constantes.STARTING_MANA;
+		this.heroPortrait = user.getHeroPortrait();
 
 		Collections.shuffle(deck);
 		drawStartingHand();
@@ -148,5 +151,13 @@ public class Player {
 	
 	public void removeCardFromHand(int indexInHand) {
 		this.hand.remove(indexInHand);
+	}
+
+	public HeroPortrait getHeroPortrait() {
+		return heroPortrait;
+	}
+
+	public void setHeroPortrait(HeroPortrait heroPortrait) {
+		this.heroPortrait = heroPortrait;
 	}
 }

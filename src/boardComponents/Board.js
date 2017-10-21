@@ -53,7 +53,7 @@ export default class Board extends Component{
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
 					</div>
 					<div id="opponentHandUnderLayer"></div>
-					<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
+					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait}/>
 
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
@@ -73,7 +73,7 @@ export default class Board extends Component{
 					</div>
 					<div id="selfFieldUnderLayer"></div>
 
-					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
+					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName={self.heroPortrait}/>
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
@@ -130,9 +130,7 @@ export default class Board extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  this.setState({gameState: response.data,
-					  });
-				  this.setState({isLoaded: true});
+				  this.setState({gameState: response.data, isLoaded: true});
 				  this.forceUpdate();
 				})
 				.catch(error => {
