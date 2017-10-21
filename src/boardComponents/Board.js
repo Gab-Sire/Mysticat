@@ -31,7 +31,7 @@ export default class Board extends Component{
 			actionList : [],
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
 			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
-			cellsOfAttaquingMinion: [false, false, false, false, false, false, false],
+			cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 			targetMinion:null,
 			attackerSelected:null
 		};
@@ -73,7 +73,7 @@ export default class Board extends Component{
 						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
-							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttaquingMinion={this.state.cellsOfAttaquingMinion} 
+							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttackingMinion={this.state.cellsOfAttackingMinion}
 							changeAttackerSelected={this.changeAtackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
