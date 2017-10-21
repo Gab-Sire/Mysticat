@@ -17,8 +17,9 @@ let self;
 let opponent;
 let opponentIndex;
 
-let minionToBeSummonedIndex;
+let selectedFieldCellIndex;
 let cardIndex;
+let selectedOpponentFieldCellIndex;
 
 export default class Board extends Component{
 	constructor(props){
@@ -106,26 +107,46 @@ export default class Board extends Component{
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
 		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
 		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
-		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex];
+		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex];
 		let manaCost = self.hand[cardIndex].manaCost;
 		let selfMana = self.remainingMana;
 
 		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
-			&& null===self.field[minionToBeSummonedIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
-			console.log("Card played from hand: "+cardIndex+" on field cell: "+minionToBeSummonedIndex);
+			&& null===self.field[selectedFieldCellIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
+			console.log("Card played from hand: "+cardIndex+" on field cell: "+selectedFieldCellIndex);
 			wereTheseCardsPlayedThisTurn[cardIndex] = true;
-			areTheseCellsAboutToBeSummonedOn[minionToBeSummonedIndex] = true;
+			areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex] = true;
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
 							indexOfCardInHand : cardIndex,
-							fieldCellWhereTheMinionIsBeingSummoned : minionToBeSummonedIndex
+							fieldCellWhereTheMinionIsBeingSummoned : selectedFieldCellIndex
 						});
 			this.setState({ actionList: actions })
 
 			self.remainingMana = selfMana - manaCost;
 			cardIndex = null;
+		}
+	}
+
+	addAttackAction = () => {
+		let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
+		let hasThisMinionAlreadyAttacked = cellsOfAttackingMinion[selectedFieldCellIndex];
+		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
+		let isThereAnOpponentMinionThere = (null!==opponent.field[selectedOpponentFieldCellIndex]);
+
+		if(isThereAMinionOnThisCell && isThereAnOpponentMinionThere && !hasThisMinionAlreadyAttacked){
+			console.log(self.field[selectedFieldCellIndex].name + " is going to attack " + opponent.field[selectedOpponentFieldCellIndex].name);
+			cellsOfAttackingMinion[selectedFieldCellIndex] = true;
+			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
+			let actions = this.state.actionList;
+			actions.push({ 	playerIndex : selfIndex,
+							attackingMinionIndex : selectedFieldCellIndex,
+							speed : self.field[selectedFieldCellIndex].speed,
+							targetIndex: selectedOpponentFieldCellIndex
+						});
+			this.setState({ actionList: actions })
 		}
 	}
 
@@ -166,6 +187,7 @@ export default class Board extends Component{
 							  activeIndex : null,
 								cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
 							  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+								cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 								waitingForOpponentToEndTurn: false
 					  	});
 						players = this.state.gameState.players;
@@ -221,7 +243,7 @@ export default class Board extends Component{
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		if(null!==cardIndex && undefined!==cardIndex){
-			minionToBeSummonedIndex = selectedIndex;
+			selectedFieldCellIndex = selectedIndex;
 			this.addSummonAction();
 		}
 	}
