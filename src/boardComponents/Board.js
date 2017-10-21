@@ -49,7 +49,7 @@ export default class Board extends Component{
 		opponent = players[opponentIndex];
 
 	}
-	changeAtackingSelected(index){
+	changeAttackingSelected(index){
 		if(null === this.state.attackerSelected || index !== this.state.attackerSelected ){
 			this.setState({attackerSelected : index});
 		}else if(index === this.state.attackerSelected ){
@@ -88,7 +88,7 @@ export default class Board extends Component{
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttackingMinion={this.state.cellsOfAttackingMinion}
-							changeAttackerSelected={this.changeAtackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
+							changeAttackerSelected={this.changeAttackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
 					</div>
@@ -144,7 +144,6 @@ export default class Board extends Component{
 	}
 
 	addAttackAction = () => {
-
 		let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
 		let hasThisMinionAlreadyAttacked = !cellsOfAttackingMinion[this.state.attackerSelected];
 		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
