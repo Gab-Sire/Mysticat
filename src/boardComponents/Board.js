@@ -49,7 +49,16 @@ export default class Board extends Component{
 
 	}
 	changeAtackingSelected(index){
-		this.setState({attackerSelected : index});
+		if(null === this.state.attackerSelected || index !== this.state.attackerSelected ){
+			this.setState({attackerSelected : index});
+		}else if(index === this.state.attackerSelected ){
+			this.setState({attackerSelected : null});
+			this.state.cellsOfAttackingMinion[index]=false;
+		}
+	}
+	changeTargetSelected(index){
+		this.setState({targetMinion : index});
+		this.setState({attackerSelected : null});
 	}
 
 	render(){

@@ -7,8 +7,6 @@ export default class Field extends Component{
 		super(props);
 		this.state={
 			selectedMinionIndex : null,
-			isAttacking: null,
-			attackClass: ""
 		}
 	}
 
