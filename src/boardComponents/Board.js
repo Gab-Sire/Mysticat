@@ -33,7 +33,7 @@ export default class Board extends Component{
 			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
 			cellsOfAttaquingMinion: [false, false, false, false, false, false, false],
 			targetMinion:null,
-			attackerSelected:false
+			attackerSelected:null
 		};
 	}
 
@@ -47,8 +47,8 @@ export default class Board extends Component{
 		opponent = players[opponentIndex];
 
 	}
-	changeAtackingSelected(){
-		this.setState({attackerSelected : !this.state.attackerSelected});
+	changeAtackingSelected(index){
+		this.setState({attackerSelected : index});
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
@@ -133,7 +133,7 @@ export default class Board extends Component{
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelecter={this.state.attackerSelected}/>
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelected={this.state.attackerSelected}/>
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
 					</div>
@@ -143,7 +143,7 @@ export default class Board extends Component{
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttaquingMinion={this.state.cellsOfAttaquingMinion} 
-							changeAttackerSelected={this.changeAtackingSelected.bind(this)}/>
+							changeAttackerSelected={this.changeAtackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
 						</div>
 						<Deck id="selfDeck" size={self.deck.length}/>
 					</div>
