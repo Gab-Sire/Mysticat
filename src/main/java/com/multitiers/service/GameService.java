@@ -118,9 +118,27 @@ public class GameService implements QueueListener {
 			} else if (action instanceof AttackAction) {
 				resolveAttackAction((AttackAction) action, game);
 			}
+			sendDeadMinionsToGraveyards(game);
 		}
 	}
-
+	
+	// Enleve seulement les minions mort en ce moment.
+	private void sendDeadMinionsToGraveyards(Game game) {
+		Player[] players = game.getPlayers();
+		for(Player player : players) {
+			Minion[] field = player.getField();
+			for(int i=0; i<field.length; ++i) {
+				Minion minion = field[i];
+				if(minion!=null) {
+					if(minion.isDead()) {
+						field[i] = null;	
+					}
+				}
+			}
+			player.setField(field);
+		}
+	}
+	
 	private List<Action> getCompleteSortedActionList(ActionList playerOneActions, ActionList playerTwoActions) {
 		List<Action> actions = new ArrayList<>();
 		actions.addAll(playerOneActions.getPlayerActions());
