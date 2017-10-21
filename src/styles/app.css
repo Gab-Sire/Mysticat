@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-/* GÉNÉRAL */
+/* Gï¿½Nï¿½RAL */
 * {
 	box-sizing: border-box;
 }
@@ -108,10 +108,10 @@
 #menuBox{
 	position:relative;
 	width:40%;
-	height: 350px;	
+	height: 350px;
 	margin-left:30%;
-	margin-top:10%;	
-	margin-bottom:10%;	
+	margin-top:10%;
+	margin-bottom:10%;
 	text-align:center;
 	background-color: rgba(100, 100, 200, 0.5);
 	border-radius: 40px;
@@ -126,7 +126,7 @@
 	background-image: url('../img/flyingCat.gif');
 	background-size:     cover;
     background-repeat:   no-repeat;
-    background-position: center center; 
+    background-position: center center;
 }
 #menuGame {
 	z-index: 1;
@@ -165,7 +165,7 @@
 	text-align: center;
 	padding-top: 50px;
 	border-radius:40px;
-	
+
 }
 
 /* MAINS DE CARTES */
@@ -267,9 +267,9 @@
 	border-bottom-right-radius: 10px;
 }
 
-/* CIMETIÈRE */
+/* CIMETIï¿½RE */
 
-/* styles pour les zones cimetière */
+/* styles pour les zones cimetiï¿½re */
 
 .graveyard {
 	position: relative;
@@ -308,7 +308,7 @@
 	background-position: -65px;
 }
 
-/* styles pour les cartes dans le cimetière */
+/* styles pour les cartes dans le cimetiï¿½re */
 
 .graveyard .cardTile {
 	width: 30%;
@@ -440,7 +440,7 @@
 	box-sizing: border-box;
 }
 
-/* styles pour les créatures invoquées sur le champ de bataille */
+/* styles pour les crï¿½atures invoquï¿½es sur le champ de bataille */
 
 .minion {
 	background: darkblue;
@@ -450,9 +450,9 @@
 	transform:scale(1.2);
 }
 
-/* HÉROS */
+/* Hï¿½ROS */
 
-/* styles pour les héros */
+/* styles pour les hï¿½ros */
 
 .hero {
 	border: 1px yellow solid;
@@ -473,7 +473,7 @@
 }
 
 
-/* style pour les types de héros */
+/* style pour les types de hï¿½ros */
 
 .zorroHero {
 	background-image: url('../img/chatZorro.jpg');
@@ -492,7 +492,7 @@
 	background-position: center;
 }
 
-/* styles pour l'attribut vies du héros (joueur) */
+/* styles pour l'attribut vies du hï¿½ros (joueur) */
 
 .heroHealth {
 	width: 29%;
@@ -516,7 +516,7 @@
 	top: 35px;
 }
 
-/* styles pour l'attribut mana du héros (joueur) */
+/* styles pour l'attribut mana du hï¿½ros (joueur) */
 
 #selfMana {
 	bottom: 40px;
@@ -552,7 +552,7 @@
 	background-color: #41aff4;
 }
 
-/* Général overrides */
+/* Gï¿½nï¿½ral overrides */
 
 .selected{
 	border: pink 4px solid;
@@ -567,22 +567,6 @@
     box-shadow: 0 0 30px #CAED9E;
     border-radius: 5px;
 }
-/*
-*	Minion Attaqueur
-*/
-.attacker{
-	border: red 4px solid;
-	outline: none;
-    box-shadow: 0 0 20px  #d35400;
-    border-radius: 5px;
-}
-.target{
-	border: white 4px solid;
-	outline: none;
-    box-shadow: 0 0 20px  #c0392b;
-    border-radius: 5px;
-}
-
 
 /* Formulaires */
 
