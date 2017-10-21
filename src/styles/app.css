@@ -106,20 +106,26 @@
 }
 
 .menuContainer {
-	margin: 10%;
+	margin: 5% 5% 5% 10%;
 	width: 80%;
 }
 
 #menuBox {
 	position: relative;
 	width: 40%;
-	height: 350px;
+	--height: 350px;
+	height: 30%;
 	margin-left: 30%;
 	margin-top: 10%;
 	margin-bottom: 10%;
 	text-align: center;
 	background-color: rgba(100, 100, 200, 0.5);
 	border-radius: 40px;
+}
+
+#titleMenu{
+	color: white;
+	padding-top: 4%;
 }
 
 #imgMenuPrincipal {
@@ -170,10 +176,14 @@
 	top: 30%;
 	left: 25%;
 	width: 50%;
-	height: 200px;
+	height: 20%;
 	text-align: center;
-	padding-top: 50px;
+	padding-top: 3%;
 	border-radius: 40px;
+}
+
+#messagePopUp {
+	color: white;
 }
 
 /* MAINS DE CARTES */

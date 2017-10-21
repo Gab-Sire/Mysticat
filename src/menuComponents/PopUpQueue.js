@@ -18,7 +18,7 @@ export default class PopUpQueue extends Component {
 		    return (
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
-			            	<p>À la recherche d'un adversaire ... </p>
+			            	<p id="messagePopUp">À la recherche d'un adversaire ... </p>
 			            	<button onClick={this.cancelQueue.bind(this)}>Quitter la file d'attente</button>
 			            </div>
 		            </div>

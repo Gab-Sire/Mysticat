@@ -20,7 +20,7 @@ export default class MainMenu extends Component{
 	render(){
 		return (<div id='MainMenu'>
 				<div id='menuBox'>
-					<h2> Mysticat</h2>
+					<h2 id="titleMenu"> Mysticat</h2>
 					<div className='menuContainer'>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
