@@ -17,11 +17,12 @@ class App extends Component{
 			gameState: null
 		};
 	}
-	
-	getGameFromQueue = (gameState)=>{
-		this.setState({gameState: gameState, inGame: true})
+
+	componentWillMount(){
+		this.checkServerAvailability();
+		this.getTestActionList();
 	}
-	
+
 	render(){
 		if(true===this.state.isServerAvailable){
 			if(false===this.state.inGame && null !==this.state.playerId){
@@ -34,25 +35,13 @@ class App extends Component{
 			else{
 				return (<div><Connection signupMode={this.state.signupMode} connectPlayer={this.setIdPlayer.bind(this)}/>
 						</div>)
-				
-			}	
+
+			}
 		}
 		else return (<LoadingScreen text={"Contacting server..."}/>)
-		
+
 	}
-	
-	disconnectPlayer(){
-		this.setState({"playerId" : null});
-	}
-	
-	
-	setIdPlayer(idPlayer){
-		this.setState({"playerId" : idPlayer});
-	}
-	endGameMode(){
-		this.setState({"inGame" : false});
-	}
-	
+
 	getTestActionList(){
 		axios({
 			  method:'get',
@@ -70,7 +59,7 @@ class App extends Component{
 						  }, TIME_BETWEEN_POLLS)
 				});
 	}
-	
+
 	checkServerAvailability(){
 		axios({
 			  method:'get',
@@ -88,12 +77,21 @@ class App extends Component{
 						  }, TIME_BETWEEN_POLLS)
 				});
 	}
-	componentWillMount(){
-		this.checkServerAvailability();
-		this.getTestActionList();
-	}
-	
-}
 
+	disconnectPlayer(){
+		this.setState({"playerId" : null});
+	}
+
+	setIdPlayer(idPlayer){
+		this.setState({"playerId" : idPlayer});
+	}
+	endGameMode(){
+		this.setState({"inGame" : false});
+	}
+
+	getGameFromQueue = (gameState)=>{
+		this.setState({gameState: gameState, inGame: true})
+	}
+}
 
 export default App;

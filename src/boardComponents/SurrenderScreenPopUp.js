@@ -34,5 +34,4 @@ export default class SurrenderScreenPopUp extends Component {
   stayInTheGame(){
 	  this.props.stayInTheGame();
   }
-
 }

@@ -9,15 +9,20 @@ export default class MainMenu extends Component{
 		this.state={
 				playerId: null,
 				isLookingForGame: false,
-				TAG:"hidden"
+				tag:"hidden"
 			}
 	}
+
+	componentWillMount(){
+		this.setState({playerId: this.props.playerId});
+	}
+
 	render(){
 		return (<div id='MainMenu'>
 				<div id='menuBox'>
 					<h2> Mysticat</h2>
 					<div className='menuContainer'>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Entrer dans la file d'attente</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue();
@@ -28,17 +33,14 @@ export default class MainMenu extends Component{
 						}
 						>Déconnexion</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
-						<div className={this.state.TAG}>Pas encore disponible</div>
+						<div className={this.state.tag}>Pas encore disponible</div>
 					</div>
 				</div>
 				<div id="imgMenuPrincipal"></div>
 				<PopUpQueue iSQueueingUp={this.state.isLookingForGame} cancelQueue={this.cancelQueue.bind(this)} />
 			</div>);
 	}
-	deconnexion(){
-		this.hideUnderContruction();
-		this.props.disconnectPlayer();
-	}
+
 	enterQueue(){
 		this.hideUnderContruction();
 		this.setState({isLookingForGame: true})
@@ -59,21 +61,6 @@ export default class MainMenu extends Component{
 			.catch(error => {
 			  console.log('Error fetching and parsing data', error);
 			});
-	}
-
-	getHardCodedGame(){
-		axios({
-			  method:'get',
-			  url:'http://localhost:8089/getHardCodedGame',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
-			})
-			  .then((response)=>{
-				  this.props.getQueueForParent(response.data);
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				});
 	}
 
 	checkIfQueuePopped(){
@@ -115,14 +102,32 @@ export default class MainMenu extends Component{
 			});
 	}
 
-	componentWillMount(){
-		this.setState({playerId: this.props.playerId});
+	getHardCodedGame(){
+		axios({
+			  method:'get',
+			  url:'http://localhost:8089/getHardCodedGame',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+									console.log(response.data);
+				  this.props.getQueueForParent(response.data);
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
 	}
+
 	displayUnderContruction(){
-		this.setState({TAG: "visible"});
+		this.setState({tag: "visible"});
 	}
 	hideUnderContruction(){
-		this.setState({TAG: "hidden"});
+		this.setState({tag: "hidden"});
+	}
+
+	deconnexion(){
+		this.hideUnderContruction();
+		this.props.disconnectPlayer();
 	}
 
 }

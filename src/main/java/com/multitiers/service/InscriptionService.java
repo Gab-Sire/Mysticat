@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
+import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
@@ -51,7 +52,9 @@ public class InscriptionService {
         }
         
         User user1 = createUser("Chat1", "Myboy1");
+        user1.setHeroPortrait(HeroPortrait.warriorHero);
         User user2 = createUser("Chat2", "Myboy2");
+        user2.setHeroPortrait(HeroPortrait.wizardHero);
         userRepository.save(user1);
         userRepository.save(user2);
     }
@@ -118,5 +121,4 @@ public class InscriptionService {
 	     }
 	     throw new BadCredentialsLoginException();
     }
-    
 }

@@ -12,8 +12,17 @@ export default class Field extends Component{
 		}
 	}
 
-	isThisFieldCellEmpty = (index) => {
-		return (null === this.props.self.field[index]);
+	render(){
+		const props = (this.props.players[this.props.playerIndex].field);
+		let fieldMinions = this.props.players[this.props.playerIndex].field.map(function(minion, index){
+				return (
+				 <Minion
+						key={"fieldMinion" + index}
+					active = {true === this.props.belongsToSelf ? this.props.cellsOfSummonedMinionsThisTurn[index] : false}
+					onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
+				)
+			 }, this)
+		return <div> {fieldMinions} </div>;
 	}
 
 	isThisFieldCellAssignedToPreviousSummon = (index) => {
@@ -30,10 +39,8 @@ export default class Field extends Component{
 	}
 	
 	handleSelectMinion = (index, indexPlayer) => {
-
 		if(true === this.props.belongsToSelf){
 			let isEmpty = this.isThisFieldCellEmpty(index);
-				let isAssigned = this.isThisFieldCellAssignedToPreviousSummon(index);
 
 			if(true === isEmpty && false === isAssigned){
 				this.assignFieldCellToSummon(index);
@@ -45,7 +52,6 @@ export default class Field extends Component{
 				this.setState({ selectedMinionIndex: index })
 				this.props.callBackSelectedMinion(index);
 			}
-		
 	}
 
 	render(){

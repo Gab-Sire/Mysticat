@@ -51,22 +51,55 @@ export default class Board extends Component{
 		this.setState({attackerSelected : index});
 	}
 
-	retrieveCardSelectedIndex = (selectedIndex) => {
-		if(selectedIndex===cardIndex){
-			cardIndex = null;
+	render(){
+		return(
+			<div id="container">
+				<div id="board">
+					<div id="opponentHand" className="hand">
+						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
+					</div>
+					<div id="opponentHandUnderLayer"></div>
+					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait}/>
 
-		}
-		else{
-			cardIndex = selectedIndex;
+					<div id="fieldContainer" className="fieldContainer">
+						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
+						<div id="opponentField" className="battleField">
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelected={this.state.attackerSelected}/>
+						</div>
+						<Deck id="opponentDeck" size={opponent.deck.length}/>
+					</div>
 
-		}
-	}
+					<div id="selfFieldContainer" className="fieldContainer">
+						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
+						<div id="selfField" className="battleField">
+							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
+							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttaquingMinion={this.state.cellsOfAttaquingMinion} 
+							changeAttackerSelected={this.changeAtackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
+						</div>
+						<Deck id="selfDeck" size={self.deck.length}/>
+					</div>
+					<div id="selfFieldUnderLayer"></div>
 
-	retrieveMinionSelectedIndex = (selectedIndex) =>{
-		if(null!==cardIndex && undefined!==cardIndex){
-			minionToBeSummonedIndex = selectedIndex;
-			this.addSummonAction();
-		}
+					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName={self.heroPortrait}/>
+
+					<div id="selfHand" className="hand">
+						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
+					</div>
+					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
+
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
+					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
+
+					<div id="menuGame"><p>Menu</p>
+						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
+					</div>
+
+					<div id="opponentUserName"><p>{opponent.name}</p></div>
+					<div id="selfUserName"><p>{self.name}</p></div>
+				</div>
+			</div>
+		);
 	}
 
 	addSummonAction = () => {
@@ -96,81 +129,6 @@ export default class Board extends Component{
 		}
 	}
 
-	/* methods to surrender/quit the game */
-
-	surrenderGameConfirmStateChange(){
-		let status = this.state.isThinkingToGiveUp;
-		this.setState({ isThinkingToGiveUp: !status });
-	}
-
-	surrender(){
-		self.health = 0;
-		this.surrenderGameConfirmStateChange();
-		this.cancelActionSubmission();
-		setTimeout(()=>{
-			this.loseGame();
-		}, TIME_BETWEEN_POLLS);
-	}
-
-	loseGame(){
-		this.setState({ hasLostGame: true });
-	}
-
-	backToMainMenu(){
-		this.props.endGame();
-	}
-
-	render(){
-		return(
-			<div id="container">
-				<div id="board">
-					<div id="opponentHand" className="hand">
-						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
-					</div>
-					<div id="opponentHandUnderLayer"></div>
-					<Hero id="opponentHero" health={opponent.hero.health} heroName="wizardHero"/>
-
-					<div id="fieldContainer" className="fieldContainer">
-						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
-						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelected={this.state.attackerSelected}/>
-						</div>
-						<Deck id="opponentDeck" size={opponent.deck.length}/>
-					</div>
-
-					<div id="selfFieldContainer" className="fieldContainer">
-						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
-						<div id="selfField" className="battleField">
-							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
-							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttaquingMinion={this.state.cellsOfAttaquingMinion} 
-							changeAttackerSelected={this.changeAtackingSelected.bind(this)} attackerSelected={this.state.attackerSelected}/>
-						</div>
-						<Deck id="selfDeck" size={self.deck.length}/>
-					</div>
-					<div id="selfFieldUnderLayer"></div>
-
-					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName="zorroHero"/>
-
-					<div id="selfHand" className="hand">
-						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
-					</div>
-					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
-
-					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
-					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
-
-					<div id="menuGame"><p>Menu</p>
-						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
-					</div>
-
-					<div id="opponentUserName"><p>{opponent.name}</p></div>
-					<div id="selfUserName"><p>{self.name}</p></div>
-				</div>
-			</div>
-		);
-	}
-
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
@@ -179,9 +137,7 @@ export default class Board extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  this.setState({gameState: response.data,
-					  });
-				  this.setState({isLoaded: true});
+				  this.setState({gameState: response.data, isLoaded: true});
 				  this.forceUpdate();
 				})
 				.catch(error => {
@@ -190,6 +146,44 @@ export default class Board extends Component{
 					  this.getInitialGameInstance();
 				  }, TIME_BETWEEN_POLLS)
 		});
+	}
+
+	//Periodically calls the back end to know if both players have posted their actions
+	checkIfGameUpdated(){
+		const data = this.state.playerId;
+		axios({
+			  method:'post',
+			  url:'http://localhost:8089/checkIfGameUpdated',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
+			})
+			  .then((response)=>{
+				  console.log(response.data);
+				  if(response.data!==null){
+					  	this.setState({gameState: response.data,
+							  actionList : [],
+							  activeIndex : null,
+								cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
+							  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+								waitingForOpponentToEndTurn: false
+					  	});
+						players = this.state.gameState.players;
+						self = this.state.gameState.players[selfIndex];
+						opponent = this.state.gameState.players[opponentIndex];
+						this.forceUpdate();
+				  }
+				  else{
+						if(true===this.state.waitingForOpponentToEndTurn){
+							setTimeout(()=>{
+								this.checkIfGameUpdated();
+							}, TIME_BETWEEN_POLLS)
+						}
+				  }
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
 	}
 
 	sendActions(){
@@ -215,45 +209,47 @@ export default class Board extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	//Periodically calls the back end to know if both players have posted their actions
-		checkIfGameUpdated(){
-			const data = this.state.playerId;
-			axios({
-				  method:'post',
-				  url:'http://localhost:8089/checkIfGameUpdated',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data: data
-				})
-				  .then((response)=>{
-					  console.log(response.data);
-					  if(response.data!==null){
-						  	this.setState({gameState: response.data,
-								  actionList : [],
-								  activeIndex : null,
-									cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
-								  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
-									waitingForOpponentToEndTurn: false
-						  	});
-							players = this.state.gameState.players;
-							self = this.state.gameState.players[selfIndex];
-							opponent = this.state.gameState.players[opponentIndex];
-							this.forceUpdate();
-					  }
-					  else{
-							if(true===this.state.waitingForOpponentToEndTurn){
-								setTimeout(()=>{
-									this.checkIfGameUpdated();
-								}, TIME_BETWEEN_POLLS)
-							}
-					  }
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-					});
-		}
 
-		cancelActionSubmission(){
-				this.setState({waitingForOpponentToEndTurn:false});
+	retrieveCardSelectedIndex = (selectedIndex) => {
+		if(selectedIndex===cardIndex){
+			cardIndex = null;
 		}
+		else{
+			cardIndex = selectedIndex;
+		}
+	}
+
+	retrieveMinionSelectedIndex = (selectedIndex) =>{
+		if(null!==cardIndex && undefined!==cardIndex){
+			minionToBeSummonedIndex = selectedIndex;
+			this.addSummonAction();
+		}
+	}
+
+	cancelActionSubmission(){
+			this.setState({waitingForOpponentToEndTurn:false});
+	}
+
+	/* methods to surrender/quit the game */
+	surrenderGameConfirmStateChange(){
+		let status = this.state.isThinkingToGiveUp;
+		this.setState({ isThinkingToGiveUp: !status });
+	}
+
+	surrender(){
+		self.health = 0;
+		this.surrenderGameConfirmStateChange();
+		this.cancelActionSubmission();
+		setTimeout(()=>{
+			this.loseGame();
+		}, TIME_BETWEEN_POLLS);
+	}
+
+	loseGame(){
+		this.setState({ hasLostGame: true });
+	}
+
+	backToMainMenu(){
+		this.props.endGame();
+	}
 }
