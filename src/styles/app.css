@@ -5,7 +5,7 @@
 	box-sizing: border-box;
 }
 
-#loadingScreen{
+#loadingScreen {
 	background: url('../img/loading.gif');
 	background-size: cover;
 	background-position: center;
@@ -13,7 +13,7 @@
 	height: 100%;
 }
 
-#loadingScreenContainer{
+#loadingScreenContainer {
 	position: relative;
 	width: 500px;
 	height: 500px;
@@ -22,12 +22,12 @@
 	margin-top: 5%;
 }
 
-#container{
+#container {
 	min-width: 1200px;
 }
 
-.centerTitle{
-	padding-left:45%;
+.centerTitle {
+	padding-left: 45%;
 }
 
 #titlePageConnexion {
@@ -46,7 +46,6 @@
 }
 
 /* PLATEAU DE JEU */
-
 #board {
 	position: relative;
 	border: 2px solid black;
@@ -59,79 +58,87 @@
 }
 
 /* BOUTTONS DU JEU */
-
 #buttonEndTurn {
 	position: absolute;
 	top: 67%;
 	left: 90.5%;
 }
 
-#loading{
+#loading {
 	text-align: center;
 }
 /*Menu et Abandon*/
-.linkConnection{
-	color:white;
+.linkConnection {
+	color: white;
 	position: absolute;
 	top: 5%;
 	right: 5%;
 }
-#loginForm{
+
+#loginForm {
 	position: relative;
 	width: 100%;
 	height: -webkit-fill-available;
-	background: url('../img/backgroundLogin.jpg') no-repeat center center fixed;
-	background-size: cover;
-	overflow: hidden;
-}
-#MainMenu{
-	color:black;
-	position: relative;
-	width: 100%;
-	height: -webkit-fill-available;
-	background: url('../img/BackgroundSpace.jpg') no-repeat center center fixed;
+	background: url('../img/backgroundLogin.jpg') no-repeat center center
+		fixed;
 	background-size: cover;
 	overflow: hidden;
 }
 
-.hidden{
+#MainMenu {
+	color: black;
+	position: relative;
+	width: 100%;
+	height: -webkit-fill-available;
+	background: url('../img/BackgroundSpace.jpg') no-repeat center center
+		fixed;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.hidden {
 	display: none;
 }
-.visible{
-	display:block;
-	color:red;
+
+.visible {
+	display: block;
+	color: red;
 }
-.menuContainer{
+
+.menuContainer {
 	margin: 10%;
 	width: 80%;
 }
-#menuBox{
-	position:relative;
-	width:40%;
+
+#menuBox {
+	position: relative;
+	width: 40%;
 	height: 350px;
-	margin-left:30%;
-	margin-top:10%;
-	margin-bottom:10%;
-	text-align:center;
+	margin-left: 30%;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	text-align: center;
 	background-color: rgba(100, 100, 200, 0.5);
 	border-radius: 40px;
 }
-#imgMenuPrincipal{
-	position:absolute;
-	z-index:3;
-	top:50%;
+
+#imgMenuPrincipal {
+	position: absolute;
+	z-index: 3;
+	top: 50%;
 	left: 10%;
-	width:300px;
-	height:300px;
+	width: 300px;
+	height: 300px;
 	background-image: url('../img/flyingCat.gif');
-	background-size:     cover;
-    background-repeat:   no-repeat;
-    background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
+
 #menuGame {
 	z-index: 1;
-	text-align:center;
-	background-color:darkred;
+	text-align: center;
+	background-color: darkred;
 	position: absolute;
 	top: 67%;
 	left: 0.5%;
@@ -139,40 +146,39 @@
 	border-radius: 20px;
 }
 
-#listeMenuHidden{
+#listeMenuHidden {
 	display: none;
 }
 
-#menuGame:hover #listeMenuHidden{
+#menuGame:hover #listeMenuHidden {
 	display: block;
 }
-#FullScreenRED{
+
+#FullScreenRED {
 	z-index: 2;
-	position:absolute;
-	top:0px;
+	position: absolute;
+	top: 0px;
 	width: 100%;
 	height: 740px;
-	background-color: rgba(200,100, 100, 0.3);
+	background-color: rgba(200, 100, 100, 0.3);
 }
-#blocGiveUp{
+
+#blocGiveUp {
 	z-index: 3;
 	background-color: darkred;
-	position:absolute;
-	top:30%;
-	left:25%;
+	position: absolute;
+	top: 30%;
+	left: 25%;
 	width: 50%;
-	height:200px;
+	height: 200px;
 	text-align: center;
 	padding-top: 50px;
-	border-radius:40px;
-
+	border-radius: 40px;
 }
 
 /* MAINS DE CARTES */
 
-
 /* styles pour les mains */
-
 .hand {
 	display: block;
 	/*border: 1px solid black;*/
@@ -194,8 +200,8 @@
 	margin-top: -80px;
 }
 
-#opponentHandUnderLayer{
-	height:10px;
+#opponentHandUnderLayer {
+	height: 10px;
 	width: 70%;
 	margin-left: 15%;
 	background-color: orange;
@@ -204,7 +210,6 @@
 }
 
 /* styles pour les cartes dans les mains */
-
 #selfHand .card {
 	margin-top: 0.75%;
 	font-size: 15px;
@@ -220,13 +225,11 @@
 /* CHAMPS DE BATAILLE */
 
 /* styles pour les conteneurs */
-
 .fieldContainer {
 	height: 21%;
 }
 
 /* styles pour les champs de bataille */
-
 .battleField {
 	display: inline-block;
 	width: 60%;
@@ -236,8 +239,8 @@
 }
 
 /* styles pour les cartes et emplacements sur le champ de bataille */
-
-.battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown, .deck .cardTile, .deck .cardFacedDown {
+.battleField .cardTile, .graveyard .cardTile, .graveyard .cardFacedDown,
+	.deck .cardTile, .deck .cardFacedDown {
 	width: 9.5%;
 	margin-top: 1%;
 }
@@ -258,7 +261,7 @@
 	margin-left: 14%;
 }
 
-#selfFieldUnderLayer{
+#selfFieldUnderLayer {
 	height: 10px;
 	background-color: orange;
 	width: 60%;
@@ -270,7 +273,6 @@
 /* CIMETI�RE */
 
 /* styles pour les zones cimeti�re */
-
 .graveyard {
 	position: relative;
 	display: inline-block;
@@ -280,36 +282,34 @@
 	border: 1px solid black;
 }
 
-
-.graveyardCount, .deckCount{
+.graveyardCount, .deckCount {
 	color: white;
 	position: absolute;
 	font-size: 30px;
 	font-weight: 800;
 }
 
-#selfGraveyard .graveyardCount{
+#selfGraveyard .graveyardCount {
 	bottom: 35%;
 	right: 42.5%;
 }
 
-#opponentGraveyard .graveyardCount{
+#opponentGraveyard .graveyardCount {
 	top: 35%;
 	right: 42.5%;
 }
 
-#selfGraveyard{
+#selfGraveyard {
 	background-image: url('../img/backgroundCemetery2.jpg');
 	background-position: -60px;
 }
 
-#opponentGraveyard{
+#opponentGraveyard {
 	background-image: url('../img/backgroundCemetery3.jpg');
 	background-position: -65px;
 }
 
 /* styles pour les cartes dans le cimeti�re */
-
 .graveyard .cardTile {
 	width: 30%;
 	margin-left: 65%;
@@ -323,7 +323,6 @@
 /* DECK */
 
 /* styles pour les zones deck */
-
 .deck {
 	display: inline-block;
 	width: 19.75%;
@@ -332,28 +331,27 @@
 	bottom: 7px;
 }
 
-#selfDeck .deckCount{
+#selfDeck .deckCount {
 	right: 30%;
 	top: 28%;
 }
 
-#opponentDeck .deckCount{
+#opponentDeck .deckCount {
 	right: 30%;
 	top: 28%;
 }
 
-#opponentDeck{
+#opponentDeck {
 	background-image: url('../img/woodenBackground1.jpg');
 }
 
-#selfDeck{
+#selfDeck {
 	background-image: url('../img/woodenBackground2.jpg');
 }
 
 /* CARTES */
 
 /* style pour les emplacements de cartes */
-
 .cardTile {
 	position: relative;
 	display: inline-block;
@@ -367,7 +365,6 @@
 }
 
 /* styles pour une carte visible (de face) */
-
 .card {
 	display: inline-block;
 	border: 1px solid black;
@@ -380,19 +377,21 @@
 	background-color: orange;
 }
 
-.card:hover{
+.card:hover {
 	transform: scale(1.5)
 }
 
 .cardName {
-	position: absolute; text-decoration : underline;
+	position: absolute;
+	text-decoration: underline;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
 }
 
 .cardManaCost {
-	top: 15px; position : absolute;
+	top: 15px;
+	position: absolute;
 	color: blue;
 	position: absolute;
 }
@@ -426,7 +425,6 @@
 }
 
 /* style pour une carte non visible (de dos) */
-
 .cardFacedDown {
 	background-image: url("../img/cardback.jpg");
 	background-size: 100% 100%;
@@ -441,19 +439,17 @@
 }
 
 /* styles pour les cr�atures invoqu�es sur le champ de bataille */
-
 .minion {
 	background: darkblue;
 }
 
-.minion:hover{
-	transform:scale(1.2);
+.minion:hover {
+	transform: scale(1.2);
 }
 
 /* H�ROS */
 
 /* styles pour les h�ros */
-
 .hero {
 	border: 1px yellow solid;
 	display: block;
@@ -472,9 +468,7 @@
 	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
 }
 
-
 /* style pour les types de h�ros */
-
 .zorroHero {
 	background-image: url('../img/chatZorro.jpg');
 	background-size: cover;
@@ -493,7 +487,6 @@
 }
 
 /* styles pour l'attribut vies du h�ros (joueur) */
-
 .heroHealth {
 	width: 29%;
 	border: 2px solid black;
@@ -506,18 +499,17 @@
 	display: inline-block;
 	border: lightgreen solid 2px;
 	position: absolute;
-	top:55%;
+	top: 55%;
 }
 
-#selfHealth, #opponentHealth{
+#selfHealth, #opponentHealth {
 	padding: 5px;
-	border-radius:50%;
-	right:-15%;
+	border-radius: 50%;
+	right: -15%;
 	top: 35px;
 }
 
 /* styles pour l'attribut mana du h�ros (joueur) */
-
 #selfMana {
 	bottom: 40px;
 	padding: 5px;
@@ -534,7 +526,7 @@
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 	color: white;
-	box-shadow: 0 0 5px white ;
+	box-shadow: 0 0 5px white;
 }
 
 #selfMana div {
@@ -553,51 +545,49 @@
 }
 
 /* G�n�ral overrides */
-
-.selected{
+.selected {
 	border: pink 4px solid;
 	outline: none;
-    box-shadow: 0 0 20px #9ecaed;
-    border-radius: 5px;
+	box-shadow: 0 0 20px #9ecaed;
+	border-radius: 5px;
 }
 
-.fiedlCellSelected{
+.fiedlCellSelected {
 	border: solid 4px green;
 	outline: none;
-    box-shadow: 0 0 30px #CAED9E;
-    border-radius: 5px;
+	box-shadow: 0 0 30px #CAED9E;
+	border-radius: 5px;
 }
 
 /* Formulaires */
-
-.expectedFormat{
-	position:relative;
-	width:65%;
+.expectedFormat {
+	position: relative;
+	width: 65%;
 	height: 25%;
 	margin: auto;
 	border: 2px solid white;
 	padding: 10px;
 	text-align: center;
-	background-color: rgba(0, 71, 179,0.75);
+	background-color: rgba(0, 71, 179, 0.75);
 	border-radius: 40px;
 	font-weight: bold;
 	color: white;
 }
 
-.errorMessage{
+.errorMessage {
 	color: red;
 }
 
-.expectedFormat div{
-		width: 40%;
-		display: inline-block;
+.expectedFormat div {
+	width: 40%;
+	display: inline-block;
 }
-#passwordFormat{
+
+#passwordFormat {
 	margin-left: 10%;
 }
 
 /* NOM JOUEURS DE LA PARTIE */
-
 #selfUserName, #opponentUserName {
 	position: absolute;
 	left: 6%;
@@ -615,7 +605,6 @@
 }
 
 /* CONNEXION FORM CSS */
-
 form {
 	/*position:absolute;
 	width:40%;
@@ -631,122 +620,137 @@ form {
 }
 
 .card-container.boiteConnexion {
-    max-width: 350px;
-    padding: 40px 40px;
+	max-width: 350px;
+	padding: 40px 40px;
 }
 
 .btn {
-    font-weight: 700;
-    height: 36px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
+	font-weight: 700;
+	height: 36px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: default;
 }
 
 /*
  * Boite de connexion
  */
 .boiteConnexion {
-    background-color: #F7F7F7;
-    /* just in case there no content*/
-    padding: 20px 25px 30px;
-    margin: 0 auto 25px;
-    margin-top: 8%;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 3%;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    background:rgba(0, 71, 179,0.75);
+	background-color: #F7F7F7;
+	/* just in case there no content*/
+	padding: 20px 25px 30px;
+	margin: 0 auto 25px;
+	margin-top: 8%;
+	/* shadows and rounded borders */
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 3%;
+	-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	background: rgba(0, 71, 179, 0.75);
 }
 
 .profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
 }
 
 /*
  * Form styles
  */
 .profile-name-card {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0;
-    min-height: 1em;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 0;
+	min-height: 1em;
 }
 
 .reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+	display: block;
+	color: #404040;
+	line-height: 2;
+	margin-bottom: 10px;
+	font-size: 14px;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.form-signin #username,
-.form-signin #password {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
+.form-signin #username, .form-signin #password {
+	direction: ltr;
+	height: 44px;
+	font-size: 16px;
 }
 
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    z-index: 1;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.form-signin input[type=email], .form-signin input[type=password],
+	.form-signin input[type=text], .form-signin button {
+	width: 100%;
+	display: block;
+	margin-bottom: 10px;
+	z-index: 1;
+	position: relative;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+	border-color: rgb(104, 145, 162);
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgb(104, 145, 162);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgb(104, 145, 162);
 }
 
 .btn.btn-signin {
-    /*background-color: #4d90fe; */
-    background-color: rgb(104, 145, 162);
-    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    padding: 0px;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
+	/*background-color: #4d90fe; */
+	background-color: rgb(104, 145, 162);
+	/* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+	padding: 0px;
+	font-weight: 700;
+	font-size: 14px;
+	height: 36px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: none;
+	-o-transition: all 0.218s;
+	-moz-transition: all 0.218s;
+	-webkit-transition: all 0.218s;
+	transition: all 0.218s;
 }
 
-.btn.btn-signin:hover,
-.btn.btn-signin:active,
-.btn.btn-signin:focus {
-    background-color: rgb(12, 97, 33);
+.btn.btn-signin:hover, .btn.btn-signin:active, .btn.btn-signin:focus {
+	background-color: rgb(12, 97, 33);
+}
+/*
+ 
+*  Minion Attaqueur
+ 
+*/
+.attacker {
+	border: red 4px solid;
+	outline: none;
+	box-shadow: 0 0 20px #d35400;
+	border-radius: 5px;
+}
+
+.target {
+	border: white 4px solid;
+	outline: none;
+	box-shadow: 0 0 20px #c0392b;
+	border-radius: 5px;
 }
