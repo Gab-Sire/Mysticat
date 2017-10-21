@@ -58,7 +58,9 @@ export default class Board extends Component{
 	}
 	changeTargetSelected(index){
 		this.setState({targetMinion : index});
+		//Add to array here
 		this.setState({attackerSelected : null});
+		this.setState({targetMinion : null});
 	}
 
 	render(){
@@ -74,7 +76,8 @@ export default class Board extends Component{
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
-							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} attackerSelected={this.state.attackerSelected}/>
+							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false} 
+							attackerSelected={this.state.attackerSelected} targetSelected={this.changeTargetSelected.bind(this)}/>
 						</div>
 						<Deck id="opponentDeck" size={opponent.deck.length}/>
 					</div>

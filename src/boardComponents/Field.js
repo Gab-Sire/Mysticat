@@ -36,9 +36,15 @@ export default class Field extends Component{
 	} 
 	  
 	assignAttaque = (index) => {
-		this.props.cellsOfAttackingMinion[index] = true;
-		this.props.changeAttackerSelected(index);
+		if(this.props.cellsOfAttackingMinion[index] !=true){
+			this.props.cellsOfAttackingMinion[index] = true;
+			this.props.changeAttackerSelected(index);
+		}else if(this.props.attackerSelected === index){
+			this.props.changeAttackerSelected(index);
+		}
+	
 	}
+	
 
 	handleSelectMinion = (index, indexPlayer) => {
 		if(true === this.props.belongsToSelf){
@@ -48,6 +54,10 @@ export default class Field extends Component{
 				this.props.callBackSelectedMinion(index);
 			}else{
 				this.assignAttaque(index);
+			}
+		}else{
+			if(this.props.attackerSelected !==null){
+				this.props.targetSelected(index);
 			}
 		}
 	}
