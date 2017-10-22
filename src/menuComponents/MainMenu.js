@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PopUpQueue from './PopUpQueue.js'
 
-const TIME_BETWEEN_POLLS = 1000;
+const TIME_BETWEEN_AXIOS_CALLS = 1000;
 export default class MainMenu extends Component{
 	constructor(props){
 		super(props);
@@ -28,7 +28,7 @@ export default class MainMenu extends Component{
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue();
 								setTimeout(()=>{
 									this.deconnexion();
-								}, TIME_BETWEEN_POLLS)
+								}, TIME_BETWEEN_AXIOS_CALLS)
 							}
 						}
 						>Déconnexion</button></p>
@@ -56,7 +56,7 @@ export default class MainMenu extends Component{
 		  .then((response)=>{
 			  setTimeout(()=>{
 				  this.checkIfQueuePopped();
-			  }, TIME_BETWEEN_POLLS)
+			  }, TIME_BETWEEN_AXIOS_CALLS)
 			})
 			.catch(error => {
 			  console.log('Error fetching and parsing data', error);
@@ -76,7 +76,7 @@ export default class MainMenu extends Component{
 			  if(response.data===null && this.state.isLookingForGame === true){
 				  setTimeout(()=>{
 					  this.checkIfQueuePopped();
-				  }, TIME_BETWEEN_POLLS)
+				  }, TIME_BETWEEN_AXIOS_CALLS)
 			  }
 			  else if(this.state.isLookingForGame===true){
 				  this.props.getQueueForParent(response.data);

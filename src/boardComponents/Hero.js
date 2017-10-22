@@ -31,7 +31,7 @@ export default class Hero extends Component{
 		}
 		else if("opponentHero" === heroId){
 			if(true ===this.props.attackerSelected){}
-			return(<div id={heroId} className={"hero " + this.state.heroName}>
+			return(<div id={heroId} className={"hero " + this.state.heroName} onClick={()=>{this.props.changeTargetSelected(-1)}}>
 						<div id="opponentHealth" className="heroHealth">
 							{health}
 						</div>

@@ -9,7 +9,7 @@ import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 
-const TIME_BETWEEN_POLLS = 1000;
+const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
 let players;
 let selfIndex;
@@ -53,11 +53,14 @@ export default class Board extends Component{
 		if(null === this.state.attackerSelected){
 			this.setState({attackerSelected : index});
 		}else if(index === this.state.attackerSelected ){
+			let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
+			cellsOfAttackingMinion[index]=false
 			this.setState({attackerSelected : null});
-			this.state.cellsOfAttackingMinion[index]=false;
+			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
 		}else if(index !== this.state.attackerSelected ){
-			this.state.cellsOfAttackingMinion[this.state.attackerSelected ]=false;
-			this.setState({attackerSelected : index});
+			let cellsOfAttackingMinion = 	this.state.cellsOfAttackingMinion;
+			cellsOfAttackingMinion[this.state.attackerSelected ]=false;
+			this.setState({attackerSelected : index, cellsOfAttackingMinion: cellsOfAttackingMinion});
 		}
 	}
 
@@ -78,7 +81,7 @@ export default class Board extends Component{
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
 					</div>
 					<div id="opponentHandUnderLayer"></div>
-					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait} />
+					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait} changeTargetSelected={this.changeTargetSelected.bind(this)}/>
 
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
@@ -132,7 +135,7 @@ export default class Board extends Component{
 
 		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
 			&& null===self.field[selectedFieldCellIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
-			console.log("Card played from hand: "+cardIndex+" on field cell: "+selectedFieldCellIndex);
+			//console.log("Card played from hand: "+cardIndex+" on field cell: "+selectedFieldCellIndex);
 			wereTheseCardsPlayedThisTurn[cardIndex] = true;
 			areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex] = true;
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
@@ -154,8 +157,6 @@ export default class Board extends Component{
 		let hasThisMinionAlreadyAttacked = cellsOfAttackingMinion[this.state.attackerSelected];
 		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
 		let isThereAnOpponentMinionThere = (null!==opponent.field[selectedOpponentFieldCellIndex]);
-
-		console.log("And then idk:", selectedOpponentFieldCellIndex);
 
 		if(isThereAMinionOnThisCell && isThereAnOpponentMinionThere && hasThisMinionAlreadyAttacked){
 			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
@@ -184,7 +185,7 @@ export default class Board extends Component{
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
 					  this.getInitialGameInstance();
-				  }, TIME_BETWEEN_POLLS)
+				  }, TIME_BETWEEN_AXIOS_CALLS)
 		});
 	}
 
@@ -220,7 +221,7 @@ export default class Board extends Component{
 						if(true===this.state.waitingForOpponentToEndTurn){
 							setTimeout(()=>{
 								this.checkIfGameUpdated();
-							}, TIME_BETWEEN_POLLS)
+							}, TIME_BETWEEN_AXIOS_CALLS)
 						}
 				  }
 				})
@@ -294,7 +295,7 @@ export default class Board extends Component{
 		this.cancelActionSubmission();
 		setTimeout(()=>{
 			this.loseGame();
-		}, TIME_BETWEEN_POLLS);
+		}, TIME_BETWEEN_AXIOS_CALLS);
 	}
 
 	loseGame(){
