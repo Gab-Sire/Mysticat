@@ -50,10 +50,14 @@ export default class Board extends Component{
 
 	}
 	changeAttackingSelected(index){
-		if(null === this.state.attackerSelected || index !== this.state.attackerSelected ){
+		if(null === this.state.attackerSelected){
 			this.setState({attackerSelected : index});
 		}else if(index === this.state.attackerSelected ){
 			this.setState({attackerSelected : null});
+			this.state.cellsOfAttackingMinion[index]=false;
+		}else if(index !== this.state.attackerSelected ){
+			this.state.cellsOfAttackingMinion[this.state.attackerSelected ]=false;
+			this.setState({attackerSelected : index});
 		}
 	}
 	changeTargetSelected(index){
@@ -61,6 +65,7 @@ export default class Board extends Component{
 			this.setState({targetMinion : index});
 			selectedOpponentFieldCellIndex = index;
 			this.addAttackAction();
+			this.resetAttackingState()
 		}
 	}
 
@@ -72,7 +77,7 @@ export default class Board extends Component{
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
 					</div>
 					<div id="opponentHandUnderLayer"></div>
-					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait}/>
+					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait} />
 
 					<div id="fieldContainer" className="fieldContainer">
 						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
@@ -200,8 +205,10 @@ export default class Board extends Component{
 							  actionList : [],
 							  activeIndex : null,
 								cellsOfSummonedMinionsThisTurn: [false, false, false, false, false, false, false],
-							  indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
+								indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
 								cellsOfAttackingMinion: [false, false, false, false, false, false, false],
+								targetMinion:null,
+								attackerSelected:null,
 								waitingForOpponentToEndTurn: false
 					  	});
 						players = this.state.gameState.players;
@@ -240,10 +247,20 @@ export default class Board extends Component{
 					this.setState({waitingForOpponentToEndTurn:true});
 					cardIndex = null;
 				  this.checkIfGameUpdated();
+				  this.resetAttackingState();
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
+	}
+
+	resetAttackingState(){
+		this.setState({
+				targetMinion:null,
+				attackerSelected:null
+			});
+
+
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
