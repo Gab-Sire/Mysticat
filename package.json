@@ -11,7 +11,9 @@
     "react": "^15.6.1",
     "react-axios": "^1.0.3",
     "react-dom": "^15.6.1",
-    "react-scripts": "^1.0.14"
+    "react-scripts": "^1.0.14",
+    "react-transition-group": "^2.2.1", 
+    "reactstrap": "^4.8.0" 
   },
   "devDependencies": {},
   "scripts": {
