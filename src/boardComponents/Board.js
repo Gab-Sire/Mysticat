@@ -173,7 +173,7 @@ export default class Board extends Component{
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
-			  url:'http://localhost:8089/getHardCodedGame',
+			  url:'http://'+window.location.hostname+':8089/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -194,7 +194,7 @@ export default class Board extends Component{
 		const data = this.state.playerId;
 		axios({
 			  method:'post',
-			  url:'http://localhost:8089/checkIfGameUpdated',
+			  url:'http://'+window.location.hostname+':8089/checkIfGameUpdated',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -239,7 +239,7 @@ export default class Board extends Component{
 		console.log("Sending actions: ", data);
 		axios({
 			  method:'post',
-			  url:'http://localhost:8089/sendActions',
+			  url:'http://'+window.location.hostname+':8089/sendActions',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data

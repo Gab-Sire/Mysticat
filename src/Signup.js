@@ -18,29 +18,29 @@ export default class Login extends Component{
 		this.handleClick = this.handleClick.bind(this);
 		this.toggle = this.toggle.bind(this);
 	}
-	
+
 	handleSubmit(event){
 		event.preventDefault();
 	}
-	
+
 	handleChangeUsername(event){
 		this.setState({username: event.target.value});
 	}
-	
+
 	handleChangePassword(event){
 		this.setState({password: event.target.value});
 	}
-	
+
 	handleClick(event){
 		console.log('Signup form submitted');
 		this.attemptSignup();
 	}
-	
+
 	attemptSignup(){
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
 			  method:'post',
-			  url:'http://localhost:8089/signUp',
+			  url:'http://'+window.location.hostname+':8089/signUp',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -49,23 +49,23 @@ export default class Login extends Component{
 				  console.log(response.data);
 				  if(response.data!==null){
 					  this.props.connectPlayer(response.data);
-					  this.setState({errorMessage: ""}); 
+					  this.setState({errorMessage: ""});
 				  }
 				  else{
-					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."}); 
+					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."});
 					  }
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	
+
 	checkIfUsernameTaken(){
 		console.log("entering");
 		const data = {username: this.state.username}
 		axios({
 			  method:'post',
-			  url:'http://localhost:8089/usernameAvailability',
+			  url:'http://'+window.location.hostname+':8089/usernameAvailability',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -81,11 +81,11 @@ export default class Login extends Component{
 	changeSignUpMode(){
 		this.props.changeSignUpMode();
 		}
-	
-	toggle() {  
+
+	toggle() {
 		this.setState({toolTipOpen: !this.state.toolTipOpen})
 	}
-	
+
 	render(){
 		const USERNAME_MIN_LENGTH = 5;
 		const USERNAME_MAX_LENGTH = 30;
@@ -96,7 +96,7 @@ export default class Login extends Component{
 	        		<img alt="profile-img" id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 	        		<p id="profile-name" className="profile-name-card"></p>
 	        		<h3 id="titlePageConnexion"> Signup </h3><a id="tooltipLink">?</a>
-	        		 
+
 	                <Tooltip id= "tooltip" placement="top" isOpen={this.state.toolTipOpen} autohide={false} target="tooltipLink" toggle={this.toggle}>
 	     	             <h5>Votre nom d'utilisateur doit être unique et doit comprendre:</h5>
 	                     <ul>

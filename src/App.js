@@ -45,7 +45,7 @@ class App extends Component{
 	getTestActionList(){
 		axios({
 			  method:'get',
-			  url:'http://localhost:8089/getHardCodedActionSample',
+			  url:'http://'+window.location.hostname+':8089/getHardCodedActionSample',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -63,7 +63,7 @@ class App extends Component{
 	checkServerAvailability(){
 		axios({
 			  method:'get',
-			  url:'http://localhost:8089/getServerStatus',
+			  url:'http://'+window.location.hostname+':8089/getServerStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})

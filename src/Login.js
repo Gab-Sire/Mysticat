@@ -38,7 +38,7 @@ export default class Login extends Component{
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
 				method:'post',
-				url:'http://localhost:8089/attemptConnection',
+				url:'http://'+window.location.hostname+':8089/attemptConnection',
 				responseType:'json',
 				headers: {'Access-Control-Allow-Origin': "true"},
 				data: data
