@@ -65,7 +65,7 @@ export default class Board extends Component{
 			this.setState({targetMinion : index});
 			selectedOpponentFieldCellIndex = index;
 			this.addAttackAction();
-			this.resetAttatingState()
+			this.resetAttackingState()
 		}
 	}
 
@@ -254,15 +254,15 @@ export default class Board extends Component{
 				});
 	}
 
-	resetAttatingState(){
+	resetAttackingState(){
 		this.setState({
 				targetMinion:null,
 				attackerSelected:null
 			});
-		
-		
+
+
 	}
-	
+
 	retrieveCardSelectedIndex = (selectedIndex) => {
 		if(selectedIndex===cardIndex){
 			cardIndex = null;
