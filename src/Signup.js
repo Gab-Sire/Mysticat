@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './styles/app.css';
 import axios from 'axios';
+import { Tooltip } from 'reactstrap';
 
 export default class Login extends Component{
 	constructor(props){
@@ -8,12 +9,14 @@ export default class Login extends Component{
 		this.state={
 			username:'',
 			password:'',
-			errorMessage: ''
+			errorMessage: '',
+			toolTipOpen: false
 		}
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
 		this.handleChangePassword = this.handleChangePassword.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.toggle = this.toggle.bind(this);
 	}
 	
 	handleSubmit(event){
@@ -79,6 +82,10 @@ export default class Login extends Component{
 		this.props.changeSignUpMode();
 		}
 	
+	toggle() {  
+		this.setState({toolTipOpen: !this.state.toolTipOpen})
+	}
+	
 	render(){
 		const USERNAME_MIN_LENGTH = 5;
 		const USERNAME_MAX_LENGTH = 30;
@@ -88,7 +95,23 @@ export default class Login extends Component{
 	        	<div className="boiteConnexion card-container">
 	        		<img alt="profile-img" id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 	        		<p id="profile-name" className="profile-name-card"></p>
-	        		<h3 id="titlePageConnexion"> Signup </h3>
+	        		<h3 id="titlePageConnexion"> Signup </h3><a id="tooltipLink">?</a>
+	        		 
+	                <Tooltip id= "tooltip" placement="top" isOpen={this.state.toolTipOpen} autohide={false} target="tooltipLink" toggle={this.toggle}>
+	     	             <h5>Votre nom d'utilisateur doit être unique et doit comprendre:</h5>
+	                     <ul>
+	                      	<li>Entre {USERNAME_MIN_LENGTH} et {USERNAME_MAX_LENGTH} caracteres inclusivement</li>
+	                  		<li>Au moins 1 chiffre</li>
+	                  		<li>Au moins 1 lettre majuscule</li>
+	                  	</ul>
+	                	<h5>Votre mot de passe doit comprendre:</h5>
+	                	<ul>
+	                  		<li>Entre {PASSWORD_MIN_LENGTH} et {PASSWORD_MAX_LENGTH} caracteres inclusivement</li>
+	                  		<li>Au moins 1 chiffre</li>
+	                  		<li>Au moins 1 lettre minuscule</li>
+	                  		<li>Au moins 1 lettre majuscule</li>
+	                  	</ul>
+	                </Tooltip>
 	        		<form className="form-signin" onSubmit={this.handleSubmit}>
 	            		<span id="reauth-email" className="reauth-email"></span>
 	            		<input className="form-control" placeholder="Nom d'utilisateur" type="text" name="username" id="username" ref="username" onChange={this.handleChangeUsername} required autoFocus/>

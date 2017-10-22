@@ -764,3 +764,21 @@ form {
 	box-shadow: 0 0 20px #c0392b;
 	border-radius: 5px;
 }
+
+/* Tooltip */
+  
+#tooltipLink {
+  color: white;
+}
+ 
+.tooltip.show {
+  opacity: 0.9;
+}
+ 
+.tooltip {
+  position: absolute;
+  transform: none !important;
+  top: 32% !important;
+  left: 41% !important;
+  will-change: transform !important;
+}
