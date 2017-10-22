@@ -30,6 +30,7 @@ export default class Hero extends Component{
 				  </div>);
 		}
 		else if("opponentHero" === heroId){
+			if(true ===this.props.attackerSelected){}
 			return(<div id={heroId} className={"hero " + this.state.heroName}>
 						<div id="opponentHealth" className="heroHealth">
 							{health}

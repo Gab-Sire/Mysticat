@@ -14,9 +14,9 @@ export default class Card extends Component{
 		if(true === this.props.active){
 			isSelected = "fiedlCellSelected";
 		}
-		if(true === this.props.activeAtacker){
+		if(true === this.props.belongsToSelf && true ===this.props.activeAttacker){
 			classNameExtra = "cardTile minion attacker";
-		}else if(this.props.attackerSelected){
+		}else if(true===this.props.attackerSelected && false === this.props.belongsToSelf){
 			classNameExtra = "cardTile minion target";
 		}
 		
@@ -30,7 +30,12 @@ export default class Card extends Component{
 			</div>);
 		}
 		else{
-			return (<div className={"cardTile " + isSelected} onClick={this.props.onClick}></div>);
+			if(true === this.props.active){
+				return (<div className={"cardTile " + isSelected} ></div>);	
+			}else{
+				return (<div className={"cardTile " + isSelected} onClick={this.props.onClick}></div>);
+			}
+			
 		}	
 	}
 }

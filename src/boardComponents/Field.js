@@ -15,11 +15,11 @@ export default class Field extends Component{
 		let fieldMinions = this.props.players[this.props.playerIndex].field.map(function(minion, index){
 				return (
 		     <Minion
-		      key={"fieldMinion" + index}
+		      	key={"fieldMinion" + index}
 		     	active = {true === this.props.belongsToSelf ? this.props.cellsOfSummonedMinionsThisTurn[index] : false}
-		     	activeAttacker = {true === this.props.belongsToSelf ? this.props.cellsOfAttackingMinion[index] : false}
-		     	attackerSelected = {false === this.props.belongsToSelf ? this.props.attackerSelected===index : false}
-
+		     	activeAttacker = {true === this.props.belongsToSelf ? true===this.props.cellsOfAttackingMinion[index] : false}
+		     	attackerSelected = {false === this.props.belongsToSelf ? null!==this.props.attackerSelected : false}
+		     	belongsToSelf={this.props.belongsToSelf}
 		     onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
 		    )
 		   }, this)
@@ -36,7 +36,7 @@ export default class Field extends Component{
 	}
 
 	assignAttaque = (index) => {
-		if(this.props.cellsOfAttackingMinion[index] !=true){
+		if(this.props.cellsOfAttackingMinion[index] ===false){
 			this.props.cellsOfAttackingMinion[index] = true;
 			this.props.changeAttackerSelected(index);
 		}else if(this.props.attackerSelected === index){
