@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//@Component
-//@Scope("session")
 @Entity
 @Table(name="mys_user_usr")
 public class User {

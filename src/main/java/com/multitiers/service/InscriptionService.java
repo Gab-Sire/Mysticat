@@ -1,7 +1,9 @@
 package com.multitiers.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +22,7 @@ import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
+import com.multitiers.exception.UserAlreadyConnectedException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -37,8 +40,10 @@ public class InscriptionService {
     private CardRepository cardRepository;
     @Autowired
     private MinionCardRepository minionCardRepository;
-    private static final Logger log = LoggerFactory.getLogger(ProjetMultitiersApplication.class);
-        
+    
+    //Key: userId
+    public Map<String, User> connectedUsers = new HashMap<String, User>();
+    
     public InscriptionService() {}
     
     @Transactional
@@ -120,4 +125,17 @@ public class InscriptionService {
 	     }
 	     throw new BadCredentialsLoginException();
     }
+    
+    public void addUserToConnectedUsers(User user) {
+    	if(this.connectedUsers==null) {
+    		this.connectedUsers = new HashMap<String, User>();
+    	}
+    	if (this.connectedUsers.containsKey(user.getId())) {
+        	throw new UserAlreadyConnectedException();
+        }
+    	else {
+    		this.connectedUsers.put(user.getId(), user);
+    	}
+    }
+    
 }

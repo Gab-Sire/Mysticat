@@ -30,6 +30,7 @@ import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
+import com.multitiers.exception.UserAlreadyConnectedException;
 import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
@@ -71,6 +72,7 @@ public class RestControlleur {
     	User user = inscriptionService.getUserFromCredentials(userCredentials);
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
+        	inscriptionService.addUserToConnectedUsers(user);
     	}
     	return new Gson().toJson(user.getId());
     }
