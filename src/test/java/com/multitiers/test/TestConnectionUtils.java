@@ -13,6 +13,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.service.InscriptionService;
 import com.multitiers.util.ConnectionUtils;
@@ -192,8 +193,8 @@ public class TestConnectionUtils {
 	@Ignore
 	@Test(expected = Exception.class)
 	public void oneUserPerUsername() {
-		user1 = inscriptionService.createUser(validUsername, password);
-		user2 = inscriptionService.createUser(validUsername, password);
+		user1 = inscriptionService.createUser(validUsername, password, HeroPortrait.warriorHero);
+		user2 = inscriptionService.createUser(validUsername, password, HeroPortrait.warriorHero);
 	}
 
 	private String replaceAllDigitsWithLetters(String str) {

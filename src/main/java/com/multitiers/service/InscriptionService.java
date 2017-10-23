@@ -51,10 +51,8 @@ public class InscriptionService {
             cardRepository.save(card);
         }
         
-        User user1 = createUser("Chat1", "Myboy1");
-        user1.setHeroPortrait(HeroPortrait.warriorHero);
-        User user2 = createUser("Chat2", "Myboy2");
-        user2.setHeroPortrait(HeroPortrait.wizardHero);
+        User user1 = createUser("Chat1", "Myboy1", HeroPortrait.warriorHero);
+        User user2 = createUser("Chat2", "Myboy2", HeroPortrait.zorroHero);
         userRepository.save(user1);
         userRepository.save(user2);
     }
@@ -71,7 +69,7 @@ public class InscriptionService {
     	return card;
     }
     
-    public  User createUser(String username, String password) {
+    public  User createUser(String username, String password, HeroPortrait portrait) {
     	if(!ConnectionUtils.isValidPassword(password)) {
     		throw new BadPasswordFormatException(password);
     	}
@@ -82,6 +80,7 @@ public class InscriptionService {
     	String salt = ConnectionUtils.generateSalt();
     	String hashedPassword = ConnectionUtils.hashPassword(password, salt);
     	User user = new User(username, hashedPassword, salt);
+    	user.setHeroPortrait(portrait);
     	user.setId(ConnectionUtils.generateUUID().toString());
     	assignStarterDeck(user);
         return user;

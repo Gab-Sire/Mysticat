@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.ingame.Action;
@@ -83,7 +84,7 @@ public class RestControlleur {
         if(userRepository.findByUsername(username)!=null) {
     		throw new UsernameTakenException(username);
     	}
-    	User user = inscriptionService.createUser(username, password);
+    	User user = inscriptionService.createUser(username, password, HeroPortrait.wizardHero);
         userRepository.save(user);
         if(user != null) {
             session.setAttribute("userActif", user.getId());	
