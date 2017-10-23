@@ -7,12 +7,9 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.multitiers.ProjetMultitiersApplication;
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.HeroPortrait;
@@ -42,7 +39,7 @@ public class InscriptionService {
     private MinionCardRepository minionCardRepository;
     
     //Key: userId
-    public Map<String, User> connectedUsers = new HashMap<String, User>();
+    public Map<String, User> connectedUsers;
     
     public InscriptionService() {}
     
@@ -140,6 +137,10 @@ public class InscriptionService {
     
     public void removeUserFromConnectedUsers(String userId) {
     	this.connectedUsers.remove(userId);
+    }
+    
+    public void initDataLists() {
+        this.connectedUsers = new HashMap<String, User>();
     }
     
 }

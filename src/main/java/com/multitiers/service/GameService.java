@@ -39,21 +39,22 @@ public class GameService implements QueueListener {
 	@Autowired
 	private MinionCardRepository minionCardRepository;
 
-	public GameQueue gameQueue = new GameQueue();
+	public GameQueue gameQueue;
 	// Key: userId
-	public Map<String, Game> newGameList = new HashMap<String, Game>();
+	public Map<String, Game> newGameList;
 	// Key: userId
-	public Map<String, Game> updatedGameList = new HashMap<String, Game>();
+	public Map<String, Game> updatedGameList;
 	// Key: gameId
-	public Map<String, Game> existingGameList = new HashMap<String, Game>();
+	public Map<String, Game> existingGameList;
 	// Key: gameId
-	public Map<String, ActionList> sentActionLists = new HashMap<String, ActionList>();
+	public Map<String, ActionList> sentActionLists;
 
 	public GameService() {
 	}
 
 	public void initGameQueue() {
 		this.gameQueue.addToListeners(this);
+		this.gameQueue.initListOfPlayersInQueue();
 	}
 
 	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
@@ -222,6 +223,21 @@ public class GameService implements QueueListener {
 		}
 	}
 
+	public void initDataLists() {
+		gameQueue = new GameQueue();
+		// Key: userId
+		newGameList = new HashMap<String, Game>();
+		// Key: userId
+		updatedGameList = new HashMap<String, Game>();
+		// Key: gameId
+		existingGameList = new HashMap<String, Game>();
+		// Key: gameId
+		sentActionLists = new HashMap<String, ActionList>();
+		
+		initGameQueue();
+	}
+	
+	
 	@Override
 	public void queueHasEnoughPlayers() {
 		System.out.println("Queue pop");

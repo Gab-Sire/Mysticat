@@ -18,8 +18,9 @@ public class ProjetMultitiersApplication {
 	@Bean
     public CommandLineRunner peuplement(InscriptionService inscriptionService, GameService gameService) {
         return (args) -> {
+        	inscriptionService.initDataLists();
             inscriptionService.bootStrapTwoUsersAndTestCardSet();
-            gameService.initGameQueue();
+            gameService.initDataLists();
         };
     }
 }
