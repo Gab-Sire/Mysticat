@@ -66,6 +66,12 @@ public class RestControlleur {
         return user;
     }
     
+    
+    @PostMapping(value="/disconnectUser")
+    public void disconnectUser(@RequestBody String userId) {
+    	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
+    }
+    
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);

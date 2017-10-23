@@ -79,6 +79,19 @@ class App extends Component{
 	}
 
 	disconnectPlayer(){
+		axios({
+				method:'post',
+				url:'http://'+window.location.hostname+':8089/disconnectUser',
+				responseType:'json',
+				headers: {'Access-Control-Allow-Origin': "true"},
+				data: this.state.playerId
+			})
+				.then((response)=>{
+
+				})
+				.catch(error => {
+					console.log('Error fetching and parsing data', error);
+		});
 		this.setState({"playerId" : null});
 	}
 

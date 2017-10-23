@@ -138,4 +138,8 @@ public class InscriptionService {
     	}
     }
     
+    public void removeUserFromConnectedUsers(String userId) {
+    	this.connectedUsers.remove(userId);
+    }
+    
 }
