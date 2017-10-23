@@ -15,6 +15,7 @@ import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Hero;
 import com.multitiers.domaine.ingame.Minion;
+import com.multitiers.domaine.ingame.PlayableCard;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
@@ -127,14 +128,17 @@ public class GameService implements QueueListener {
 		Player[] players = game.getPlayers();
 		for(Player player : players) {
 			Minion[] field = player.getField();
+			List<PlayableCard> graveyard = player.getGraveyard();
 			for(int i=0; i<field.length; ++i) {
 				Minion minion = field[i];
 				if(minion!=null) {
 					if(minion.isDead()) {
-						field[i] = null;	
+						field[i] = null;
+						graveyard.add(minion.getCardReference());
 					}
 				}
 			}
+			player.setGraveyard(graveyard);
 			player.setField(field);
 		}
 	}
