@@ -10,6 +10,7 @@
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-axios": "^1.0.3",
+    "react-beforeunload": "^1.0.4",
     "react-dom": "^15.6.1",
     "react-scripts": "^1.0.14",
     "react-transition-group": "^2.2.1",

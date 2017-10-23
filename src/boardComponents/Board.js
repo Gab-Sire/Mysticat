@@ -8,6 +8,7 @@ import Hero from './Hero.js';
 import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
+import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
@@ -76,6 +77,7 @@ export default class Board extends Component{
 	render(){
 		return(
 			<div id="container">
+				<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
 				<div id="board">
 					<div id="opponentHand" className="hand">
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
