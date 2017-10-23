@@ -155,9 +155,8 @@ export default class Board extends Component{
 	addAttackAction = () => {
 		let cellsOfAttackingMinion = this.state.cellsOfAttackingMinion;
 		let hasThisMinionAlreadyAttacked = cellsOfAttackingMinion[this.state.attackerSelected];
-		let isThereAMinionOnThisCell = (null!==self.field[selectedFieldCellIndex]);
+		let isThereAMinionOnThisCell = (null!==self.field[this.state.attackerSelected]);
 		let isThereAnOpponentMinionThere = (null!==opponent.field[selectedOpponentFieldCellIndex]);
-
 		if(isThereAMinionOnThisCell && isThereAnOpponentMinionThere && hasThisMinionAlreadyAttacked){
 			this.setState({cellsOfAttackingMinion: cellsOfAttackingMinion});
 			let actions = this.state.actionList;
