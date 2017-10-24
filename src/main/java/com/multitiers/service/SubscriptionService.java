@@ -100,7 +100,7 @@ public class SubscriptionService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//
+    	//le deck de départ attribue des cartes au hasard
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
