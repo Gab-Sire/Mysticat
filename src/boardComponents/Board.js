@@ -86,7 +86,7 @@ export default class Board extends Component{
 					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait} changeTargetSelected={this.changeTargetSelected.bind(this)}/>
 
 					<div id="fieldContainer" className="fieldContainer">
-						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
+						<Graveyard id="opponentGraveyard" graveyard={opponent.graveyard} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
 							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false}
 							attackerSelected={this.state.attackerSelected} targetSelected={this.changeTargetSelected.bind(this)}/>
@@ -95,7 +95,7 @@ export default class Board extends Component{
 					</div>
 
 					<div id="selfFieldContainer" className="fieldContainer">
-						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
+						<Graveyard id="selfGraveyard" graveyard={self.graveyard} identity={"self"}/>
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttackingMinion={this.state.cellsOfAttackingMinion}

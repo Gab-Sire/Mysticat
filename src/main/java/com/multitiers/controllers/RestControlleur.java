@@ -135,6 +135,7 @@ public class RestControlleur {
     
     @PostMapping(value="/enterQueue")
     public void enterQueue(@RequestBody String userId) {
+    	System.out.println(userId);
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);
