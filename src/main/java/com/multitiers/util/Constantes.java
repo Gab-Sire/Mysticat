@@ -7,7 +7,7 @@ public interface Constantes {
 	public static final Integer MAX_PASSWORD_LENGTH = 100;
 	public static final Integer MAX_SALT_LENGTH = 100;
 	
-	public final static int NB_OF_CARDS_IN_TEST_SET = 50;
+	public final static int NB_OF_CARDS_IN_TEST_SET = 40;
 	public final static int MAX_COPIES_OF_SAME_CARD_PER_DECK = 2;
 	public final static Integer MAX_NB_OF_PLAYERS=2;
 	
