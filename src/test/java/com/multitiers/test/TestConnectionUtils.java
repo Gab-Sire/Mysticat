@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
-import com.multitiers.service.SubscriptionService;
+import com.multitiers.service.AuthentificationService;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
@@ -28,7 +28,7 @@ public class TestConnectionUtils {
 
 	static final char MIN_MAJUSCULE = 'A', MIN_MINUSCULE = 'a', MIN_DIGIT = '0';
 	@Autowired
-	SubscriptionService inscriptionService;
+	AuthentificationService inscriptionService;
 	
 	RandomStringGenerator passwordGenerator;
 	RandomStringGenerator usernameGenerator;

@@ -17,7 +17,4 @@ public abstract class PlayableCharacter {
 	public void setHealth(Integer health) {
 		this.health = health;
 	}
-	
-	
-	
 }

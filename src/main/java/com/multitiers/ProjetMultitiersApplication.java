@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.multitiers.service.GameService;
-import com.multitiers.service.SubscriptionService;
+import com.multitiers.service.AuthentificationService;
 
 @SpringBootApplication
 public class ProjetMultitiersApplication {
@@ -16,7 +16,7 @@ public class ProjetMultitiersApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner peuplement(SubscriptionService inscriptionService, GameService gameService) {
+    public CommandLineRunner peuplement(AuthentificationService inscriptionService, GameService gameService) {
         return (args) -> {
         	inscriptionService.initDataLists();
             inscriptionService.bootStrapTwoUsersAndTestCardSet();

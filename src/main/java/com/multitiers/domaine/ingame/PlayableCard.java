@@ -6,6 +6,7 @@ public abstract class PlayableCard {
 	protected String description;
 	//Flagged durant le tour du joueur. Une carte played sera enlevee de la main
 	protected Boolean played;
+	protected String imagePath;
 	
 	public Integer getManaCost() {
 		return manaCost;
@@ -30,6 +31,12 @@ public abstract class PlayableCard {
 	}
 	public void setPlayed(Boolean played) {
 		this.played = played;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }

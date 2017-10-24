@@ -29,7 +29,7 @@ import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 @Service
-public class SubscriptionService {
+public class AuthentificationService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -42,8 +42,6 @@ public class SubscriptionService {
     //Key: userId
     public Map<String, User> connectedUsers;
     
-    public SubscriptionService() {}
-    
     @Transactional
     public void bootStrapTwoUsersAndTestCardSet() {
     	insertCustomCardsInDatabase();
@@ -51,7 +49,7 @@ public class SubscriptionService {
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; ++i) {
         	Integer stats = (((i/5)<=0)) ? 1 : i/5;
         	int manaCost = 1;
-            MinionCard card = createMinionCard("Minion"+i, stats, stats, stats, manaCost, stats+" mana"+" "+stats+"/"+stats);
+            MinionCard card = createMinionCard("Minion"+i, stats, stats, stats, manaCost, stats+" mana"+" "+stats+"/"+stats, "");
             cardRepository.save(card);
         }
         
@@ -61,7 +59,7 @@ public class SubscriptionService {
         userRepository.save(user2);
     }
     
-    public  MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost, String desc) {
+    public MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost, String desc, String imagePath) {
     	MinionCard card = new MinionCard();
     	card.setCardId(ConnectionUtils.generateUUID().toString());
     	card.setCardName(name);
@@ -70,6 +68,7 @@ public class SubscriptionService {
     	card.setInitialSpeed(speed);
     	card.setManaCost(manaCost);
     	card.setCardDescription(desc);
+    	card.setImagePath(imagePath);
     	return card;
     }
     
@@ -104,7 +103,6 @@ public class SubscriptionService {
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
-    	
     	starterDeck.setCardList(cards);
     	return starterDeck;
     }
@@ -137,16 +135,16 @@ public class SubscriptionService {
     
     public void insertCustomCardsInDatabase() {
     	
-    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon");
-    	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?");
-    	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo");
-    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite");
-    	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute");
-    	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !");
-    	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFG BBQ");
-    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en échange de cette créature ?");
-    	MinionCard minionCard09 = createMinionCard("Chat Possédé", 9, 6, 5, 3, "Ehhh boy");
-    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystérieux...");
+    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon", "");
+    	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?", "");
+    	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo", "");
+    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite", "");
+    	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute", "");
+    	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !", "");
+    	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFGBBQ", "");
+    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en échange de cette créature ?", "");
+    	MinionCard minionCard09 = createMinionCard("Chat Possédé", 9, 6, 5, 3, "Ehhh boy", "");
+    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystérieux...", "");
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);

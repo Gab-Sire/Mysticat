@@ -23,6 +23,8 @@ public abstract class Card {
 	private String cardName;
 	@Column(name = "car_desc")
 	private String cardDescription;
+	@Column(name="car_img_path")
+	private String imagePath;
 
 	public String getCardId() {
 		return cardId;
@@ -54,6 +56,14 @@ public abstract class Card {
 
 	public void setCardDescription(String cardDescription) {
 		this.cardDescription = cardDescription;
+	}
+
+	public String getImagePath() {
+		return ImagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		ImagePath = imagePath;
 	}
 
 	@Override
