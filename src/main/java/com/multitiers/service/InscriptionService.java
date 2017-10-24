@@ -100,10 +100,10 @@ public class InscriptionService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//trouve toutes les cartes, mélange, prend les x premières
+    	//
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
-    	cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
+    	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
     	
     	starterDeck.setCardList(cards);
     	return starterDeck;
@@ -140,7 +140,7 @@ public class InscriptionService {
     	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon");
     	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?");
     	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo");
-    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 5, 1, "Si c'est vendredi 13, bonne chance pour la suite");
+    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite");
     	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute");
     	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !");
     	MinionCard minionCard07 = createMinionCard("Chat zombie", 6, 4, 5, 2, "OMFG BBQ");
