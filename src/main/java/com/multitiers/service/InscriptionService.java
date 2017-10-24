@@ -40,7 +40,7 @@ public class InscriptionService {
     private MinionCardRepository minionCardRepository;
     
     //Key: userId
-    public Map<String, User> connectedUsers = new HashMap<String, User>();
+    public Map<String, User> connectedUsers;
     
     public InscriptionService() {}
     
@@ -152,6 +152,13 @@ public class InscriptionService {
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);
     	cardRepository.save(minionCard07);	cardRepository.save(minionCard08);	cardRepository.save(minionCard09);
     	cardRepository.save(minionCard10);
+
+    public void removeUserFromConnectedUsers(String userId) {
+    	this.connectedUsers.remove(userId);
+    }
+    
+    public void initDataLists() {
+        this.connectedUsers = new HashMap<String, User>();
     }
     
 }

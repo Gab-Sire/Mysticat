@@ -8,6 +8,7 @@ import Hero from './Hero.js';
 import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
+import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
@@ -76,6 +77,7 @@ export default class Board extends Component{
 	render(){
 		return(
 			<div id="container">
+				<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
 				<div id="board">
 					<div id="opponentHand" className="hand">
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
@@ -84,7 +86,7 @@ export default class Board extends Component{
 					<Hero id="opponentHero" health={opponent.hero.health} heroName={opponent.heroPortrait} changeTargetSelected={this.changeTargetSelected.bind(this)}/>
 
 					<div id="fieldContainer" className="fieldContainer">
-						<Graveyard id="opponentGraveyard" size={opponent.graveyard.length} identity={"opponent"}/>
+						<Graveyard id="opponentGraveyard" graveyard={opponent.graveyard} identity={"opponent"}/>
 						<div id="opponentField" className="battleField">
 							<Field players={players} playerIndex={opponentIndex} belongsToSelf={false}
 							attackerSelected={this.state.attackerSelected} targetSelected={this.changeTargetSelected.bind(this)}/>
@@ -93,7 +95,7 @@ export default class Board extends Component{
 					</div>
 
 					<div id="selfFieldContainer" className="fieldContainer">
-						<Graveyard id="selfGraveyard" size={self.graveyard.length} identity={"self"}/>
+						<Graveyard id="selfGraveyard" graveyard={self.graveyard} identity={"self"}/>
 						<div id="selfField" className="battleField">
 							<Field players={players} playerIndex={selfIndex} belongsToSelf={true} self={self} callBackSelectedMinion={this.retrieveMinionSelectedIndex}
 							 cellsOfSummonedMinionsThisTurn={this.state.cellsOfSummonedMinionsThisTurn} cellsOfAttackingMinion={this.state.cellsOfAttackingMinion}

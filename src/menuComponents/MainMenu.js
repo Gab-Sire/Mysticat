@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import PopUpQueue from './PopUpQueue.js'
+import PopUpQueue from './PopUpQueue.js';
+import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 export default class MainMenu extends Component{
@@ -19,6 +20,7 @@ export default class MainMenu extends Component{
 
 	render(){
 		return (<div id='MainMenu'>
+		<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
 				<div id='menuBox'>
 					<h2 id="titleMenu"> Mysticat</h2>
 					<div className='menuContainer'>

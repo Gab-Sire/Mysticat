@@ -292,6 +292,11 @@
 	border: 1px solid black;
 }
 
+.graveyard .card{
+	width: 30%;
+	margin-left: 65%;
+}
+
 .graveyardCount, .deckCount {
 	color: white;
 	position: absolute;
@@ -747,9 +752,9 @@ form {
 	background-color: rgb(12, 97, 33);
 }
 /*
- 
+
 *  Minion Attaqueur
- 
+
 */
 .attacker {
 	border: red 4px solid;
@@ -766,15 +771,15 @@ form {
 }
 
 /* Tooltip */
-  
+
 #tooltipLink {
   color: white;
 }
- 
+
 .tooltip.show {
   opacity: 0.9;
 }
- 
+
 .tooltip {
   position: absolute;
   transform: none !important;

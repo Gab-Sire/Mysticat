@@ -66,5 +66,7 @@ public class GameQueue {
 		return null;
 	}
 	
-
+	public void initListOfPlayersInQueue() {
+		this.listOfPlayersInQueue = new ArrayList<>();
+	}
 }

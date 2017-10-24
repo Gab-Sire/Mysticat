@@ -29,7 +29,7 @@ class App extends Component{
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
-					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} />
+					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 				);
 			}
 			else{
@@ -79,6 +79,19 @@ class App extends Component{
 	}
 
 	disconnectPlayer(){
+		axios({
+				method:'post',
+				url:'http://'+window.location.hostname+':8089/disconnectUser',
+				responseType:'json',
+				headers: {'Access-Control-Allow-Origin': "true"},
+				data: this.state.playerId
+			})
+				.then((response)=>{
+
+				})
+				.catch(error => {
+					console.log('Error fetching and parsing data', error);
+		});
 		this.setState({"playerId" : null});
 	}
 
