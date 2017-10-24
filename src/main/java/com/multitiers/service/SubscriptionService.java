@@ -29,7 +29,7 @@ import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 @Service
-public class InscriptionService {
+public class SubscriptionService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -42,11 +42,11 @@ public class InscriptionService {
     //Key: userId
     public Map<String, User> connectedUsers;
     
-    public InscriptionService() {}
+    public SubscriptionService() {}
     
     @Transactional
     public void bootStrapTwoUsersAndTestCardSet() {
-    	generateCardSet();
+    	insertCustomCardsInDatabase();
     	//Methode qu'on va utiliser pour Bootstrapper
         for(int i=1; i<=Constantes.NB_OF_CARDS_IN_TEST_SET; ++i) {
         	Integer stats = (((i/5)<=0)) ? 1 : i/5;
@@ -135,7 +135,7 @@ public class InscriptionService {
     	}
     }
     
-    public void generateCardSet() {
+    public void insertCustomCardsInDatabase() {
     	
     	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon");
     	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?");
@@ -143,9 +143,9 @@ public class InscriptionService {
     	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite");
     	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute");
     	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !");
-    	MinionCard minionCard07 = createMinionCard("Chat zombie", 6, 4, 5, 2, "OMFG BBQ");
+    	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFG BBQ");
     	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en échange de cette créature ?");
-    	MinionCard minionCard09 = createMinionCard("Chat possédé", 9, 6, 5, 3, "Ehhh boy");
+    	MinionCard minionCard09 = createMinionCard("Chat Possédé", 9, 6, 5, 3, "Ehhh boy");
     	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystérieux...");
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);

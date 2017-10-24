@@ -38,7 +38,7 @@ import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.GameQueue;
 import com.multitiers.service.GameService;
-import com.multitiers.service.InscriptionService;
+import com.multitiers.service.SubscriptionService;
 import com.multitiers.util.Constantes;
 import com.multitiers.util.JsonUtils;
 
@@ -55,7 +55,7 @@ public class RestControlleur {
 	private MinionCardRepository minionCardRepository;
 	
 	@Autowired
-	private InscriptionService inscriptionService;
+	private SubscriptionService inscriptionService;
 	
 	@Autowired
 	private GameService gameService;
