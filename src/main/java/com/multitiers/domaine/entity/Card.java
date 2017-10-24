@@ -59,11 +59,11 @@ public abstract class Card {
 	}
 
 	public String getImagePath() {
-		return ImagePath;
+		return imagePath;
 	}
 
 	public void setImagePath(String imagePath) {
-		ImagePath = imagePath;
+		imagePath = imagePath;
 	}
 
 	@Override

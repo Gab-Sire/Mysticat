@@ -53,7 +53,7 @@
 	width: 98%;
 	height: 740px;
 	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-		url('../img/background.jpg');
+		url('../img/backgroundImg/background.jpg');
 	cursor: default;
 }
 
@@ -79,7 +79,7 @@
 	position: relative;
 	width: 100%;
 	height: -webkit-fill-available;
-	background: url('../img/backgroundLogin.jpg') no-repeat center center
+	background: url('../img/backgroundImg/backgroundLogin.jpg') no-repeat center center
 		fixed;
 	background-size: cover;
 	overflow: hidden;
@@ -90,7 +90,7 @@
 	position: relative;
 	width: 100%;
 	height: -webkit-fill-available;
-	background: url('../img/BackgroundSpace.jpg') no-repeat center center
+	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center
 		fixed;
 	background-size: cover;
 	overflow: hidden;
@@ -135,7 +135,7 @@
 	left: 10%;
 	width: 300px;
 	height: 300px;
-	background-image: url('../img/flyingCat.gif');
+	background-image: url('../img/backgroundImg/flyingCat.gif');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -315,12 +315,12 @@
 }
 
 #selfGraveyard {
-	background-image: url('../img/backgroundCemetery2.jpg');
+	background-image: url('../img/backgroundImg/backgroundCemetery2.jpg');
 	background-position: -60px;
 }
 
 #opponentGraveyard {
-	background-image: url('../img/backgroundCemetery3.jpg');
+	background-image: url('../img/backgroundImg/backgroundCemetery3.jpg');
 	background-position: -65px;
 }
 
@@ -357,11 +357,11 @@
 }
 
 #opponentDeck {
-	background-image: url('../img/woodenBackground1.jpg');
+	background-image: url('../img/backgroundImg/woodenBackground1.jpg');
 }
 
 #selfDeck {
-	background-image: url('../img/woodenBackground2.jpg');
+	background-image: url('../img/backgroundImg/woodenBackground2.jpg');
 }
 
 /* CARTES */
@@ -441,7 +441,7 @@
 
 /* style pour une carte non visible (de dos) */
 .cardFacedDown {
-	background-image: url("../img/cardback.jpg");
+	background-image: url("../img/cardImg/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
 	border: 1px solid black;
@@ -485,18 +485,18 @@
 
 /* style pour les types de h�ros */
 .zorroHero {
-	background-image: url('../img/chatZorro.jpg');
+	background-image: url('../img/heroImg/chatZorro.jpg');
 	background-size: cover;
 }
 
 .wizardHero {
-	background-image: url('../img/chatgicien.jpg');
+	background-image: url('../img/heroImg/chatgicien.jpg');
 	background-size: cover;
 	background-position: center;
 }
 
 .warriorHero {
-	background-image: url('../img/chatGuerrier.jpg');
+	background-image: url('../img/heroImg/chatGuerrier.jpg');
 	background-size: cover;
 	background-position: center;
 }
