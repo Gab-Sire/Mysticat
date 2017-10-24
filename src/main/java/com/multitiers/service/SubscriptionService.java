@@ -100,7 +100,6 @@ public class SubscriptionService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
@@ -137,21 +136,41 @@ public class SubscriptionService {
     
     public void insertCustomCardsInDatabase() {
     	
-    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon");
+    	// Cartes de Gabriel, theme Halloween
+    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malï¿½diction du pharaon");
     	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?");
     	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo");
     	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite");
     	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute");
     	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !");
     	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFG BBQ");
-    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en échange de cette créature ?");
-    	MinionCard minionCard09 = createMinionCard("Chat Possédé", 9, 6, 5, 3, "Ehhh boy");
-    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystérieux...");
+    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en ï¿½change de cette crï¿½ature ?");
+    	MinionCard minionCard09 = createMinionCard("Chat Possï¿½dï¿½", 9, 6, 5, 3, "Ehhh boy");
+    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystï¿½rieux...");
+    	
+    	
+    	//Carte des Marc-Antoine, theme Super Hero et Super Vilain
+    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.");
+    	MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.");
+    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand mÃªme peur de l'eau.");
+    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.");
+    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "DÃ©mon des temps anciens qui souhaite dominer le monde.");
+    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "ProtÃ¨ge la nation.");
+    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.");
+    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes lÃ©gendaires peuvent couper n'importe quoi.");
+    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 5, 10, 30, 8, "Plus rapide que le point rouge par terre.");
+    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.");
+    	
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);
     	cardRepository.save(minionCard07);	cardRepository.save(minionCard08);	cardRepository.save(minionCard09);
     	cardRepository.save(minionCard10);
+    	
+    	cardRepository.save(minionCard11);	cardRepository.save(minionCard12);	cardRepository.save(minionCard13);
+    	cardRepository.save(minionCard14);	cardRepository.save(minionCard15);	cardRepository.save(minionCard16);
+    	cardRepository.save(minionCard17);	cardRepository.save(minionCard18);	cardRepository.save(minionCard19);
+    	cardRepository.save(minionCard20);
     }
 
     public void removeUserFromConnectedUsers(String userId) {
