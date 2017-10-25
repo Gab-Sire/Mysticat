@@ -16,7 +16,7 @@ export default class Hand extends Component{
 				return (
 				 <Card
 					 key={"handCard" + index}
-					 active={index === this.state.selectedHandCardIndex}
+					 active={index === this.state.selectedHandCardIndex && false===this.props.startOfTurn}
 					 onClick={() => this.handleSelectHandCard(index)} faceUp={this.props.faceUp} {...card}{...props}/>
 				)
 			 }, this)
