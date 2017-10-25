@@ -149,7 +149,7 @@ public class SubscriptionService {
     	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement myst�rieux...");
     	
     	
-    	//Carte des Marc-Antoine, theme Super Hero et Super Vilain
+    	//Cartes de Marc-Antoine, theme Super Hero et Super Vilain
     	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.");
     	MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.");
     	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand même peur de l'eau.");
@@ -158,9 +158,14 @@ public class SubscriptionService {
     	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.");
     	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.");
     	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes légendaires peuvent couper n'importe quoi.");
-    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 5, 10, 30, 8, "Plus rapide que le point rouge par terre.");
+    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.");
     	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.");
     	
+    	//Cartes de Marc-Antoine, mes chats
+    	MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.");
+    	MinionCard minionCard22 = createMinionCard("Madame Chat", 5, 3, 3, 1, "La madame.");
+    	MinionCard minionCard23 = createMinionCard("Chat Orange", 5, 2, 3, 1, "L'orange.");
+    	MinionCard minionCard24 = createMinionCard("Autre Chat", 5, 5, 5, 2, "L'autre.");
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);
@@ -171,6 +176,9 @@ public class SubscriptionService {
     	cardRepository.save(minionCard14);	cardRepository.save(minionCard15);	cardRepository.save(minionCard16);
     	cardRepository.save(minionCard17);	cardRepository.save(minionCard18);	cardRepository.save(minionCard19);
     	cardRepository.save(minionCard20);
+    	
+    	cardRepository.save(minionCard21);  cardRepository.save(minionCard22);  cardRepository.save(minionCard23);
+    	cardRepository.save(minionCard24);
     }
 
     public void removeUserFromConnectedUsers(String userId) {
