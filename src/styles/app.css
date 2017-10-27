@@ -397,14 +397,16 @@
 }
 
 .cardName {
+	font-size:10px;
 	position: absolute;
+	bottom:25px;
 	text-decoration: underline;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
 }
 
-.cardManaContainer{
+.cardDetailContainer{
 	width: 18px;
 	height: 18px;
 	font-size: 2em;
@@ -425,7 +427,7 @@
 }
 .balancingDetail{
 	font-size:12px;
-		-webkit-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
 	-moz-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);

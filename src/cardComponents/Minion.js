@@ -15,7 +15,7 @@ export default class Card extends Component{
 			isSelected = "fiedlCellSelected";
 		}
 		if(true === this.props.belongsToSelf && true ===this.props.activeAttacker){
-			classNameExtra = "cardTile minion attacker";
+			classNameExtra = "cardTile minion attacker card";
 		}else if(true===this.props.attackerSelected && false === this.props.belongsToSelf){
 			classNameExtra = "cardTile minion target";
 		}
@@ -24,9 +24,9 @@ export default class Card extends Component{
 		if(isEmpty){
 			return (<div className={classNameExtra} title={this.props.description} onClick={this.props.onClick}>
 				<div className="cardName">{this.props.name}</div>
-				<div title="The amount of damage this minion deals" className="cardPower">Power: {this.props.power}</div>
-				<div title="The amount of damage this minion can take" className="cardHealth">Health: {this.props.health}</div>
-				<div title="Speed dictates the order in which attacks resolve" className="cardSpeed">Speed: {this.props.speed}</div>
+				<div title="The amount of damage this minion deals" className="cardDetailContainer cardPower"><div className="balancingDetail">{this.props.power}</div></div>
+				<div title="The amount of damage this minion can take" className="cardDetailContainer cardHealth"><div className="balancingDetail">{this.props.health}</div></div>
+				<div title="Speed dictates the order in which attacks resolve" className="cardDetailContainer cardSpeed"><div className="balancingDetail">{this.props.speed}</div></div>
 			</div>);
 		}
 		else{
