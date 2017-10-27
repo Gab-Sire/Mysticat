@@ -14,7 +14,7 @@ export default class Card extends Component{
 
 		if(true === this.props.faceUp){
 			return (<div className={"card " + isSelected} title={this.props.description} onClick={this.props.onClick}>
-				<div className='cardManaContainer' title="The amount of mana crystals consumed when summoning this minion"><div className="cardManaCost balancingDetail" >{this.props.manaCost}</div></div>
+				<div className='cardManaContainer cardManaCost' title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of damage this minion deals" className='cardManaContainer cardPower'><div className="balancingDetail">{this.props.initialPower}</div></div>
 				<div title="The amount of damage this minion can take" className='cardManaContainer cardHealth'><div className="balancingDetail">{this.props.initialHealth}</div></div>
