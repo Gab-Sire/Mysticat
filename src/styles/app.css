@@ -420,11 +420,12 @@
 }
 .cardManaCost {
 	font-size:15px;
-	
 	left:5px;
 	position: absolute;
 	color: blue;
-	-webkit-transform: rotate(-45deg);
+}
+.balancingDetail{
+		-webkit-transform: rotate(-45deg);
 	-moz-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
@@ -433,20 +434,25 @@
 
 
 .cardPower {
-	top: 30px;
+	font-size:15px;
+	top: 105px;
+	left:5px;
 	position: absolute;
 	color: red;
 }
 
-
 .cardHealth {
-	top: 45px;
+	font-size:15px;
+	top: 105px;
+	left:10px;
 	position: absolute;
 	color: lightgreen;
 }
 
 .cardSpeed {
-	top: 60px;
+	font-size:15px;
+	top: 105px;
+	left:25px;
 	position: absolute;
 	font-style: italic;
 	color: white;
