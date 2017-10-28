@@ -28,9 +28,13 @@ class App extends Component{
 	}
 
 	render(){
+		
 		if(true===this.state.isServerAvailable){
-			if(false===this.state.inGame && null !==this.state.playerId){
-				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} />
+			if("deck_selection" === this.state.appDisplay){
+				return <DeckSelection />
+			}
+			else if(false===this.state.inGame && null !==this.state.playerId){
+				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
 					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
@@ -81,24 +85,6 @@ class App extends Component{
 						  }, TIME_BETWEEN_AXIOS_CALLS)
 				});
 	}
-	
-	goDeckSelection(){
-		axios({
-			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/selectDeck',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
-			})
-			  .then((response)=>{
-				  this.setState({appDisplay: "deck_selection"});
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				  setTimeout(()=>{
-							  this.checkServerAvailability();
-						  }, TIME_BETWEEN_AXIOS_CALLS)
-				});
-	}
 
 	disconnectPlayer(){
 		axios({
@@ -126,6 +112,10 @@ class App extends Component{
 
 	getGameFromQueue = (gameState)=>{
 		this.setState({gameState: gameState, inGame: true})
+	}
+	
+	updateAppDisplay = (displayMode) =>{
+		this.setState({appDisplay: displayMode})
 	}
 }
 

@@ -17,9 +17,13 @@ export default class DeckSelection extends Component{
 	render(){
 		return(
 			<div>
-			<CardTile />
-			<CardTile />
-			<CardTile />
+			<div id="deckSelection">
+				<div id="deckSlotsContainer">
+					<CardTile />
+					<CardTile />
+					<CardTile />
+				</div>
+			</div>
 			</div>
 		)
 	}

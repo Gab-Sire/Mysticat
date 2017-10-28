@@ -26,7 +26,7 @@ export default class MainMenu extends Component{
 					<div className='menuContainer'>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.goDeckSelection.bind(this)}>Consulter ses decks</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{
 								setTimeout(()=>{
 									this.deconnexion();
@@ -119,6 +119,23 @@ export default class MainMenu extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
+	
+	goDeckSelection(){
+		axios({
+			  method:'get',
+			  url:'http://'+window.location.hostname+':8089/selectDeck',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  this.props.appDisplay("deck_selection");
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+		
+				});
+	}
+	
 
 	displayUnderContruction(){
 		this.setState({tag: "visible"});

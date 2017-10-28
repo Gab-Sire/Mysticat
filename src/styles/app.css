@@ -815,3 +815,18 @@ form {
   left: 41% !important;
   will-change: transform !important;
 }
+
+/* DECK SELECTION */
+
+#deckSelection{
+	background-color: black;
+}
+
+#deckSlotsContainer{
+	display: block;
+	margin-left: 30%;
+	margin-top: 40%;
+	background-color: rgba(255, 210, 150, 1);
+	width: 40%;
+}
+

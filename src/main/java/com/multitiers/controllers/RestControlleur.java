@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
@@ -69,6 +70,11 @@ public class RestControlleur {
     @PostMapping(value="/disconnectUser")
     public void disconnectUser(@RequestBody String userId) {
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
+    }
+    
+    @GetMapping(value="/selectDeck")
+    public List<Deck> selectDeck() {
+    	return null;
     }
     
     @PostMapping(value = "/attemptConnection")
