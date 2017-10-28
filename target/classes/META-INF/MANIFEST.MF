@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: demows
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: portable
+Built-By: linkl
 Implementation-Vendor-Id: com.example
-Build-Jdk: 1.8.0_45
+Build-Jdk: 1.8.0_151
 Implementation-URL: http://projects.spring.io/spring-boot/projet_multi
  tiers/
 Created-By: Maven Integration for Eclipse
