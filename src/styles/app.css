@@ -397,34 +397,61 @@
 }
 
 .cardName {
+	font-size:10px;
 	position: absolute;
+	bottom:25px;
 	text-decoration: underline;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
 }
 
+.cardDetailContainer{
+	width: 18px;
+	height: 18px;
+	font-size: 2em;
+	border: 2px solid black;
+	background-color: #008ae6;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	color: white;
+	box-shadow: 0 0 5px white;
+}
 .cardManaCost {
-	top: 15px;
+	left:5px;
 	position: absolute;
 	color: blue;
-	position: absolute;
+}
+.balancingDetail{
+	font-size:12px;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 
+
 .cardPower {
-	top: 30px;
+	top: 105px;
+	left:2px;
 	position: absolute;
 	color: red;
 }
 
 .cardHealth {
-	top: 45px;
+	top: 105px;
+	left:27px;
 	position: absolute;
 	color: lightgreen;
 }
 
 .cardSpeed {
-	top: 60px;
+	top: 105px;
+	left:52px;
 	position: absolute;
 	font-style: italic;
 	color: white;
@@ -543,6 +570,7 @@
 	color: white;
 	box-shadow: 0 0 5px white;
 }
+
 
 #selfMana div {
 	-webkit-transform: rotate(-45deg);

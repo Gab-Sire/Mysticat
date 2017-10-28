@@ -8,6 +8,7 @@ import Hero from './Hero.js';
 import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
+import PopUpEndOfTurn from './PopUpEndOfTurn.js';
 import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
@@ -35,7 +36,9 @@ export default class Board extends Component{
 			indexesOfPlayedCardsThisTurn : [false, false, false, false, false, false, false, false, false, false],
 			cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 			targetMinion:null,
-			attackerSelected:null
+			attackerSelected:null,
+			startOfTurnForSummoning:false,
+			endOfTurn:false
 		};
 	}
 
@@ -109,10 +112,10 @@ export default class Board extends Component{
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} />
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} startOfTurn={this.state.startOfTurnForSummoning} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
-
+					<PopUpEndOfTurn status={this.state.endOfTurn} />
 					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
@@ -211,7 +214,8 @@ export default class Board extends Component{
 								cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 								targetMinion:null,
 								attackerSelected:null,
-								waitingForOpponentToEndTurn: false
+								waitingForOpponentToEndTurn: false,
+								endOfTurn:false
 					  	});
 						players = this.state.gameState.players;
 						self = this.state.gameState.players[selfIndex];
@@ -250,6 +254,7 @@ export default class Board extends Component{
 					cardIndex = null;
 				  this.checkIfGameUpdated();
 				  this.resetAttackingState();
+				  this.setState({startOfTurnForSummoning:true,endOfTurn:true});
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -270,6 +275,7 @@ export default class Board extends Component{
 		}
 		else{
 			cardIndex = selectedIndex;
+			this.setState({startOfTurnForSummoning:false});
 		}
 	}
 

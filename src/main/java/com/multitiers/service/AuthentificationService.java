@@ -99,7 +99,7 @@ public class AuthentificationService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//le deck de départ attribue des cartes au hasard
+    	//le système attribue des cartes au hasard pour le deck par défaut
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
@@ -135,21 +135,49 @@ public class AuthentificationService {
     
     public void insertCustomCardsInDatabase() {
     	
-    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon", "../img/cardImg/halloweenSetCards/chat_momie");
-    	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?", "../img/cardImg/halloweenSetCards/chat_souris");
-    	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo", "../img/cardImg/halloweenSetCards/chat_fantome");
-    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite", "../img/cardImg/halloweenSetCards/chat_noir");
-    	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute", "../img/cardImg/halloweenSetCards/jack_o_chat");
-    	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !", "../img/cardImg/halloweenSetCards/apprenti_sorcier");
-    	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFGBBQ", "../img/cardImg/halloweenSetCards/chat_zombie");
-    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en échange de cette créature ?", "../img/cardImg/halloweenSetCards/frankenchat");
-    	MinionCard minionCard09 = createMinionCard("Chat Possédé", 9, 6, 5, 3, "Ehhh boy", "../img/cardImg/halloweenSetCards/chat_possede");
-    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystérieux...", "../img/cardImg/halloweenSetCards/chanatique");
+    	// Cartes de Gabriel, theme Halloween
+    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malï¿½diction du pharaon", "../img/cardImg/halloweenSetCards/chat_momie.jpg");
+    	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?", "../img/cardImg/halloweenSetCards/chat_souris.jpg");
+    	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo", "../img/cardImg/halloweenSetCards/chat_fantome.jpg");
+    	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite", "../img/cardImg/halloweenSetCards/chat_noir.jpg");
+    	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute", "../img/cardImg/halloweenSetCards/jack_o_chat.jpg");
+    	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !", "../img/cardImg/halloweenSetCards/apprenti_sorcier.jpg");
+    	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFG BBQ", "../img/cardImg/halloweenSetCards/chat_zombie.jpg");
+    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en ï¿½change de cette crï¿½ature ?", "../img/cardImg/halloweenSetCards/frankenchat.jpg");
+    	MinionCard minionCard09 = createMinionCard("Chat Possï¿½dï¿½", 9, 6, 5, 3, "Ehhh boy", "../img/cardImg/halloweenSetCards/chat_possede.jpg");
+    	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystï¿½rieux...", "../img/cardImg/halloweenSetCards/chanatique.jpg");
+    	
+    	
+    	//Cartes de Marc-Antoine, theme Super Hero et Super Vilain
+    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.", "");
+    	MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.", "");
+    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand mÃªme peur de l'eau.", "");
+    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.", "");
+    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "DÃ©mon des temps anciens qui souhaite dominer le monde.", "");
+    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "ProtÃ¨ge la nation.", "");
+    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.", "");
+    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes lÃ©gendaires peuvent couper n'importe quoi.", "");
+    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.", "");
+    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.", "");
+    	
+    	//Cartes de Marc-Antoine, mes chats
+    	MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "");
+    	MinionCard minionCard22 = createMinionCard("Madame Chat", 5, 3, 3, 1, "La madame.", "");
+    	MinionCard minionCard23 = createMinionCard("Chat Orange", 5, 2, 3, 1, "L'orange.", "");
+    	MinionCard minionCard24 = createMinionCard("Autre Chat", 5, 5, 5, 2, "L'autre.", "");
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);
     	cardRepository.save(minionCard07);	cardRepository.save(minionCard08);	cardRepository.save(minionCard09);
     	cardRepository.save(minionCard10);
+    	
+    	cardRepository.save(minionCard11);	cardRepository.save(minionCard12);	cardRepository.save(minionCard13);
+    	cardRepository.save(minionCard14);	cardRepository.save(minionCard15);	cardRepository.save(minionCard16);
+    	cardRepository.save(minionCard17);	cardRepository.save(minionCard18);	cardRepository.save(minionCard19);
+    	cardRepository.save(minionCard20);
+    	
+    	cardRepository.save(minionCard21);  cardRepository.save(minionCard22);  cardRepository.save(minionCard23);
+    	cardRepository.save(minionCard24);
     }
 
     public void removeUserFromConnectedUsers(String userId) {

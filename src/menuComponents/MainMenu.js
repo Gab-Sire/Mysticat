@@ -27,7 +27,7 @@ export default class MainMenu extends Component{
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Consulter ses decks</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{this.cancelQueue();
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{
 								setTimeout(()=>{
 									this.deconnexion();
 								}, TIME_BETWEEN_AXIOS_CALLS)
@@ -128,6 +128,7 @@ export default class MainMenu extends Component{
 	}
 
 	deconnexion(){
+		this.cancelQueue();
 		this.hideUnderContruction();
 		this.props.disconnectPlayer();
 	}
