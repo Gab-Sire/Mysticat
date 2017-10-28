@@ -149,16 +149,16 @@ public class AuthentificationService {
     	
     	
     	//Cartes de Marc-Antoine, theme Super Hero et Super Vilain
-    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.", "");
+    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.", "../img/cardImd/superheroSet/mechacat.jpg");
     	MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.", "");
-    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand même peur de l'eau.", "");
-    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.", "");
-    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "Démon des temps anciens qui souhaite dominer le monde.", "");
-    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.", "");
-    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.", "");
-    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes légendaires peuvent couper n'importe quoi.", "");
-    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.", "");
-    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.", "");
+    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand même peur de l'eau.", "../img/cardImd/superheroSet/moustacheRousse.jpg");
+    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.", "../img/cardImd/superheroSet/channibalLecter.jpg");
+    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "Démon des temps anciens qui souhaite dominer le monde.", "../img/cardImd/superheroSet/ashesThepurrifier.jpg");
+    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.", "../img/cardImd/superheroSet/captainAmerichat.jpg");
+    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.", "../img/cardImd/superheroSet/superChat.png");
+    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes légendaires peuvent couper n'importe quoi.", "../img/cardImd/superheroSet/goldenClaws.jpg");
+    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.", "../img/cardImd/superheroSet/redDotCatcher.jpg");
+    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.", "../img/cardImd/superheroSet/theIncredibleWhisker.jpg");
     	
     	//Cartes de Marc-Antoine, mes chats
     	MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "");
