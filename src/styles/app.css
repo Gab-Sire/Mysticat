@@ -818,15 +818,71 @@ form {
 
 /* DECK SELECTION */
 
-#deckSelection{
-	background-color: black;
+#deckSelectionContainer{
+	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center
+		fixed;
+	background-size: cover;
+	width: 100%;
+	height: 700px;
+	
 }
 
 #deckSlotsContainer{
 	display: block;
-	margin-left: 30%;
-	margin-top: 40%;
+	position: relative;
+	margin: 0 auto;
+	top: 20%;
 	background-color: rgba(255, 210, 150, 1);
-	width: 40%;
+	width: 80%;
+	height: 48%;
 }
+
+#deckSlotsContainer div{
+	width: 14%;
+	height: 70%;
+	margin: 3%;
+	margin-top: 5%;
+}
+
+#deckSlotsContainer div:first-child{
+	margin-left: 22%;
+}
+
+#selectionDeckTitle{
+	font-family: 'Arvo', Georgia, Times, serif;
+	font-size: 90px;
+	line-height: 70px;
+	font-weight: bold;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	top: 15%;
+	width: 30%;
+	background-color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+#deckSlotsContainerUnderLayer{
+	display: block;
+	position: relative;
+	margin: 0 auto;
+	top: 20%;
+	background-color: orange;
+	width: 80%;
+	height: 2%;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+#backToMenu{
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	width: 15%;
+	padding: 5px;
+	top: 24%;
+	font-size: 18px;
+}
+
 
