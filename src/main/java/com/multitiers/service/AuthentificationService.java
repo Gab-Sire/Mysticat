@@ -99,7 +99,7 @@ public class AuthentificationService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//le système attribue des cartes au hasard pour le deck par défaut
+    	//le systï¿½me attribue des cartes au hasard pour le deck par dï¿½faut
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);
@@ -136,14 +136,14 @@ public class AuthentificationService {
     public void insertCustomCardsInDatabase() {
     	
     	// Cartes de Gabriel, theme Halloween
-    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malï¿½diction du pharaon", "../img/cardImg/halloweenSetCards/chat_momie.jpg");
+    	MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malÃ©diction du pharaon", "../img/cardImg/halloweenSetCards/chat_momie.jpg");
     	MinionCard minionCard02 = createMinionCard("Chat-Souris", 3, 3, 4, 1, "Vous avez dit chat-souris?", "../img/cardImg/halloweenSetCards/chat_souris.jpg");
     	MinionCard minionCard03 = createMinionCard("Chat Fantome", 2, 6, 2, 1, "Boo", "../img/cardImg/halloweenSetCards/chat_fantome.jpg");
     	MinionCard minionCard04 = createMinionCard("Chat Noir", 2, 4, 4, 1, "Si c'est vendredi 13, bonne chance pour la suite", "../img/cardImg/halloweenSetCards/chat_noir.jpg");
     	MinionCard minionCard05 = createMinionCard("Jack-O-Chat", 4, 6, 5, 2, "Bonne carte sans l'ombre d'un doute", "../img/cardImg/halloweenSetCards/jack_o_chat.jpg");
     	MinionCard minionCard06 = createMinionCard("Apprenti-Sorcier", 5, 6, 4, 2, "Abra Kadrachat !", "../img/cardImg/halloweenSetCards/apprenti_sorcier.jpg");
     	MinionCard minionCard07 = createMinionCard("Chat Zombie", 6, 4, 5, 2, "OMFG BBQ", "../img/cardImg/halloweenSetCards/chat_zombie.jpg");
-    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en ï¿½change de cette crï¿½ature ?", "../img/cardImg/halloweenSetCards/frankenchat.jpg");
+    	MinionCard minionCard08 = createMinionCard("FrankenChat", 7, 8, 5, 3, "Combien de vies de chats en Ã©change de cette crÃ©ature ?", "../img/cardImg/halloweenSetCards/frankenchat.jpg");
     	MinionCard minionCard09 = createMinionCard("Chat Possï¿½dï¿½", 9, 6, 5, 3, "Ehhh boy", "../img/cardImg/halloweenSetCards/chat_possede.jpg");
     	MinionCard minionCard10 = createMinionCard("Chanatique", 6, 8, 6, 3, "Tellement mystï¿½rieux...", "../img/cardImg/halloweenSetCards/chanatique.jpg");
     	

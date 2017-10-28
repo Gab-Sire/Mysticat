@@ -6,7 +6,10 @@ import Board from './boardComponents/Board.js';
 import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
+import DeckSelection from './DeckSelection.js';
+
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
+
 class App extends Component{
 	constructor(props){
 		super(props);
@@ -14,7 +17,8 @@ class App extends Component{
 			isServerAvailable: false,
 			inGame: false,
 			playerId: null,
-			gameState: null
+			gameState: null,
+			appDisplay: null
 		};
 	}
 
@@ -69,6 +73,24 @@ class App extends Component{
 			})
 			  .then((response)=>{
 				  this.setState({isServerAvailable: true});
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				  setTimeout(()=>{
+							  this.checkServerAvailability();
+						  }, TIME_BETWEEN_AXIOS_CALLS)
+				});
+	}
+	
+	goDeckSelection(){
+		axios({
+			  method:'get',
+			  url:'http://'+window.location.hostname+':8089/selectDeck',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  this.setState({appDisplay: "deck_selection"});
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);

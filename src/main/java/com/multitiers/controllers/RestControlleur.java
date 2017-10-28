@@ -66,7 +66,6 @@ public class RestControlleur {
         return user;
     }
     
-    
     @PostMapping(value="/disconnectUser")
     public void disconnectUser(@RequestBody String userId) {
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
