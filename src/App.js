@@ -36,7 +36,6 @@ class App extends Component{
 				if(null != this.state.userDeckList){
 					return <DeckSelection deckList={this.state.userDeckList}/>
 				}
-				
 			}
 			else if(false===this.state.inGame && null !==this.state.playerId){
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />

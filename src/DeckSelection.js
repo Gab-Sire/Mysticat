@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './styles/app.css';
+import './styles/menu.css';
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 import Card from './cardComponents/Card.js';
@@ -19,7 +19,7 @@ export default class DeckSelection extends Component{
 		let slotsRemaining = 3 - numberDecks;
 		let emptyDeckSlots = [];
 		for(var i = 0; i < slotsRemaining; i++){
-			emptyDeckSlots.push(<CardTile />);
+			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} />);
 		}
 		
 		return(
@@ -28,8 +28,8 @@ export default class DeckSelection extends Component{
 					<h2>S&eacute;lection de deck</h2>
 				</div>
 				<div id="deckSlotsContainer">
-				{this.props.deckList.map((deck, index) => (<Card key={"deckSlot" + index} faceUp={false} />))}
-				{emptyDeckSlots}
+					{this.props.deckList.map((deck, index) => (<Card key={"deckSlot" + index} faceUp={false} />))}
+					{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>
 				<button id="backToMenu">Retour au menu</button>
