@@ -15,6 +15,12 @@ export default class DeckSelection extends Component{
 	}
 	
 	render(){
+		let numberDecks = this.props.deckList.length;
+		let slotsRemaining = 3 - numberDecks;
+		let emptyDeckSlots = [];
+		for(var i = 0; i < slotsRemaining; i++){
+			emptyDeckSlots.push(<CardTile />);
+		}
 		
 		return(
 			<div id="deckSelectionContainer">
