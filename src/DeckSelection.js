@@ -15,16 +15,15 @@ export default class DeckSelection extends Component{
 	}
 	
 	render(){
-
+		
 		return(
 			<div id="deckSelectionContainer">
 				<div id="selectionDeckTitle">
 					<h2>S&eacute;lection de deck</h2>
 				</div>
 				<div id="deckSlotsContainer">
-					<CardTile />
-					<CardTile />
-					<CardTile />
+				{this.props.deckList.map((deck, index) => (<Card key={"deckSlot" + index} faceUp={false} />))}
+				{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>
 				<button id="backToMenu">Retour au menu</button>
