@@ -34,10 +34,10 @@ class App extends Component{
 			if("deck_selection" === this.state.appDisplay){
 				this.fetchUserDecks();	
 				if(null != this.state.userDeckList){
-					return <DeckSelection deckList={this.state.userDeckList}/>
+					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)}/>
 				}
 			}
-			else if(false===this.state.inGame && null !==this.state.playerId){
+			else if("menu" === this.state.appDisplay || (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(

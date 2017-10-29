@@ -32,8 +32,12 @@ export default class DeckSelection extends Component{
 					{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>
-				<button id="backToMenu">Retour au menu</button>
+				<button id="backToMenu" onClick={this.goBackToMenu.bind(this)}>Retour au menu</button>
 			</div>
 		)
 	}
+					
+	goBackToMenu(){
+		this.props.appDisplay("menu");
+	}				
 }
