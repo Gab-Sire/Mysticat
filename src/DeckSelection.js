@@ -15,6 +15,7 @@ export default class DeckSelection extends Component{
 	}
 	
 	render(){
+
 		return(
 			<div id="deckSelectionContainer">
 				<div id="selectionDeckTitle">

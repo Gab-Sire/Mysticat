@@ -837,14 +837,14 @@ form {
 	height: 48%;
 }
 
-#deckSlotsContainer div{
+#deckSlotsContainer .cardTile{
 	width: 14%;
 	height: 70%;
 	margin: 3%;
 	margin-top: 5%;
 }
 
-#deckSlotsContainer div:first-child{
+#deckSlotsContainer .cardTile:first-child{
 	margin-left: 22%;
 }
 

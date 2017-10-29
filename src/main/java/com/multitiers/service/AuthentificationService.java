@@ -99,7 +99,7 @@ public class AuthentificationService {
     	Deck starterDeck = new Deck();
     	starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
     	
-    	//le syst�me attribue des cartes au hasard pour le deck par d�faut
+    	//le système attribue des cartes au hasard pour le deck par défaut
     	List<Card> cards = cardRepository.findAll();
     	Collections.shuffle(cards);
     	cards = cards.subList(0, Constantes.CONSTRUCTED_DECK_MAX_SIZE);

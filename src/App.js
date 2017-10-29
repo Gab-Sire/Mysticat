@@ -18,7 +18,8 @@ class App extends Component{
 			inGame: false,
 			playerId: null,
 			gameState: null,
-			appDisplay: null
+			appDisplay: null,
+			userDeckList: null
 		};
 	}
 
@@ -31,7 +32,8 @@ class App extends Component{
 		
 		if(true===this.state.isServerAvailable){
 			if("deck_selection" === this.state.appDisplay){
-				return <DeckSelection />
+				this.fetchUserDecks();	
+				return <DeckSelection deckList={this.state.userDeckList}/>
 			}
 			else if(false===this.state.inGame && null !==this.state.playerId){
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
@@ -65,6 +67,24 @@ class App extends Component{
 				  setTimeout(()=>{
 							  this.checkServerAvailability();
 						  }, TIME_BETWEEN_AXIOS_CALLS)
+				});
+	}
+	
+	fetchUserDecks(){
+
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':8089/selectDeck',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: this.state.playerId
+			})
+			  .then((response)=>{
+				  	this.setState({ userDeckList: response.data });
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+		
 				});
 	}
 

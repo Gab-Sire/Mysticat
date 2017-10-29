@@ -1,5 +1,6 @@
 package com.multitiers.domaine.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,7 @@ public class User {
 		this.username = username;
 		this.hashedSalt = hashedSalt;
 		this.passwordHash = passwordHash;
+		this.decks = new ArrayList<>();
 	}
 	
 	public User() {}

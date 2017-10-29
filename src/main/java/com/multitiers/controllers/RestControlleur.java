@@ -72,9 +72,11 @@ public class RestControlleur {
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     
-    @GetMapping(value="/selectDeck")
-    public List<Deck> selectDeck() {
-    	return null;
+    @PostMapping(value="/selectDeck")
+    public List<Deck> selectDeck(@RequestBody String userId) {
+    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
+    	List<Deck> decks = user.getDecks();
+    	return decks;
     }
     
     @PostMapping(value = "/attemptConnection")

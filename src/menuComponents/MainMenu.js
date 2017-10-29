@@ -121,19 +121,7 @@ export default class MainMenu extends Component{
 	}
 	
 	goDeckSelection(){
-		axios({
-			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/selectDeck',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
-			})
-			  .then((response)=>{
-				  this.props.appDisplay("deck_selection");
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-		
-				});
+		this.props.appDisplay("deck_selection");
 	}
 	
 
