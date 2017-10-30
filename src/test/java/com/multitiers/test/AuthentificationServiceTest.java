@@ -2,6 +2,7 @@ package com.multitiers.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,7 @@ public class AuthentificationServiceTest {
 	CardRepository cardRepository;
 	
 	@Test
+	@Ignore
 	public void testInsertCustomCardsInDatabase() {
 		authentificationService.insertCustomCardsInDatabase();
 		Card card = cardRepository.findByCardName("Chat noir");

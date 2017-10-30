@@ -149,16 +149,16 @@ public class AuthentificationService {
     	
     	
     	//Cartes de Marc-Antoine, theme Super Hero et Super Vilain
-    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.", "../img/cardImd/superheroSet/mechacat.jpg");
+    	MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.", "../img/cardImg/superheroSet/mechacat.jpg");
     	MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.", "");
-    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand même peur de l'eau.", "../img/cardImd/superheroSet/moustacheRousse.jpg");
-    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.", "../img/cardImd/superheroSet/channibalLecter.jpg");
-    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "Démon des temps anciens qui souhaite dominer le monde.", "../img/cardImd/superheroSet/ashesThepurrifier.jpg");
-    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.", "../img/cardImd/superheroSet/captainAmerichat.jpg");
-    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.", "../img/cardImd/superheroSet/superChat.png");
-    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes légendaires peuvent couper n'importe quoi.", "../img/cardImd/superheroSet/goldenClaws.jpg");
-    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.", "../img/cardImd/superheroSet/redDotCatcher.jpg");
-    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.", "../img/cardImd/superheroSet/theIncredibleWhisker.jpg");
+    	MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3, "Le pirate le plus dangereux. Il a quand même peur de l'eau.", "../img/cardImg/superheroSet/moustacheRousse.jpg");
+    	MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7, "Un chat qui mange d'autres chats.", "../img/cardImg/superheroSet/channibalLecter.jpg");
+    	MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10, "Démon des temps anciens qui souhaite dominer le monde.", "../img/cardImg/superheroSet/ashesThepurrifier.jpg");
+    	MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.", "../img/cardImg/superheroSet/captainAmerichat.jpg");
+    	MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.", "../img/cardImg/superheroSet/superChat.png");
+    	MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5, "Ses griffes légendaires peuvent couper n'importe quoi.", "../img/cardImg/superheroSet/goldenClaws.jpg");
+    	MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8, "Plus rapide que le point rouge par terre.", "../img/cardImg/superheroSet/redDotCatcher.jpg");
+    	MinionCard minionCard20 = createMinionCard("The Incredible Whisker", 5, 10, 10, 4, "Son elegance est incomparable.", "../img/cardImg/superheroSet/theIncredibleWhisker.jpg");
     	
     	//Cartes de Marc-Antoine, mes chats
     	MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "");
@@ -167,16 +167,16 @@ public class AuthentificationService {
     	MinionCard minionCard24 = createMinionCard("Autre Chat", 5, 5, 5, 2, "L'autre.", "");
     	
     	// Cartes de Vincent, theme Medieval
-    	MinionCard minionCard25 = createMinionCard("Chavalier", 7, 8, 5, 10, "Le chavalier le plus redoutable du village", "../img/cardImd/medievalSetCards/chavalier.jpg");
-    	MinionCard minionCard26 = createMinionCard("ChatDragon", 15, 20, 10, 15, "Ce dragon peut vous pulvériser. Attention.", "../img/cardImd/medievalSetCards/dragonCat.jpg");
-    	MinionCard minionCard27 = createMinionCard("ChatPrincesse", 5, 5, 5, 3, "Ne vous faites pas avoir. Elle est rusée.", "../img/cardImd/medievalSetCards/chatPrincesse.jpg");
-    	MinionCard minionCard28 = createMinionCard("ChatBotte", 8, 15, 3, 7, "Il décidera de votre sort. Ce sera une chattastrophe", "../img/cardImd/medievalSetCards/chatBotte.jpg");
-    	MinionCard minionCard29 = createMinionCard("Chat Fou du roi", 4, 2, 4, 4, "Toujours là pour vous narguer", "../img/cardImd/medievalSetCards/chatFou.jpg");
-    	MinionCard minionCard30 = createMinionCard("Chat peint", 5, 7, 6, 7, "Personnage tranquille, mais à l'affut de tout. Ne le sous-estimez point.", "../img/cardImd/medievalSetCards/chatPeint.jpg");
-    	MinionCard minionCard31 = createMinionCard("Chat Belier", 15, 10, 5, 12, "Ne vous mettez pas à travers de son chemin, vous allez mourir.", "../img/cardImd/medievalSetCards/chatBelier.jpg");
-    	MinionCard minionCard32 = createMinionCard("Chat Roi", 6, 7, 5, 5, "Le chat le plus prestigieux du royaume.", "../img/cardImd/medievalSetCards/chatRoi.jpg");
-    	MinionCard minionCard33 = createMinionCard("Chat prince", 8, 6, 4, 3, "Ne tombez pas sous son charme", "../img/cardImd/medievalSetCards/chatPrince.jpg");
-    	MinionCard minionCard34 = createMinionCard("Chatdalf", 5, 10, 10, 4, "Le chat wizard peut vous transformer en grenouille n'importe quand ...", "../img/cardImd/medievalSetCards/chatdalf.jpg");
+    	MinionCard minionCard25 = createMinionCard("Chavalier", 7, 8, 5, 10, "Le chavalier le plus redoutable du village", "../img/cardImg/medievalSetCards/chavalier.jpg");
+    	MinionCard minionCard26 = createMinionCard("ChatDragon", 15, 20, 10, 15, "Ce dragon peut vous pulvériser. Attention.", "../img/cardImg/medievalSetCards/dragonCat.jpg");
+    	MinionCard minionCard27 = createMinionCard("ChatPrincesse", 5, 5, 5, 3, "Ne vous faites pas avoir. Elle est rusée.", "../img/cardImg/medievalSetCards/chatPrincesse.jpg");
+    	MinionCard minionCard28 = createMinionCard("ChatBotte", 8, 15, 3, 7, "Il décidera de votre sort. Ce sera une chattastrophe", "../img/cardImg/medievalSetCards/chatBotte.jpg");
+    	MinionCard minionCard29 = createMinionCard("Chat Fou du roi", 4, 2, 4, 4, "Toujours là pour vous narguer", "../img/cardImg/medievalSetCards/chatFou.jpg");
+    	MinionCard minionCard30 = createMinionCard("Chat peint", 5, 7, 6, 7, "Personnage tranquille, mais à l'affut de tout. Ne le sous-estimez point.", "../img/cardImg/medievalSetCards/chatPeint.jpg");
+    	MinionCard minionCard31 = createMinionCard("Chat Belier", 15, 10, 5, 12, "Ne vous mettez pas à travers de son chemin, vous allez mourir.", "../img/cardImg/medievalSetCards/chatBelier.jpg");
+    	MinionCard minionCard32 = createMinionCard("Chat Roi", 6, 7, 5, 5, "Le chat le plus prestigieux du royaume.", "../img/cardImg/medievalSetCards/chatRoi.jpg");
+    	MinionCard minionCard33 = createMinionCard("Chat prince", 8, 6, 4, 3, "Ne tombez pas sous son charme", "../img/cardImg/medievalSetCards/chatPrince.jpg");
+    	MinionCard minionCard34 = createMinionCard("Chatdalf", 5, 10, 10, 4, "Le chat wizard peut vous transformer en grenouille n'importe quand ...", "../img/cardImg/medievalSetCards/chatdalf.jpg");
     	
     	cardRepository.save(minionCard01);	cardRepository.save(minionCard02);	cardRepository.save(minionCard03);
     	cardRepository.save(minionCard04);	cardRepository.save(minionCard05);	cardRepository.save(minionCard06);
