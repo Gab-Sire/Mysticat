@@ -63,7 +63,7 @@ public abstract class Card {
 	}
 
 	public void setImagePath(String imagePath) {
-		imagePath = imagePath;
+		this.imagePath = imagePath;
 	}
 
 	@Override
