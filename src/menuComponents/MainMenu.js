@@ -81,6 +81,7 @@ export default class MainMenu extends Component{
 				  }, TIME_BETWEEN_AXIOS_CALLS)
 			  }
 			  else if(this.state.isLookingForGame===true){
+					console.log(response.data);
 				  this.props.getQueueForParent(response.data);
 			  }
 			})
@@ -119,11 +120,11 @@ export default class MainMenu extends Component{
 				  console.log('Error fetching and parsing data', error);
 				});
 	}
-	
+
 	goDeckSelection(){
 		this.props.appDisplay("deck_selection");
 	}
-	
+
 
 	displayUnderContruction(){
 		this.setState({tag: "visible"});

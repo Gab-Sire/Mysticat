@@ -20,6 +20,7 @@ public class PlayableMinionCard extends PlayableCard{
 		this.manaCost = entityCard.getManaCost();
 		this.description = entityCard.getCardDescription();
 		this.name = entityCard.getCardName();
+		this.imagePath = entityCard.getImagePath();
 	}
 	
 	public Integer getInitialPower() {
