@@ -9,7 +9,7 @@ import com.multitiers.domaine.entity.Card;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.service.AuthentificationService;
 
-public class TestAuthentificationService {
+public class AuthentificationServiceTest {
 	
 	AuthentificationService authentificationService = new AuthentificationService();
 	

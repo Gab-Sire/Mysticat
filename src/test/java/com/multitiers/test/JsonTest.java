@@ -18,7 +18,7 @@ import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.util.JsonUtils;
 
-public class TestJson {
+public class JsonTest {
 	String invalidJson;
 	
 

@@ -19,7 +19,7 @@ import com.multitiers.service.AuthentificationService;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
-public class TestConnectionUtils {
+public class ConnectionUtilsTest {
 
 	private static final int OFFSET_MIN_LENGTH = 2;
 	private static final int OFFSET_MAX_LENGTH = 4;
