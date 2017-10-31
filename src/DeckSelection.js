@@ -28,7 +28,7 @@ export default class DeckSelection extends Component{
 					<h2>S&eacute;lection de deck</h2>
 				</div>
 				<div id="deckSlotsContainer">
-					{this.props.deckList.map((deck, index) => (<Card key={"deckSlot" + index} faceUp={false} />))}
+					{this.props.deckList.map((deck, index) => <Card key={"deckSlot" + index} faceUp={false} {...deck} />)}
 					{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>
