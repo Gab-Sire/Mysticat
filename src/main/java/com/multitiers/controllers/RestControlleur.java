@@ -79,6 +79,15 @@ public class RestControlleur {
     	return decks;
     }
     
+    /**
+     * Get One Deck
+     */
+    @PostMapping(value="/selectOneDeck/{userId}/{deckId}")
+    public Deck selectSingleDeck(@RequestBody String userId, @RequestBody int deckId) {
+    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
+    	return user.getDecks().get(deckId);
+    }
+    
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
