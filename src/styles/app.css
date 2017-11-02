@@ -391,8 +391,20 @@
 	border-radius: 5px;
 	background-color: orange;
 }
+.minion img{
+	position:absolute;
+	top:0px;
+	left:5px;
+	margin-top: 10px;
+	width: 60px;
+	height: 75px;
+}
+
 
 .card img{
+	position:absolute;
+	top:0px;
+	left:5px;
 	margin-top: 10px;
 	width: 60px;
 	height: 75px;
@@ -427,6 +439,7 @@
 	box-shadow: 0 0 5px white;
 }
 .cardManaCost {
+	z-index:1;
 	left:5px;
 	position: absolute;
 	color: blue;
