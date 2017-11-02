@@ -41,7 +41,6 @@ public class GameServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-
 		slowMinion = new Minion();
 		slowMinion.setSpeed(0);
 		fastMinion = new Minion();

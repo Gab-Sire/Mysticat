@@ -43,7 +43,7 @@ public class AuthentificationService {
 	public Map<String, User> connectedUsers;
 
 	@Transactional
-	public void bootStrapTwoUsersAndTestCardSet() {
+	public void bootStrapTwoUsers() {
 		User user1 = createUser("Chat1", "Myboy1", HeroPortrait.warriorHero);
 		User user2 = createUser("Chat2", "Myboy2", HeroPortrait.zorroHero);
 		userRepository.save(user1);

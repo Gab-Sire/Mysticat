@@ -54,12 +54,13 @@ public class Player {
 	public void drawCard() {
 		if(this.deck.isEmpty()) {
 			takeFatigueDamage();
-			return;
 		}
-		PlayableCard cardDrawn = deck.get(0);
-		deck.remove(0);
-		if(hand.size()<Constantes.MAX_HAND_SIZE) {
-			hand.add(cardDrawn);
+		else {		
+			PlayableCard cardDrawn = deck.get(0);
+			deck.remove(0);
+			if(hand.size()<Constantes.MAX_HAND_SIZE) {
+				hand.add(cardDrawn);
+			}
 		}
 	}
 	

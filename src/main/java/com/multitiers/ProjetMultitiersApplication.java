@@ -21,7 +21,7 @@ public class ProjetMultitiersApplication {
         return (args) -> {
         	cardCreationService.initBasicCardSet();
         	inscriptionService.initDataLists();
-            inscriptionService.bootStrapTwoUsersAndTestCardSet();
+            inscriptionService.bootStrapTwoUsers();
             gameService.initDataLists();
         };
     }
