@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.multitiers.service.GameService;
 import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.CardCreationService;
 
 @SpringBootApplication
 public class ProjetMultitiersApplication {
@@ -16,8 +17,9 @@ public class ProjetMultitiersApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner peuplement(AuthentificationService inscriptionService, GameService gameService) {
+    public CommandLineRunner peuplement(AuthentificationService inscriptionService, GameService gameService, CardCreationService cardCreationService) {
         return (args) -> {
+        	cardCreationService.initBasicCardSet();
         	inscriptionService.initDataLists();
             inscriptionService.bootStrapTwoUsersAndTestCardSet();
             gameService.initDataLists();

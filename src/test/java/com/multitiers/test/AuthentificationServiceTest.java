@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.CardCreationService;
 
 public class AuthentificationServiceTest {
 	
-	AuthentificationService authentificationService = new AuthentificationService();
+	CardCreationService cardCreationService = new CardCreationService();
 	
 	@Autowired
 	CardRepository cardRepository;
@@ -20,7 +21,7 @@ public class AuthentificationServiceTest {
 	@Test
 	@Ignore
 	public void testInsertCustomCardsInDatabase() {
-		authentificationService.insertCustomCardsInDatabase();
+		cardCreationService.initBasicCardSet();
 		Card card = cardRepository.findByCardName("Chat noir");
 		assertNotNull(card);
 	}
