@@ -101,8 +101,6 @@ export default class Login extends Component{
 	     	             <h5>Votre nom d'utilisateur doit être unique et doit comprendre:</h5>
 	                     <ul>
 	                      	<li>Entre {USERNAME_MIN_LENGTH} et {USERNAME_MAX_LENGTH} caracteres inclusivement</li>
-	                  		<li>Au moins 1 chiffre</li>
-	                  		<li>Au moins 1 lettre majuscule</li>
 	                  	</ul>
 	                	<h5>Votre mot de passe doit comprendre:</h5>
 	                	<ul>
@@ -122,26 +120,6 @@ export default class Login extends Component{
 	            	</form>
 	            </div>
 
-        <div className="expectedFormat">
-        	<div id="usernameFormat">
-				<h4>Votre nom d'utilisateur doit être unique et doit comprendre:</h4>
-				<ul>
-					<li>Entre {USERNAME_MIN_LENGTH} et {USERNAME_MAX_LENGTH} caracteres inclusivement</li>
-					<li>Au moins 1 chiffre</li>
-					<li>Au moins 1 lettre minuscule</li>
-					<li>Au moins 1 lettre majuscule</li>
-				</ul>
-			</div>
-			<div id="passwordFormat">
-				<h4>Votre mot de passe doit comprendre:</h4>
-				<ul>
-					<li>Entre {PASSWORD_MIN_LENGTH} et {PASSWORD_MAX_LENGTH} caracteres inclusivement</li>
-					<li>Au moins 1 chiffre</li>
-					<li>Au moins 1 lettre minuscule</li>
-					<li>Au moins 1 lettre majuscule</li>
-				</ul>
-			</div>
-        </div>
 	    </div>)
 	}
 }

@@ -51,7 +51,6 @@ public class AuthentificationService {
 	}
 
 
-
 	public User createUser(String username, String password, HeroPortrait portrait) {
 		if (!ConnectionUtils.isValidPassword(password)) {
 			throw new BadPasswordFormatException(password);
@@ -110,7 +109,6 @@ public class AuthentificationService {
 			this.connectedUsers.put(user.getId(), user);
 		}
 	}
-
 
 
 	public void removeUserFromConnectedUsers(String userId) {
