@@ -6,6 +6,7 @@ public class UsernameTakenException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
 	public UsernameTakenException(String username) {
+		super(username);
 		this.username = username;
 	}
 }
