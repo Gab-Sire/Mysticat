@@ -149,9 +149,9 @@ public class ConnectionUtilsTest {
 	@Test
 	public void usernameIsTooShort() {
 		// Meet all other conditions, so you know it's length that is the problem.
-		tooShortUsername += lowerCaseInUsername;
-		tooShortUsername += upperCaseInUsername;
-		tooShortUsername += digitInUsername;
+		tooShortUsername += generateLowerCase();
+		tooShortUsername += generateUpperCase();
+		tooShortUsername += generateDigit();
 		assertFalse(ConnectionUtils.isValidUsername(tooShortUsername));
 	}
 

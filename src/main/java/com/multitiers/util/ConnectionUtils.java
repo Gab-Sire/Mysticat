@@ -10,8 +10,7 @@ public class ConnectionUtils {
 
 	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
 	// caracteres et maximale de 30.
-	public final static String USERNAME_REGEX = "^." + "{"
-			+ Constantes.MIN_USERNAME_LENGTH + "," + Constantes.MAX_USERNAME_LENGTH + "}$";
+	public final static String USERNAME_REGEX = "^." + "{"+ Constantes.MIN_USERNAME_LENGTH + "," + Constantes.MAX_USERNAME_LENGTH + "}$";
 
 	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
 	// caracteres et maximale de 100.
