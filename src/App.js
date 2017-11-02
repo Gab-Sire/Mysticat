@@ -19,7 +19,8 @@ class App extends Component{
 			playerId: null,
 			gameState: null,
 			appDisplay: null,
-			userDeckList: null
+			userDeckList: null,
+			deckId:null
 		};
 	}
 
@@ -34,7 +35,7 @@ class App extends Component{
 			if("deck_selection" === this.state.appDisplay){
 				this.fetchUserDecks();	
 				if(null != this.state.userDeckList){
-					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)}/>
+					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)}/>
 				}
 			}
 			else if("menu" === this.state.appDisplay || (false===this.state.inGame && null !==this.state.playerId)){
@@ -89,7 +90,11 @@ class App extends Component{
 		
 				});
 	}
-
+	
+	selectDeck(deckId){
+		this.setState({deckId:deckId});
+	}
+	
 	checkServerAvailability(){
 		axios({
 			  method:'get',

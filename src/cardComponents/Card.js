@@ -21,6 +21,8 @@ export default class Card extends Component{
 				<div title="The amount of damage this minion can take" className='cardDetailContainer cardHealth'><div className="balancingDetail">{this.props.initialHealth}</div></div>
 				<div title="Speed dictates the order in which attacks resolve" className='cardDetailContainer cardSpeed'><div className="balancingDetail">{this.props.initialSpeed}</div></div>
 			</div>);
+		}else if(null===this.props.index){
+			return (<div className="cardFacedDown"></div>);
 		}
 		else{
 			return (<div className="cardFacedDown"></div>);
