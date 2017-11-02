@@ -392,6 +392,12 @@
 	background-color: orange;
 }
 
+.card img{
+	margin-top: 10px;
+	width: 60px;
+	height: 75px;
+}
+
 .card:hover {
 	transform: scale(1.5)
 }
@@ -815,7 +821,3 @@ form {
   left: 41% !important;
   will-change: transform !important;
 }
-
-
-
-

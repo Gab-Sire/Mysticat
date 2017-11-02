@@ -5,7 +5,7 @@ export default class Card extends Component{
 		super(props);
 		this.state={faceUp: true, selected:false};
 	}
-	
+
 	render(){
 		let isSelected = "";
 		if(true === this.props.active){
@@ -15,7 +15,7 @@ export default class Card extends Component{
 		if(true === this.props.faceUp){
 			return (<div className={"card " + isSelected} title={this.props.description} onClick={this.props.onClick}>
 				<div className='cardDetailContainer cardManaCost' title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
-				<img src="../img/cardImg/medievalSetCards/dragonCat.jpg" />
+				<img src= {'/' + this.props.imagePath}  />
 				<div className="cardName">{this.props.name}</div>
 				<div title="The amount of damage this minion deals" className='cardDetailContainer cardPower'><div className="balancingDetail">{this.props.initialPower}</div></div>
 				<div title="The amount of damage this minion can take" className='cardDetailContainer cardHealth'><div className="balancingDetail">{this.props.initialHealth}</div></div>
@@ -33,7 +33,7 @@ export default class Card extends Component{
 		this.props.deckSelection(this.props.index);
 		this.props.appDisplay("displayDeck");
 	}
-	
+
 	handleClick = () => {
 		this.setState(prevState =>({ selected: !this.state.selected }));
 	};
