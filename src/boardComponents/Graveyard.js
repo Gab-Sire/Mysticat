@@ -30,7 +30,8 @@ export default class Graveyard extends Component{
 					initialPower= {topCardOnGraveyard.initialPower}
 					initialSpeed= {topCardOnGraveyard.initialSpeed}
 					initialHealth= {topCardOnGraveyard.initialHealth}
-					manaCost= {topCardOnGraveyard.manaCost} />
+					manaCost= {topCardOnGraveyard.manaCost}
+					imagePath ={topCardOnGraveyard.imagePath} />
 	   		</div>);
 		}
 	}
