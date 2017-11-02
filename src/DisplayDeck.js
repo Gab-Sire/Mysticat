@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-/**
- * Pop up menu si on a besoin plus tard
- */
-export default class SurrenderScreenPopUp extends Component {
+import axios from 'axios';
+import './styles/app.css';
+
+const TIME_BETWEEN_AXIOS_CALLS = 1000;
+
+export default class DisplayDeck extends Component {
 
   constructor(props) {
     super(props);
@@ -10,15 +12,19 @@ export default class SurrenderScreenPopUp extends Component {
     		deck:null
     }
   }
-  componentDidMount(){
+  componentWillMount(){
 	  this.getDeck();
   }
   getDeck(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/selectOneDeck/'+this.props.playerId+'/'+this.props.idDeck,
+			  url:'http://'+window.location.hostname+':8089/selectOneDeck/'+this.props.playerId+'/'+this.props.deckId,
 			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
+			  headers: {'Access-Control-Allow-Origin': "true"},
+				params: {
+					userId: this.props.playerId,
+					deckId:this.props.deckId
+				  }
 			})
 			  .then((response)=>{
 				  this.setState({deck: response.data});
@@ -27,14 +33,14 @@ export default class SurrenderScreenPopUp extends Component {
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				  setTimeout(()=>{
-					 
+					  //this.getDeck();
 				  }, TIME_BETWEEN_AXIOS_CALLS)
 		});
 	}
   
   render() {
-	  if(deck !== null){
-		  return (<div></div>);  
+	  if(this.state.deck !== null){
+		  return (<div>Deck Found</div>);  
 	  }else{
 		  return (<div>En attente du serveur</div>);
 	  }

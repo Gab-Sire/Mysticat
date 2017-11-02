@@ -7,6 +7,7 @@ import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './DeckSelection.js';
+import DisplayDeck from './DisplayDeck.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
 
@@ -37,6 +38,9 @@ class App extends Component{
 				if(null != this.state.userDeckList){
 					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)}/>
 				}
+			}
+			else if("displayDeck" === this.state.appDisplay){
+				return <DisplayDeck playerId={this.state.playerId} deckId={this.state.deckId}/>
 			}
 			else if("menu" === this.state.appDisplay || (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
