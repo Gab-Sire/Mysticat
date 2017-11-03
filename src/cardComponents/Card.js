@@ -31,7 +31,13 @@ export default class Card extends Component{
 				<div title="Speed dictates the order in which attacks resolve" className={'cardDetailContainer'+listedInstance+' cardSpeed'+listedInstance}><div className="balancingDetail">{this.props.initialSpeed}</div></div>
 			</div>);
 		}else if(null!==this.props.index){
-			return (<div className="cardFacedDown" onClick={this.selectDeck.bind(this)}></div>);
+			console.log(this.props.isUserDeck);
+			if(true===this.props.isUserDeck){
+					return (<div className="cardFacedDown" onClick={this.selectDeck.bind(this)}></div>);
+			}
+			else{
+				return (<div className="cardFacedDown"></div>);
+			}
 		}
 		else{
 			return (<div className="cardFacedDown"></div>);

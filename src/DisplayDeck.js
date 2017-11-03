@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './styles/app.css';
 import CardDisplayTable from './cardComponents/CardDisplayTable.js';
+import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
@@ -30,7 +31,7 @@ export default class DisplayDeck extends Component {
 			})
 			  .then((response)=>{
 				  this.setState({deck: response.data});
-			
+
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -39,13 +40,13 @@ export default class DisplayDeck extends Component {
 				  }, TIME_BETWEEN_AXIOS_CALLS)
 		});
 	}
-  
+
   render() {
 	  if(this.state.deck !== null){
-		  return (<div className='MainMenu'><CardDisplayTable deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/></div>);  
+		  return (<div className='MainMenu'><CardDisplayTable deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/></div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
 	  }
-	  
+
   }
 }

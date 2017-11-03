@@ -4,6 +4,7 @@ import Login from "./Login.js";
 import Signup from "./Signup.js";
 import Card from './cardComponents/Card.js';
 import CardTile from './cardComponents/CardTile.js';
+import Beforeunload from 'react-beforeunload';
 
 export default class DeckSelection extends Component{
 
@@ -24,11 +25,12 @@ export default class DeckSelection extends Component{
 
 		return(
 			<div id="deckSelectionContainer">
+				<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
 				<div id="selectionDeckTitle">
 					<h2>S&eacute;lection de deck</h2>
 				</div>
 				<div id="deckSlotsContainer">
-					{this.props.deckList.map((deck, index) => <Card key={"deckSlot" + index} index={index} deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} faceUp={false} {...deck} />)}
+					{this.props.deckList.map((deck, index) => <Card key={"deckSlot" + index} index={index} isUserDeck={true} deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} faceUp={false} {...deck} />)}
 					{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>
