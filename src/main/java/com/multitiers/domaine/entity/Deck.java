@@ -12,18 +12,20 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="mys_deck_dec")
+@Table(name = "mys_deck_dec")
 public class Deck {
-	
+
 	@Id
-    @Column(name = "dec_id", nullable = false, updatable = false)
+	@Column(name = "dec_id", nullable = false, updatable = false)
 	private String deckId;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="mys_card_deck",
-				joinColumns = {@JoinColumn(name="dec_id")},
-				inverseJoinColumns = {@JoinColumn(name="car_id")})
+	@JoinTable(name = "mys_card_deck", joinColumns = { @JoinColumn(name = "dec_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "car_id") })
 	private List<Card> cardList;
+
+	@Column(name = "dec_name")
+	private String name;
 
 	public String getDeckId() {
 		return deckId;
@@ -39,6 +41,14 @@ public class Deck {
 
 	public void setCardList(List<Card> cardList) {
 		this.cardList = cardList;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
