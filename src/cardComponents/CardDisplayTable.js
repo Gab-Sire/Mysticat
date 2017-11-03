@@ -19,28 +19,30 @@ export default class CardDisplayTable extends Component {
   render() {
 	  const props = (this.props.deckList.cardList);
 	  let deck = this.props.deckList.cardList.map(function(card, index){
-		  if(0!==index && 0===index%5 ){
+		  if(0===((index+1)%5) ){
 			  return (
-						 <span><Card
+						 <span className='cardDisplay'><Card
 							 key={"handCard" + index}
 						 	 displayList={true}
 							 faceUp={true}
+						 	 listed={true}
 						 	 index={index}
 						 {...card}{...props} /><br/></span>
 						)  
 		  }else{
 			  return (
-						 <span><Card
+						 <span className='cardDisplay'><Card
 							 key={"handCard" + index}
 						 	 displayList={true}
 							 faceUp={true}
 						 	 index={index}
+					 	 listed={true}
 						 {...card}{...props} /></span>
 						)   
 		  }
 			
 		 }, this)
-	return (<div>{deck}</div>);  
+	return (<div id='MainMenu'><div className='cardDisplayTable'>{deck}</div></div>);  
 	  
   }
 }
