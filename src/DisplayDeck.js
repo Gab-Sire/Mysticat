@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './styles/app.css';
+import CardDisplayTable from './cardComponents/CardDisplayTable.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
@@ -9,7 +10,8 @@ export default class DisplayDeck extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    		deck:null
+    		deck:null,
+    		modeMode:false
     }
   }
   componentWillMount(){
@@ -40,7 +42,7 @@ export default class DisplayDeck extends Component {
   
   render() {
 	  if(this.state.deck !== null){
-		  return (<div>Deck Found</div>);  
+		  return (<div className='MainMenu'><CardDisplayTable /></div>);  
 	  }else{
 		  return (<div>En attente du serveur</div>);
 	  }
