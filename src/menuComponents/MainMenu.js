@@ -113,7 +113,7 @@ export default class MainMenu extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-									console.log(response.data);
+					console.log(response.data);
 				  this.props.getQueueForParent(response.data);
 				})
 				.catch(error => {
