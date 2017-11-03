@@ -1,6 +1,7 @@
 package com.multitiers.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -85,7 +86,9 @@ public class RestControlleur {
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
     	User user = userRepository.findById(userId);
-    	return user.getDecks().get(deckId);
+    	Deck deck = user.getDecks().get(deckId);
+    	Collections.sort(deck.getCardList());
+    	return deck;
     }
     
     @PostMapping(value = "/attemptConnection")
