@@ -28,11 +28,7 @@ public class Player {
 	public Player(User user) {
 		this.playerId = user.getId();
 		this.name = user.getUsername();
-		this.deck = new ArrayList<PlayableCard>();
-		List<Card> entityCardList = user.getDecks().get(0).getCardList();
-		for(int i=0; i<entityCardList.size(); i++) {
-			this.deck.add(new PlayableMinionCard((MinionCard) entityCardList.get(i)));
-		}
+		convertUserDeckToPlayerDeck(user);
 		this.hero = new Hero();
 		this.graveyard = new ArrayList<PlayableCard>();
 		this.field = new Minion[Constantes.MAX_FIELD_SIZE];
@@ -43,6 +39,14 @@ public class Player {
 
 		Collections.shuffle(deck);
 		drawStartingHand();
+	}
+
+	private void convertUserDeckToPlayerDeck(User user) {
+		this.deck = new ArrayList<PlayableCard>();
+		List<Card> entityCardList = user.getDecks().get(0).getCardList();
+		for(int i=0; i<entityCardList.size(); i++) {
+			this.deck.add(new PlayableMinionCard((MinionCard) entityCardList.get(i)));
+		}
 	}
 
 	private void drawStartingHand() {
