@@ -1,5 +1,7 @@
 package com.multitiers.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,15 @@ public class CardCreationService {
 	@Autowired
 	private MinionCardRepository minionCardRepository;
 	
-	
+	@Transactional
 	public void initBasicCardSet() {
 		generateHalloweenSet();
 		generateSuperHeroSet();
 		generateMabSet();
 		generateMedievalSet();
 	}
-
+	
+	@Transactional
 	private void generateMedievalSet() {
 		// Cartes de Vincent, theme Medieval
 		MinionCard minionCard25 = createMinionCard("Chavalier", 7, 8, 5, 10,
@@ -66,6 +69,7 @@ public class CardCreationService {
 		cardRepository.save(minionCard34);
 	}
 
+	@Transactional
 	private void generateMabSet() {
 		// Cartes de Marc-Antoine, mes chats
 		MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "img/cardImg/mabSet/petitChat.jpg");
@@ -78,6 +82,7 @@ public class CardCreationService {
 		cardRepository.save(minionCard24);
 	}
 
+	@Transactional
 	private void generateSuperHeroSet() {
 		// Cartes de Marc-Antoine, theme Super Hero et Super Vilain
 		MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.",
@@ -113,6 +118,7 @@ public class CardCreationService {
 		cardRepository.save(minionCard20);
 	}
 
+	@Transactional
 	private void generateHalloweenSet() {
 		// Cartes de Gabriel, theme Halloween
 		MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon",
@@ -149,6 +155,7 @@ public class CardCreationService {
 		cardRepository.save(minionCard10);
 	}
 	
+	@Transactional
 	public MinionCard createMinionCard(String name, Integer power, Integer health, Integer speed, Integer manaCost,
 			String desc, String imagePath) {
 		MinionCard card = new MinionCard();
