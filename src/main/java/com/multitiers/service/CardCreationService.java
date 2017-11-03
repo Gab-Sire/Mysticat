@@ -169,6 +169,5 @@ public class CardCreationService {
 		card.setImagePath(imagePath);
 		return card;
 	}
-	
 }
 
