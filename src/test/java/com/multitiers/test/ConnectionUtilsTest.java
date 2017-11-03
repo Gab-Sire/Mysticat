@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.UUID;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.After;

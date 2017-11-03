@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "mys_card_car")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "car_type")
-public abstract class Card {
+public abstract class Card implements Comparable<Card>{
 
 	@Id
 	@Column(name = "car_id", nullable = false, updatable = false)
@@ -70,5 +70,19 @@ public abstract class Card {
 	public String toString() {
 		return "Card [cardName=" + cardName + "]";
 	}
-
+	
+	@Override
+	public int compareTo(Card otherCard) {
+		if(this.manaCost < otherCard.manaCost) {
+			return -1;
+		}
+		else if(this.manaCost > otherCard.manaCost) {
+			return 1;
+		}
+		else {
+			int res = String.CASE_INSENSITIVE_ORDER.compare(this.cardName, otherCard.cardName);
+			res = (res==0) ? (this.cardName.compareTo(otherCard.cardName)) : res;
+			return res;
+		}
+	}
 }

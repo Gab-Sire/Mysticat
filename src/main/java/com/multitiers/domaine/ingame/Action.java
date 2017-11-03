@@ -16,12 +16,7 @@ public abstract class Action implements Comparable<Action>{
 	@Override
 	public int compareTo(Action a2) {
 		if(this instanceof SummonAction) {
-			if(a2 instanceof SummonAction) {
-				return 0;
-			}
-			else {
-				return -1;
-			}
+			return (a2 instanceof SummonAction) ? 0 : -1;
 		}
 		else if(this instanceof AttackAction) {
 			if(a2 instanceof SummonAction) {
