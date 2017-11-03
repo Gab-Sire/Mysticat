@@ -17,7 +17,18 @@ export default class CardDisplayTable extends Component {
   
   
   render() {
-	return (<table><tr><Card /></tr></table>);  
+	  const props = (this.props.deckList.cardList);
+	  let deck = this.props.deckList.cardList.map(function(card, index){
+			return (
+			 <Card
+				 key={"handCard" + index}
+			 	 displayList={true}
+				 faceUp={true}
+			 	 index={index}
+			 {...card}{...props}/>
+			)
+		 }, this)
+	return (<table><tr>{deck}</tr></table>);  
 	  
   }
 }
