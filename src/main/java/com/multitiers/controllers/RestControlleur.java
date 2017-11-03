@@ -75,6 +75,7 @@ public class RestControlleur {
     
     @PostMapping(value="/selectDeck")
     public List<Deck> selectDeck(@RequestBody String userId) {
+    	System.out.println("Getting a deck");
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	List<Deck> decks = user.getDecks();
     	return decks;

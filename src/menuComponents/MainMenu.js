@@ -91,7 +91,7 @@ export default class MainMenu extends Component{
 	}
 
 	cancelQueue(){
-		this.setState({isLookingForGame: false});
+		this.setState({isLookingForGame: false})
 		//Contacter le serveur pour etre removed.
 		let data = this.props.playerId;
 		axios({
@@ -122,8 +122,21 @@ export default class MainMenu extends Component{
 	}
 
 	goDeckSelection(){
-		this.props.appDisplay("deck_selection");
-	}
+			axios({
+				  method:'post',
+				  url:'http://'+window.location.hostname+':8089/selectDeck',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data: this.state.playerId
+				})
+				  .then((response)=>{
+					  	this.props.setUserDeckList(response.data);
+							this.props.appDisplay("deck_selection");
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+					});
+		}
 
 
 	displayUnderContruction(){

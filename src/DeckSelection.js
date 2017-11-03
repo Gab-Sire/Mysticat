@@ -6,14 +6,14 @@ import Card from './cardComponents/Card.js';
 import CardTile from './cardComponents/CardTile.js';
 
 export default class DeckSelection extends Component{
-	
+
 	constructor(props){
 		super(props);
 		this.state={
-			
+
 		};
 	}
-	
+
 	render(){
 		let numberDecks = this.props.deckList.length;
 		let slotsRemaining = 3 - numberDecks;
@@ -21,7 +21,7 @@ export default class DeckSelection extends Component{
 		for(var i = 0; i < slotsRemaining; i++){
 			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} />);
 		}
-		
+
 		return(
 			<div id="deckSelectionContainer">
 				<div id="selectionDeckTitle">
@@ -36,8 +36,8 @@ export default class DeckSelection extends Component{
 			</div>
 		)
 	}
-					
+
 	goBackToMenu(){
 		this.props.appDisplay("deck_selection");
-	}				
+	}
 }
