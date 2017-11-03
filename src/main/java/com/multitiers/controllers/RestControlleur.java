@@ -73,8 +73,8 @@ public class RestControlleur {
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     
-    @PostMapping(value="/selectDeck")
-    public List<Deck> selectDeck(@RequestBody String userId) {
+    @PostMapping(value="/getUserDecks")
+    public List<Deck> getUserDecks(@RequestBody String userId) {
     	System.out.println("Getting a deck");
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	List<Deck> decks = user.getDecks();

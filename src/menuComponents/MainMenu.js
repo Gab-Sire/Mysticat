@@ -124,7 +124,7 @@ export default class MainMenu extends Component{
 	goDeckSelection(){
 			axios({
 				  method:'post',
-				  url:'http://'+window.location.hostname+':8089/selectDeck',
+				  url:'http://'+window.location.hostname+':8089/getUserDecks',
 				  responseType:'json',
 				  headers: {'Access-Control-Allow-Origin': "true"},
 				  data: this.state.playerId

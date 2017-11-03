@@ -50,7 +50,6 @@ public class AuthentificationService {
 		userRepository.save(user2);
 	}
 
-
 	public User createUser(String username, String password, HeroPortrait portrait) {
 		if (!ConnectionUtils.isValidPassword(password)) {
 			throw new BadPasswordFormatException(password);
@@ -76,6 +75,7 @@ public class AuthentificationService {
 	public Deck createStarterDeck(User owner) {
 		Deck starterDeck = new Deck();
 		starterDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+		starterDeck.setName("Starter deck : " + owner.getUsername());
 
 		// le système attribue des cartes au hasard pour le deck par défaut
 		List<Card> cards = cardRepository.findAll();
@@ -109,7 +109,6 @@ public class AuthentificationService {
 			this.connectedUsers.put(user.getId(), user);
 		}
 	}
-
 
 	public void removeUserFromConnectedUsers(String userId) {
 		this.connectedUsers.remove(userId);

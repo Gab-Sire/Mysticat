@@ -131,7 +131,6 @@ class App extends Component{
 	}
 
 	updateAppDisplay = (displayMode) =>{
-		console.log(displayMode);
 		this.setState({appDisplay: displayMode})
 	}
 }
