@@ -26,6 +26,7 @@ export default class CardDisplayTable extends Component {
 						 	 displayList={true}
 							 faceUp={true}
 						 	 listed={true}
+						 	 name={this.props.deckList.cardList[index].cardName}
 						 	 index={index}
 						 {...card}{...props} /><br/></span>
 						)  
@@ -42,7 +43,17 @@ export default class CardDisplayTable extends Component {
 		  }
 			
 		 }, this)
-	return (<div id='MainMenu'><div className='cardDisplayTable'>{deck}</div></div>);  
-	  
+	return (<div id='MainMenu'>
+				<h1 className='displayDeckTitle'>Affichage Deck</h1>
+				<div className='cardDisplayTable'>
+					{deck}
+					<button id="backToMenu" onClick={this.goBackToDeckList.bind(this)}>Retour au Liste</button>
+				</div>
+			</div>);  
   }
+
+  goBackToDeckList(){
+		this.props.appDisplay("deck_selection");
+	}
+ 	
 }
