@@ -84,8 +84,7 @@ public class RestControlleur {
      */
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
-    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
-    	System.out.println("Sending Deck from"+userId+" Deck ->"+deckId);
+    	User user = userRepository.findById(userId);
     	return user.getDecks().get(deckId);
     }
     
