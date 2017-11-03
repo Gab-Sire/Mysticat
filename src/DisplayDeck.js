@@ -42,9 +42,10 @@ export default class DisplayDeck extends Component {
   
   render() {
 	  if(this.state.deck !== null){
-		  return (<div className='MainMenu'><CardDisplayTable deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId}/></div>);  
+		  return (<div className='MainMenu'><CardDisplayTable deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/></div>);  
 	  }else{
 		  return (<div>En attente du serveur</div>);
 	  }
+	  
   }
 }

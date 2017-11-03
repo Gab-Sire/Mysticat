@@ -40,7 +40,7 @@ class App extends Component{
 				}
 			}
 			else if("displayDeck" === this.state.appDisplay){
-				return <DisplayDeck playerId={this.state.playerId} deckId={this.state.deckId}/>
+				return <DisplayDeck playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)}/>
 			}
 			else if("menu" === this.state.appDisplay || (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu playerId={this.state.playerId} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
