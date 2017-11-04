@@ -26,9 +26,9 @@ export default class Card extends Component{
 				<img src={'/' + this.props.cardReference.imagePath}></img>
 				<div className="cardName">{this.props.name}</div>
 				
-				<div title="The amount of damage this minion deals" className="cardDetailContainer cardPower"><div className="balancingDetail">{this.props.power}</div></div>
-				<div title="The amount of damage this minion can take" className="cardDetailContainer cardHealth"><div className="balancingDetail">{this.props.health}</div></div>
-				<div title="Speed dictates the order in which attacks resolve" className="cardDetailContainer cardSpeed"><div className="balancingDetail">{this.props.speed}</div></div>
+				<div title="The amount of damage this minion deals" className="cardPower"><div className="placingAttribut">{this.props.power}</div></div>
+				<div title="The amount of damage this minion can take" className=" cardHealth"><div className="placingAttribut">{this.props.health}</div></div>
+				<div title="Speed dictates the order in which attacks resolve" className=" cardSpeed"><div className="placingAttribut">{this.props.speed}</div></div>
 			</div>);
 		}
 		else{
