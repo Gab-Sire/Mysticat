@@ -87,13 +87,15 @@
 
 #MainMenu {
 	color: black;
-	position: relative;
+	top:0px;
+	position: absolute;
 	width: 100%;
-	height: -webkit-fill-available;
-	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center
-		fixed;
+	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 	background-size: cover;
-	overflow: hidden;
 }
 
 .hidden {
@@ -113,8 +115,9 @@
 #menuBox {
 	position: relative;
 	width: 40%;
-	--height: 350px;
-	height: 30%;
+	height: 300px;
+	margin-bottom:50;
+
 	margin-left: 30%;
 	margin-top: 10%;
 	margin-bottom: 10%;
@@ -451,6 +454,11 @@
 	color: white;
 	box-shadow: 0 0 5px white;
 }
+.placingAttribut{
+	position: absolute;
+	top: 45%;
+	left: 30%;
+}
 .cardManaCost {
 	z-index:1;
 	left:5px;
@@ -468,23 +476,37 @@
 
 
 .cardPower {
-	top: 105px;
-	left:2px;
 	position: absolute;
+	left:-5px;
+	bottom:0px;
+	width: 25px;
+	height: 25px;
+	background-image: url("../img/cardImg/catpaw2.png");
+	background-size:cover;
 	color: red;
 }
 
 .cardHealth {
-	top: 105px;
-	left:27px;
 	position: absolute;
+	left:21px;
+	bottom:0px;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	background-image: url("../img/cardImg/heart.png");
+	background-size:cover;
 	color: lightgreen;
 }
 
 .cardSpeed {
-	top: 105px;
-	left:52px;
 	position: absolute;
+	left:48px;
+	bottom:0px;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	background-image: url("../img/cardImg/shoe.png");
+	background-size:cover;
 	font-style: italic;
 	color: white;
 }
@@ -533,19 +555,31 @@
 	color: blue;
 }
 .cardPowerBig {
-	bottom: 10px;
-	left:5px;
+	bottom: 0px;
+	width: 40px;
+	height: 40px;
+	background-image: url("../img/cardImg/catpaw2.png");
+	background-size:cover;
+	left:0px;
 	position: absolute;
 	color: red;
 }
 .cardHealthBig {
-	bottom: 10px;
-	left:42%;
+	bottom: 0px;
+	width: 40px;
+	height: 40px;
+	background-image: url("../img/cardImg/heart.png");
+	background-size:cover;
+	left:38%;
 	position: absolute;
 	color: lightgreen;
 }
 .cardSpeedBig {
-	bottom: 10px;
+	bottom: 0px;
+	width: 30px;
+	height: 30px;
+	background-image: url("../img/cardImg/shoe.png");
+	background-size:cover;
 	right:5px;
 	position: absolute;
 	font-style: italic;

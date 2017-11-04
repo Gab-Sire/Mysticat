@@ -51,7 +51,12 @@ export default class CardDisplayTable extends Component {
 				</div>
 			</div>);  
   }
-
+/**
+ * <form>
+					<>
+					<button onClick={this.sortCard.bind(this)} ></button>
+				</from>
+ */
   goBackToDeckList(){
 		this.props.appDisplay("deck_selection");
 	}

@@ -26,9 +26,9 @@ export default class Card extends Component{
 				<div className={'cardDetailContainer'+listedInstance+' cardManaCost'} title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
 				<img src= {'/' + this.props.imagePath}  />
 				<div className="cardName">{cardName}</div>
-				<div title="The amount of damage this minion deals" className={'cardDetailContainer'+listedInstance+' cardPower'+listedInstance}><div className="balancingDetail">{this.props.initialPower}</div></div>
-				<div title="The amount of damage this minion can take" className={'cardDetailContainer'+listedInstance+' cardHealth'+listedInstance}><div className="balancingDetail">{this.props.initialHealth}</div></div>
-				<div title="Speed dictates the order in which attacks resolve" className={'cardDetailContainer'+listedInstance+' cardSpeed'+listedInstance}><div className="balancingDetail">{this.props.initialSpeed}</div></div>
+				<div title="The amount of damage this minion deals" className={'cardPower'+listedInstance}><div className='placingAttribut'>{this.props.initialPower}</div></div>
+				<div title="The amount of damage this minion can take" className={'cardHealth'+listedInstance}><div className="placingAttribut">{this.props.initialHealth}</div></div>
+				<div title="Speed dictates the order in which attacks resolve" className={'cardSpeed'+listedInstance}><div className="placingAttribut">{this.props.initialSpeed}</div></div>
 			</div>);
 		}else if(null!==this.props.index){
 			if(true===this.props.isUserDeck){
