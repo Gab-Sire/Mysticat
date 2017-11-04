@@ -25,8 +25,8 @@ export default class EndGameScreen extends Component {
 		        );
 	  } else if(this.props.status === 0){
 		  return (
-		            <div id='FullScreenRED'>
-			            <div id='blocGiveUp'>
+		            <div id='FullScreenGREEN'>
+			            <div id='blocGagne'>
 			            	<p>Vous Avez Gagné!!!</p>
 			            	<button onClick={this.backToMainMenu.bind(this)}>Menu Principal</button>
 			            </div>
@@ -34,8 +34,8 @@ export default class EndGameScreen extends Component {
 		        );
 	  } else if(this.props.status === -1){
 		  return (
-		            <div id='FullScreenRED'>
-			            <div id='blocGiveUp'>
+		            <div id='FullScreenORANGE'>
+			            <div id='blocPartieNulle'>
 			            	<p>Partie Nulle</p>
 			            	<button onClick={this.backToMainMenu.bind(this)}>Menu Principal</button>
 			            </div>

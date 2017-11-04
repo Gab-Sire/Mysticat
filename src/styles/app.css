@@ -180,18 +180,28 @@
 	display: block;
 }
 
-#FullScreenRED {
+#FullScreenRED, #FullScreenGREEN, #FullScreenOrange {
 	z-index: 2;
 	position: absolute;
 	top: 0px;
 	width: 100%;
 	height: 740px;
+}
+
+#FullScreenRED {
 	background-color: rgba(200, 100, 100, 0.3);
 }
 
-#blocGiveUp {
+#FullScreenGREEN {
+	background-color: rgba(100, 200, 100, 0.3);
+}
+
+#FullScreenOrange {
+	background-color: rgba(244, 185, 66, 0.3);
+}
+
+#blocGiveUp, #blocGagne, #blocPartieNulle {
 	z-index: 3;
-	background-color: darkred;
 	position: absolute;
 	top: 30%;
 	left: 25%;
@@ -200,6 +210,22 @@
 	text-align: center;
 	padding-top: 3%;
 	border-radius: 40px;
+}
+
+#blocGiveUp {
+	background-color: darkred;
+}
+
+#blocGagne {
+	background-color: darkgreen;
+}
+
+#blocPartieNulle {
+	background-color: rgb(238,118,0);
+}
+
+#blocGiveUp > p, #blocGagne > p, #blocPartieNulle > p{
+	color: white;
 }
 
 #messagePopUp {
