@@ -732,18 +732,20 @@
 /* NOM JOUEURS DE LA PARTIE */
 #selfUserName, #opponentUserName {
 	position: absolute;
-	left: 6%;
+	left: 1%;
 	color: white;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 29px;
+	max-width: 43%;
+	overflow: hidden;
 }
 
 #selfUserName {
-	top: 83%;
+	bottom: 18.5%;
 }
 
 #opponentUserName {
-	top: 0;
+	top: 10%;
 }
 
 /* CONNEXION FORM CSS */

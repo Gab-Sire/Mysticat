@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class Card extends Component{
 	constructor(props){
 		super(props);
-		this.state={faceUp: true, selected:false};
+		this.state={faceUp: true};
 	}
 
 	render(){
@@ -47,10 +47,6 @@ export default class Card extends Component{
 		this.props.deckSelection(this.props.index);
 		this.props.appDisplay("displayDeck");
 	}
-
-	handleClick = () => {
-		this.setState(prevState =>({ selected: !this.state.selected }));
-	};
 
 	unselect = () => {
 		this.setState(prevState => ({ selected: false }));

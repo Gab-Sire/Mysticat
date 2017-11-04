@@ -123,8 +123,8 @@ export default class Board extends Component{
 						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
 					</div>
 
-					<div id="opponentUserName"><p>{opponent.name}</p></div>
-					<div id="selfUserName"><p>{self.name}</p></div>
+					<div id="opponentUserName"><p title={opponent.name}>{opponent.name}</p></div>
+					<div id="selfUserName"><p title={self.name}>{self.name}</p></div>
 				</div>
 			</div>
 		);
