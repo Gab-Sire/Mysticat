@@ -572,36 +572,29 @@
 	position: absolute;
 	color: blue;
 }
-.cardPowerBig {
+
+.cardStatBig{
+	position: absolute;
+	color: white;
 	bottom: 0px;
 	width: 40px;
 	height: 40px;
-	background-image: url("../img/cardImg/catpaw2.png");
 	background-size:cover;
+}
+
+.cardPowerBig {
+	background-image: url("../img/cardImg/catpaw2.png");
 	left: 1%;
-	position: absolute;
-	color: white;
 }
 .cardHealthBig {
-	bottom: 0px;
-	width: 40px;
-	height: 40px;
 	background-image: url("../img/cardImg/heart.png");
-	background-size:cover;
 	left:34%;
-	position: absolute;
-	color: lightgreen;
 }
 .cardSpeedBig {
-	bottom: 0px;
-	width: 40px;
-	height: 40px;
+
 	background-image: url("../img/cardImg/shoe.png");
-	background-size:cover;
 	right: 1%;
-	position: absolute;
 	font-style: italic;
-	color: white;
 }
 .cardBig:hover {
 	transform: scale(1.5);

@@ -41,7 +41,7 @@ class App extends Component{
 			else if("displayDeck" === this.state.appDisplay){
 				return <DisplayDeck playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)}/>
 			}
-			else if("menu" === this.state.appDisplay || (false===this.state.inGame && null !==this.state.playerId)){
+			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
@@ -49,7 +49,7 @@ class App extends Component{
 				);
 			}
 			else{
-				return (<div><Connection signupMode={this.state.signupMode} connectPlayer={this.setIdPlayer.bind(this)}/>
+				return (<div><Connection updateAppDisplay={this.updateAppDisplay.bind(this)} signupMode={this.state.signupMode} connectPlayer={this.connectPlayer.bind(this)}/>
 						</div>)
 
 			}
@@ -115,6 +115,11 @@ class App extends Component{
 		this.setState({"playerId" : null});
 	}
 
+	connectPlayer(idPlayer){
+				this.setState({"playerId" : idPlayer,
+											appDisplay: "menu"});
+	}
+
 	setUserDeckList(userDeckList){
 		this.setState({userDeckList: userDeckList});
 	}
@@ -127,6 +132,7 @@ class App extends Component{
 	}
 
 	getGameFromQueue = (gameState)=>{
+		console.log(this.state.appDisplay);
 		this.setState({gameState: gameState, inGame: true})
 	}
 
