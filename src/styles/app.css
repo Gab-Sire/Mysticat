@@ -433,7 +433,7 @@
 .cardName {
 	font-size:10px;
 	position: absolute;
-	bottom:40px;
+	bottom:30px;
 	text-decoration: underline;
 	overflow: auto;
 	color: white;

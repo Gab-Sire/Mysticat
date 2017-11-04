@@ -10,7 +10,7 @@ export default class Card extends Component{
 		let isSelected = "";
 		let listedInstance = "";
 		let cardName=this.props.name;
-		if(null===this.props.cardName){
+		if(null!==this.props.cardName){
 			cardName = this.props.name;
 		}else{
 			cardName = this.props.cardName;
