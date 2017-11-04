@@ -454,10 +454,19 @@
 	color: white;
 	box-shadow: 0 0 5px white;
 }
+
+
+
 .placingAttribut{
 	position: absolute;
-	top: 40%;
-	left: 30%;
+	top:50%;
+	margin-top: -10px;
+	left:50%;
+	margin-left: -10px;
+	height:20px;
+	width: 20px;
+	line-height: 20px;
+	text-align: center;
 }
 .cardManaCost {
 	z-index:1;
@@ -472,6 +481,7 @@
 	-o-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
 	transform: rotate(-45deg);
+	text-align: center;
 }
 
 
@@ -548,6 +558,7 @@
 	color: white;
 	box-shadow: 0 0 5px white;
 }
+
 .cardManaCostBig {
 	z-index:1;
 	left:5px;
