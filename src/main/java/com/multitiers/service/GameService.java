@@ -189,6 +189,9 @@ public class GameService implements QueueListener {
 				attackMinion(opponentPlayer, attackedIndex, attacker);
 			}
 		}
+		if(game.getWinnerPlayerIndex()!=null) {
+			existingGameList.remove(game.getGameId());
+		}
 	}
 
 	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
