@@ -32,7 +32,10 @@ export default class Card extends Component{
 			</div>);
 		}else if(null!==this.props.index){
 			if(true===this.props.isUserDeck){
-					return (<div className="cardFacedDown" onClick={this.selectDeck.bind(this)}></div>);
+					return (
+							<div className="cardFacedDown" title={this.props.deck.name} onClick={this.selectDeck.bind(this)}>
+							</div>
+						);
 			}
 			else{
 				return (<div className="cardFacedDown"></div>);

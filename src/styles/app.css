@@ -577,6 +577,7 @@
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 5px;
 	box-sizing: border-box;
+	vertical-align: bottom;
 }
 
 /* styles pour les cr�atures invoqu�es sur le champ de bataille */
