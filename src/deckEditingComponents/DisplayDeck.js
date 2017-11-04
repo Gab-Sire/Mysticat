@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './styles/app.css';
-import CardDisplayTable from './cardComponents/CardDisplayTable.js';
+import '../styles/app.css';
+import CardDisplayTable from './CardDisplayTable.js';
 import Beforeunload from 'react-beforeunload';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;

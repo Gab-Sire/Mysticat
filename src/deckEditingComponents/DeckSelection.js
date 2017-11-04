@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './styles/menu.css';
-import Login from "./Login.js";
-import Signup from "./Signup.js";
-import Card from './cardComponents/Card.js';
-import CardTile from './cardComponents/CardTile.js';
+import '../styles/menu.css';
+import Login from "../Login.js";
+import Signup from "../Signup.js";
+import Card from '../cardComponents/Card.js';
+import CardTile from '../cardComponents/CardTile.js';
 import Beforeunload from 'react-beforeunload';
 
 export default class DeckSelection extends Component{

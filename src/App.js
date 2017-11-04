@@ -6,8 +6,8 @@ import Board from './boardComponents/Board.js';
 import Connection from "./Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
-import DeckSelection from './DeckSelection.js';
-import DisplayDeck from './DisplayDeck.js';
+import DeckSelection from './deckEditingComponents/DeckSelection.js';
+import DisplayDeck from './deckEditingComponents/DisplayDeck.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
 
