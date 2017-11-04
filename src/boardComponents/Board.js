@@ -29,7 +29,7 @@ export default class Board extends Component{
 		this.state ={
 			playerId: null,
 			isThinkingToGiveUp: false,
-			hasLostGame : false,
+			isEndGame: null,
 			waitingForOpponentToEndTurn: false,
 			actionList : [],
 			cellsOfSummonedMinionsThisTurn : [false, false, false, false, false, false, false],
@@ -117,7 +117,7 @@ export default class Board extends Component{
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
 					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
-					<EndGameScreen status={this.state.hasLostGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
+					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
 						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
@@ -220,6 +220,7 @@ export default class Board extends Component{
 						players = this.state.gameState.players;
 						self = this.state.gameState.players[selfIndex];
 						opponent = this.state.gameState.players[opponentIndex];
+						this.selfUserHasWon();
 						this.forceUpdate();
 				  }
 				  else{
@@ -297,7 +298,7 @@ export default class Board extends Component{
 	}
 
 	surrender(){
-		self.health = 0;
+		self.hero.health = 0;
 		this.surrenderGameConfirmStateChange();
 		this.cancelActionSubmission();
 		setTimeout(()=>{
@@ -306,7 +307,27 @@ export default class Board extends Component{
 	}
 
 	loseGame(){
-		this.setState({ hasLostGame: true });
+		this.setState({ isEndGame: 1 });
+	}
+	
+	winGame(){
+		this.setState({ isEndGame: 0 });
+	}
+	
+	drawGame(){
+		this.setState({ isEndGame: -1 });
+	}
+	
+	selfUserHasWon(){
+		if(this.state.gameState.winnerPlayerIndex != null){
+			if(this.state.gameState.winnerPlayerIndex === selfIndex){
+				this.winGame();
+			} else if(this.state.gameState.winnerPlayerIndex === opponentIndex){
+				this.loseGame();
+			} else {
+				this.drawGame();
+			}
+		}
 	}
 
 	backToMainMenu(){

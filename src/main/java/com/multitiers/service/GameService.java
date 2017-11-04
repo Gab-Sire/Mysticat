@@ -182,6 +182,9 @@ public class GameService implements QueueListener {
 			verifySpeed(speed, attacker);
 			if (attackedIndex == HERO_FACE_INDEX) {
 				attackFace(opponentPlayer, attacker);
+				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
+					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
+				}
 			} else {
 				attackMinion(opponentPlayer, attackedIndex, attacker);
 			}
@@ -212,7 +215,7 @@ public class GameService implements QueueListener {
 		targetOfTheAttack = opponentPlayer.getHero();
 		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
 		if (targetOfTheAttack.isDead()) {
-			System.out.println("Congratz grad, you won.");
+			//System.out.println("Congratz grad, you won.");
 		}
 	}
 

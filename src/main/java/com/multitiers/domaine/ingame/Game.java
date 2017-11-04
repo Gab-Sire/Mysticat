@@ -7,6 +7,7 @@ public class Game {
 	private String gameId;
 	private Player[] players;
 	private Integer currentMana;
+	private Integer winnerPlayerIndex;
 	
 	public Game() {
 		super();
@@ -29,6 +30,14 @@ public class Game {
 		players[1].drawCard();
 		players[0].setRemainingMana(this.currentMana);
 		players[1].setRemainingMana(this.currentMana);
+		
+		if(players[0].getHero().isDead() && players[1].getHero().isDead()) {
+			this.setWinnerPlayerIndex(-1);
+		} else if(players[0].getHero().isDead()) {
+			this.setWinnerPlayerIndex(1);
+		} else if(players[1].getHero().isDead()) {
+			this.setWinnerPlayerIndex(0);
+		}
 	}
 
 	public Player[] getPlayers() {
@@ -55,4 +64,11 @@ public class Game {
 		this.gameId = gameId;
 	}
 	
+	public Integer getWinnerPlayerIndex() {
+		return this.winnerPlayerIndex;
+	}
+	
+	public void setWinnerPlayerIndex(Integer winnerIndex) {
+		this.winnerPlayerIndex = winnerIndex;
+	}
 }
