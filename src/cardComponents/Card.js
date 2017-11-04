@@ -16,7 +16,7 @@ export default class Card extends Component{
 			cardName = this.props.cardName;
 		}
 		if(true === this.props.active){
-			isSelected = "selected";
+			isSelected = " selected ";
 		}
 		if(true === this.props.listed){
 			listedInstance="Big ";
