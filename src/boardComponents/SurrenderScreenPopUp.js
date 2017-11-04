@@ -19,7 +19,7 @@ export default class SurrenderScreenPopUp extends Component {
 		    return (
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
-			            	<p>Es-tu sur de vouloir abandonner?</p>
+			            	<p>&Ecirc;tes-vous certain de vouloir abandonner?</p>
 			            	<button onClick={this.giveUp.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
 			            </div>
 		            </div>
