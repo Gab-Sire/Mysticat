@@ -119,6 +119,15 @@ public class CardCreationService {
 	}
 
 	@Transactional
+	private void generateMedievalSet() {
+		// Cartes de Jimmy, theme Comic Relieve (PopCulture/popStar)
+		//createMinionCard(name, power, health, speed, manaCost, desc, imagePath)
+		MinionCard minionCard35 = createMinionCard("Breaking Cat", 5, 10, 5, 3, "I'm not in the meth business. I'm in the empire business.", "img/cardImg/popcultureSet/BreakingCat.jpg");
+		MinionCard minionCard36 = createMinionCard("Princess Leia", 7, 5, 8, 3, "Can't believe I was so foolish to think I could find Luke and bring him home.", "img/cardImg/popcultureSet/Leia.jpg");
+		MinionCard minionCard37 = createMinionCard("Catty Gaga", 5, 10, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
+		}
+	
+	@Transactional
 	private void generateHalloweenSet() {
 		// Cartes de Gabriel, theme Halloween
 		MinionCard minionCard01 = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon",
