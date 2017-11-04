@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './styles/app.css';
+import '../styles/app.css';
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 
@@ -19,7 +19,7 @@ export default class Connection extends Component{
 			return <Login connectPlayer={this.connectPlayer} changeSignUpMode={this.changeSignUpMode}/>
 		}
 	}
-	
+
 	connectPlayer(playerId){
 		this.props.connectPlayer(playerId);
 	}

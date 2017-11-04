@@ -3,7 +3,7 @@ import axios from 'axios';
 import './styles/app.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Board from './boardComponents/Board.js';
-import Connection from "./Connection.js";
+import Connection from "./authenticationComponents/Connection.js";
 import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './deckEditingComponents/DeckSelection.js';
