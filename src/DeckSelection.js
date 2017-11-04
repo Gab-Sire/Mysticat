@@ -40,6 +40,6 @@ export default class DeckSelection extends Component{
 	}
 
 	goBackToMenu(){
-		this.props.appDisplay("deck_selection");
+		this.props.appDisplay("menu");
 	}
 }
