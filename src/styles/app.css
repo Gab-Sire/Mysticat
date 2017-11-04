@@ -85,10 +85,11 @@
 	overflow: hidden;
 }
 
-#MainMenu {
+#MainMenu, #CardCollection {
 	color: black;
 	top:0px;
 	position: absolute;
+	height: 100%;
 	width: 100%;
 	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -96,6 +97,14 @@
   -o-background-size: cover;
   background-size: cover;
 	background-size: cover;
+}
+
+#CardCollection{
+	height: auto;
+}
+
+#MainMenu{
+	height: 100%;
 }
 
 .hidden {
@@ -115,9 +124,6 @@
 #menuBox {
 	position: relative;
 	width: 40%;
-	height: 300px;
-	margin-bottom:50;
-
 	margin-left: 30%;
 	margin-top: 10%;
 	margin-bottom: 10%;
@@ -403,7 +409,7 @@
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
 	border-radius: 5px;
-	background-color: orange;
+	background-color: green;
 }
 .minion img{
 	position:absolute;

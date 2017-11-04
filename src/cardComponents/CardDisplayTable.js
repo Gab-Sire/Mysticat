@@ -11,11 +11,11 @@ export default class CardDisplayTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    		
+
     }
   }
-  
-  
+
+
   render() {
 	  const props = (this.props.deckList.cardList);
 	  let deck = this.props.deckList.cardList.map(function(card, index){
@@ -29,7 +29,7 @@ export default class CardDisplayTable extends Component {
 						 	 name={this.props.deckList.cardList[index].cardName}
 						 	 index={index}
 						 {...card}{...props} /><br/></span>
-						)  
+						)
 		  }else{
 			  return (
 						 <span className='cardDisplay'><Card
@@ -39,17 +39,17 @@ export default class CardDisplayTable extends Component {
 						 	 index={index}
 					 	 listed={true}
 						 {...card}{...props} /></span>
-						)   
+						)
 		  }
-			
+
 		 }, this)
-	return (<div id='MainMenu'>
+	return (<div id='CardCollection'>
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
 				<div className='cardDisplayTable'>
 					{deck}
 					<button id="backToMenu" onClick={this.goBackToDeckList.bind(this)}>Retour au Liste</button>
 				</div>
-			</div>);  
+			</div>);
   }
 /**
  * <form>
@@ -60,5 +60,5 @@ export default class CardDisplayTable extends Component {
   goBackToDeckList(){
 		this.props.appDisplay("deck_selection");
 	}
- 	
+
 }
