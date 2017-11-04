@@ -539,8 +539,9 @@
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
 	border-radius: 5px;
-	background-color: orange;
+	background-color: green;
 }
+
 .cardBig img{
 	position:absolute;
 	top:0px;
@@ -577,7 +578,7 @@
 	height: 40px;
 	background-image: url("../img/cardImg/catpaw2.png");
 	background-size:cover;
-	left:0px;
+	left: 1%;
 	position: absolute;
 	color: red;
 }
@@ -587,17 +588,17 @@
 	height: 40px;
 	background-image: url("../img/cardImg/heart.png");
 	background-size:cover;
-	left:38%;
+	left:34%;
 	position: absolute;
 	color: lightgreen;
 }
 .cardSpeedBig {
 	bottom: 0px;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	background-image: url("../img/cardImg/shoe.png");
 	background-size:cover;
-	right:5px;
+	right: 1%;
 	position: absolute;
 	font-style: italic;
 	color: white;

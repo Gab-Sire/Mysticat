@@ -21,24 +21,28 @@ export default class CardDisplayTable extends Component {
 	  let deck = this.props.deckList.cardList.map(function(card, index){
 		  if(0===((index+1)%5) ){
 			  return (
-						 <span className='cardDisplay'><Card
-							 key={"handCard" + index}
-						 	 displayList={true}
-							 faceUp={true}
-						 	 listed={true}
-						 	 name={this.props.deckList.cardList[index].cardName}
-						 	 index={index}
-						 {...card}{...props} /><br/></span>
+						 <span className='cardDisplay'>
+               <Card
+  							 key={"handCard" + index}
+  						 	 displayList={true}
+  							 faceUp={true}
+  						 	 listed={true}
+  						 	 name={this.props.deckList.cardList[index].cardName}
+  						 	 index={index}
+  						 {...card}{...props} /><br/>
+             </span>
 						)
 		  }else{
 			  return (
-						 <span className='cardDisplay'><Card
-							 key={"handCard" + index}
-						 	 displayList={true}
-							 faceUp={true}
-						 	 index={index}
-					 	 listed={true}
-						 {...card}{...props} /></span>
+						 <span className='cardDisplay'>
+               <Card
+  							 key={"handCard" + index}
+  						 	 displayList={true}
+  							 faceUp={true}
+  						 	 index={index}
+  					 	   listed={true}
+  						 {...card}{...props} />
+             </span>
 						)
 		  }
 
