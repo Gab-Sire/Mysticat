@@ -125,13 +125,13 @@ public class CardCreationService {
 		//createMinionCard(name, power, health, speed, manaCost, desc, imagePath)
 		MinionCard minionCard35 = createMinionCard("Breaking Cat", 5, 10, 5, 3, "I'm not in the meth business. I'm in the empire business.", "img/cardImg/popcultureSet/BreakingCat.jpg");
 		MinionCard minionCard36 = createMinionCard("Princess Leia", 7, 5, 8, 3, "Can't believe I was so foolish to think I could find Luke and bring him home.", "img/cardImg/popcultureSet/Leia.jpg");
-		MinionCard minionCard37 = createMinionCard("Catty Gaga", 5, 10, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
+		MinionCard minionCard37 = createMinionCard("Catty Gaga", 4, 11, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
 		MinionCard minionCard38 = createMinionCard("Kitty Perry", 4, 2, 4, 1, "Take me, ta-ta-take me, Wanna be your victim, Ready for abduction, Boy, you're an alien", "img/cardImg/popcultureSet/kitty-perry.jpg");
 		MinionCard minionCard39 = createMinionCard("Nikki Miouw", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
 		MinionCard minionCard40 = createMinionCard("Cat Sparrow", 10, 10, 10, 5, "Why the rum is always gone. ", "img/cardImg/popcultureSet/CatSperow.jpg");
-		MinionCard minionCard41 = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "elvis.png");
+		MinionCard minionCard41 = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "img/cardImg/popcultureSet/elvis.png");
 		MinionCard minionCard42 = createMinionCard("Miouwly Cirus", 9, 11, 5, 4, "I came in like a recking Ball", "img/cardImg/popcultureSet/MileyCirus.jpg");
-		MinionCard minionCard43 = createMinionCard("DIE Bunny", 12, 5, 8, 4, "STUPID HUMAIN, A Battery Up My B***, You must All die, DIE DIE DIE DIE", "img/cardImg/popcultureSet/kitty-perry.jpg");
+		MinionCard minionCard43 = createMinionCard("DIE Bunny", 12, 5, 8, 4, "STUPID HUMAIN, A Battery Up My B***, You must All die, DIE DIE DIE DIE", "img/cardImg/popcultureSet/Sellout.jpg");
 		MinionCard minionCard44 = createMinionCard("Thriller Cat", 12, 11, 12, 6, "Cause this is thriller, Thriller night, And no one’s gonna save you", "img/cardImg/popcultureSet/TrillerCat.jpg");
 		cardRepository.save(minionCard35);
 		cardRepository.save(minionCard36);
