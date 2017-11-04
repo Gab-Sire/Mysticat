@@ -601,7 +601,7 @@
 	z-index: 4;
 }
 
-.card+.card {
+.card+.card, .cardFacedDown+.cardFacedDown {
 	margin-left: 1%;
 }
 
