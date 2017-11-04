@@ -32,13 +32,11 @@ import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
-import com.multitiers.exception.UserAlreadyConnectedException;
 import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
-import com.multitiers.service.GameQueue;
 import com.multitiers.service.GameService;
 import com.multitiers.service.AuthentificationService;
 import com.multitiers.util.Constantes;
@@ -70,12 +68,13 @@ public class RestControlleur {
     
     @PostMapping(value="/disconnectUser")
     public void disconnectUser(@RequestBody String userId) {
+    	Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
+    	gameService.gameQueue.removeFromQueue(player);
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     
     @PostMapping(value="/getUserDecks")
     public List<Deck> getUserDecks(@RequestBody String userId) {
-    	System.out.println("Getting a deck");
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	List<Deck> decks = user.getDecks();
     	return decks;
@@ -155,7 +154,6 @@ public class RestControlleur {
     
     @PostMapping(value="/enterQueue")
     public void enterQueue(@RequestBody String userId) {
-    	System.out.println(userId);
     	User user = userRepository.findById(userId.substring(0, userId.length()-1));
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);

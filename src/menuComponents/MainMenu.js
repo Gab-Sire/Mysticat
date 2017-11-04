@@ -147,7 +147,6 @@ export default class MainMenu extends Component{
 	}
 
 	deconnexion(){
-		this.cancelQueue();
 		this.hideUnderContruction();
 		this.props.disconnectPlayer();
 	}
