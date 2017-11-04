@@ -16,13 +16,13 @@ export default class Card extends Component{
 			cardName = this.props.cardName;
 		}
 		if(true === this.props.active){
-			isSelected = " selected ";
+			isSelected = "selected";
 		}
 		if(true === this.props.listed){
 			listedInstance="Big ";
 		}
 		if(true === this.props.faceUp){
-			return (<div className={"card"+listedInstance + isSelected} title={this.props.description} onClick={this.props.onClick}>
+			return (<div className={"card"+listedInstance +" "+ isSelected} title={this.props.description} onClick={this.props.onClick}>
 				<div className={'cardDetailContainer'+listedInstance+' cardManaCost'} title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
 				<img src= {'/' + this.props.imagePath}  />
 				<div className="cardName">{cardName}</div>
