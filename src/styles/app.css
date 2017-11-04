@@ -433,7 +433,7 @@
 .cardName {
 	font-size:10px;
 	position: absolute;
-	bottom:30px;
+	bottom:35px;
 	text-decoration: underline;
 	overflow: auto;
 	color: white;
@@ -456,7 +456,7 @@
 }
 .placingAttribut{
 	position: absolute;
-	top: 35%;
+	top: 40%;
 	left: 30%;
 }
 .cardManaCost {
