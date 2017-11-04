@@ -29,6 +29,7 @@ export default class CardDisplayTable extends Component {
   						 	 listed={true}
   						 	 name={this.props.deckList.cardList[index].cardName}
   						 	 index={index}
+                 description={this.props.deckList.cardList[index].cardDescription}
   						 {...card}{...props} /><br/>
              </span>
 						)
@@ -41,6 +42,7 @@ export default class CardDisplayTable extends Component {
   							 faceUp={true}
   						 	 index={index}
   					 	   listed={true}
+                description={this.props.deckList.cardList[index].cardDescription}
   						 {...card}{...props} />
              </span>
 						)

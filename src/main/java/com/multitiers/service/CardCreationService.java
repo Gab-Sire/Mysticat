@@ -88,7 +88,7 @@ public class CardCreationService {
 		// Cartes de Marc-Antoine, theme Super Hero et Super Vilain
 		MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.",
 				"img/cardImg/superheroSet/mechacat.jpg");
-		MinionCard minionCard12 = createMinionCard("DoppleMeower", 10, 1, 19, 5, "Une vision terrible.", "img/cardImg/superheroSet/doppleMeower.jpg");
+		MinionCard minionCard12 = createMinionCard("DoppleMeower", 19, 1, 10, 5, "Une vision terrible.", "img/cardImg/superheroSet/doppleMeower.jpg");
 		MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3,
 				"Le pirate le plus dangereux. Il a quand même peur de l'eau.",
 				"img/cardImg/superheroSet/moustacheRousse.jpg");
