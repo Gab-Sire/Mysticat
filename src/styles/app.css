@@ -580,6 +580,7 @@
 	transform: rotate(45deg);
 	color: white;
 	box-shadow: 0 0 5px white;
+	margin-top:5%;
 }
 
 .cardManaCostBig {
