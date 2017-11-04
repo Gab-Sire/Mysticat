@@ -495,7 +495,7 @@
 
 .cardPower {
 	position: absolute;
-	left:-5px;
+	left:-2px;
 	bottom:0px;
 	width: 25px;
 	height: 25px;
@@ -506,7 +506,7 @@
 
 .cardHealth {
 	position: absolute;
-	left:21px;
+	left:23px;
 	bottom:0px;
 	width: 25px;
 	height: 25px;
