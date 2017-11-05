@@ -34,6 +34,9 @@ public abstract class Action implements Comparable<Action>{
 				}
 			}
 		}
+		else if(this instanceof SurrenderAction) {
+			return -1;
+		}
 		return 0;
 	}
 	

@@ -173,6 +173,14 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 		}
 	}
+	
+	addSurrenderAction = () => {
+		let actions = this.state.actionList;
+		actions.push({ 	playerIndex : selfIndex,
+						field : 'Abandonner'
+					});
+		this.setState({ actionList: actions })
+	}
 
 	getInitialGameInstance(){
 		axios({
@@ -298,12 +306,9 @@ export default class Board extends Component{
 	}
 
 	surrender(){
-		self.hero.health = 0;
 		this.surrenderGameConfirmStateChange();
-		this.cancelActionSubmission();
-		setTimeout(()=>{
-			this.loseGame();
-		}, TIME_BETWEEN_AXIOS_CALLS);
+		this.addSurrenderAction();
+		this.sendActions();
 	}
 
 	loseGame(){

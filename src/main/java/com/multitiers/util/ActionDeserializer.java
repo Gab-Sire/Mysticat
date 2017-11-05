@@ -10,6 +10,7 @@ import com.google.gson.JsonParseException;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.SummonAction;
+import com.multitiers.domaine.ingame.SurrenderAction;
 
 public class ActionDeserializer implements JsonDeserializer<Action>{
 
@@ -43,6 +44,15 @@ public class ActionDeserializer implements JsonDeserializer<Action>{
 			summonAction.setIndexOfCardInHand(indexOfCardInHand);
 			
 			return summonAction;
+		}
+		else if(jsonObj.has("field"))  {
+			int playerIndex = jsonObj.get("playerIndex").getAsInt();
+			String field = jsonObj.get("field").getAsString();
+			SurrenderAction surrenderAction = new SurrenderAction();
+			surrenderAction.setPlayerIndex(playerIndex);
+			surrenderAction.setField(field);
+			
+			return surrenderAction;
 		}
 		
 		return null;

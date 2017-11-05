@@ -19,6 +19,7 @@ import com.multitiers.domaine.ingame.PlayableCard;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
+import com.multitiers.domaine.ingame.SurrenderAction;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.DeckRepository;
 import com.multitiers.repository.MinionCardRepository;
@@ -119,6 +120,8 @@ public class GameService implements QueueListener {
 				resolveSummonAction((SummonAction) action, game);
 			} else if (action instanceof AttackAction) {
 				resolveAttackAction((AttackAction) action, game);
+			} else if (action instanceof SurrenderAction) {
+				resolveSurrenderAction((SurrenderAction) action, game);
 			}
 			sendDeadMinionsToGraveyards(game);
 		}
@@ -192,6 +195,17 @@ public class GameService implements QueueListener {
 		if(game.getWinnerPlayerIndex()!=null) {
 			existingGameList.remove(game.getGameId());
 		}
+	}
+	
+	private void resolveSurrenderAction(SurrenderAction surrenderAction, Game game) {
+		Integer playerDeclaringSurrenderIndex = surrenderAction.getPlayerIndex();
+		Integer opponentPlayerIndex = (playerDeclaringSurrenderIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
+				: PLAYER_ONE_INDEX;
+		Player playerDeclaringSurrender = game.getPlayers()[playerDeclaringSurrenderIndex];
+		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
+		
+		playerDeclaringSurrender.getHero().setHealth(0);
+		game.setWinnerPlayerIndex(opponentPlayerIndex);
 	}
 
 	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
