@@ -3,7 +3,7 @@ Implementation-Title: demows
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: portable
 Implementation-Vendor-Id: com.example
-Build-Jdk: 1.8.0_144
+Build-Jdk: 1.8.0_45
 Implementation-URL: http://projects.spring.io/spring-boot/projet_multi
  tiers/
 Created-By: Maven Integration for Eclipse

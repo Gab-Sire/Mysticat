@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../styles/app.css';
+import '../styles/menu.css';
 import Card from '../cardComponents/Card.js';
 
 
@@ -53,7 +53,7 @@ export default class CardDisplayTable extends Component {
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
 				<div className='cardDisplayTable'>
 					{deck}
-					<button id="backToMenu" onClick={this.goBackToDeckList.bind(this)}>Retour au Liste</button>
+					<button id="backToDeckSelection" onClick={this.goBackToDeckList.bind(this)}>Retour &agrave; la s&eacute;lection de deck</button>
 				</div>
 			</div>);
   }
