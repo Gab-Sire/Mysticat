@@ -7,7 +7,6 @@ import Card from '../cardComponents/Card.js';
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
 export default class CardDisplayTable extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +15,8 @@ export default class CardDisplayTable extends Component {
   }
 
   render() {
-	  const props = (this.props.deckList.cardList);
-	  let deck = this.props.deckList.cardList.map(function(card, index){
+      const props = this.state.deck;
+      let deck = this.state.deck.map(function(card, index){
 		  if(0===((index+1)%5) ){
 			  return (
 						 <span className='cardDisplay'>
@@ -26,9 +25,10 @@ export default class CardDisplayTable extends Component {
   						 	 displayList={true}
   							 faceUp={true}
   						 	 listed={true}
-  						 	 name={this.props.deckList.cardList[index].cardName}
+  						 	 name={this.state.deck[index].cardName}
   						 	 index={index}
-                 description={this.props.deckList.cardList[index].cardDescription}
+                 onClick={(true===this.state.EditMode) ? this.removeCardFromDeck.bind(this, index) : this.removeCardFromDeck.bind(this, index)}
+                 description={this.state.deck[index].cardDescription}
   						 {...card}{...props} /><br/>
              </span>
 						)
@@ -41,6 +41,7 @@ export default class CardDisplayTable extends Component {
   							 faceUp={true}
   						 	 index={index}
   					 	   listed={true}
+                 onClick={(true===this.state.EditMode) ? this.removeCardFromDeck.bind(this, index) : this.removeCardFromDeck.bind(this, index)}
                 description={this.props.deckList.cardList[index].cardDescription}
   						 {...card}{...props} />
              </span>
@@ -59,11 +60,22 @@ export default class CardDisplayTable extends Component {
 			</div>);
   }
 
+  componentWillMount(){
+    this.setState({deck:this.props.deckList.cardList});
+  }
+
   goBackToDeckList(){
 		this.props.appDisplay("deck_selection");
 	}
 
   switchEditMode(){
       this.setState({editMode: !this.state.editMode})
+  }
+
+  removeCardFromDeck(index){
+      let deck = this.state.deck;
+      deck.splice(index, 1);
+      this.setState({deck: deck});
+      console.log(this.state.deck);
   }
 }
