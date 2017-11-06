@@ -74,7 +74,7 @@ public class CardCreationService {
 	private void generateMabSet() {
 		// Cartes de Marc-Antoine, mes chats
 		MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "img/cardImg/mabSet/petitChat.jpg");
-		MinionCard minionCard22 = createMinionCard("Madame Chat", 5, 3, 3, 1, "La madame.", "img/cardImg/mabSet/madameChat.jpg");
+		MinionCard minionCard22 = createMinionCard("Madame Chat", 3, 2, 0, 0, "La madame.", "img/cardImg/mabSet/madameChat.jpg");
 		MinionCard minionCard23 = createMinionCard("Chat Orange", 5, 2, 3, 1, "L'orange.", "img/cardImg/mabSet/chatOrange.jpg");
 		MinionCard minionCard24 = createMinionCard("Autre Chat", 5, 5, 5, 2, "L'autre.", "img/cardImg/mabSet/autreChat.jpg");
 		cardRepository.save(minionCard21);
@@ -86,9 +86,9 @@ public class CardCreationService {
 	@Transactional
 	private void generateSuperHeroSet() {
 		// Cartes de Marc-Antoine, theme Super Hero et Super Vilain
-		MinionCard minionCard11 = createMinionCard("MechaChat", 10, 30, 5, 8, "Technologie et mauvaises intentions.",
+		MinionCard minionCard11 = createMinionCard("Mechachat", 10, 30, 5, 8, "Technologie et mauvaises intentions.",
 				"img/cardImg/superheroSet/mechacat.jpg");
-		MinionCard minionCard12 = createMinionCard("DoppleMeower", 19, 1, 10, 5, "Une vision terrible.", "img/cardImg/superheroSet/doppleMeower.jpg");
+		MinionCard minionCard12 = createMinionCard("Dopplemeower", 19, 1, 10, 5, "Une vision terrible.", "img/cardImg/superheroSet/doppleMeower.jpg");
 		MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3,
 				"Le pirate le plus dangereux. Il a quand même peur de l'eau.",
 				"img/cardImg/superheroSet/moustacheRousse.jpg");
@@ -97,9 +97,9 @@ public class CardCreationService {
 		MinionCard minionCard15 = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10,
 				"Démon des temps anciens qui souhaite dominer le monde.",
 				"img/cardImg/superheroSet/ashesThepurrifier.jpg");
-		MinionCard minionCard16 = createMinionCard("Captain AmeriChat", 10, 20, 10, 7, "Protège la nation.",
+		MinionCard minionCard16 = createMinionCard("Captain Americhat", 10, 20, 10, 7, "Protège la nation.",
 				"img/cardImg/superheroSet/captainAmerichat.jpg");
-		MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 5, 8, "Un chat super.",
+		MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 10, 9, "Un chat super.",
 				"img/cardImg/superheroSet/superChat.png");
 		MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5,
 				"Ses griffes légendaires peuvent couper n'importe quoi.", "img/cardImg/superheroSet/goldenClaws.jpg");
@@ -130,7 +130,7 @@ public class CardCreationService {
 		MinionCard minionCard39 = createMinionCard("Nikki Miouw", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
 		MinionCard minionCard40 = createMinionCard("Cat Sparrow", 10, 10, 10, 5, "Why the rum is always gone. ", "img/cardImg/popcultureSet/CatSperow.jpg");
 		MinionCard minionCard41 = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "img/cardImg/popcultureSet/elvis.png");
-		MinionCard minionCard42 = createMinionCard("Miouwly Cirus", 9, 11, 5, 4, "I came in like a recking Ball", "img/cardImg/popcultureSet/MileyCirus.jpg");
+		MinionCard minionCard42 = createMinionCard("Miouwly Cyrus", 9, 11, 5, 4, "I came in like a wrecking ball", "img/cardImg/popcultureSet/MileyCirus.jpg");
 		MinionCard minionCard43 = createMinionCard("DIE Bunny", 12, 5, 8, 4, "STUPID HUMAIN, A Battery Up My B***, You must All die, DIE DIE DIE DIE", "img/cardImg/popcultureSet/Sellout.jpg");
 		MinionCard minionCard44 = createMinionCard("Thriller Cat", 12, 11, 12, 6, "Cause this is thriller, Thriller night, And no one’s gonna save you", "img/cardImg/popcultureSet/TrillerCat.jpg");
 		cardRepository.save(minionCard35);
