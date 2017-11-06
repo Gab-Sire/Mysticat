@@ -76,7 +76,9 @@ public class GameService implements QueueListener {
 
 		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
 		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
-		game.nextTurn();
+		if(!game.getEndedWithSurrender()) {
+			game.nextTurn();
+		}
 
 		this.existingGameList.put(gameId, game);
 		this.updatedGameList.put(playerOneId, game);
@@ -116,11 +118,12 @@ public class GameService implements QueueListener {
 
 	private void resolveAllActions(List<Action> actions, Game game) {
 		for (Action action : actions) {
-			if (action instanceof SummonAction) {
+			if (action instanceof SummonAction && !game.getEndedWithSurrender()) {
 				resolveSummonAction((SummonAction) action, game);
-			} else if (action instanceof AttackAction) {
+			} else if (action instanceof AttackAction && !game.getEndedWithSurrender()) {
 				resolveAttackAction((AttackAction) action, game);
 			} else if (action instanceof SurrenderAction) {
+				game.setEndedWithSurrender(true);
 				resolveSurrenderAction((SurrenderAction) action, game);
 			}
 			sendDeadMinionsToGraveyards(game);

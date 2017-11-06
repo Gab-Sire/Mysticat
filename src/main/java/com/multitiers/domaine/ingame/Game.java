@@ -8,6 +8,7 @@ public class Game {
 	private Player[] players;
 	private Integer currentMana;
 	private Integer winnerPlayerIndex;
+	private transient Boolean endedWithSurrender;
 	
 	public Game() {
 		super();
@@ -19,6 +20,7 @@ public class Game {
 		players[0] = player1;
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
+		endedWithSurrender = false;
     	this.nextTurn();
 	}
 	
@@ -71,4 +73,14 @@ public class Game {
 	public void setWinnerPlayerIndex(Integer winnerIndex) {
 		this.winnerPlayerIndex = winnerIndex;
 	}
+
+	public Boolean getEndedWithSurrender() {
+		return endedWithSurrender;
+	}
+
+	public void setEndedWithSurrender(Boolean endedWithSurrender) {
+		this.endedWithSurrender = endedWithSurrender;
+	}
+	
+	
 }
