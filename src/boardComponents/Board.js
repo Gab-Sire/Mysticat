@@ -307,6 +307,7 @@ export default class Board extends Component{
 
 	surrender(){
 		this.surrenderGameConfirmStateChange();
+		this.clearActionList();
 		this.addSurrenderAction();
 		this.sendActions();
 	}
@@ -333,6 +334,12 @@ export default class Board extends Component{
 				this.drawGame();
 			}
 		}
+	}
+	
+	clearActionList(){
+		let actions = this.state.actionList;
+		actions.pop();
+		this.setState({ actionList : actions });
 	}
 
 	backToMainMenu(){
