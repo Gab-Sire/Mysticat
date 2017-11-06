@@ -614,6 +614,12 @@
 	margin-top:3%;
 }
 
+#cardCounter{
+	font-size: 20px;
+	color: white;
+	text-align: center;
+}
+
 .cardManaCostBig {
 	z-index:1;
 	left:5px;

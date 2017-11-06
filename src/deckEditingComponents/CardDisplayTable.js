@@ -11,10 +11,9 @@ export default class CardDisplayTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+        editMode: false
     }
   }
-
 
   render() {
 	  const props = (this.props.deckList.cardList);
@@ -51,20 +50,20 @@ export default class CardDisplayTable extends Component {
 		 }, this)
 	return (<div id='CardCollection'>
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
+        <div id="cardCounter">{deck.length}/30</div>
+        <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
 				<div className='cardDisplayTable'>
 					{deck}
 					<button id="backToDeckSelection" onClick={this.goBackToDeckList.bind(this)}>Retour &agrave; la s&eacute;lection de deck</button>
 				</div>
 			</div>);
   }
-/**
- * <form>
-					<>
-					<button onClick={this.sortCard.bind(this)} ></button>
-				</from>
- */
+
   goBackToDeckList(){
 		this.props.appDisplay("deck_selection");
 	}
 
+  switchEditMode(){
+      this.setState({editMode: !this.state.editMode})
+  }
 }

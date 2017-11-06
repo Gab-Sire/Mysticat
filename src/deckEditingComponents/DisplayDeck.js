@@ -35,9 +35,6 @@ export default class DisplayDeck extends Component {
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
-				  setTimeout(()=>{
-					  //this.getDeck();
-				  }, TIME_BETWEEN_AXIOS_CALLS)
 		});
 	}
 

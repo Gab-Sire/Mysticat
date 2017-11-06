@@ -22,7 +22,6 @@ export default class Card extends Component{
 			bigStat = "cardStatBig";
 		}
 		if(true === this.props.faceUp){
-			console.log(this.props.description);
 			return (<div className={"card"+listedInstance +" "+ isSelected} title={this.props.description} onClick={this.props.onClick}>
 				<div className={'cardDetailContainer'+listedInstance+' cardManaCost'} title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
 				<img src= {'/' + this.props.imagePath}  />
