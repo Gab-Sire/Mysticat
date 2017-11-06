@@ -89,7 +89,7 @@ public class CardCreationService {
 		MinionCard minionCard11 = createMinionCard("Mechachat", 10, 30, 5, 8, "Technologie et mauvaises intentions.",
 				"img/cardImg/superheroSet/mechacat.jpg");
 		MinionCard minionCard12 = createMinionCard("Dopplemeower", 19, 1, 10, 5, "Une vision terrible.", "img/cardImg/superheroSet/doppleMeower.jpg");
-		MinionCard minionCard13 = createMinionCard("Moustache Rousse", 5, 10, 5, 3,
+		MinionCard minionCard13 = createMinionCard("Moustache Rousse", 8, 7, 5, 3,
 				"Le pirate le plus dangereux. Il a quand même peur de l'eau.",
 				"img/cardImg/superheroSet/moustacheRousse.jpg");
 		MinionCard minionCard14 = createMinionCard("Channibal Lecter", 10, 15, 15, 7,
@@ -127,7 +127,7 @@ public class CardCreationService {
 		MinionCard minionCard36 = createMinionCard("Princess Leia", 7, 5, 8, 3, "Can't believe I was so foolish to think I could find Luke and bring him home.", "img/cardImg/popcultureSet/Leia.jpg");
 		MinionCard minionCard37 = createMinionCard("Catty Gaga", 4, 11, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
 		MinionCard minionCard38 = createMinionCard("Kitty Perry", 4, 2, 4, 1, "Take me, ta-ta-take me, Wanna be your victim, Ready for abduction, Boy, you're an alien", "img/cardImg/popcultureSet/kitty-perry.jpg");
-		MinionCard minionCard39 = createMinionCard("Nikki Miouw", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
+		MinionCard minionCard39 = createMinionCard("Nikki Minou", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
 		MinionCard minionCard40 = createMinionCard("Cat Sparrow", 10, 10, 10, 5, "Why the rum is always gone. ", "img/cardImg/popcultureSet/CatSperow.jpg");
 		MinionCard minionCard41 = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "img/cardImg/popcultureSet/elvis.png");
 		MinionCard minionCard42 = createMinionCard("Miouwly Cyrus", 9, 11, 5, 4, "I came in like a wrecking ball", "img/cardImg/popcultureSet/MileyCirus.jpg");

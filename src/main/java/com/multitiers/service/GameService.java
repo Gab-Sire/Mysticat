@@ -208,7 +208,12 @@ public class GameService implements QueueListener {
 		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
 		
 		playerDeclaringSurrender.getHero().setHealth(0);
-		game.setWinnerPlayerIndex(opponentPlayerIndex);
+		if(game.getEndedWithSurrender()) {
+			game.setWinnerPlayerIndex(-1);
+		}
+		else {
+			game.setWinnerPlayerIndex(opponentPlayerIndex);
+		}
 	}
 
 	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
