@@ -208,7 +208,7 @@ public class GameService implements QueueListener {
 		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
 		
 		playerDeclaringSurrender.getHero().setHealth(0);
-		if(game.getEndedWithSurrender()) {
+		if(game.getWinnerPlayerIndex()==opponentPlayerIndex) {
 			game.setWinnerPlayerIndex(-1);
 		}
 		else {
