@@ -437,7 +437,7 @@
 	border-radius: 5px;
 	background-color: green;
 }
-.minion img{
+.minion img.cardArt{
 	position:absolute;
 	top:0px;
 	left:5px;
@@ -450,7 +450,7 @@
 }
 
 
-.card img{
+.card img.cardArt{
 	position:absolute;
 	top:0px;
 	margin-left: 50%;
