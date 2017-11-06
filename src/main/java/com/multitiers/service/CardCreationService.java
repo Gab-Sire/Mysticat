@@ -35,27 +35,27 @@ public class CardCreationService {
 	@Transactional
 	private void generateMedievalSet() {
 		// Cartes de Vincent, theme Medieval
-		MinionCard minionCard25 = createMinionCard("Chavalier", 7, 8, 5, 10,
+		MinionCard minionCard25 = createMinionCard("Chavalier", 11, 15, 9, 6,
 				"Le chavalier le plus redoutable du village", "img/cardImg/medievalSetCards/chavalier.jpg");
-		MinionCard minionCard26 = createMinionCard("ChatDragon", 15, 20, 10, 15,
+		MinionCard minionCard26 = createMinionCard("ChatDragon", 25, 25, 5, 10,
 				"Ce dragon peut vous pulvériser. Attention.", "img/cardImg/medievalSetCards/dragonCat.jpg");
-		MinionCard minionCard27 = createMinionCard("ChatPrincesse", 5, 5, 5, 3,
+		MinionCard minionCard27 = createMinionCard("ChatPrincesse", 10, 5, 5, 3,
 				"Ne vous faites pas avoir. Elle est rusée.", "img/cardImg/medievalSetCards/chatPrincesse.jpg");
-		MinionCard minionCard28 = createMinionCard("ChatBotte", 8, 15, 3, 7,
+		MinionCard minionCard28 = createMinionCard("ChatBotte", 15, 10, 15, 7,
 				"Il décidera de votre sort. Ce sera une chattastrophe", "img/cardImg/medievalSetCards/chatBotte.jpg");
-		MinionCard minionCard29 = createMinionCard("Chat Fou du roi", 4, 2, 4, 4, "Toujours là pour vous narguer",
+		MinionCard minionCard29 = createMinionCard("Chat Fou du roi", 5, 15, 5, 4, "Toujours là pour vous narguer",
 				"img/cardImg/medievalSetCards/chatFou.jpg");
-		MinionCard minionCard30 = createMinionCard("Chat peint", 5, 7, 6, 7,
+		MinionCard minionCard30 = createMinionCard("Chat peint", 5, 20, 15, 7,
 				"Personnage tranquille, mais à l'affut de tout. Ne le sous-estimez point.",
 				"img/cardImg/medievalSetCards/chatPeint.jpg");
-		MinionCard minionCard31 = createMinionCard("Chat Belier", 15, 10, 5, 12,
+		MinionCard minionCard31 = createMinionCard("Chat Belier", 20, 5, 5, 5,
 				"Ne vous mettez pas à travers de son chemin, vous allez mourir.",
 				"img/cardImg/medievalSetCards/chatBelier.jpg");
-		MinionCard minionCard32 = createMinionCard("Chat Roi", 6, 7, 5, 5, "Le chat le plus prestigieux du royaume.",
+		MinionCard minionCard32 = createMinionCard("Chat Roi", 5, 15, 10, 5, "Le chat le plus prestigieux du royaume.",
 				"img/cardImg/medievalSetCards/chatRoi.jpg");
-		MinionCard minionCard33 = createMinionCard("Chat prince", 8, 6, 4, 3, "Ne tombez pas sous son charme",
+		MinionCard minionCard33 = createMinionCard("Chat prince", 5, 15, 0, 3, "Ne tombez pas sous son charme",
 				"img/cardImg/medievalSetCards/chatPrince.jpg");
-		MinionCard minionCard34 = createMinionCard("Chatdalf", 5, 10, 10, 4,
+		MinionCard minionCard34 = createMinionCard("Chatdalf", 30, 10, 5, 8,
 				"Le chat wizard peut vous transformer en grenouille n'importe quand ...",
 				"img/cardImg/medievalSetCards/chatdalf.jpg");
 		cardRepository.save(minionCard25);
