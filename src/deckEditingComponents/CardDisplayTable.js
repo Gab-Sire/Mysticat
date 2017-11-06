@@ -27,7 +27,7 @@ export default class CardDisplayTable extends Component {
   						 	 listed={true}
   						 	 name={this.state.deck[index].cardName}
   						 	 index={index}
-                 onClick={(true===this.state.EditMode) ? this.removeCardFromDeck.bind(this, index) : this.removeCardFromDeck.bind(this, index)}
+                 onClick={(true===this.state.EditMode) ? this.removeCardFromDeck.bind(this, index) : null}
                  description={this.state.deck[index].cardDescription}
   						 {...card}{...props} /><br/>
              </span>
@@ -41,8 +41,8 @@ export default class CardDisplayTable extends Component {
   							 faceUp={true}
   						 	 index={index}
   					 	   listed={true}
-                 onClick={(true===this.state.EditMode) ? this.removeCardFromDeck.bind(this, index) : this.removeCardFromDeck.bind(this, index)}
-                description={this.props.deckList.cardList[index].cardDescription}
+                 onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, index) : null}
+                 description={this.props.deckList.cardList[index].cardDescription}
   						 {...card}{...props} />
              </span>
 						)
