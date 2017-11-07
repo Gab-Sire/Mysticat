@@ -63,8 +63,12 @@ export default class CardDisplayTable extends Component {
         <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
         <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
         <br/>
-        {(true===this.state.editMode) ? <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button> : null}
-        {(true===this.state.editMode) ? <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} /> : null}
+        {(true===this.state.editMode) ?
+          <div>
+            <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
+            <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
+          </div>
+          : null}
         <div className='cardDisplayTable'>
 					{deck}
 					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
