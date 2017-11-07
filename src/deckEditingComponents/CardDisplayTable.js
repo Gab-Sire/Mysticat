@@ -5,6 +5,7 @@ import Card from '../cardComponents/Card.js';
 
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
+const MAX_CARDS_IN_DECK = 30;
 
 export default class CardDisplayTable extends Component {
   constructor(props) {
@@ -81,11 +82,12 @@ export default class CardDisplayTable extends Component {
   }
 
   addCardToDeck(index){
-    let collection = this.state.collection;
-    card = collection[index];
-    let deck = this.state.deck;
-    deck.push(card);
-    this.setState({deck: deck});
+    if(this.state.deck.length < MAX_CARDS_IN_DECK){
+      let collection = this.state.collection;
+      let card = collection[index];
+      let deck = this.state.deck;
+      deck.push(card);
+      this.setState({deck: deck});
+    }
   }
-
 }
