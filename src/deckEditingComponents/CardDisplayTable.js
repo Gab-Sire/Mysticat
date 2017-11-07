@@ -79,4 +79,13 @@ export default class CardDisplayTable extends Component {
       this.setState({deck: deck});
       console.log(this.state.deck);
   }
+
+  addCardToDeck(index){
+    let collection = this.state.collection;
+    card = collection[index];
+    let deck = this.state.deck;
+    deck.push(card);
+    this.setState({deck: deck});
+  }
+
 }
