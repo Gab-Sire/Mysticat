@@ -19,7 +19,8 @@ export default class CardDisplayTable extends Component {
     console.log(this.props);
     this.setState({deck:this.props.deckList.cardList,
                   deckIndex: this.props.deckId,
-                  userId: this.props.playerId});
+                  userId: this.props.playerId,
+                  deckName: this.props.deckList.name});
   }
   render() {
       const props = this.state.deck;
@@ -63,7 +64,7 @@ export default class CardDisplayTable extends Component {
         <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
         <br/>
         {(true===this.state.editMode) ? <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button> : null}
-        {(true===this.state.editMode) ? <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" /> : null}
+        {(true===this.state.editMode) ? <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} /> : null}
         <div className='cardDisplayTable'>
 					{deck}
 					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
