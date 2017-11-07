@@ -16,7 +16,10 @@ export default class CardDisplayTable extends Component {
   }
 
   componentWillMount(){
-    this.setState({deck:this.props.deckList.cardList});
+    console.log(this.props);
+    this.setState({deck:this.props.deckList.cardList,
+                  deckIndex: this.props.deckId,
+                  userId: this.props.playerId});
   }
   render() {
       const props = this.state.deck;
@@ -58,31 +61,45 @@ export default class CardDisplayTable extends Component {
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
         <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
         <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
-				<div className='cardDisplayTable'>
+        <br/>
+        {(true===this.state.editMode) ? <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button> : null}
+        {(true===this.state.editMode) ? <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" /> : null}
+        <div className='cardDisplayTable'>
 					{deck}
-          <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
-					<button id="backToDeckSelection" onClick={this.goBackToDeckList.bind(this)}>Retour &agrave; la s&eacute;lection de deck</button>
+					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
 				</div>
 			</div>);
   }
 
   saveDeck(){
+    let userId = this.state.userId;
+    let cardIds = [];
+    let deckIndex = this.state.deckIndex;
+    let deckName = this.state.deckName;
+    for(let i=0; i<this.state.deck.length; i++){
+        cardIds.push(this.state.deck[i].cardId);
+    }
     axios({
         method:'post',
-        url:'http://'+window.location.hostname+':8089/getHardCodedGame',
+        url:'http://'+window.location.hostname+':8089/saveDeck',
         responseType:'json',
-        headers: {'Access-Control-Allow-Origin': "true"}
+        headers: {'Access-Control-Allow-Origin': "true"},
+        data:{
+          cardIds: cardIds,
+          deckIndex: deckIndex,
+          deckName: deckName,
+          userId: userId
+        }
       })
         .then((response)=>{
-          this.setState({gameState: response.data, isLoaded: true});
-          this.forceUpdate();
         })
         .catch(error => {
           console.log('Error fetching and parsing data', error);
-          setTimeout(()=>{
-            this.getInitialGameInstance();
-          }, TIME_BETWEEN_AXIOS_CALLS)
-    });
+        });
+  }
+
+  handleChangeDeckName(event){
+    this.setState({deckName: event.target.value})
   }
 
   goBackToDeckList(){
@@ -97,7 +114,6 @@ export default class CardDisplayTable extends Component {
       let deck = this.state.deck;
       deck.splice(index, 1);
       this.setState({deck: deck});
-      console.log(this.state.deck);
   }
 
   addCardToDeck(index){

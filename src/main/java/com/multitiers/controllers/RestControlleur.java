@@ -98,6 +98,7 @@ public class RestControlleur {
     
     @PostMapping(value="/saveDeck")
     public void saveDeck(@RequestBody String json) {
+    	System.out.println("We're in");
     	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
     	String userId = userDeck.getUserId();
     	List<String> cardIds = userDeck.getCardIds();
@@ -118,6 +119,7 @@ public class RestControlleur {
     		newDeck.setCardList(cardList);
     		deckEditingService.editDeck(user, deckIndex, newDeck);
     	}
+    	System.out.println("Saved deck");
     }
     
     @PostMapping(value = "/attemptConnection")
