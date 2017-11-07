@@ -27,9 +27,8 @@ export default class CardDisplayTable extends Component {
       let deck = this.state.deck.map(function(card, index){
 		  if(0===((index+1)%5) ){
 			  return (
-						 <span className='cardDisplay'>
+						 <span className='cardDisplay' key={"handCard" + index}>
                <Card
-  							 key={"handCard" + index}
   						 	 displayList={true}
   							 faceUp={true}
   						 	 listed={true}
@@ -43,10 +42,9 @@ export default class CardDisplayTable extends Component {
 						)
 		  }else{
 			  return (
-						 <span className='cardDisplay'>
+						 <span className='cardDisplay' key={"handCard" + index}>
                <Card
-  							 key={"handCard" + index}
-  						 	 displayList={true}
+  							 displayList={true}
   							 faceUp={true}
   						 	 index={index}
   					 	   listed={true}
