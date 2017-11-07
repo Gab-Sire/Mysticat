@@ -39,10 +39,10 @@ class App extends Component{
 				}
 			}
 			else if("displayDeck" === this.state.appDisplay){
-				return <DisplayDeck playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)}/>
+				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)}/>
 			}
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
-				return <MainMenu playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
+				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
 			}else if(true===this.state.inGame){
 				return(
 					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
@@ -114,6 +114,23 @@ class App extends Component{
 		});
 		this.setState({"playerId" : null});
 	}
+
+	goDeckSelection(){
+			axios({
+				  method:'post',
+				  url:'http://'+window.location.hostname+':8089/getUserDecks',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data: this.state.playerId
+				})
+				  .then((response)=>{
+					  	this.setUserDeckList(response.data);
+							this.updateAppDisplay("deck_selection");
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+					});
+		}
 
 	connectPlayer(idPlayer){
 				this.setState({"playerId" : idPlayer,

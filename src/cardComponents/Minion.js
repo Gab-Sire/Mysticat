@@ -5,12 +5,12 @@ export default class Card extends Component{
 		super(props);
 		this.state={isEmpty: true};
 	}
-	
+
 	render(){
 		let isEmpty = this.state.isEmpty;
 		let isSelected = "";
 		let classNameExtra = "cardTile minion";
-		
+
 		if(true === this.props.active){
 			isSelected = "fiedlCellSelected";
 		}
@@ -19,13 +19,13 @@ export default class Card extends Component{
 		}else if(true===this.props.attackerSelected && false === this.props.belongsToSelf){
 			classNameExtra = "cardTile minion target";
 		}
-		
+
 		isEmpty = (this.props.name!=null) ? true : false;
 		if(isEmpty){
 			return (<div className={classNameExtra} title={this.props.description} onClick={this.props.onClick}>
-				<img src={'/' + this.props.cardReference.imagePath}></img>
+				<img src={'/' + this.props.cardReference.imagePath} className="cardArt" alt="card art" ></img>
 				<div className="cardName">{this.props.name}</div>
-				
+
 				<div title="The amount of damage this minion deals" className="cardPower"><div className="placingAttribut">{this.props.power}</div></div>
 				<div title="The amount of damage this minion can take" className=" cardHealth"><div className="placingAttribut">{this.props.health}</div></div>
 				<div title="Speed dictates the order in which attacks resolve" className=" cardSpeed"><div className="placingAttribut">{this.props.speed}</div></div>
@@ -33,11 +33,11 @@ export default class Card extends Component{
 		}
 		else{
 			if(true === this.props.active){
-				return (<div className={"cardTile " + isSelected} ></div>);	
+				return (<div className={"cardTile " + isSelected} ></div>);
 			}else{
 				return (<div className={"cardTile " + isSelected} onClick={this.props.onClick}></div>);
 			}
-			
-		}	
+
+		}
 	}
 }

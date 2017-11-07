@@ -46,9 +46,7 @@ export default class Login extends Component{
 				.then((response)=>{
 					console.log(response);
 					if(response.data!==null){
-						this.setState({errorMessage: ""});
 						this.props.connectPlayer(response.data);
-
 					}else{
 							this.setState({errorMessage: "Échec, le nom d'utilisateur et le mot de passe que vous avez entré ne correspondent pas."});
 					}
