@@ -90,4 +90,18 @@ export default class CardDisplayTable extends Component {
       this.setState({deck: deck});
     }
   }
+
+  isThisCardInTheDeck(indexInCollection){
+      let collection = this.state.collection;
+      let deck = this.state.deck;
+      let card = collection[indexInCollection];
+
+      for(let i=0; i<deck.length; i++){
+          if(deck[i]===card){
+            return true;
+          }
+      }
+      return false;
+  }
+
 }
