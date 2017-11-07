@@ -570,8 +570,14 @@
 }
 
 /**
- Big Card CSS
+ Deck viewing and editing
 */
+
+.incompleteDeck{
+	color: red;
+	font-weight: bold;
+}
+
 .cardBig{
 	display: inline-block;
 	border: 1px solid black;

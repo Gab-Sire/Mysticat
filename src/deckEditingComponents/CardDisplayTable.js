@@ -53,7 +53,7 @@ export default class CardDisplayTable extends Component {
 		 }, this)
 	return (<div id='CardCollection'>
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
-        <div id="cardCounter">{deck.length}/30</div>
+        <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
         <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
 				<div className='cardDisplayTable'>
 					{deck}
