@@ -3,6 +3,7 @@ package com.multitiers.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.multitiers.domaine.entity.UserCredentials;
+import com.multitiers.domaine.entity.UserDeck;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.Game;
@@ -17,6 +18,15 @@ public class JsonUtils {
     	
     	return userCredentials;
     }
+    
+    public static UserDeck deserializeUserDeckFromJson(String json) {
+    	GsonBuilder builder = new GsonBuilder();
+    	Gson gson = builder.create();
+    	UserDeck userDeck = gson.fromJson(json, UserDeck.class);
+    	
+    	return userDeck;
+    }
+    
 	
 	public static Game deserializeGameFromJson(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();

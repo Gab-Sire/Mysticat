@@ -15,6 +15,9 @@ export default class CardDisplayTable extends Component {
     }
   }
 
+  componentWillMount(){
+    this.setState({deck:this.props.deckList.cardList});
+  }
   render() {
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
@@ -57,13 +60,29 @@ export default class CardDisplayTable extends Component {
         <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
 				<div className='cardDisplayTable'>
 					{deck}
+          <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
 					<button id="backToDeckSelection" onClick={this.goBackToDeckList.bind(this)}>Retour &agrave; la s&eacute;lection de deck</button>
 				</div>
 			</div>);
   }
 
-  componentWillMount(){
-    this.setState({deck:this.props.deckList.cardList});
+  saveDeck(){
+    axios({
+        method:'post',
+        url:'http://'+window.location.hostname+':8089/getHardCodedGame',
+        responseType:'json',
+        headers: {'Access-Control-Allow-Origin': "true"}
+      })
+        .then((response)=>{
+          this.setState({gameState: response.data, isLoaded: true});
+          this.forceUpdate();
+        })
+        .catch(error => {
+          console.log('Error fetching and parsing data', error);
+          setTimeout(()=>{
+            this.getInitialGameInstance();
+          }, TIME_BETWEEN_AXIOS_CALLS)
+    });
   }
 
   goBackToDeckList(){
