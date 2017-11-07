@@ -5,6 +5,7 @@ import Card from '../cardComponents/Card.js';
 export default class Deck extends Component{
 	constructor(props){
 		super(props);
+		this.state={}
 	}
 
 	render(){

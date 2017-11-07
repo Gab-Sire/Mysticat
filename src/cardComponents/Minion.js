@@ -23,7 +23,7 @@ export default class Card extends Component{
 		isEmpty = (this.props.name!=null) ? true : false;
 		if(isEmpty){
 			return (<div className={classNameExtra} title={this.props.description} onClick={this.props.onClick}>
-				<img src={'/' + this.props.cardReference.imagePath} className="cardArt"></img>
+				<img src={'/' + this.props.cardReference.imagePath} className="cardArt" alt="card art" ></img>
 				<div className="cardName">{this.props.name}</div>
 
 				<div title="The amount of damage this minion deals" className="cardPower"><div className="placingAttribut">{this.props.power}</div></div>

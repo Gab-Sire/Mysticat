@@ -3,8 +3,6 @@ import axios from 'axios';
 import '../styles/menu.css';
 import Card from '../cardComponents/Card.js';
 
-
-const TIME_BETWEEN_AXIOS_CALLS = 1000;
 const MAX_CARDS_IN_DECK = 30;
 
 export default class CardDisplayTable extends Component {

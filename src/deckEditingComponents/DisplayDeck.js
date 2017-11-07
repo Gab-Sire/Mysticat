@@ -4,8 +4,6 @@ import '../styles/app.css';
 import CardDisplayTable from './CardDisplayTable.js';
 import Beforeunload from 'react-beforeunload';
 
-const TIME_BETWEEN_AXIOS_CALLS = 1000;
-
 export default class DisplayDeck extends Component {
 
   constructor(props) {
