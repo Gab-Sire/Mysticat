@@ -126,7 +126,7 @@ public class RestControlleur {
     		session.setAttribute("userActif", user.getId());
         	authService.addUserToConnectedUsers(user);
     	}
-    	return new Gson().toJson(user.getUsername() + " " + user.getId());
+    	return new Gson().toJson(user.getId());
     }
     
     @PostMapping(value="/signUp")

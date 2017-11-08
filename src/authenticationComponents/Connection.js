@@ -20,8 +20,8 @@ export default class Connection extends Component{
 		}
 	}
 
-	connectPlayer(playerId){
-		this.props.connectPlayer(playerId);
+	connectPlayer(playerId, playerName){
+		this.props.connectPlayer(playerId, playerName);
 	}
 
 	changeSignUpMode(){

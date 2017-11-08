@@ -19,6 +19,7 @@ class App extends Component{
 			isServerAvailable: false,
 			inGame: false,
 			playerId: null,
+			playerName: null,
 			gameState: null,
 			appDisplay: null,
 			userDeckList: null,
@@ -135,9 +136,10 @@ class App extends Component{
 					});
 		}
 
-	connectPlayer(idPlayer){
-				this.setState({"playerId" : idPlayer,
-											appDisplay: "menu"});
+	connectPlayer(idPlayer, namePlayer){
+		this.setState({ playerId : idPlayer, 
+						playerName : namePlayer, 
+						appDisplay: "menu"});
 	}
 
 	setUserDeckList(userDeckList){
