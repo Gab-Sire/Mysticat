@@ -38,7 +38,8 @@ export default class Board extends Component{
 			targetMinion:null,
 			attackerSelected:null,
 			startOfTurnForSummoning:false,
-			endOfTurn:false
+			endOfTurn:false,
+			surrendering: false
 		};
 	}
 
@@ -261,9 +262,14 @@ export default class Board extends Component{
 			  .then((response)=>{
 					this.setState({waitingForOpponentToEndTurn:true});
 					cardIndex = null;
-				  this.checkIfGameUpdated();
-				  this.resetAttackingState();
-				  this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+					if(true===this.state.surrendering){
+							this.loseGame();
+					}
+					else{
+						this.checkIfGameUpdated();
+						this.resetAttackingState();
+						this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+					}
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -309,6 +315,7 @@ export default class Board extends Component{
 		this.surrenderGameConfirmStateChange();
 		this.clearActionList();
 		this.addSurrenderAction();
+		this.setState({surrendering: true});
 		this.sendActions();
 	}
 
