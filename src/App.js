@@ -34,8 +34,8 @@ class App extends Component{
 
 	render(){
 		if(true===this.state.isServerAvailable){
-			if("3fffe74a-eba9-43d5-89d8-58bc8d6b6b02" === this.state.playerId){
-				return <AdminDashBoard />
+			if("Admin" === this.state.playerName){
+				return <AdminDashBoard adminName={this.state.playerName} />
 			}
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){

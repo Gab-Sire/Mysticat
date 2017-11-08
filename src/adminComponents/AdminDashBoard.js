@@ -15,9 +15,10 @@ export default class AdminDashBoard extends Component{
 			<div id="containerAdmin">
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
-					<p>Bonjour, glorieux administrateur</p><br />
+					<p>Bonjour, {this.props.adminName}</p><br />
 					
 				</div>
+				<button id="btnDisconnect">D&eacute;connexion</button>
 			</div>
 		)
 	}
