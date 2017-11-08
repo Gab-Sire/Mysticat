@@ -46,6 +46,9 @@ export default class DisplayDeck extends Component {
 	  }else{
 		  return (<div>En attente du serveur</div>);
 	  }
+  }
 
+  deconnexion(){
+    this.props.disconnectPlayer();
   }
 }

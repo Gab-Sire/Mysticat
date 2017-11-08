@@ -31,15 +31,14 @@ class App extends Component{
 	}
 
 	render(){
-
 		if(true===this.state.isServerAvailable){
 			if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
-					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)}/>
+					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)}/>
 				}
 			}
 			else if("displayDeck" === this.state.appDisplay){
-				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)}/>
+				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
