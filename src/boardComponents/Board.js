@@ -116,7 +116,7 @@ export default class Board extends Component{
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
-					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} surrender={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
@@ -173,7 +173,7 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 		}
 	}
-	
+
 	addSurrenderAction = () => {
 		let actions = this.state.actionList;
 		actions.push({ 	playerIndex : selfIndex,
@@ -315,15 +315,15 @@ export default class Board extends Component{
 	loseGame(){
 		this.setState({ isEndGame: 1 });
 	}
-	
+
 	winGame(){
 		this.setState({ isEndGame: 0 });
 	}
-	
+
 	drawGame(){
 		this.setState({ isEndGame: -1 });
 	}
-	
+
 	selfUserHasWon(){
 		if(this.state.gameState.winnerPlayerIndex != null){
 			if(this.state.gameState.winnerPlayerIndex === selfIndex){
@@ -335,7 +335,7 @@ export default class Board extends Component{
 			}
 		}
 	}
-	
+
 	clearActionList(){
 		let actions = this.state.actionList;
 		actions.pop();
