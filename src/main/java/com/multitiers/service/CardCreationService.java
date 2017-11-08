@@ -7,21 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.repository.CardRepository;
-import com.multitiers.repository.DeckRepository;
-import com.multitiers.repository.MinionCardRepository;
-import com.multitiers.repository.UserRepository;
 import com.multitiers.util.ConnectionUtils;
 
 @Service
 public class CardCreationService {
 	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private DeckRepository deckRepository;
-	@Autowired
 	private CardRepository cardRepository;
-	@Autowired
-	private MinionCardRepository minionCardRepository;
+
 	
 	@Transactional
 	public void initBasicCardSet() {

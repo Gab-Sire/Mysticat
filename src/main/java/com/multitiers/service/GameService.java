@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multitiers.domaine.ingame.Action;
@@ -20,25 +19,13 @@ import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.domaine.ingame.SurrenderAction;
-import com.multitiers.repository.CardRepository;
-import com.multitiers.repository.DeckRepository;
-import com.multitiers.repository.MinionCardRepository;
-import com.multitiers.repository.UserRepository;
 
 @Service
 public class GameService implements QueueListener {
 	private static final int PLAYER_ONE_INDEX = 0;
 	private static final int PLAYER_TWO_INDEX = 1;
 	private static final int HERO_FACE_INDEX = -1;
-	private static final int NB_OF_PLAYERS_PER_GAME = 2;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private DeckRepository deckRepository;
-	@Autowired
-	private CardRepository cardRepository;
-	@Autowired
-	private MinionCardRepository minionCardRepository;
+
 
 	public GameQueue gameQueue;
 	// Key: userId

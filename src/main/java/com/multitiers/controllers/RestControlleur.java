@@ -23,21 +23,16 @@ import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.entity.UserDeck;
-import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
-import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
-import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
-import com.multitiers.repository.DeckRepository;
-import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.GameService;
 import com.multitiers.service.AuthentificationService;
@@ -52,11 +47,8 @@ public class RestControlleur {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private DeckRepository deckRepository;
-	@Autowired
 	private CardRepository cardRepository;
-	@Autowired
-	private MinionCardRepository minionCardRepository;
+
 	
 	@Autowired
 	private AuthentificationService inscriptionService;
