@@ -22,6 +22,21 @@ public class CardCreationService {
 		generateMabSet();
 		generateMedievalSet();
 		generatePopCultureSet();
+		generateJobSet();
+		
+	}
+
+	private void generateJobSet() {
+		MinionCard minionCard01 = createMinionCard("Chat Banquier", 5, 5, 5, 2, "$", "img/cardImg/jobSet/bankerCat.jpg");
+		MinionCard minionCard02 = createMinionCard("Chat Pompier", 10, 10, 5, 4, "Viens ici Ashes.", "img/cardImg/jobSet/firefighterCat.jpg");
+		MinionCard minionCard03 = createMinionCard("Chat Policier", 10, 15, 5, 5, "Vous êtes en état d'arrestation.", "img/cardImg/jobSet/policeCat.jpg");
+		MinionCard minionCard04 = createMinionCard("Chat Scientifique", 3, 14, 13, 5, "Non, je ne fabrique pas d'herbe &agrave; chat.", "img/cardImg/jobSet/scientificCat.jpg");
+		MinionCard minionCard05 = createMinionCard("Professeur Miaou", 1, 2, 2, 0, "Vous avez beaucoup &agrave; apprendre.", "img/cardImg/jobSet/chatErudit.jpg");
+		cardRepository.save(minionCard01);
+		cardRepository.save(minionCard02);
+		cardRepository.save(minionCard03);
+		cardRepository.save(minionCard04);
+		cardRepository.save(minionCard05);
 	}
 	
 	@Transactional
