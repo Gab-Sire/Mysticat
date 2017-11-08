@@ -38,7 +38,8 @@ export default class Board extends Component{
 			targetMinion:null,
 			attackerSelected:null,
 			startOfTurnForSummoning:false,
-			endOfTurn:false
+			endOfTurn:false,
+			surrendering: false
 		};
 	}
 
@@ -80,7 +81,10 @@ export default class Board extends Component{
 	render(){
 		return(
 			<div id="container">
-				<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
+				<Beforeunload onBeforeunload={() => {
+					this.addSurrenderAction();
+					this.sendActions();
+					this.props.disconnectPlayer(); return "Are you sure?"}}/>
 				<div id="board">
 					<div id="opponentHand" className="hand">
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
@@ -116,7 +120,7 @@ export default class Board extends Component{
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
-					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} surrender={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
@@ -173,7 +177,7 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 		}
 	}
-	
+
 	addSurrenderAction = () => {
 		let actions = this.state.actionList;
 		actions.push({ 	playerIndex : selfIndex,
@@ -261,9 +265,14 @@ export default class Board extends Component{
 			  .then((response)=>{
 					this.setState({waitingForOpponentToEndTurn:true});
 					cardIndex = null;
-				  this.checkIfGameUpdated();
-				  this.resetAttackingState();
-				  this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+					if(true===this.state.surrendering){
+							this.loseGame();
+					}
+					else{
+						this.checkIfGameUpdated();
+						this.resetAttackingState();
+						this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+					}
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -309,21 +318,22 @@ export default class Board extends Component{
 		this.surrenderGameConfirmStateChange();
 		this.clearActionList();
 		this.addSurrenderAction();
+		this.setState({surrendering: true});
 		this.sendActions();
 	}
 
 	loseGame(){
 		this.setState({ isEndGame: 1 });
 	}
-	
+
 	winGame(){
 		this.setState({ isEndGame: 0 });
 	}
-	
+
 	drawGame(){
 		this.setState({ isEndGame: -1 });
 	}
-	
+
 	selfUserHasWon(){
 		if(this.state.gameState.winnerPlayerIndex != null){
 			if(this.state.gameState.winnerPlayerIndex === selfIndex){
@@ -335,7 +345,7 @@ export default class Board extends Component{
 			}
 		}
 	}
-	
+
 	clearActionList(){
 		let actions = this.state.actionList;
 		actions.pop();
