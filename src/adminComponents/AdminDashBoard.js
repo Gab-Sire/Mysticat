@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import UserManagement from './UserManagement.js';
 import '../styles/admin.css';
 
 export default class AdminDashBoard extends Component{
@@ -8,7 +9,6 @@ export default class AdminDashBoard extends Component{
 		this.state={
 
 		}
-		console.log(this.props.adminName);
 	}
 
 	render(){
@@ -17,8 +17,7 @@ export default class AdminDashBoard extends Component{
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p>Bonjour, {this.props.adminName}</p><br />
-					{this.props.userList.map((user, index) => <p>{index} {user.username}</p>)}
-					
+					<UserManagement userList={this.props.userList} />
 				</div>
 				<button id="btnDisconnect">D&eacute;connexion</button>
 			</div>
