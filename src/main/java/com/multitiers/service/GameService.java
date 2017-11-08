@@ -74,8 +74,7 @@ public class GameService implements QueueListener {
 
 		resolveAllActions(actions, game);
 
-		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
-		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
+		removedPlayedCards(playerOneActions, playerTwoActions, playerOneId, playerTwoId, game);
 		if(!game.getEndedWithSurrender()) {
 			game.nextTurn();
 		}
@@ -89,6 +88,12 @@ public class GameService implements QueueListener {
 		this.newGameList.remove(playerOneId);
 		this.newGameList.remove(playerTwoId);
 
+	}
+
+	private void removedPlayedCards(ActionList playerOneActions, ActionList playerTwoActions, String playerOneId,
+			String playerTwoId, Game game) {
+		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
+		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
 	}
 
 	private void removePlayedCardsFromPlayerHand(ActionList playerActionList, String playerId, Game game) {

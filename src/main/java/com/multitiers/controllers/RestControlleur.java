@@ -100,6 +100,13 @@ public class RestControlleur {
     public void saveDeck(@RequestBody String json) {
     	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
     	String userId = userDeck.getUserId();
+    	User user = userRepository.findById(userId);
+    	
+    	if(user==null) {
+    		System.out.println("Null user cannot save deck.");
+    		return;
+    	}
+    	
     	List<String> cardIds = userDeck.getCardIds();
     	Integer deckIndex = userDeck.getDeckIndex();
     	String deckName = userDeck.getDeckName();
@@ -109,15 +116,12 @@ public class RestControlleur {
     	for(String cardId : cardIds) {
     		cardList.add(cardRepository.findByCardId(cardId));
     	}
-    	
-    	User user = userRepository.findById(userId);
-    	if(user!=null) {
-    		Deck newDeck = new Deck();
-    		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
-    		newDeck.setName(deckName);
-    		newDeck.setCardList(cardList);
-    		deckEditingService.editDeck(user, deckIndex, newDeck);
-    	}
+
+		Deck newDeck = new Deck();
+		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+		newDeck.setName(deckName);
+		newDeck.setCardList(cardList);
+		deckEditingService.editDeck(user, deckIndex, newDeck);
     	System.out.println("Saved deck");
     }
     
