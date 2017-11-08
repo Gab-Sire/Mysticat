@@ -23,6 +23,7 @@ class App extends Component{
 			gameState: null,
 			appDisplay: null,
 			userDeckList: null,
+			userList: null,
 			deckId:null
 		};
 	}
@@ -34,8 +35,9 @@ class App extends Component{
 
 	render(){
 		if(true===this.state.isServerAvailable){
-			if("Admin" === this.state.playerName){
-				return <AdminDashBoard adminName={this.state.playerName} />
+			
+			if("admin_dashboard" === this.state.appDisplay){
+				return <AdminDashBoard adminName={this.state.playerName} userList={this.state.userList}/>
 			}
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
@@ -135,15 +137,41 @@ class App extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
+	
+	goAdminDashBoard = () => {
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':8089/getUsers',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			})
+			  .then((response)=>{
+				  this.setUserList(response.data);
+				  this.updateAppDisplay("admin_dashboard");
+				  
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
+	}
+	
 
 	connectPlayer(idPlayer, namePlayer){
 		this.setState({ playerId : idPlayer, 
 						playerName : namePlayer, 
 						appDisplay: "menu"});
+		
+		if("Admin" === this.state.playerName){
+			this.goAdminDashBoard();
+		}
 	}
 
 	setUserDeckList(userDeckList){
 		this.setState({userDeckList: userDeckList});
+	}
+	
+	setUserList(userList){
+		this.setState({userList: userList});
 	}
 
 	setIdPlayer(idPlayer){

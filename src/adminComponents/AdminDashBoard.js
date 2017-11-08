@@ -8,6 +8,7 @@ export default class AdminDashBoard extends Component{
 		this.state={
 
 		}
+		console.log(this.props.adminName);
 	}
 
 	render(){
@@ -16,6 +17,7 @@ export default class AdminDashBoard extends Component{
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p>Bonjour, {this.props.adminName}</p><br />
+					{this.props.userList.map((user, index) => <p>{index} {user.username}</p>)}
 					
 				</div>
 				<button id="btnDisconnect">D&eacute;connexion</button>

@@ -77,6 +77,12 @@ public class RestControlleur {
     	gameService.gameQueue.removeFromQueue(player);
     	authService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
+
+    @PostMapping(value="/getUsers")
+    public List<User> getUsers() {
+    	List<User> users = userRepository.findAll();
+    	return users;
+    }
     
     @PostMapping(value="/getUserDecks")
     public List<Deck> getUserDecks(@RequestBody String userId) {
