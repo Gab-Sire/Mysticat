@@ -90,12 +90,6 @@ public class GameService implements QueueListener {
 
 	}
 
-	private void removedPlayedCards(ActionList playerOneActions, ActionList playerTwoActions, String playerOneId,
-			String playerTwoId, Game game) {
-		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
-		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
-	}
-
 	private void removePlayedCardsFromPlayerHand(ActionList playerActionList, String playerId, Game game) {
 		Integer playerIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1;
 		Player currentPlayer = game.getPlayers()[playerIndex];
@@ -104,21 +98,6 @@ public class GameService implements QueueListener {
 		gatherIndexesOfPlayedCards(playerActionList, indexesOfCardsThatWerePlayed);
 
 		removePlayedCards(currentPlayer, indexesOfCardsThatWerePlayed);
-	}
-
-	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
-		Collections.sort(indexesOfCardsThatWerePlayed);
-		for (int i = indexesOfCardsThatWerePlayed.size() - 1; i >= 0; --i) {
-			currentPlayer.removeCardFromHand(indexesOfCardsThatWerePlayed.get(i));
-		}
-	}
-
-	private void gatherIndexesOfPlayedCards(ActionList playerActionList, List<Integer> indexesOfCardsThatWerePlayed) {
-		for (Action action : playerActionList.getPlayerActions()) {
-			if (action instanceof SummonAction) {
-				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getIndexOfCardInHand());
-			}
-		}
 	}
 
 	private void resolveAllActions(List<Action> actions, Game game) {
@@ -132,6 +111,27 @@ public class GameService implements QueueListener {
 				resolveSurrenderAction((SurrenderAction) action, game);
 			}
 			sendDeadMinionsToGraveyards(game);
+		}
+	}
+	
+	private void removedPlayedCards(ActionList playerOneActions, ActionList playerTwoActions, String playerOneId,
+			String playerTwoId, Game game) {
+		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
+		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
+	}
+	
+	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
+		Collections.sort(indexesOfCardsThatWerePlayed);
+		for (int i = indexesOfCardsThatWerePlayed.size() - 1; i >= 0; --i) {
+			currentPlayer.removeCardFromHand(indexesOfCardsThatWerePlayed.get(i));
+		}
+	}
+
+	private void gatherIndexesOfPlayedCards(ActionList playerActionList, List<Integer> indexesOfCardsThatWerePlayed) {
+		for (Action action : playerActionList.getPlayerActions()) {
+			if (action instanceof SummonAction) {
+				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getIndexOfCardInHand());
+			}
 		}
 	}
 	
@@ -209,8 +209,6 @@ public class GameService implements QueueListener {
 		Integer playerDeclaringSurrenderIndex = surrenderAction.getPlayerIndex();
 		Integer opponentPlayerIndex = (playerDeclaringSurrenderIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
 				: PLAYER_ONE_INDEX;
-		Player playerDeclaringSurrender = game.getPlayers()[playerDeclaringSurrenderIndex];
-		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
 		
 		if(game.getWinnerPlayerIndex()==playerDeclaringSurrenderIndex) {
 			game.setWinnerPlayerIndex(-1);
@@ -280,8 +278,7 @@ public class GameService implements QueueListener {
 		
 		initGameQueue();
 	}
-	
-	
+
 	@Override
 	public void queueHasEnoughPlayers() {
 		System.out.println("Queue pop");

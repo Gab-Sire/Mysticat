@@ -81,7 +81,10 @@ export default class Board extends Component{
 	render(){
 		return(
 			<div id="container">
-				<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
+				<Beforeunload onBeforeunload={() => {
+					this.addSurrenderAction();
+					this.sendActions();
+					this.props.disconnectPlayer(); return "Are you sure?"}}/>
 				<div id="board">
 					<div id="opponentHand" className="hand">
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />

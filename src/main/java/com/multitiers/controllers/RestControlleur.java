@@ -75,6 +75,7 @@ public class RestControlleur {
     public void disconnectUser(@RequestBody String userId) {
     	Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
     	gameService.gameQueue.removeFromQueue(player);
+    	
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     
@@ -190,32 +191,6 @@ public class RestControlleur {
     	}
     	return null;
     }
-    
-    @GetMapping(value="/getHardCodedActionSample")
-    public @ResponseBody ActionList getHardCodedActionSample() {
-		ActionList retour = new ActionList();
-		retour.setGameId("game1");
-		List<Action> actionList = new ArrayList<Action>();
-		SummonAction summonAction = new SummonAction();
-		summonAction.setFieldCellWhereTheMinionIsBeingSummoned(1);
-		summonAction.setIndexOfCardInHand(0);
-		summonAction.setPlayerIndex(0);
-		
-		AttackAction attackAction = new AttackAction();
-		attackAction.setAttackingMinionIndex(0);
-		attackAction.setPlayerIndex(0);
-		attackAction.setSpeed(3);
-		attackAction.setTargetIndex(5);
-		
-		actionList.add(attackAction);
-		actionList.add(summonAction);
-		
-		retour.setPlayerActions(actionList);
-		retour.setPlayerId("player1");
-		retour.setGameId("game1");
-		
-    	return retour;
-    } 
     
     @PostMapping(value="/sendActions")
     public void sendActions(@RequestBody String actionListJson) {
