@@ -219,8 +219,7 @@ public class GameService implements QueueListener {
 		Minion targetOfTheAttack;
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
-			attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
-			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
 				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
 			}
@@ -232,6 +231,19 @@ public class GameService implements QueueListener {
 			System.out.println("Target is missing or dead.");
 		}
 
+	}
+
+	private void attackerAndTargetExchangeDamage(Minion attacker, Minion targetOfTheAttack) {
+		attackerTakesDamageFromTarget(attacker, targetOfTheAttack);
+		targetTakesDamageFromAttacker(attacker, targetOfTheAttack);
+	}
+
+	private void targetTakesDamageFromAttacker(Minion attacker, Minion targetOfTheAttack) {
+		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+	}
+
+	private void attackerTakesDamageFromTarget(Minion attacker, Minion targetOfTheAttack) {
+		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 	}
 
 	private void attackFace(Player opponentPlayer, Minion attacker) {

@@ -51,10 +51,14 @@ public class GameQueue {
 		
 		Game game = new Game(player1, player2);
 		
-		this.listOfPlayersInQueue.remove(0);
-		this.listOfPlayersInQueue.remove(0);
-		
+		removeFirstTwoPlayersFromQueue();
+				
 		return game;
+	}
+
+	private void removeFirstTwoPlayersFromQueue() {
+		this.listOfPlayersInQueue.remove(0);
+		this.listOfPlayersInQueue.remove(0);
 	}
 	
 	public Player getPlayerInQueueById(String playerId) {
