@@ -169,6 +169,7 @@ public class RestControlleur {
     	this.gameService.gameQueue.addToQueue(player);
     }
     
+    
     @PostMapping(value="/cancelQueue")
     public void cancelQueue(@RequestBody String playerId) {
     	Player player = this.gameService.gameQueue.getPlayerInQueueById(playerId.substring(0, playerId.length()-1));

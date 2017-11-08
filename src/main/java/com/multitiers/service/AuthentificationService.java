@@ -109,7 +109,7 @@ public class AuthentificationService {
 			this.connectedUsers.put(user.getId(), user);
 		}
 	}
-
+	
 	public void removeUserFromConnectedUsers(String userId) {
 		this.connectedUsers.remove(userId);
 	}
