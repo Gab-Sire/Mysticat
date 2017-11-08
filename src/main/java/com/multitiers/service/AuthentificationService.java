@@ -46,8 +46,10 @@ public class AuthentificationService {
 	public void bootStrapTwoUsers() {
 		User user1 = createUser("Chat1", "Myboy1", HeroPortrait.warriorHero);
 		User user2 = createUser("Chat2", "Myboy2", HeroPortrait.zorroHero);
+		User admin = createUser("Admin", "Toor1", HeroPortrait.zorroHero);
 		userRepository.save(user1);
 		userRepository.save(user2);
+		userRepository.save(admin);
 	}
 
 	public User createUser(String username, String password, HeroPortrait portrait) {

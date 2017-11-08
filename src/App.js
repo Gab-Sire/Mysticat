@@ -8,6 +8,7 @@ import MainMenu from './menuComponents/MainMenu.js';
 import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './deckEditingComponents/DeckSelection.js';
 import DisplayDeck from './deckEditingComponents/DisplayDeck.js';
+import AdminDashBoard from './adminComponents/AdminDashBoard.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
 
@@ -32,7 +33,10 @@ class App extends Component{
 
 	render(){
 		if(true===this.state.isServerAvailable){
-			if("deck_selection" === this.state.appDisplay){
+			if("3fffe74a-eba9-43d5-89d8-58bc8d6b6b02" === this.state.playerId){
+				return <AdminDashBoard />
+			}
+			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
 					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)}/>
 				}

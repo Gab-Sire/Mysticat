@@ -59,7 +59,7 @@ public class RestControlleur {
 	private MinionCardRepository minionCardRepository;
 	
 	@Autowired
-	private AuthentificationService inscriptionService;
+	private AuthentificationService authService;
 	@Autowired
 	private GameService gameService;
 	@Autowired
@@ -75,7 +75,7 @@ public class RestControlleur {
     public void disconnectUser(@RequestBody String userId) {
     	Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
     	gameService.gameQueue.removeFromQueue(player);
-    	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
+    	authService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     
     @PostMapping(value="/getUserDecks")
@@ -85,9 +85,6 @@ public class RestControlleur {
     	return decks;
     }
     
-    /**
-     * Get One Deck
-     */
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
     	User user = userRepository.findById(userId);
@@ -124,12 +121,12 @@ public class RestControlleur {
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
-    	User user = inscriptionService.getUserFromCredentials(userCredentials);
+    	User user = authService.getUserFromCredentials(userCredentials);
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
-        	inscriptionService.addUserToConnectedUsers(user);
+        	authService.addUserToConnectedUsers(user);
     	}
-    	return new Gson().toJson(user.getId());
+    	return new Gson().toJson(user.getUsername() + " " + user.getId());
     }
     
     @PostMapping(value="/signUp")
@@ -141,7 +138,7 @@ public class RestControlleur {
         if(userRepository.findByUsername(username)!=null) {
     		throw new UsernameTakenException(username);
     	}
-    	User user = inscriptionService.createUser(username, password, HeroPortrait.wizardHero);
+    	User user = authService.createUser(username, password, HeroPortrait.wizardHero);
         userRepository.save(user);
         if(user != null) {
             session.setAttribute("userActif", user.getId());	
