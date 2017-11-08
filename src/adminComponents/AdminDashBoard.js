@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import '../styles/app.css';
-import Login from "./Login.js";
-import Signup from "./Signup.js";
+import '../styles/admin.css';
 
 export default class AdminDashBoard extends Component{
 	
@@ -14,7 +12,13 @@ export default class AdminDashBoard extends Component{
 	
 	render(){
 		return(
-			<div></div>
+			<div id="containerAdmin">
+				<h1>Tableau Administrateur</h1>
+				<div id="contentAdmin">
+					<p>Bonjour, {this.props.adminName}</p><br />
+					
+				<div>
+			</div>
 		)
 	}
 
