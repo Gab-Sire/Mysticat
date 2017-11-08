@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Built-By: GABSIRE
-Build-Jdk: 9.0.1
 Implementation-Title: demows
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: GABSIRE
 Implementation-Vendor-Id: com.example
-Implementation-Vendor: Pivotal Software, Inc.
+Build-Jdk: 1.8.0_152
 Implementation-URL: http://projects.spring.io/spring-boot/projet_multi
  tiers/
 Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
 
