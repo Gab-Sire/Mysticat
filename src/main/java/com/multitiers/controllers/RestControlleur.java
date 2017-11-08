@@ -75,7 +75,6 @@ public class RestControlleur {
     public void disconnectUser(@RequestBody String userId) {
     	Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
     	gameService.gameQueue.removeFromQueue(player);
-    	
     	inscriptionService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
     

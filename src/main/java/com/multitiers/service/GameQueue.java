@@ -70,6 +70,10 @@ public class GameQueue {
 		return null;
 	}
 	
+	public Integer getNbOfPlayersInQueue() {
+		return listOfPlayersInQueue.size();
+	}
+	
 	public void initListOfPlayersInQueue() {
 		this.listOfPlayersInQueue = new ArrayList<>();
 	}

@@ -104,7 +104,7 @@ public class AuthentificationService {
 			this.connectedUsers = new HashMap<String, User>();
 		}
 		if (this.connectedUsers.containsKey(user.getId())) {
-			throw new UserAlreadyConnectedException();
+			throw new UserAlreadyConnectedException(user.getUsername());
 		} else {
 			this.connectedUsers.put(user.getId(), user);
 		}
