@@ -91,6 +91,13 @@ public class RestControlleur {
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
     	User user = userRepository.findById(userId);
+    	if(deckId >= user.getDecks().size()) {
+    		Deck newDeck = new Deck();
+    		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+    		newDeck.setName("New Deck");
+    		newDeck.setCardList(new ArrayList<Card>());
+    		return newDeck;
+    	}
     	Deck deck = user.getDecks().get(deckId);
     	Collections.sort(deck.getCardList());
     	return deck;

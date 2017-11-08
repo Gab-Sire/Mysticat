@@ -41,7 +41,7 @@ export default class DisplayDeck extends Component {
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-          <CardDisplayTable goDeckSelection = {this.props.goDeckSelection} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
+          <CardDisplayTable editMode={null===this.state.deck} goDeckSelection = {this.props.goDeckSelection} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
         </div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
