@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import CardTile from '../cardComponents/CardTile.js';
 import Card from '../cardComponents/Card.js';
@@ -5,6 +6,7 @@ import Card from '../cardComponents/Card.js';
 export default class Deck extends Component{
 	constructor(props){
 		super(props);
+		this.state={}
 	}
 
 	render(){
@@ -26,3 +28,4 @@ export default class Deck extends Component{
 		}
 	}
 }
+

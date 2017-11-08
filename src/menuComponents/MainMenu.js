@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import axios from 'axios';
 import PopUpQueue from './PopUpQueue.js';
@@ -26,7 +27,7 @@ export default class MainMenu extends Component{
 					<div className='menuContainer'>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.goDeckSelection.bind(this)}>Consulter ses decks</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.props.goDeckSelection}>Consulter ses decks</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{
 								setTimeout(()=>{
 									this.deconnexion();
@@ -121,23 +122,6 @@ export default class MainMenu extends Component{
 				});
 	}
 
-	goDeckSelection(){
-			axios({
-				  method:'post',
-				  url:'http://'+window.location.hostname+':8089/getUserDecks',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data: this.state.playerId
-				})
-				  .then((response)=>{
-					  	this.props.setUserDeckList(response.data);
-							this.props.appDisplay("deck_selection");
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-					});
-		}
-
 
 	displayUnderContruction(){
 		this.setState({tag: "visible"});
@@ -152,3 +136,4 @@ export default class MainMenu extends Component{
 	}
 
 }
+

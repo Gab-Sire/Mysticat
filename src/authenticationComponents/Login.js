@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import '../styles/app.css';
 import axios from 'axios';
@@ -46,9 +47,7 @@ export default class Login extends Component{
 				.then((response)=>{
 					console.log(response);
 					if(response.data!==null){
-						this.setState({errorMessage: ""});
 						this.props.connectPlayer(response.data);
-
 					}else{
 							this.setState({errorMessage: "Échec, le nom d'utilisateur et le mot de passe que vous avez entré ne correspondent pas."});
 					}
@@ -79,3 +78,4 @@ export default class Login extends Component{
 		this.props.changeSignUpMode();
 		}
 }
+>>>>>>> develop

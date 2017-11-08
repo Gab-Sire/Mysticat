@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
+import com.multitiers.domaine.entity.UserDeck;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.AttackAction;
@@ -39,6 +41,8 @@ import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.GameService;
 import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.DeckEditingService;
+import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 import com.multitiers.util.JsonUtils;
 
@@ -56,9 +60,10 @@ public class RestControlleur {
 	
 	@Autowired
 	private AuthentificationService inscriptionService;
-	
 	@Autowired
 	private GameService gameService;
+	@Autowired
+	private DeckEditingService deckEditingService;
 	
     @GetMapping(value = "/getUserByName/{username}")
     public @ResponseBody User getUserByName(@PathVariable String username) {
@@ -91,6 +96,31 @@ public class RestControlleur {
     	return deck;
     }
     
+    @PostMapping(value="/saveDeck")
+    public void saveDeck(@RequestBody String json) {
+    	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
+    	String userId = userDeck.getUserId();
+    	List<String> cardIds = userDeck.getCardIds();
+    	Integer deckIndex = userDeck.getDeckIndex();
+    	String deckName = userDeck.getDeckName();
+    	
+    	List<Card> cardList = new ArrayList<>();
+    	
+    	for(String cardId : cardIds) {
+    		cardList.add(cardRepository.findByCardId(cardId));
+    	}
+    	
+    	User user = userRepository.findById(userId);
+    	if(user!=null) {
+    		Deck newDeck = new Deck();
+    		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+    		newDeck.setName(deckName);
+    		newDeck.setCardList(cardList);
+    		deckEditingService.editDeck(user, deckIndex, newDeck);
+    	}
+    	System.out.println("Saved deck");
+    }
+    
     @PostMapping(value = "/attemptConnection")
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
@@ -117,26 +147,6 @@ public class RestControlleur {
             session.setAttribute("userActif", user.getId());	
         }
     	return new Gson().toJson(user.getId());
-    }
-    
-    @ExceptionHandler(value=UsernameTakenException.class)
-    public String handleUsernameTakenSignup(UsernameTakenException e) {
-    	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
-    }
-    
-    @GetMapping(value="/getHardCodedGame")
-    public @ResponseBody Game getUserByName() {
-        User user1 = userRepository.findByUsername("Chat1");
-        User user2 = userRepository.findByUsername("Chat2");
-        Player player1 = new Player(user1);
-        Player player2 = new Player(user2);
-        Minion minion = new Minion(((PlayableMinionCard)player1.getHand().get(0)));
-        player1.addMinion(minion, 0);
-        player2.addMinion(minion, 3);
-        player1.sendCardToGraveyard(player1.getHand().get(0));
-        player1.sendCardToGraveyard(player1.getHand().get(0));
-    	Game game = new Game(player1, player2);
-        return game;
     }
     
     // TODO use in front end
@@ -229,9 +239,30 @@ public class RestControlleur {
     public void getServerStatus() {
     }
     
+    
+    @GetMapping(value="/getHardCodedGame")
+    public @ResponseBody Game getUserByName() {
+        User user1 = userRepository.findByUsername("Chat1");
+        User user2 = userRepository.findByUsername("Chat2");
+        Player player1 = new Player(user1);
+        Player player2 = new Player(user2);
+        Minion minion = new Minion(((PlayableMinionCard)player1.getHand().get(0)));
+        player1.addMinion(minion, 0);
+        player2.addMinion(minion, 3);
+        player1.sendCardToGraveyard(player1.getHand().get(0));
+        player1.sendCardToGraveyard(player1.getHand().get(0));
+    	Game game = new Game(player1, player2);
+        return game;
+    }
+    
     @ExceptionHandler(value=BadCredentialsLoginException.class)
     public String handleBadCredentialsLogin() {
     	return "Le nom d'utilisateur et le mot de passe que vous avez entre ne correspondent pas.";
+    }
+    
+    @ExceptionHandler(value=UsernameTakenException.class)
+    public String handleUsernameTakenSignup(UsernameTakenException e) {
+    	return "Le nom d'utilisateur "+ e.username +" est indisponible. ";
     }
     
     @ExceptionHandler(value=BadPasswordFormatException.class)
@@ -253,3 +284,4 @@ public class RestControlleur {
 				+ "<li>Au moins 1 lettre majuscule</li></ul>";
     }
 }
+
