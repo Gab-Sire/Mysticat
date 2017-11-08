@@ -45,7 +45,7 @@ public class GameQueue {
 		this.listeners.add(listener);
 	}
 	
-	public Game matchFirstTwoPlayersInQueue() {
+	public synchronized Game matchFirstTwoPlayersInQueue() {
 		Player player1 = this.listOfPlayersInQueue.get(0);
 		Player player2 = this.listOfPlayersInQueue.get(1);
 		
