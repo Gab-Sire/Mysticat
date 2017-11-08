@@ -4,6 +4,8 @@ import Card from '../cardComponents/Card.js';
 import CardTile from '../cardComponents/CardTile.js';
 import Beforeunload from 'react-beforeunload';
 
+const MAX_NUMBER_OF_DECKS = 3;
+
 export default class DeckSelection extends Component{
 
 	constructor(props){
@@ -15,7 +17,7 @@ export default class DeckSelection extends Component{
 
 	render(){
 		let numberDecks = this.props.deckList.length;
-		let slotsRemaining = 3 - numberDecks;
+		let slotsRemaining = MAX_NUMBER_OF_DECKS - numberDecks;
 		let emptyDeckSlots = [];
 		for(var i = 0; i < slotsRemaining; i++){
 			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} />);
@@ -40,5 +42,9 @@ export default class DeckSelection extends Component{
 
 	goBackToMenu(){
 		this.props.appDisplay("menu");
+	}
+
+	deconnexion(){
+		this.props.disconnectPlayer();
 	}
 }
