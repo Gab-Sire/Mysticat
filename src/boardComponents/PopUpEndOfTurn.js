@@ -18,7 +18,7 @@ export default class PopUpEndOfTurn extends Component {
 		    return (
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
-			            	<p>En Attente De Adversaire ...</p>
+			            	<p>En attente de l'adversaire ...</p>
 			            </div>
 		            </div>
 		        );
