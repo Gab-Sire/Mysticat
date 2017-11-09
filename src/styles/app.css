@@ -1020,6 +1020,7 @@ form {
 	outline: none;
 	box-shadow: 0 0 20px #d35400;
 	border-radius: 5px;
+	box-sizing: border-box;
 }
 
 .target {
