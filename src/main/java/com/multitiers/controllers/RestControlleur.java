@@ -97,6 +97,11 @@ public class RestControlleur {
     	return deck;
     }
     
+    @PostMapping(value="/getCollection")
+    public List<Card> getCollection() {
+    	return cardRepository.findAll();
+    }
+    
     @PostMapping(value="/saveDeck")
     public void saveDeck(@RequestBody String json) {
     	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);

@@ -9,20 +9,21 @@ export default class CardDisplayTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        editMode: false
+        editMode: false,
+        collection:null
     }
   }
 
   componentWillMount(){
     console.log(this.props);
     this.setState({editMode:this.state.editMode});
-
+    this.getCollection();
     	this.setState({
     		deck:this.props.deckList.cardList,
             deckIndex: this.props.deckId,
             userId: this.props.playerId,
             deckName: this.props.deckList.name});
-  
+    
     
   }
   render() {
@@ -77,6 +78,21 @@ export default class CardDisplayTable extends Component {
 			</div>);
   }
 
+  getCollection(){
+	  axios({
+	        method:'post',
+	        url:'http://'+window.location.hostname+':8089/getCollection',
+	        responseType:'json',
+	        headers: {'Access-Control-Allow-Origin': "true"}
+	      })
+	        .then((response)=>{
+	        	this.setState({collection:response.data});
+	        })
+	        .catch(error => {
+	          console.log('Error fetching and parsing data', error);
+	        });
+  }
+  
   saveDeck(){
     let userId = this.state.userId;
     let cardIds = [];

@@ -10,7 +10,7 @@ export default class DisplayDeck extends Component {
     super(props);
     this.state = {
     		deck:null,
-    		modeMode:false
+    		isEmpty:false
     }
   }
   componentWillMount(){
@@ -29,7 +29,9 @@ export default class DisplayDeck extends Component {
 			})
 			  .then((response)=>{
 				  this.setState({deck: response.data});
-
+				  if(0===this.state.deck.deckList.length){
+					  this.setState({isEmpty:true})
+				  }
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -41,7 +43,7 @@ export default class DisplayDeck extends Component {
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-          <CardDisplayTable editMode={null===this.state.deck} goDeckSelection = {this.props.goDeckSelection} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
+          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelection} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
         </div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
