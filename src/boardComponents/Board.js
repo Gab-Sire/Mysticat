@@ -19,7 +19,6 @@ let self;
 let opponent;
 let opponentIndex;
 
-let selectedFieldCellIndex;
 let selectedOpponentFieldCellIndex;
 
 export default class Board extends Component{
@@ -38,7 +37,8 @@ export default class Board extends Component{
 			attackerSelected:null,
 			endOfTurn:false,
 			surrendering: false,
-			selectedCardIndex:null
+			selectedCardIndex:null,
+			selectedFieldCellIndex:null
 		};
 	}
 
@@ -133,26 +133,28 @@ export default class Board extends Component{
 		);
 	}
 
-	addSummonAction = () => {
-		let cardIndex = this.state.selectedCardIndex;
+	addSummonAction = (selectedIndex) => {
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex];
+
 		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
-		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
-		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex];
-		let manaCost = self.hand[cardIndex].manaCost;
+		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[selectedIndex];
+		let manaCost = self.hand[this.state.selectedCardIndex].manaCost;
 		let selfMana = self.remainingMana;
 
-		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
-			&& null===self.field[selectedFieldCellIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
-			//console.log("Card played from hand: "+cardIndex+" on field cell: "+selectedFieldCellIndex);
-			wereTheseCardsPlayedThisTurn[cardIndex] = true;
-			areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex] = true;
+		if(
+			false===wasThisCardAlreadyPlayedThisTurn
+			&& true===(selfMana>=manaCost)
+			&& true===(null===self.field[selectedIndex])
+			&& false===wasAMinionAlreadyPlayedOnThisCell){
+			wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex] = true;
+			areTheseCellsAboutToBeSummonedOn[selectedIndex] = true;
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
-							indexOfCardInHand : cardIndex,
-							fieldCellWhereTheMinionIsBeingSummoned : selectedFieldCellIndex
+							indexOfCardInHand : this.state.selectedCardIndex,
+							fieldCellWhereTheMinionIsBeingSummoned : selectedIndex
 						});
 			this.setState({ actionList: actions ,
 			selectedCardIndex: null})
@@ -299,8 +301,7 @@ export default class Board extends Component{
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		if(null!==this.state.selectedCardIndex && undefined!==this.state.selectedCardIndex){
-			selectedFieldCellIndex = selectedIndex;
-			this.addSummonAction();
+			this.addSummonAction(selectedIndex);
 		}
 	}
 
