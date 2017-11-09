@@ -7,7 +7,15 @@ export default class CardTile extends Component{
 	}
 
 	render(){
-		return (<div className="cardTile"></div>
-		);
+		if(true===this.props.isUserDeck){
+			return (<div className="cardTile" onClick={this.selectDeck.bind(this)}><div className="displayDeckAjouter">Nouveau Deck</div></div>);
+		}else{
+			return (<div className="cardTile"></div>);
+		}
+		
+	}
+	selectDeck(){
+		this.props.deckSelection(this.props.index);
+		this.props.appDisplay("displayDeck");
 	}
 }

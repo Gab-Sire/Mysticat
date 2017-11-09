@@ -15,10 +15,15 @@ export default class CardDisplayTable extends Component {
 
   componentWillMount(){
     console.log(this.props);
-    this.setState({deck:this.props.deckList.cardList,
-                  deckIndex: this.props.deckId,
-                  userId: this.props.playerId,
-                  deckName: this.props.deckList.name});
+    this.setState({editMode:this.state.editMode});
+
+    	this.setState({
+    		deck:this.props.deckList.cardList,
+            deckIndex: this.props.deckId,
+            userId: this.props.playerId,
+            deckName: this.props.deckList.name});
+  
+    
   }
   render() {
       const props = this.state.deck;

@@ -425,6 +425,20 @@
 	background-color: black;
 	font-size: 10px;
 }
+.displayDeckAjouter{display: none;}
+.cardTile:hover .displayDeckAjouter{
+	position: absolute;
+	top: 10px;
+	display: inline;
+	border: 1px solid red;
+	color:black;
+	width: 100px;
+	height: 50px;
+	margin-left:25%;
+	border-radius: 20px;
+	background-color: blue;
+	font-size: 10px;
+}
 
 /* styles pour une carte visible (de face) */
 .card {
