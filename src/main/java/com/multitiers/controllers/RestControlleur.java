@@ -23,11 +23,13 @@ import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.entity.UserDeck;
+import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
+import com.multitiers.domaine.ingame.SurrenderAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
@@ -196,12 +198,25 @@ public class RestControlleur {
     	String gameId = currentPlayerActionList.getGameId();
     	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
+    		if(currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId()) && actionListContainsSurrender(currentPlayerActionList)) {
+    			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
+    			return;
+    		}
     		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
     	}
     	else {
     		this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
     	}
     }
+
+	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
+		for(Action action : currentPlayerActionList.getPlayerActions()) {
+			if(action instanceof SurrenderAction) {
+				return true;
+			}
+		}
+		return false;
+	}
     
     @PostMapping(value="/checkIfGameUpdated")
     public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {

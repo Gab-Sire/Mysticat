@@ -83,7 +83,7 @@ public class CardCreationService {
 		MinionCard minionCard21 = createMinionCard("Petit Chat", 4, 1, 5, 1, "Le petit.", "img/cardImg/mabSet/petitChat.jpg");
 		MinionCard minionCard22 = createMinionCard("Madame Chat", 3, 2, 0, 0, "La madame.", "img/cardImg/mabSet/madameChat.jpg");
 		MinionCard minionCard23 = createMinionCard("Chat Orange", 5, 2, 3, 1, "L'orange.", "img/cardImg/mabSet/chatOrange.jpg");
-		MinionCard minionCard24 = createMinionCard("Autre Chat", 5, 5, 5, 2, "L'autre.", "img/cardImg/mabSet/autreChat.jpg");
+		MinionCard minionCard24 = createMinionCard("Autre Chat", 4, 7, 4, 2, "L'autre.", "img/cardImg/mabSet/autreChat.jpg");
 		cardRepository.save(minionCard21);
 		cardRepository.save(minionCard22);
 		cardRepository.save(minionCard23);
@@ -108,7 +108,7 @@ public class CardCreationService {
 				"img/cardImg/superheroSet/captainAmerichat.jpg");
 		MinionCard minionCard17 = createMinionCard("Super Chat", 15, 25, 10, 9, "Un chat super.",
 				"img/cardImg/superheroSet/superChat.png");
-		MinionCard minionCard18 = createMinionCard("Golden Claws", 20, 5, 5, 5,
+		MinionCard minionCard18 = createMinionCard("Golden Claws", 22, 3, 5, 5,
 				"Ses griffes légendaires peuvent couper n'importe quoi.", "img/cardImg/superheroSet/goldenClaws.jpg");
 		MinionCard minionCard19 = createMinionCard("Red Dot Catcher", 10, 5, 30, 8,
 				"Plus rapide que le point rouge par terre.", "img/cardImg/superheroSet/redDotCatcher.jpeg");
