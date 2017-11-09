@@ -201,13 +201,16 @@ public class RestControlleur {
     public void sendActions(@RequestBody String actionListJson) {
     	ActionList currentPlayerActionList = JsonUtils.deserializeActionListFromJson(actionListJson);
     	String gameId = currentPlayerActionList.getGameId();
+    	gameService.newGameList.remove(currentPlayerActionList.getPlayerId());
+    	gameService.updatedGameList.remove(currentPlayerActionList.getPlayerId());
     	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
     		if(currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId()) && actionListContainsSurrender(currentPlayerActionList)) {
     			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
-    			return;
     		}
-    		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
+    		else {
+        		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
+    		}
     	}
     	else {
     		this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
@@ -272,6 +275,7 @@ public class RestControlleur {
 				"<li>Au moins 1 lettre majuscule</li>"+
 				"<li>Au moins un chiffre</li></ul>";
     }
+    
     @ExceptionHandler(value=BadUsernameFormatException.class)
     public String handleBadUsernameSignup() {
     	return "Votre mot de passe est dans un format invalide.\n"+
