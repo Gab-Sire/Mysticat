@@ -20,7 +20,6 @@ let opponent;
 let opponentIndex;
 
 let selectedFieldCellIndex;
-let cardIndex;
 let selectedOpponentFieldCellIndex;
 
 export default class Board extends Component{
@@ -37,9 +36,9 @@ export default class Board extends Component{
 			cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 			targetMinion:null,
 			attackerSelected:null,
-			startOfTurnForSummoning:false,
 			endOfTurn:false,
-			surrendering: false
+			surrendering: false,
+			selectedCardIndex:null
 		};
 	}
 
@@ -116,8 +115,7 @@ export default class Board extends Component{
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} startOfTurn={this.state.startOfTurnForSummoning}
-						selectedCardIndex = {cardIndex} />
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} selectedCardIndex = {this.state.selectedCardIndex} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
@@ -136,6 +134,7 @@ export default class Board extends Component{
 	}
 
 	addSummonAction = () => {
+		let cardIndex = this.state.selectedCardIndex;
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
 		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
 		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
@@ -155,11 +154,11 @@ export default class Board extends Component{
 							indexOfCardInHand : cardIndex,
 							fieldCellWhereTheMinionIsBeingSummoned : selectedFieldCellIndex
 						});
-			this.setState({ actionList: actions })
+			this.setState({ actionList: actions ,
+			selectedCardIndex: null})
 
 			self.remainingMana = selfMana - manaCost;
-			this.retrieveCardSelectedIndex(cardIndex);
-			cardIndex = null;
+			//this.retrieveCardSelectedIndex(cardIndex);
 		}
 	}
 
@@ -251,7 +250,7 @@ export default class Board extends Component{
 	}
 
 	sendActions(){
-		cardIndex = null;
+		this.setState({selectedCardIndex: null});
 		const data = {
 					gameId: this.state.gameState.gameId,
 					playerActions: this.state.actionList,
@@ -273,7 +272,7 @@ export default class Board extends Component{
 					else{
 						this.checkIfGameUpdated();
 						this.resetAttackingState();
-						this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+						this.setState({endOfTurn:true});
 					}
 				})
 				.catch(error => {
@@ -290,17 +289,16 @@ export default class Board extends Component{
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
-		if(selectedIndex===cardIndex){
-			cardIndex = null;
+		if(selectedIndex===this.state.selectedCardIndex){
+			this.setState({selectedCardIndex : null})
 		}
 		else{
-			cardIndex = selectedIndex;
-			this.setState({startOfTurnForSummoning:false});
+			this.setState({selectedCardIndex : selectedIndex})
 		}
 	}
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
-		if(null!==cardIndex && undefined!==cardIndex){
+		if(null!==this.state.selectedCardIndex && undefined!==this.state.selectedCardIndex){
 			selectedFieldCellIndex = selectedIndex;
 			this.addSummonAction();
 		}

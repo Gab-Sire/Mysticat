@@ -16,7 +16,7 @@ export default class Hand extends Component{
 				return (
 				 <Card
 					 key={"handCard" + index}
-					 active={index === this.props.selectedCardIndex && false === this.props.startOfTurn}
+					 active={index === this.props.selectedCardIndex}
 					 onClick={() => this.handleSelectHandCard(index)} faceUp={this.props.faceUp} {...card}{...props}/>
 				)
 			 }, this)
@@ -24,7 +24,6 @@ export default class Hand extends Component{
 	}
 
 	handleSelectHandCard = (index) => {
-		console.log("index", index, "selectedCardState", this.props.selectedCardIndex);
 		  if(index === this.props.selectedCardIndex){
 				this.props.callBackSelectedCardIndex(null);
 		  }
