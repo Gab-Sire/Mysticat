@@ -116,7 +116,8 @@ export default class Board extends Component{
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} startOfTurn={this.state.startOfTurnForSummoning} />
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} startOfTurn={this.state.startOfTurnForSummoning}
+						selectedCardIndex = {cardIndex} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
@@ -157,6 +158,7 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 
 			self.remainingMana = selfMana - manaCost;
+			this.retrieveCardSelectedIndex(cardIndex);
 			cardIndex = null;
 		}
 	}
@@ -249,6 +251,7 @@ export default class Board extends Component{
 	}
 
 	sendActions(){
+		cardIndex = null;
 		const data = {
 					gameId: this.state.gameState.gameId,
 					playerActions: this.state.actionList,
@@ -264,7 +267,6 @@ export default class Board extends Component{
 			})
 			  .then((response)=>{
 					this.setState({waitingForOpponentToEndTurn:true});
-					cardIndex = null;
 					if(true===this.state.surrendering){
 							this.loseGame();
 					}

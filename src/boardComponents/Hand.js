@@ -9,14 +9,14 @@ export default class Hand extends Component{
 			selectedHandCardIndex : null
 		};
 	}
-	
+
 	render(){
 		const props = (this.props.players[this.props.playerIndex].hand);
 		let handCards = this.props.players[this.props.playerIndex].hand.map(function(card, index){
 				return (
 				 <Card
 					 key={"handCard" + index}
-					 active={index === this.state.selectedHandCardIndex && false===this.props.startOfTurn}
+					 active={index === this.props.selectedCardIndex && false === this.props.startOfTurn}
 					 onClick={() => this.handleSelectHandCard(index)} faceUp={this.props.faceUp} {...card}{...props}/>
 				)
 			 }, this)
@@ -24,12 +24,12 @@ export default class Hand extends Component{
 	}
 
 	handleSelectHandCard = (index) => {
-		  if(index === this.state.selectedHandCardIndex){
-			  this.setState({ selectedHandCardIndex: null })
+		console.log("index", index, "selectedCardState", this.props.selectedCardIndex);
+		  if(index === this.props.selectedCardIndex){
+				this.props.callBackSelectedCardIndex(null);
 		  }
 		  else{
-			  this.setState({ selectedHandCardIndex : index })
+				this.props.callBackSelectedCardIndex(index);
 		  }
-			 	this.props.callBackSelectedCardIndex(index);
 	}
 }

@@ -6,6 +6,8 @@ export default class Card extends Component{
 		this.state={faceUp: true};
 	}
 
+
+
 	render(){
 		let isSelected = "";
 		let listedInstance = "";
