@@ -55,7 +55,7 @@ export default class CardDisplayTable extends Component {
                      index={index}
                      listed={true}
                 	 color={(indexInDeck===-1)?"gris": null}
-                     onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
+                     onClick={(indexInDeck!==-1) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
                      description={this.state.collection[index].cardDescription}
                      {...card}{...props}
                  />
