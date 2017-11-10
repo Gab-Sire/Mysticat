@@ -36,6 +36,7 @@ export default class Card extends Component{
 			if(true===this.props.isUserDeck){
 					return (
 							<div className="cardFacedDown" title={this.props.deck.name} onClick={this.selectDeck.bind(this)}>
+							<p className="displayDeckAjouter">Afficher le Deck</p>
 							</div>
 						);
 			}
