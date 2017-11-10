@@ -20,8 +20,11 @@ export default class Card extends Component{
 			isSelected = "selected";
 		}
 		if(true === this.props.listed){
-			listedInstance="Big ";
+			listedInstance+="Big ";
 			bigStat = "cardStatBig";
+		}
+		if(true===this.props.isFromCollection){
+			listedInstance+=" cardInCollection";
 		}
 		if(true === this.props.faceUp){
 			return (<div className={"card"+listedInstance +" "+ isSelected} title={this.props.description} onClick={this.props.onClick}>

@@ -593,6 +593,10 @@
 	font-weight: bold;
 }
 
+.cardInCollection{
+	background-color: gray!important;
+}
+
 .cardBig{
 	display: inline-block;
 	border: 1px solid black;

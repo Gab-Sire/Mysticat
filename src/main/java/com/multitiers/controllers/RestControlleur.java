@@ -99,7 +99,9 @@ public class RestControlleur {
     
     @PostMapping(value="/getCollection")
     public List<Card> getCollection() {
-    	return cardRepository.findAll();
+    	List<Card> cardCollection = cardRepository.findAll();
+    	Collections.sort(cardCollection);
+    	return cardCollection;
     }
     
     @PostMapping(value="/saveDeck")

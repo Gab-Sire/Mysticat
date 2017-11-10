@@ -43,7 +43,6 @@ export default class CardDisplayTable extends Component {
            </span>
         )
 		 }, this)
-     console.log("Collection",this.state.collection);
      let editModeCollection = this.state.collection.map((card, index)=>{
          let indexInDeck = this.isThisCardInTheDeck(index);
          if(indexInDeck!==-1){
@@ -54,6 +53,7 @@ export default class CardDisplayTable extends Component {
                      faceUp={true}
                      index={index}
                      listed={true}
+                     isFromCollection={false}
                      onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
                      description={this.state.collection[index].cardDescription}
                      {...card}{...props}
@@ -69,6 +69,7 @@ export default class CardDisplayTable extends Component {
                    faceUp={true}
                    index={index}
                    listed={true}
+                   isFromCollection={true}
                    onClick={(true===this.state.editMode) ? this.addCardToDeck.bind(this, index) : null}
                    description={this.state.collection[index].cardDescription}
                    {...card}{...props}
@@ -79,7 +80,6 @@ export default class CardDisplayTable extends Component {
          }
      }, this)
 
-     console.log(editModeCollection);
 	return (<div id='CardCollection'>
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
         <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
@@ -180,7 +180,7 @@ export default class CardDisplayTable extends Component {
       let card = collection[indexInCollection];
 
       for(let i=0; i<deck.length; i++){
-          if(deck[i]===card){
+          if(deck[i].cardId===card.cardId){
             return i;
           }
       }
