@@ -15,8 +15,9 @@ export default class CardDisplayTable extends Component {
   }
 
   componentWillMount(){
-    this.setState({editMode:this.props.editMode});
-    this.getCollection();
+    console.log(this.props);
+    this.setState({editMode:this.state.editMode});
+    //this.getCollection();
     	this.setState({
     		    deck:this.props.deckList.cardList,
             deckIndex: this.props.deckId,
