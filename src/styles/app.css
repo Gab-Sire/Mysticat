@@ -144,6 +144,9 @@
 	padding-bottom: 200px;
 	padding-top: 100px;
 }
+.gris{
+	background-color:gray; 
+}
 .displayDeckTitle{
 	color:white;
 	text-align: center;
@@ -683,6 +686,12 @@
 .cardBig:hover {
 	transform: scale(1.5);
 	z-index: 4;
+}
+.gris{
+	background-color:gray; 
+}
+.gris .cardNameBig{
+	background-color:navy;
 }
 
 .card+.card, .cardFacedDown+.cardFacedDown {

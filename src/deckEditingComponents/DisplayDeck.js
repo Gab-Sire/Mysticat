@@ -10,12 +10,14 @@ export default class DisplayDeck extends Component {
     super(props);
     this.state = {
     		deck:null,
+    		collection:null,
     		isEmpty:false,
     		editMode:false
     }
   }
   componentWillMount(){
 	  this.getDeck();
+	  this.getCollection();
   }
 
   getDeck(){
@@ -55,11 +57,13 @@ export default class DisplayDeck extends Component {
   }
 
   render() {
-	  if(this.state.deck !== null ){
+	  if( null !== this.state.deck && null !== this.state.collection){
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelecnulltion} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
+          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelecnulltion} 
+        	deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} 
+        	appDisplay={this.props.appDisplay} collection={this.state.collection}/>
         </div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
