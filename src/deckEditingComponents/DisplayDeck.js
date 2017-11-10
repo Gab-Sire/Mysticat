@@ -16,6 +16,7 @@ export default class DisplayDeck extends Component {
   componentWillMount(){
 	  this.getDeck();
   }
+
   getDeck(){
 		axios({
 			  method:'get',
@@ -29,7 +30,7 @@ export default class DisplayDeck extends Component {
 			})
 			  .then((response)=>{
 				  this.setState({deck: response.data});
-				  if(0===this.state.deck.deckList.length){
+				  if(0===response.data.cardList.length){
 					  this.setState({isEmpty:true})
 				  }
 				})

@@ -10,42 +10,76 @@ export default class CardDisplayTable extends Component {
     super(props);
     this.state = {
         editMode: false,
-        collection:null
+        collection : []
     }
   }
 
   componentWillMount(){
-    console.log(this.props);
-    this.setState({editMode:this.state.editMode});
+    this.setState({editMode:this.props.editMode});
     this.getCollection();
     	this.setState({
-    		deck:this.props.deckList.cardList,
+    		    deck:this.props.deckList.cardList,
             deckIndex: this.props.deckId,
             userId: this.props.playerId,
             deckName: this.props.deckList.name});
-    	
-    
+
+
   }
   render() {
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
     	  return (
 					 <span className='cardDisplay' key={"handCard" + index}>
-        <Card
-						 displayList={true}
-						 faceUp={true}
-					 	 index={index}
-				 	   listed={true}
-          onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, index) : null}
-          description={this.props.deckList.cardList[index].cardDescription}
-					 {...card}{...props} />{(0===((index+1)%5) )?<br/>:null}
-      </span>
-					)
-
+              <Card
+      						 displayList={true}
+      						 faceUp={true}
+      					 	 index={index}
+      				 	   listed={true}
+                   onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, index) : null}
+                   description={this.props.deckList.cardList[index].cardDescription}
+      					   {...card}{...props}
+               />
+              {(0===((index+1)%5) ) ? <br/>:null}
+           </span>
+        )
 		 }, this)
-		 
-		 
-		 
+     console.log("Collection",this.state.collection);
+     let editModeCollection = this.state.collection.map((card, index)=>{
+         let indexInDeck = this.isThisCardInTheDeck(index);
+         if(indexInDeck!==-1){
+           return (
+             <span className='cardDisplay' key={"handCard" + index}>
+                <Card
+                     displayList={true}
+                     faceUp={true}
+                     index={index}
+                     listed={true}
+                     onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
+                     description={this.state.collection[index].cardDescription}
+                     {...card}{...props}
+                 />
+                {(0===((index+1)%5) ) ? <br/>:null}
+             </span>
+         )
+         }else{
+           return(
+           <span className='cardDisplay' key={"collectionCard" + index}>
+              <Card
+                   displayList={true}
+                   faceUp={true}
+                   index={index}
+                   listed={true}
+                   onClick={(true===this.state.editMode) ? this.addCardToDeck.bind(this, index) : null}
+                   description={this.state.collection[index].cardDescription}
+                   {...card}{...props}
+               />
+               {(0===((index+1)%5) ) ? <br/>:null}
+            </span>
+          )
+         }
+     }, this)
+
+     console.log(editModeCollection);
 	return (<div id='CardCollection'>
 				<h1 className='displayDeckTitle'>Affichage Deck</h1>
         <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
@@ -55,19 +89,18 @@ export default class CardDisplayTable extends Component {
           <div>
             <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
             <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
-	           <div className='cardDisplayTable'>
-					{deck}
-					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
-				</div>
-			</div>
-           
-          : 
-        	  <div className='cardDisplayTable'>
-		{deck}
-		<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
-	</div>
+  	        <div className='cardDisplayTable'>
+    					{(true===this.state.editMode) ? editModeCollection : deck}
+    					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
+  		      </div>
+	        </div>
+          :
+          <div className='cardDisplayTable'>
+    		      {deck}
+    		      <button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
+	        </div>
         }
-        
+
 			</div>);
   }
 
@@ -85,7 +118,7 @@ export default class CardDisplayTable extends Component {
 	          console.log('Error fetching and parsing data', error);
 	        });
   }
-  
+
   saveDeck(){
     let userId = this.state.userId;
     let cardIds = [];
@@ -148,10 +181,10 @@ export default class CardDisplayTable extends Component {
 
       for(let i=0; i<deck.length; i++){
           if(deck[i]===card){
-            return true;
+            return i;
           }
       }
-      return false;
+      return -1;
   }
 
 }
