@@ -21,10 +21,9 @@ export default class CardDisplayTable extends Component {
             deckIndex: this.props.deckId,
             userId: this.props.playerId,
             deckName: this.props.deckList.name});
-    if(this.props.deckList.cardList.length>MAX_CARDS_IN_DECK){
+    if(this.props.deckList.cardList.length<MAX_CARDS_IN_DECK){
         this.setState({editMode: true})
     }
-
   }
   render() {
       const props = this.state.deck;
