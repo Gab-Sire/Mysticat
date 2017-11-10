@@ -15,7 +15,12 @@ public class DeckEditingService {
 	@Transactional
 	public void editDeck(User user, Integer deckIndex, Deck newDeck) {
 		List<Deck> deckList = user.getDecks();
-		deckList.set(deckIndex, newDeck);
+		if(deckList.size()<deckIndex) {
+			deckList.add(newDeck);
+		}
+		else {
+			deckList.set(deckIndex, newDeck);	
+		}
 		user.setDecks(deckList);
 	}
 	

@@ -15,7 +15,6 @@ export default class CardDisplayTable extends Component {
   }
 
   componentWillMount(){
-
     this.getCollection();
     this.setState({
     		    deck:this.props.deckList.cardList,
@@ -46,8 +45,8 @@ export default class CardDisplayTable extends Component {
         )
 		 }, this)
      let editModeCollection = this.state.collection.map((card, index)=>{
-         let indexInDeck = this.isThisCardInTheDeck(index);
-         if(indexInDeck!==-1){
+     let indexInDeck = this.isThisCardInTheDeck(index);
+     if(indexInDeck!==-1){
            return (
              <span className='cardDisplay' key={"handCard" + index}>
                 <Card
@@ -57,12 +56,9 @@ export default class CardDisplayTable extends Component {
                      listed={true}
                      isFromCollection={false}
                      onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
-                     description={this.state.collection[index].cardDescription}
                      {...card}{...props}
                  />
-                {(0===((index+1)%5) ) ? <br/>:null}
-             </span>
-         )
+                 </span>)
          }else{
            return(
            <span className='cardDisplay' key={"collectionCard" + index}>
@@ -83,15 +79,22 @@ export default class CardDisplayTable extends Component {
      }, this)
 
 	return (<div id='CardCollection'>
-				<h1 className='displayDeckTitle'>Affichage Deck</h1>
+	<button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
+				<h1 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification Deck" : "Affichage Deck"}</h1>
+				<div>{(true===this.state.editMode) ?
+				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
+				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button></div>
+				:
+				<h2 className='displayDeckTitle'>{this.state.deckName}</h2>
+						}</div>
+
         <div id="cardCounter">{<span className={(deck.length<30) ? "incompleteDeck" : ""}>{deck.length}</span>}/30</div>
-        <button onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
+
         <br/>
         {(true===this.state.editMode) ?
           <div>
-            <button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
-            <input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
-  	        <div className='cardDisplayTable'>
+
+  	        <div className='cardDisplayTable editMode'>
     					{(true===this.state.editMode) ? editModeCollection : deck}
     					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
   		      </div>
@@ -182,7 +185,7 @@ export default class CardDisplayTable extends Component {
       let card = collection[indexInCollection];
 
       for(let i=0; i<deck.length; i++){
-          if(deck[i].cardId===card.cardId){
+          if(deck[i].cardId ===card.cardId){
             return i;
           }
       }

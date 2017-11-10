@@ -137,12 +137,24 @@
 	color: white;
 	padding-top: 4%;
 }
-
+.buttonDeckMod{
+	margin-top:50px;
+	display: block;
+	margin: 0 auto;
+	position: absolute;
+	width: 10%;
+	padding: 5px;
+	right: 5%;
+	font-size: 10px;
+}
 .cardDisplayTable{
 	width: 50%;
 	margin-left: 25%;
 	padding-bottom: 200px;
-	padding-top: 100px;
+	padding-top: 25px;
+}
+.gris{
+	background-color:gray; 
 }
 .displayDeckTitle{
 	color:white;
@@ -425,20 +437,29 @@
 	background-color: black;
 	font-size: 10px;
 }
-.displayDeckAjouter{display: none;}
-.cardTile:hover .displayDeckAjouter{
+.displayDeckAjouter{
+	display: none;
 	position: absolute;
-	top: 10px;
-	display: inline;
+	top: 40%;
 	border: 1px solid red;
-	color:black;
-	width: 100px;
-	height: 50px;
-	margin-left:25%;
+	color:white;
+	width: 80%;
+	height: 60px;
+	margin-left:10%;
 	border-radius: 20px;
-	background-color: blue;
-	font-size: 10px;
+	background-color: darkblue;
+	font-size: 20px;
+	text-align: center;
 }
+.displayDeckTitle input{
+	color:black;
+}
+.displayDeckTitle button{
+	color:black;
+}
+.cardTile:hover .displayDeckAjouter{display: inline;}
+
+.cardFacedDown:hover .displayDeckAjouter{display: inline;}
 
 /* styles pour une carte visible (de face) */
 .card {
@@ -688,6 +709,12 @@
 .cardBig:hover {
 	transform: scale(1.5);
 	z-index: 4;
+}
+.gris{
+	background-color:gray; 
+}
+.gris .cardNameBig{
+	background-color:navy;
 }
 
 .card+.card, .cardFacedDown+.cardFacedDown {

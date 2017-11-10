@@ -10,11 +10,14 @@ export default class DisplayDeck extends Component {
     super(props);
     this.state = {
     		deck:null,
-    		isEmpty:false
+    		collection:null,
+    		isEmpty:false,
+    		editMode:false
     }
   }
   componentWillMount(){
 	  this.getDeck();
+	  this.getCollection();
   }
 
   getDeck(){
@@ -38,13 +41,29 @@ export default class DisplayDeck extends Component {
 				  console.log('Error fetching and parsing data', error);
 		});
 	}
+  getCollection(){
+	  axios({
+	        method:'post',
+	        url:'http://'+window.location.hostname+':8089/getCollection',
+	        responseType:'json',
+	        headers: {'Access-Control-Allow-Origin': "true"}
+	      })
+	        .then((response)=>{
+	        	this.setState({collection:response.data});
+	        })
+	        .catch(error => {
+	          console.log('Error fetching and parsing data', error);
+	        });
+  }
 
   render() {
-	  if(this.state.deck !== null){
+	  if( null !== this.state.deck && null !== this.state.collection){
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelection} deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId} appDisplay={this.props.appDisplay}/>
+          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelection} 
+        	deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId}
+        	appDisplay={this.props.appDisplay} collection={this.state.collection}/>
         </div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
