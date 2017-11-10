@@ -154,7 +154,7 @@
 	padding-top: 25px;
 }
 .gris{
-	background-color:gray; 
+	background-color:gray;
 }
 .displayDeckTitle{
 	color:white;
@@ -450,6 +450,7 @@
 	background-color: darkblue;
 	font-size: 20px;
 	text-align: center;
+	cursor:default;
 }
 .displayDeckTitle input{
 	color:black;
@@ -711,7 +712,7 @@
 	z-index: 4;
 }
 .gris{
-	background-color:gray; 
+	background-color:gray;
 }
 .gris .cardNameBig{
 	background-color:navy;
