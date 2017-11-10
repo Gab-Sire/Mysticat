@@ -15,14 +15,16 @@ export default class CardDisplayTable extends Component {
   }
 
   componentWillMount(){
-    this.setState({editMode:this.props.editMode});
+
     this.getCollection();
-    	this.setState({
+    this.setState({
     		    deck:this.props.deckList.cardList,
             deckIndex: this.props.deckId,
             userId: this.props.playerId,
             deckName: this.props.deckList.name});
-
+    if(this.props.deckList.cardList.length>MAX_CARDS_IN_DECK){
+        this.setState({editMode: true})
+    }
 
   }
   render() {
