@@ -47,7 +47,6 @@ export default class CardDisplayTable extends Component {
      console.log("Collection",this.state.collection);
      let editModeCollection = this.state.collection.map((card, index)=>{
          let indexInDeck = this.isThisCardInTheDeck(index);
-         //if(indexInDeck!==-1){
            return (
              <span className='cardDisplay' key={"handCard" + index}>
                 <Card
@@ -63,22 +62,7 @@ export default class CardDisplayTable extends Component {
                 {(0===((index+1)%5) ) ? <br/>:null}
              </span>
          )
-         //}else{
-          /* return(
-           <span className='cardDisplay' key={"collectionCard" + index}>
-              <Card
-                   displayList={true}
-                   faceUp={true}
-                   index={index}
-                   listed={true}
-                   onClick={(true===this.state.editMode) ? this.addCardToDeck.bind(this, index) : null}
-                   description={this.state.collection[index].cardDescription}
-                   {...card}{...props}
-               />
-               {(0===((index+1)%5) ) ? <br/>:null}
-            </span>
-          )
-         }*/
+         
      }, this)
 
      console.log(editModeCollection);
