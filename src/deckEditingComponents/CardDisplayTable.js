@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles/menu.css';
 import Card from '../cardComponents/Card.js';
 import Not30CardsInDeckWarning from './Not30CardsInDeckWarning.js';
+import SavedDeckSuccess from './SavedDeckSuccess.js';
 
 const MAX_CARDS_IN_DECK = 30;
 
@@ -12,7 +13,8 @@ export default class CardDisplayTable extends Component {
     this.state = {
         editMode: false,
         collection : [],
-        isAlertVisible: false
+        isAlertVisible: false,
+        isSuccessVisible: false
     }
   }
 
@@ -85,6 +87,10 @@ export default class CardDisplayTable extends Component {
             MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertVisible}
             onDismiss = {this.onDismissWarning.bind(this)}
         />
+        <SavedDeckSuccess
+            visible={this.state.isSuccessVisible}
+            onDismiss = {this.onDismissSuccess.bind(this)}
+        />
         <h1 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification Deck" : "Affichage Deck"}</h1>
 				<div>{(true===this.state.editMode) ?
 				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
@@ -151,6 +157,8 @@ export default class CardDisplayTable extends Component {
           }
         })
           .then((response)=>{
+            this.setState({isSuccessVisible:true,
+                          isAlertVisible: false})
           })
           .catch(error => {
             console.log('Error fetching and parsing data', error);
@@ -158,7 +166,8 @@ export default class CardDisplayTable extends Component {
     }
     else{
         //TODO pop-up d'avertissement que le deck est invalide.
-        this.setState({isAlertVisible:true})
+        this.setState({isAlertVisible:true,
+                  isSuccessVisible: false})
     }
   }
 
@@ -207,6 +216,10 @@ export default class CardDisplayTable extends Component {
 
   onDismissWarning(){
     this.setState({isAlertVisible: false})
+  }
+
+  onDismissSuccess(){
+    this.setState({isSuccessVisible: false})
   }
 
 }
