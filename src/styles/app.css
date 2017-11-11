@@ -610,7 +610,11 @@
  Deck viewing and editing
 */
 
-.incompleteDeck{
+.fade{
+	opacity:1 !important;
+}
+
+.invalidDeck{
 	color: red;
 	font-weight: bold;
 }
