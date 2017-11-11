@@ -5,16 +5,11 @@ export default class UserManagement extends Component{
 
 	constructor(props){
 		super(props);
-		this.state={
-
-		}
 	}
 
 	render(){
 		return(
-			<div id="containerUserList">
-				{this.props.userList.map((user, index) => <p>{index} {user.username}</p>)}	
-			</div>
+			<p>{this.props.index} {this.props.username}</p>
 		)
 	}
 }

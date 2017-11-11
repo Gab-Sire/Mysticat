@@ -79,9 +79,14 @@ public class RestControlleur {
     }
 
     @PostMapping(value="/getUsers")
-    public List<User> getUsers() {
+    public List<User>[] getUsers() {
     	List<User> users = userRepository.findAll();
-    	return users;
+    	List<User> usersConnected = (List<User>) authService.connectedUsers;
+    	List<User>[] usersComparison = new List[2];
+    	usersComparison[0] = users;
+    	usersComparison[1] = usersConnected;
+    	
+    	return usersComparison;
     }
     
     @PostMapping(value="/getUserDecks")

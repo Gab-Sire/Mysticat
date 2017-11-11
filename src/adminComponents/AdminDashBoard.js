@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserManagement from './UserManagement.js';
+import UserManagementList from './UserManagementList.js';
 import '../styles/admin.css';
 
 export default class AdminDashBoard extends Component{
@@ -17,7 +17,7 @@ export default class AdminDashBoard extends Component{
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p>Bonjour, {this.props.adminName}</p><br />
-					<UserManagement userList={this.props.userList} />
+					<UserManagementList userList={this.props.userList[0]} />
 				</div>
 				<button id="btnDisconnect">D&eacute;connexion</button>
 			</div>

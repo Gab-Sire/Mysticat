@@ -30,6 +30,9 @@ import com.multitiers.util.Constantes;
 
 @Service
 public class AuthentificationService {
+	
+	public static final String ADMIN_NAME = "Admin";
+
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired

@@ -160,6 +160,7 @@ class App extends Component{
 		this.setState({ playerId : idPlayer, 
 						playerName : namePlayer, 
 						appDisplay: "menu"});
+		console.log("crepe " + namePlayer);
 		
 		if("Admin" === this.state.playerName){
 			this.goAdminDashBoard();
