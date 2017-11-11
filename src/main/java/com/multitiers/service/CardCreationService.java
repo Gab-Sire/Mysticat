@@ -31,10 +31,12 @@ public class CardCreationService {
 		MinionCard charanosaurusRex = createMinionCard("Charanosaurus Rex", 20, 15, 15, 9, "Le prédateur apex.", "img/cardImg/prehistoricalSet/chatTrex.jpg");
 		MinionCard chatCromagnon = createMinionCard("Chat de Cromagnon", 3, 10, 2, 2, "Meow smash.", "img/cardImg/prehistoricalSet/chatCromagnon.gif");
 		MinionCard tricechatops = createMinionCard("TriceChatops", 12, 15, 3, 5, "Il préfère la nourriture croquante.", "img/cardImg/prehistoricalSet/tricechatTops.jpg");
+		MinionCard chatDentSabre = createMinionCard("Chat à dents de sabre", 9, 8, 8, 4, "Un sourire à en mourrir 😂", "img/cardImg/prehistoricalSet/chatDentSabre.jpg");
 		
 		cardRepository.save(charanosaurusRex);
 		cardRepository.save(chatCromagnon);
 		cardRepository.save(tricechatops);
+		cardRepository.save(chatDentSabre);
 	}
 
 	private void generateJobSet() {
