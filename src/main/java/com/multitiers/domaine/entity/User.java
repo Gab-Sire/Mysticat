@@ -32,7 +32,7 @@ public class User {
 	@Column(name = "usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
 
-	@Column(name = "usr_connected", nullable = false, updatable = false)
+	@Column(name = "usr_connected", nullable = false, updatable = true)
 	protected Boolean connected;
 
 	@Column(name = "usr_hero_img_path")
@@ -108,7 +108,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", passwordHash=" + passwordHash + ", decks=" + decks
+		return "User [id=" + id + ", username=" + username + ", connected=" + connected + ", passwordHash=" + passwordHash + ", decks=" + decks
 				+ ", hashedSalt=" + hashedSalt + ", heroPortrait=" + heroPortrait + "]";
 	}
 

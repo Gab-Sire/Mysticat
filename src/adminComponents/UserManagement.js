@@ -5,14 +5,16 @@ export default class UserManagement extends Component{
 
 	constructor(props){
 		super(props);
-		this.state ={
-			
-		}
+		
 	}
 
 	render(){
+		let connected = "isNotConnected";
+		if(true === this.props.connected){
+			connected = "isConnected";
+		}
 		return(
-			<p>{this.props.index} {this.props.username}</p>
+			<p className={connected}>{this.props.index} {this.props.username}</p>
 		)
 	}
 }

@@ -105,6 +105,7 @@ public class AuthentificationService {
 	}
 
 	public void addUserToConnectedUsers(User user) {
+		user = userRepository.findById(user.getId());
 		user.setConnected(true);
 		if (this.connectedUsers == null) {
 			this.connectedUsers = new HashMap<String, User>();
@@ -114,6 +115,7 @@ public class AuthentificationService {
 		} else {
 			this.connectedUsers.put(user.getId(), user);
 		}
+		userRepository.save(user);
 	}
 
 	public void removeUserFromConnectedUsers(String userId) {

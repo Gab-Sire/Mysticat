@@ -17,7 +17,7 @@ export default class UserManagementList extends Component{
 		
 		return(
 			<div id="containerUserList">
-				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} />)}	
+				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} connected={user.connected}/>)}	
 			</div>
 		)
 	}
