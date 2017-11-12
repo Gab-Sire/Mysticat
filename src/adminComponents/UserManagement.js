@@ -14,7 +14,9 @@ export default class UserManagement extends Component{
 			connected = "isConnected";
 		}
 		return(
-			<p className={connected}>{this.props.index} {this.props.username}</p>
+			<div>
+			<p className={connected}>{this.props.index} {this.props.username}</p><button className="btnDeconnexionUser">D&eacute;connexion</button>
+			</div>
 		)
 	}
 }

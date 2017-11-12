@@ -45,15 +45,32 @@ h1{
 
 #containerUserList{
 	background-color: black;
+	position: relative;
 	color: white;
 	width: 50%;
 	padding: 5px;
 }
 
+
+
 .isConnected {
 	color: green;
+	display: inline-block;
+	height: 30px;
 }
 
 .isNotConnected{
 	color: grey;
+	display: inline-block;
+	height: 30px;
+}
+
+.btnDeconnexionUser{
+	display: inline-block;
+	position: absolute;
+	right: 50px;
+	color: blue;
+	background-color: yellow;
+	border-radius: 20px;
+	padding: 2px;
 }
