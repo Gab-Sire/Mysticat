@@ -105,6 +105,7 @@ public class AuthentificationService {
 	}
 
 	public void addUserToConnectedUsers(User user) {
+		user.setConnected(true);
 		if (this.connectedUsers == null) {
 			this.connectedUsers = new HashMap<String, User>();
 		}
@@ -116,6 +117,8 @@ public class AuthentificationService {
 	}
 
 	public void removeUserFromConnectedUsers(String userId) {
+		User user = this.connectedUsers.get(userId);
+		user.setConnected(false);
 		this.connectedUsers.remove(userId);
 	}
 

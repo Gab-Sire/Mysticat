@@ -78,15 +78,10 @@ public class RestControlleur {
     	authService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
     }
 
-    @PostMapping(value="/getUsers")
-    public List<User>[] getUsers() {
+    @PostMapping(value="/getAllUsers")
+    public List<User> getUsers() {
     	List<User> users = userRepository.findAll();
-    	List<User> usersConnected = (List<User>) authService.connectedUsers;
-    	List<User>[] usersComparison = new List[2];
-    	usersComparison[0] = users;
-    	usersComparison[1] = usersConnected;
-    	
-    	return usersComparison;
+    	return users;
     }
     
     @PostMapping(value="/getUserDecks")
@@ -133,6 +128,7 @@ public class RestControlleur {
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
     	User user = authService.getUserFromCredentials(userCredentials);
+
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
         	authService.addUserToConnectedUsers(user);

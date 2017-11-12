@@ -13,39 +13,43 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="mys_user_usr")
+@Table(name = "mys_user_usr")
 public class User {
-    @Column(name = "usr_id", nullable = false, updatable = false)
-    @Id
+	@Column(name = "usr_id", nullable = false, updatable = false)
+	@Id
 	protected String id;
-	
-	@Column(name="usr_username", unique=true)
+
+	@Column(name = "usr_username", unique = true)
 	protected String username;
-	
-	@Column(name="usr_password")
+
+	@Column(name = "usr_password")
 	protected String passwordHash;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_user")
+	@JoinColumn(name = "id_user")
 	protected List<Deck> decks;
-	
-	@Column(name="usr_salt", nullable = false, updatable = false)
+
+	@Column(name = "usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
 
-	@Column(name="usr_hero_img_path")
+	@Column(name = "usr_connected", nullable = false, updatable = false)
+	protected Boolean connected;
+
+	@Column(name = "usr_hero_img_path")
 	protected HeroPortrait heroPortrait;
-	
+
 	public User(String username, String passwordHash, String hashedSalt) {
 		super();
 		this.username = username;
 		this.hashedSalt = hashedSalt;
 		this.passwordHash = passwordHash;
 		this.decks = new ArrayList<>();
+		this.connected = false;
 	}
-	
-	public User() {}
-	
-	
+
+	public User() {
+	}
+
 	public String getHashedSalt() {
 		return hashedSalt;
 	}
@@ -57,24 +61,31 @@ public class User {
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPasswordHash() {
 		return passwordHash;
 	}
+
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
+
 	public List<Deck> getDecks() {
 		return decks;
 	}
+
 	public void setDecks(List<Deck> decks) {
 		this.decks = decks;
 	}
@@ -85,6 +96,14 @@ public class User {
 
 	public void setHeroPortrait(HeroPortrait heroPortrait) {
 		this.heroPortrait = heroPortrait;
+	}
+
+	public Boolean getConnected() {
+		return connected;
+	}
+
+	public void setConnected(Boolean connected) {
+		this.connected = connected;
 	}
 
 	@Override

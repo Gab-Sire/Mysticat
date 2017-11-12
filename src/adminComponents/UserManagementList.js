@@ -9,9 +9,12 @@ export default class UserManagementList extends Component{
 		this.state={
 			
 		}
+		console.log(this.props.connectedUserList);
+		console.log(this.props.userList);
 	}
 
 	render(){
+		
 		return(
 			<div id="containerUserList">
 				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} />)}	

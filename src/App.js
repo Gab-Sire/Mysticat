@@ -141,7 +141,7 @@ class App extends Component{
 	goAdminDashBoard = () => {
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/getUsers',
+			  url:'http://'+window.location.hostname+':8089/getAllUsers',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			})
@@ -160,7 +160,6 @@ class App extends Component{
 		this.setState({ playerId : idPlayer, 
 						playerName : namePlayer, 
 						appDisplay: "menu"});
-		console.log("crepe " + namePlayer);
 		
 		if("Admin" === this.state.playerName){
 			this.goAdminDashBoard();

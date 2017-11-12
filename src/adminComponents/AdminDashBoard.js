@@ -17,7 +17,7 @@ export default class AdminDashBoard extends Component{
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p>Bonjour, {this.props.adminName}</p><br />
-					<UserManagementList userList={this.props.userList[0]} />
+					<UserManagementList userList={this.props.userList} />
 				</div>
 				<button id="btnDisconnect">D&eacute;connexion</button>
 			</div>
