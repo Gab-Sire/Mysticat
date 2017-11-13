@@ -24,7 +24,7 @@ public class CardCreationService {
 		generatePopCultureSet();
 		generateJobSet();		
 		generatePrehistoricalSet();
-		
+		generateCatOverSet();
 	}
 
 	private void generatePrehistoricalSet() {
@@ -169,29 +169,55 @@ public class CardCreationService {
 	}
 	
 	@Transactional
-	private void generateCat() {
-		// Cartes de Jimmy, theme Comic Relieve (PopCulture/popStar)
+	private void generateDoodleSet() {
+		// Cartes de Jimmy, theme Photo Cat over Quelque chose
 		//createMinionCard(name, power, health, speed, manaCost, desc, imagePath)
-		MinionCard breakingCat = createMinionCard("Breaking Cat", 5, 10, 5, 3, "I'm not in the meth business. I'm in the empire business.", "img/cardImg/popcultureSet/BreakingCat.jpg");
-		MinionCard princessLeia = createMinionCard("Princess Leia", 7, 5, 8, 3, "Can't believe I was so foolish to think I could find Luke and bring him home.", "img/cardImg/popcultureSet/Leia.jpg");
-		MinionCard cattyGaga = createMinionCard("Catty Gaga", 4, 11, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
-		MinionCard kittyPerry = createMinionCard("Kitty Perry", 4, 2, 4, 1, "Take me, ta-ta-take me, Wanna be your victim, Ready for abduction, Boy, you're an alien", "img/cardImg/popcultureSet/kitty-perry.jpg");
-		MinionCard nikkiMinou = createMinionCard("Nikki Minou", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
-		MinionCard catSparrow = createMinionCard("Cat Sparrow", 10, 10, 10, 5, "Why the rum is always gone. ", "img/cardImg/popcultureSet/CatSperow.jpg");
-		MinionCard elvisChat = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "img/cardImg/popcultureSet/elvis.png");
-		MinionCard miouwlyCyrus = createMinionCard("Miouwly Cyrus", 9, 11, 5, 4, "I came in like a wrecking ball", "img/cardImg/popcultureSet/MileyCirus.jpg");
-		MinionCard dieBunny = createMinionCard("DIE Bunny", 12, 5, 8, 4, "STUPID HUMAIN, A Battery Up My B***, You must All die, DIE DIE DIE DIE", "img/cardImg/popcultureSet/Sellout.jpg");
-		MinionCard thrillerCat = createMinionCard("Thriller Cat", 12, 11, 12, 6, "Cause this is thriller, Thriller night, And no one’s gonna save you", "img/cardImg/popcultureSet/TrillerCat.jpg");
-		cardRepository.save(breakingCat);
-		cardRepository.save(princessLeia);
-		cardRepository.save(cattyGaga);
-		cardRepository.save(kittyPerry);
-		cardRepository.save(nikkiMinou);
-		cardRepository.save(catSparrow);
-		cardRepository.save(elvisChat);
-		cardRepository.save(miouwlyCyrus);
-		cardRepository.save(dieBunny);
-		cardRepository.save(thrillerCat);
+		MinionCard turkey = createMinionCard("Chat Turkey", 3, 6 , 1, 1, "Eat Me", "img/cardImg/DoodleSet/TurkeyCat.jpg");
+		MinionCard sushi = createMinionCard("Chat sushi", 1, 8 , 1, 1, "Eat Me", "img/cardImg/DoodleSet/SushiCat.jpeg");
+		MinionCard mop = createMinionCard("Chat Mop", 1, 7, 2, 1, "No. Not the bucket", "img/cardImg/DoodleSet/Mop.jpg");
+		MinionCard clean = createMinionCard("Chat Clean", 4, 6, 5, 2, "Spot less", "img/cardImg/DoodleSet/CleanningCat.jpg");
+		MinionCard swim = createMinionCard("Chat Swim", 4, 5, 6, 2, "Dive in", "img/cardImg/DoodleSet/swimming.jpg");
+		MinionCard tutu = createMinionCard("Tutu Chat", 5, 5, 5, 2, "Dance Pour moi", "img/cardImg/DoodleSet/DancerCat.jpg");
+		MinionCard skatterA = createMinionCard("Chat Skater Trick", 5, 10, 5, 3, "Grab", "img/cardImg/DoodleSet/SkateBoardTrickCat.jpg");
+		MinionCard skatterB = createMinionCard("Chat Skater Speed", 5, 5, 10, 3, "I got a Need for Speed", "img/cardImg/DoodleSet/SkateBoard.jpg");
+		MinionCard ariel = createMinionCard("Icon", 9, 23, 3, 4, "Pay 2 win", "img/cardImg/DoodleSet/iconCat.png");
+		MinionCard joker = createMinionCard("Painture d'un chat", 5, 15, 5, 4, "Painture", "img/cardImg/DoodleSet/paintingCat.jpeg");
+		MinionCard Mozaichat = createMinionCard("Mozaichat",7 , 13, 10, 5, "Art", "img/cardImg/DoodleSet/mozaicCat.jpg");
+		MinionCard plusieur = createMinionCard("Many Chat", 5, 25, 5, 6, "Union fait la force", "img/cardImg/DoodleSet/ManyCat.png");
+		cardRepository.save(turkey);
+		cardRepository.save(sushi);
+		cardRepository.save(swim);
+		cardRepository.save(mop);
+		cardRepository.save(clean);
+		cardRepository.save(tutu);
+		cardRepository.save(skatterA);
+		cardRepository.save(skatterB);
+		cardRepository.save(ariel);
+		cardRepository.save(joker);
+		cardRepository.save(Mozaichat);
+		cardRepository.save(plusieur);	
+	}
+	
+	@Transactional
+	private void generateCatOverSet() {
+		// Cartes de Jimmy, theme Photo Cat over Quelque chose
+		//createMinionCard(name, power, health, speed, manaCost, desc, imagePath)
+		MinionCard turkey = createMinionCard("Chat Turkey", 3, 6 , 1, 1, "Eat Me", "img/cardImg/CatOverSet/TurkeyCat.jpg");
+		MinionCard sushi = createMinionCard("Chat sushi", 1, 8 , 1, 1, "Eat Me", "img/cardImg/CatOverSet/SushiCat.jpeg");
+		MinionCard mop = createMinionCard("Chat Mop", 1, 7, 2, 1, "No. Not the bucket", "img/cardImg/CatOverSet/Mop.jpg");
+		MinionCard clean = createMinionCard("Chat Clean", 4, 6, 5, 2, "Spot less", "img/cardImg/CatOverSet/CleanningCat.jpg");
+		MinionCard swim = createMinionCard("Chat Swim", 4, 5, 6, 2, "Dive in", "img/cardImg/CatOverSet/swimming.jpg");
+		MinionCard skatterA = createMinionCard("Chat Skater Trick", 5, 10, 5, 3, "Grab", "img/cardImg/CatOverSet/SkateBoardTrickCat.jpg");
+		MinionCard ariel = createMinionCard("Chariel", 22, 9, 4, 4, "Under the sea, Nobody beat us, Fry us and eat us, In fricassee", "img/cardImg/CatOverSet/MermaidCat.jpg");
+		MinionCard Chatraigner = createMinionCard("Chatraigner",10 , 15, 5, 5, "Food Food Food! Kill Food", "img/cardImg/CatOverSet/SpiderMonsterCat.jpeg");
+		cardRepository.save(turkey);
+		cardRepository.save(sushi);
+		cardRepository.save(swim);
+		cardRepository.save(mop);
+		cardRepository.save(clean);
+		cardRepository.save(skatterA);
+		cardRepository.save(ariel);
+		cardRepository.save(Chatraigner);
 		
 	}
 	
