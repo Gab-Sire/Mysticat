@@ -49,11 +49,16 @@ public class CardCreationService {
 		MinionCard sherrifMoustache = createMinionCard("Shérrif Moustache", 10, 15, 5, 5, "Vous êtes en état d'arrestation.", "img/cardImg/jobSet/policeCat.jpg");
 		MinionCard chatScientifique = createMinionCard("Chat Scientifique", 5, 14, 11, 5, "Non, je ne fabrique pas d'herbe à chat.", "img/cardImg/jobSet/scientistCat.jpg");
 		MinionCard professeurMiaou = createMinionCard("Professeur Miaou", 1, 2, 2, 0, "Vous avez beaucoup à apprendre.", "img/cardImg/jobSet/chatErudit.jpg");
+		MinionCard chatBucheron = createMinionCard("Bu-chat-ronron", 8, 15, 2, 4, "And my axe. Meow.", "img/cardImg/jobSet/lumberjackCat.png");
+		MinionCard chatPecheur = createMinionCard("Chat Pecheur", 2, 7, 6, 2, "Un brave mousaillon.", "img/cardImg/jobSet/fishermanCat.jpg");
+		
 		cardRepository.save(chatBanquier);
 		cardRepository.save(chatPompier);
 		cardRepository.save(sherrifMoustache);
 		cardRepository.save(chatScientifique);
 		cardRepository.save(professeurMiaou);
+		cardRepository.save(chatBucheron);
+		cardRepository.save(chatPecheur);
 	}
 	
 	@Transactional
