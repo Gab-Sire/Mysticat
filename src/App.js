@@ -77,7 +77,7 @@ class App extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  console.log(response.data);
+				  
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
