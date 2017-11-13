@@ -41,7 +41,7 @@ class App extends Component{
 		if(true===this.state.isServerAvailable){
 			
 			if("admin_dashboard" === this.state.appDisplay){
-				return <AdminDashBoard adminName={this.state.playerName} userList={this.state.userList} disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
+				return <AdminDashBoard adminName={this.state.playerName} adminId={this.state.playerId} userList={this.state.userList} setIdPlayer={this.setIdPlayer.bind(this)}disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
 			}
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
@@ -153,7 +153,7 @@ class App extends Component{
 	}
 	
 	disconnectPlayerById(id){
-		console.log(id);
+
 		axios({
 				method:'post',
 				url:'http://'+window.location.hostname+':8089/disconnectUser',
@@ -170,7 +170,6 @@ class App extends Component{
 		if(id === this.state.playerId){
 			this.setState({ appDisplay: ""});
 			this.setState({"playerId" : null});
-			this.goAdminDashBoard();
 		}
 	}
 
@@ -192,6 +191,7 @@ class App extends Component{
 		}
 	
 	goAdminDashBoard = () => {
+		
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':8089/getAllUsers',
@@ -206,6 +206,10 @@ class App extends Component{
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
+		
+		if("admin_dashboard" !== this.state.appDisplay){
+			setTimeout(this.goAdminDashBoard, 3000);
+		}
 	}
 	
 

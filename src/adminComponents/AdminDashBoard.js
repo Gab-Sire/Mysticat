@@ -17,14 +17,15 @@ export default class AdminDashBoard extends Component{
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p>Bonjour, {this.props.adminName}</p><br />
+					<img src="../img/backgroundImg/radar.gif" alt="radar"/>
 					<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
 				</div>
-				<button id="btnDisconnect">D&eacute;connexion</button>
+				<button id="btnDisconnect" onClick={this.disconnectPlayerById.bind(this, this.props.adminId)}>D&eacute;connexion</button>
 			</div>
 		)
 	}
 	
 	disconnectPlayerById(id){
-		this.props.disconnectPlayerById(id);
+		setTimeout(() => {this.props.disconnectPlayerById(id)}, 3000);
 	}
 }
