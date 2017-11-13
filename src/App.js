@@ -31,15 +31,15 @@ class App extends Component{
 	componentWillMount(){
 		this.checkServerAvailability();
 		this.getTestActionList();
-		
+
 	}
 
 	render(){
 		if(null !== this.state.playerId){
-			setInterval(this.checkIfStillConnected.bind(this), 5000);
+			setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
 		}
 		if(true===this.state.isServerAvailable){
-			
+
 			if("admin_dashboard" === this.state.appDisplay){
 				return <AdminDashBoard adminName={this.state.playerName} adminId={this.state.playerId} userList={this.state.userList} setIdPlayer={this.setIdPlayer.bind(this)}disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
 			}
@@ -108,7 +108,7 @@ class App extends Component{
 						  }, TIME_BETWEEN_AXIOS_CALLS)
 				});
 	}
-	
+
 	checkIfStillConnected(){
 		if(null != this.state.playerId){
 			axios({
@@ -119,12 +119,11 @@ class App extends Component{
 				  data : this.state.playerId
 				})
 				  .then((response)=>{
-					  console.log(response.data);
 					  if(null === response.data){
 						  this.setState({ playerId: null});
 						  this.setState({ appDisplay: ""});
 					  }
-					  
+
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
@@ -151,7 +150,7 @@ class App extends Component{
 		});
 		this.setState({"playerId" : null});
 	}
-	
+
 	disconnectPlayerById(id){
 
 		axios({
@@ -189,9 +188,9 @@ class App extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
-	
+
 	goAdminDashBoard = () => {
-		
+		console.log("We're in boys");
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':8089/getAllUsers',
@@ -199,25 +198,25 @@ class App extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			})
 			  .then((response)=>{
+							console.log("Hell yeah");
 				  this.setUserList(response.data);
 				  this.updateAppDisplay("admin_dashboard");
-				  
+					if("admin_dashboard" === this.state.appDisplay){
+						setTimeout(this.goAdminDashBoard, TIME_BETWEEN_AXIOS_CALLS);
+					}
+
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
-		
-		if("admin_dashboard" !== this.state.appDisplay){
-			setTimeout(this.goAdminDashBoard, 3000);
-		}
 	}
-	
+
 
 	connectPlayer(idPlayer, namePlayer){
-		this.setState({ playerId : idPlayer, 
-						playerName : namePlayer, 
+		this.setState({ playerId : idPlayer,
+						playerName : namePlayer,
 						appDisplay: "menu"});
-		
+
 		if("Admin" === this.state.playerName){
 			this.goAdminDashBoard();
 		}
@@ -226,7 +225,7 @@ class App extends Component{
 	setUserDeckList(userDeckList){
 		this.setState({userDeckList: userDeckList});
 	}
-	
+
 	setUserList(userList){
 		this.setState({userList: userList});
 	}
