@@ -178,14 +178,16 @@ public class CardCreationService {
 	@Transactional
 	private void generateDoodleSet() {
 		// Cartes de Jimmy, theme Doodle
+
 		MinionCard frigo = createMinionCard("Chat Frigo", 3, 5 , 2, 1, "Je suis fiere de toi", "img/cardImg/DoodleSet/fridgeCat.jpeg");
 		MinionCard kid = createMinionCard("Chat dessin Enfant", 1, 7 , 2, 1, "Mon premier dessin", "img/cardImg/DoodleSet/kiddrawing.png");
-		MinionCard chat = createMinionCard("Chat01", 1, 7, 2, 1, "Chat Chat chat", "img/cardImg/DoodleSet/cutelineCAt.png");
-		MinionCard clean = createMinionCard("Chat de Coeur", 3, 5, 8, 2, "Food Food Food", "img/cardImg/DoodleSet/heartCat.jpg");
+		MinionCard chat = createMinionCard("Chat01", 1, 6, 3, 1, "Chat Chat chat", "img/cardImg/DoodleSet/cutelineCAt.png");
+		MinionCard clean = createMinionCard("Chat de Coeur", 3, 5, 7, 2, "Food Food Food", "img/cardImg/DoodleSet/heartCat.jpg");
 		MinionCard icon = createMinionCard("Icon", 9, 23, 3, 4, "Pay 2 win", "img/cardImg/DoodleSet/iconCat.png");
 		MinionCard Painture = createMinionCard("Painture d'un chat", 5, 15, 5, 4, "Painture", "img/cardImg/DoodleSet/paintingCat.jpeg");
 		MinionCard Mozaichat = createMinionCard("Mozaichat",7 , 13, 10, 5, "Art", "img/cardImg/DoodleSet/mozaicCat.jpg");
 		MinionCard plusieur = createMinionCard("Many Chat", 5, 25, 5, 6, "Union fait la force", "img/cardImg/DoodleSet/ManyCat.png");
+
 		cardRepository.save(frigo);
 		cardRepository.save(kid);
 		cardRepository.save(chat);
@@ -227,7 +229,7 @@ public class CardCreationService {
 		// Cartes de Jimmy, theme Photo Cat over Quelque chose
 		MinionCard turkey = createMinionCard("Chat Turkey", 3, 6 , 1, 1, "Eat Me", "img/cardImg/CatOverSet/TurkeyCat.jpg");
 		MinionCard sushi = createMinionCard("Chat sushi", 1, 8 , 1, 1, "Eat Me", "img/cardImg/CatOverSet/SushiCat.jpeg");
-		MinionCard mop = createMinionCard("Chat Mop", 1, 7, 2, 1, "No. Not the bucket", "img/cardImg/CatOverSet/Mop.jpg");
+		MinionCard mop = createMinionCard("Chat Mop", 1, 5, 4, 1, "No. Not the bucket", "img/cardImg/CatOverSet/Mop.jpg");
 		MinionCard clean = createMinionCard("Chat Clean", 4, 6, 5, 2, "Spot less", "img/cardImg/CatOverSet/CleanningCat.jpg");
 		MinionCard swim = createMinionCard("Chat Swim", 4, 5, 6, 2, "Dive in", "img/cardImg/CatOverSet/swimming.jpg");
 		MinionCard skatterA = createMinionCard("Chat Skater Trick", 5, 10, 5, 3, "Grab", "img/cardImg/CatOverSet/SkateBoardTrickCat.jpg");
