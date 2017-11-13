@@ -9,8 +9,6 @@ export default class UserManagementList extends Component{
 		this.state={
 			
 		}
-		console.log(this.props.connectedUserList);
-		console.log(this.props.userList);
 	}
 
 	render(){

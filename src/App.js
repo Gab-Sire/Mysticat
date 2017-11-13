@@ -36,7 +36,6 @@ class App extends Component{
 
 	render(){
 		if(null !== this.state.playerId){
-			console.log("pawa");
 			setInterval(this.checkIfStillConnected.bind(this), 5000);
 		}
 		if(true===this.state.isServerAvailable){
@@ -54,7 +53,8 @@ class App extends Component{
 			}
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
-			}else if(true===this.state.inGame){
+			}
+			else if(true===this.state.inGame){
 				return(
 					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 				);
@@ -110,28 +110,29 @@ class App extends Component{
 	}
 	
 	checkIfStillConnected(){
-		console.log("spaceship");
-		axios({
-			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"},
-			  data : this.state.playerId
-			})
-			  .then((response)=>{
-				  console.log(response.data);
-				  if(null === response.data){
-					  this.setState({ playerId: null});
-					  this.setState({ appDisplay: ""});
-				  }
-				  
+		if(null != this.state.playerId){
+			axios({
+				  method:'post',
+				  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data : this.state.playerId
 				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				  setTimeout(()=>{
-							  this.checkIfStillConnected();
-						  }, TIME_BETWEEN_AXIOS_CALLS)
-				});
+				  .then((response)=>{
+					  console.log(response.data);
+					  if(null === response.data){
+						  this.setState({ playerId: null});
+						  this.setState({ appDisplay: ""});
+					  }
+					  
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+					  setTimeout(()=>{
+								  this.checkIfStillConnected();
+							  }, TIME_BETWEEN_AXIOS_CALLS)
+					});
+		}
 	}
 
 	disconnectPlayer(){
@@ -169,6 +170,7 @@ class App extends Component{
 		if(id === this.state.playerId){
 			this.setState({ appDisplay: ""});
 			this.setState({"playerId" : null});
+			this.goAdminDashBoard();
 		}
 	}
 

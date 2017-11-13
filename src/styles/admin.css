@@ -80,3 +80,8 @@ h1{
 	padding: 2px;
 	
 }
+
+.btnDeconnexionUser:disabled{
+	background-color: lightgrey;
+	color: white;
+}
