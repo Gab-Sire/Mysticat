@@ -172,6 +172,11 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
+		transition:1.5s all;
+}
+
+#imgMenuPrincipal:hover {
+	top:-100px;
 }
 
 #menuGame {
