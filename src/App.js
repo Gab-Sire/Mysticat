@@ -24,39 +24,47 @@ class App extends Component{
 			appDisplay: null,
 			userDeckList: null,
 			userList: null,
-			deckId:null
+			deckId:null,
+			connectedAsAdmin:false
 		};
 	}
 
 	componentWillMount(){
 		this.checkServerAvailability();
 		this.getTestActionList();
-		
+
 	}
 
 	render(){
 		if(null !== this.state.playerId){
-			setInterval(this.checkIfStillConnected.bind(this), 5000);
+			setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
 		}
 		if(true===this.state.isServerAvailable){
-			
+
 			if("admin_dashboard" === this.state.appDisplay){
-				return <AdminDashBoard adminName={this.state.playerName} adminId={this.state.playerId} userList={this.state.userList} setIdPlayer={this.setIdPlayer.bind(this)}disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
+				return <AdminDashBoard adminName={this.state.playerName} adminId={this.state.playerId}
+				userList={this.state.userList} setIdPlayer={this.setIdPlayer.bind(this)}
+				disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
 			}
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
-					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)} deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)}/>
+					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)}
+					deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)}/>
 				}
 			}
 			else if("displayDeck" === this.state.appDisplay){
-				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId} deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
+				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId}
+				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
-				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId} setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue} disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
+				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
+				setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue}
+				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
 			}
 			else if(true===this.state.inGame){
 				return(
-					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
+					<Board gameState={this.state.gameState} playerId={this.state.playerId} endGame={this.endGameMode.bind(this)}
+					disconnectPlayer={this.disconnectPlayer.bind(this)} />
 				);
 			}
 			else{
@@ -66,7 +74,6 @@ class App extends Component{
 			}
 		}
 		else return (<LoadingScreen text={"Contacting server..."}/>)
-
 	}
 
 	getTestActionList(){
@@ -108,7 +115,7 @@ class App extends Component{
 						  }, TIME_BETWEEN_AXIOS_CALLS)
 				});
 	}
-	
+
 	checkIfStillConnected(){
 		if(null != this.state.playerId){
 			axios({
@@ -119,12 +126,11 @@ class App extends Component{
 				  data : this.state.playerId
 				})
 				  .then((response)=>{
-					  console.log(response.data);
 					  if(null === response.data){
 						  this.setState({ playerId: null});
 						  this.setState({ appDisplay: ""});
 					  }
-					  
+
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
@@ -151,9 +157,8 @@ class App extends Component{
 		});
 		this.setState({"playerId" : null});
 	}
-	
-	disconnectPlayerById(id){
 
+	disconnectPlayerById(id){
 		axios({
 				method:'post',
 				url:'http://'+window.location.hostname+':8089/disconnectUser',
@@ -162,15 +167,14 @@ class App extends Component{
 				data: id
 			})
 				.then((response)=>{
-
+					if(id === this.state.playerId){
+						console.log("Kicking admin out");
+						this.setState({appDisplay: "", playerId : null, connectedAsAdmin:false})
+					}
 				})
 				.catch(error => {
 					console.log('Error fetching and parsing data', error);
 		});
-		if(id === this.state.playerId){
-			this.setState({ appDisplay: ""});
-			this.setState({"playerId" : null});
-		}
 	}
 
 	goDeckSelection(){
@@ -189,9 +193,9 @@ class App extends Component{
 					  console.log('Error fetching and parsing data', error);
 					});
 		}
-	
+
 	goAdminDashBoard = () => {
-		
+		console.log("We're in boys");
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':8089/getAllUsers',
@@ -200,33 +204,34 @@ class App extends Component{
 			})
 			  .then((response)=>{
 				  this.setUserList(response.data);
-				  this.updateAppDisplay("admin_dashboard");
-				  
+					if(true===this.state.connectedAsAdmin){
+					this.setState({appDisplay: "admin_dashboard"})
+						setTimeout(()=>{
+							this.goAdminDashBoard()
+						}, TIME_BETWEEN_AXIOS_CALLS);
+					}
+
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
 				});
-		
-		if("admin_dashboard" !== this.state.appDisplay){
-			setTimeout(this.goAdminDashBoard, 3000);
-		}
 	}
-	
+
 
 	connectPlayer(idPlayer, namePlayer){
-		this.setState({ playerId : idPlayer, 
-						playerName : namePlayer, 
-						appDisplay: "menu"});
-		
+		this.setState({playerName : namePlayer, playerId : idPlayer})
 		if("Admin" === this.state.playerName){
+			this.setState({connectedAsAdmin:true})
 			this.goAdminDashBoard();
+		}else{
+			this.setState({appDisplay: "menu"});
 		}
 	}
 
 	setUserDeckList(userDeckList){
 		this.setState({userDeckList: userDeckList});
 	}
-	
+
 	setUserList(userList){
 		this.setState({userList: userList});
 	}

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import UserManagementList from './UserManagementList.js';
 import '../styles/admin.css';
 
+const TIME_BETWEEN_AXIOS_CALLS = 5000;
 export default class AdminDashBoard extends Component{
-
 	constructor(props){
 		super(props);
 		this.state={
@@ -20,12 +20,15 @@ export default class AdminDashBoard extends Component{
 					<img src="../img/backgroundImg/radar.gif" alt="radar"/>
 					<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
 				</div>
-				<button id="btnDisconnect" onClick={this.disconnectPlayerById.bind(this, this.props.adminId)}>D&eacute;connexion</button>
+				<button id="btnDisconnect"
+				onClick={(event)=>{
+						setTimeout(()=>{
+							this.props.disconnectPlayerById(this.props.adminId);
+						}, TIME_BETWEEN_AXIOS_CALLS)
+					}
+				}
+				>D&eacute;connexion</button>
 			</div>
 		)
-	}
-	
-	disconnectPlayerById(id){
-		setTimeout(() => {this.props.disconnectPlayerById(id)}, 3000);
 	}
 }
