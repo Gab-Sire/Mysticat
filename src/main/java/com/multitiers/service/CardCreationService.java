@@ -169,6 +169,33 @@ public class CardCreationService {
 	}
 	
 	@Transactional
+	private void generateCat() {
+		// Cartes de Jimmy, theme Comic Relieve (PopCulture/popStar)
+		//createMinionCard(name, power, health, speed, manaCost, desc, imagePath)
+		MinionCard breakingCat = createMinionCard("Breaking Cat", 5, 10, 5, 3, "I'm not in the meth business. I'm in the empire business.", "img/cardImg/popcultureSet/BreakingCat.jpg");
+		MinionCard princessLeia = createMinionCard("Princess Leia", 7, 5, 8, 3, "Can't believe I was so foolish to think I could find Luke and bring him home.", "img/cardImg/popcultureSet/Leia.jpg");
+		MinionCard cattyGaga = createMinionCard("Catty Gaga", 4, 11, 5, 3, "I was born this way hey!", "img/cardImg/popcultureSet/LadyGaga.jpg");
+		MinionCard kittyPerry = createMinionCard("Kitty Perry", 4, 2, 4, 1, "Take me, ta-ta-take me, Wanna be your victim, Ready for abduction, Boy, you're an alien", "img/cardImg/popcultureSet/kitty-perry.jpg");
+		MinionCard nikkiMinou = createMinionCard("Nikki Minou", 4, 5, 1, 1, "Hit 'em with the oh now that's just ridiculous, We could've cleared up all these particulars", "img/cardImg/popcultureSet/Nikki_Mioui.jpg");
+		MinionCard catSparrow = createMinionCard("Cat Sparrow", 10, 10, 10, 5, "Why the rum is always gone. ", "img/cardImg/popcultureSet/CatSperow.jpg");
+		MinionCard elvisChat = createMinionCard("Elvis Cat", 22, 9, 4, 6, "Wise men sayOnly fools rush inBut I can't help falling in love with you", "img/cardImg/popcultureSet/elvis.png");
+		MinionCard miouwlyCyrus = createMinionCard("Miouwly Cyrus", 9, 11, 5, 4, "I came in like a wrecking ball", "img/cardImg/popcultureSet/MileyCirus.jpg");
+		MinionCard dieBunny = createMinionCard("DIE Bunny", 12, 5, 8, 4, "STUPID HUMAIN, A Battery Up My B***, You must All die, DIE DIE DIE DIE", "img/cardImg/popcultureSet/Sellout.jpg");
+		MinionCard thrillerCat = createMinionCard("Thriller Cat", 12, 11, 12, 6, "Cause this is thriller, Thriller night, And no one’s gonna save you", "img/cardImg/popcultureSet/TrillerCat.jpg");
+		cardRepository.save(breakingCat);
+		cardRepository.save(princessLeia);
+		cardRepository.save(cattyGaga);
+		cardRepository.save(kittyPerry);
+		cardRepository.save(nikkiMinou);
+		cardRepository.save(catSparrow);
+		cardRepository.save(elvisChat);
+		cardRepository.save(miouwlyCyrus);
+		cardRepository.save(dieBunny);
+		cardRepository.save(thrillerCat);
+		
+	}
+	
+	@Transactional
 	private void generateHalloweenSet() {
 		// Cartes de Gabriel, theme Halloween
 		MinionCard chatMomie = createMinionCard("Chat Momie", 3, 4, 3, 1, "La malédiction du pharaon",
