@@ -17,8 +17,12 @@ export default class UserManagementList extends Component{
 		
 		return(
 			<div id="containerUserList">
-				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} connected={user.connected}/>)}	
+				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} id={user.id} connected={user.connected} disconnectPlayerById={this.props.disconnectPlayerById}/>)}	
 			</div>
 		)
+	}
+				
+	disconnectPlayerById(id){
+		this.props.disconnectPlayerById(id);
 	}
 }

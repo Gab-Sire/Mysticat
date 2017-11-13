@@ -43,7 +43,7 @@ public class AuthentificationService {
 	private MinionCardRepository minionCardRepository;
 
 	// Key: userId
-	public Map<String, User> connectedUsers;
+	public static Map<String, User> connectedUsers;
 
 	@Transactional
 	public void bootStrapTwoUsers() {
@@ -105,8 +105,11 @@ public class AuthentificationService {
 	}
 
 	public void addUserToConnectedUsers(User user) {
+		System.out.println("added: "+ user);
 		user = userRepository.findById(user.getId());
 		user.setConnected(true);
+		userRepository.save(user);
+		
 		if (this.connectedUsers == null) {
 			this.connectedUsers = new HashMap<String, User>();
 		}
@@ -115,12 +118,13 @@ public class AuthentificationService {
 		} else {
 			this.connectedUsers.put(user.getId(), user);
 		}
-		userRepository.save(user);
 	}
 
 	public void removeUserFromConnectedUsers(String userId) {
 		User user = this.connectedUsers.get(userId);
 		user.setConnected(false);
+		userRepository.save(user);
+		
 		this.connectedUsers.remove(userId);
 	}
 

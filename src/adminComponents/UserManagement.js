@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../styles/admin.css';
+import axios from 'axios';
 
 export default class UserManagement extends Component{
 
@@ -13,10 +14,15 @@ export default class UserManagement extends Component{
 		if(true === this.props.connected){
 			connected = "isConnected";
 		}
+		
 		return(
-			<div>
-			<p className={connected}>{this.props.index} {this.props.username}</p><button className="btnDeconnexionUser">D&eacute;connexion</button>
+			<div className="userLine">
+			<p className={connected}>{this.props.index} {this.props.username}</p><button className="btnDeconnexionUser" onClick={this.disconnectPlayerById.bind(this, this.props.id)}>D&eacute;connexion</button>
 			</div>
 		)
+	}
+	
+	disconnectPlayerById(id){
+		this.props.disconnectPlayerById(id);
 	}
 }

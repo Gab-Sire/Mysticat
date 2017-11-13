@@ -31,13 +31,18 @@ class App extends Component{
 	componentWillMount(){
 		this.checkServerAvailability();
 		this.getTestActionList();
+		
 	}
 
 	render(){
+		if(null !== this.state.playerId){
+			console.log("pawa");
+			setInterval(this.checkIfStillConnected.bind(this), 5000);
+		}
 		if(true===this.state.isServerAvailable){
 			
 			if("admin_dashboard" === this.state.appDisplay){
-				return <AdminDashBoard adminName={this.state.playerName} userList={this.state.userList}/>
+				return <AdminDashBoard adminName={this.state.playerName} userList={this.state.userList} disconnectPlayerById={this.disconnectPlayerById.bind(this)}/>
 			}
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
@@ -103,6 +108,31 @@ class App extends Component{
 						  }, TIME_BETWEEN_AXIOS_CALLS)
 				});
 	}
+	
+	checkIfStillConnected(){
+		console.log("spaceship");
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data : this.state.playerId
+			})
+			  .then((response)=>{
+				  console.log(response.data);
+				  if(null === response.data){
+					  this.setState({ playerId: null});
+					  this.setState({ appDisplay: ""});
+				  }
+				  
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				  setTimeout(()=>{
+							  this.checkIfStillConnected();
+						  }, TIME_BETWEEN_AXIOS_CALLS)
+				});
+	}
 
 	disconnectPlayer(){
 		axios({
@@ -119,6 +149,27 @@ class App extends Component{
 					console.log('Error fetching and parsing data', error);
 		});
 		this.setState({"playerId" : null});
+	}
+	
+	disconnectPlayerById(id){
+		console.log(id);
+		axios({
+				method:'post',
+				url:'http://'+window.location.hostname+':8089/disconnectUser',
+				responseType:'json',
+				headers: {'Access-Control-Allow-Origin': "true"},
+				data: id
+			})
+				.then((response)=>{
+
+				})
+				.catch(error => {
+					console.log('Error fetching and parsing data', error);
+		});
+		if(id === this.state.playerId){
+			this.setState({ appDisplay: ""});
+			this.setState({"playerId" : null});
+		}
 	}
 
 	goDeckSelection(){
@@ -182,7 +233,6 @@ class App extends Component{
 	}
 
 	getGameFromQueue = (gameState)=>{
-		console.log(this.state.appDisplay);
 		this.setState({gameState: gameState, inGame: true})
 	}
 

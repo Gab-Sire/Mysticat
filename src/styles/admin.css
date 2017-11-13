@@ -50,19 +50,24 @@ h1{
 	width: 50%;
 	padding: 5px;
 }
-
-
+.userLline{
+	width: 100%;
+	height: 30px;	
+	
+}
 
 .isConnected {
 	color: green;
 	display: inline-block;
-	height: 30px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .isNotConnected{
 	color: grey;
 	display: inline-block;
-	height: 30px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .btnDeconnexionUser{
@@ -73,4 +78,5 @@ h1{
 	background-color: yellow;
 	border-radius: 20px;
 	padding: 2px;
+	
 }

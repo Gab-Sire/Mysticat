@@ -73,9 +73,21 @@ public class RestControlleur {
     
     @PostMapping(value="/disconnectUser")
     public void disconnectUser(@RequestBody String userId) {
-    	Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
-    	gameService.gameQueue.removeFromQueue(player);
+    	try {
+    		Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
+    		gameService.gameQueue.removeFromQueue(player);
+    	}catch(Exception e) {
+    		
+    	}
     	authService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
+    }
+    
+    @PostMapping(value="/getPlayerConnection")
+    public User getPlayerConnection(@RequestBody String userId) {
+    	if(null != AuthentificationService.connectedUsers) {
+    		return AuthentificationService.connectedUsers.get(userId.substring(0, userId.length()-1));
+    	}
+    	return null;
     }
 
     @PostMapping(value="/getAllUsers")
