@@ -58,6 +58,7 @@ export default class CardDisplayTable extends Component {
                      index={index}
                      listed={true}
                      isFromCollection={false}
+                     description={this.props.deckList.cardList[indexInDeck].cardDescription}
                      onClick={(true===this.state.editMode) ? this.removeCardFromDeck.bind(this, indexInDeck) : null}
                      {...card}{...props}
                  />
