@@ -178,14 +178,14 @@ public class CardCreationService {
 	@Transactional
 	private void generateDoodleSet() {
 		// Cartes de Jimmy, theme Doodle
-		MinionCard frigo = createMinionCard("Chat Frigo", 3, 5 , 2, 1, "Je suis fiere de toi", "img/cardImg/DoddleSet/fridgeCat.jpeg");
-		MinionCard kid = createMinionCard("Chat dessin Enfant", 1, 7 , 2, 1, "Mon premier dessin", "img/cardImg/DoddleSet/kiddrawing.png");
-		MinionCard chat = createMinionCard("Chat01", 1, 7, 2, 1, "Chat Chat chat", "img/cardImg/DoddleSet/cutelineCAt.png");
-		MinionCard clean = createMinionCard("Chat de Coeur", 3, 5, 8, 2, "Food Food Food", "img/cardImg/DoddleSet/heartCat.jpg");
-		MinionCard icon = createMinionCard("Icon", 9, 23, 3, 4, "Pay 2 win", "img/cardImg/DoddleSet/iconCat.png");
-		MinionCard Painture = createMinionCard("Painture d'un chat", 5, 15, 5, 4, "Painture", "img/cardImg/DoddleSet/paintingCat.jpeg");
-		MinionCard Mozaichat = createMinionCard("Mozaichat",7 , 13, 10, 5, "Art", "img/cardImg/DoddleSet/mozaicCat.jpg");
-		MinionCard plusieur = createMinionCard("Many Chat", 5, 25, 5, 6, "Union fait la force", "img/cardImg/DoddleSet/ManyCat.png");
+		MinionCard frigo = createMinionCard("Chat Frigo", 3, 5 , 2, 1, "Je suis fiere de toi", "img/cardImg/DoodleSet/fridgeCat.jpeg");
+		MinionCard kid = createMinionCard("Chat dessin Enfant", 1, 7 , 2, 1, "Mon premier dessin", "img/cardImg/DoodleSet/kiddrawing.png");
+		MinionCard chat = createMinionCard("Chat01", 1, 7, 2, 1, "Chat Chat chat", "img/cardImg/DoodleSet/cutelineCAt.png");
+		MinionCard clean = createMinionCard("Chat de Coeur", 3, 5, 8, 2, "Food Food Food", "img/cardImg/DoodleSet/heartCat.jpg");
+		MinionCard icon = createMinionCard("Icon", 9, 23, 3, 4, "Pay 2 win", "img/cardImg/DoodleSet/iconCat.png");
+		MinionCard Painture = createMinionCard("Painture d'un chat", 5, 15, 5, 4, "Painture", "img/cardImg/DoodleSet/paintingCat.jpeg");
+		MinionCard Mozaichat = createMinionCard("Mozaichat",7 , 13, 10, 5, "Art", "img/cardImg/DoodleSet/mozaicCat.jpg");
+		MinionCard plusieur = createMinionCard("Many Chat", 5, 25, 5, 6, "Union fait la force", "img/cardImg/DoodleSet/ManyCat.png");
 		cardRepository.save(frigo);
 		cardRepository.save(kid);
 		cardRepository.save(chat);
