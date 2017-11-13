@@ -203,11 +203,11 @@ public class CardCreationService {
 		MinionCard dancing = createMinionCard("Dancing Chat", 8, 12 , 20, 7, "Let dances", "img/cardImg/EpicSet/DancingCat.gif");
 		MinionCard RidingChat = createMinionCard("RidingChat", 8, 8 , 24, 7, "Yhay", "img/cardImg/EpicSet/RidingCat.gif");
 		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 8, 8, "Beat on the music", "img/cardImg/EpicSet/BeatCat.gif");
-		MinionCard Winter = createMinionCard("Winter Chat", 8, 6, 5, 8, "Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
+		MinionCard Winter = createMinionCard("Winter Chat", 8, 8,24, 8, "Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
 		MinionCard padding = createMinionCard("Padding Chat", 8, 22, 15, 8, "My belly next, My belly next", "img/cardImg/EpicSet/Padding.gif");
 		MinionCard skatterA = createMinionCard("Grumpy Bat Lord", 10, 20, 15, 8, "Go my minion", "img/cardImg/EpicSet/BatLordCat.gif");
-		MinionCard jedi = createMinionCard("Chat Jedi", 10, 35, 5, 9, "Use the force Luke", "img/cardImg/EpicSet/RainbowCat.gif");
-		MinionCard nia = createMinionCard("Nia", 10, 34, 6, 9, "Use the force Luke", "img/cardImg/EpicSet/catSaber.gif");
+		MinionCard jedi = createMinionCard("Nia", 10, 35, 5, 9, "Nia Nia Nia Nia Nia", "img/cardImg/EpicSet/RainbowCat.gif");
+		MinionCard nia = createMinionCard("Chat Jedi", 10, 34, 6, 9, "Use the force Luke", "img/cardImg/EpicSet/catSaber.gif");
 		MinionCard gun = createMinionCard("Chat Gun",10 , 40, 5, 10, "AHAHAHAHHAHAHAHAHA", "img/cardImg/EpicSet/GunCat.gif");
 		cardRepository.save(sleeping);
 		cardRepository.save(dancing);
