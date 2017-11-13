@@ -129,7 +129,7 @@ public class RestControlleur {
 		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
 		newDeck.setName(deckName);
 		newDeck.setCardList(cardList);
-		deckEditingService.editDeck(user, deckIndex, newDeck);
+		deckEditingService.changeDeck(user, deckIndex, newDeck);
     	System.out.println("Saved deck");
     }
     

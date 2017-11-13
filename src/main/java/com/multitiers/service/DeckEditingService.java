@@ -13,7 +13,7 @@ import com.multitiers.domaine.entity.User;
 public class DeckEditingService {
 	
 	@Transactional
-	public void editDeck(User user, Integer deckIndex, Deck newDeck) {
+	public void changeDeck(User user, Integer deckIndex, Deck newDeck) {
 		List<Deck> deckList = user.getDecks();
 		if(deckList.size()<=deckIndex) {
 			deckList.add(newDeck);
