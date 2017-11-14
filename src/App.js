@@ -106,7 +106,7 @@ class App extends Component{
 				  data : this.state.playerId
 				})
 				  .then((response)=>{
-					  if(null === response.data){
+					  if(false === response.data || null ===  response.data){
 						  this.setState({ playerId: null});
 						  this.setState({ appDisplay: ""});
 					  }
@@ -178,7 +178,7 @@ class App extends Component{
 		console.log("We're in boys");
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/getAllUsers',
+			  url:'http://'+window.location.hostname+':8089/getAllUserStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			})

@@ -32,9 +32,6 @@ public class User {
 	@Column(name = "usr_salt", nullable = false, updatable = false)
 	protected String hashedSalt;
 
-	@Column(name = "usr_connected", nullable = false, updatable = true)
-	protected Boolean connected;
-
 	@Column(name = "usr_hero_img_path")
 	protected HeroPortrait heroPortrait;
 
@@ -44,7 +41,6 @@ public class User {
 		this.hashedSalt = hashedSalt;
 		this.passwordHash = passwordHash;
 		this.decks = new ArrayList<>();
-		this.connected = false;
 	}
 
 	public User() {
@@ -96,20 +92,6 @@ public class User {
 
 	public void setHeroPortrait(HeroPortrait heroPortrait) {
 		this.heroPortrait = heroPortrait;
-	}
-
-	public Boolean getConnected() {
-		return connected;
-	}
-
-	public void setConnected(Boolean connected) {
-		this.connected = connected;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", connected=" + connected + ", passwordHash=" + passwordHash + ", decks=" + decks
-				+ ", hashedSalt=" + hashedSalt + ", heroPortrait=" + heroPortrait + "]";
 	}
 
 }

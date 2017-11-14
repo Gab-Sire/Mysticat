@@ -1,5 +1,6 @@
 package com.multitiers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,12 +17,13 @@ public class ProjetMultitiersApplication {
 		SpringApplication.run(ProjetMultitiersApplication.class, args);
 	}
 	
+	
 	@Bean
-    public CommandLineRunner peuplement(AuthentificationService inscriptionService, GameService gameService, CardCreationService cardCreationService) {
+    public CommandLineRunner peuplement(AuthentificationService authService, GameService gameService, CardCreationService cardCreationService) {
         return (args) -> {
         	cardCreationService.initBasicCardSet();
-        	inscriptionService.initDataLists();
-            inscriptionService.bootStrapTwoUsers();
+        	authService.initDataLists();
+            authService.bootStrapTwoUsers();
             gameService.initDataLists();
         };
     }

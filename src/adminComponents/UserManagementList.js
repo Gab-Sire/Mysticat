@@ -11,10 +11,10 @@ export default class UserManagementList extends Component{
 	}
 
 	render(){
-
+		console.log(this.props.userList);
 		return(
 			<div id="containerUserList">
-				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.username} id={user.id} connected={user.connected} disconnectPlayerById={this.props.disconnectPlayerById}/>)}
+				{this.props.userList.map((user, index) => <UserManagement key={"User" + index} index={index} username={user.userName} id={user.userId} connected={user.isConnected} disconnectPlayerById={this.props.disconnectPlayerById}/>)}
 			</div>
 		)
 	}

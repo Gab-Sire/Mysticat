@@ -23,6 +23,7 @@ import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.entity.UserDeck;
+import com.multitiers.domaine.entity.UserStatus;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.Game;
@@ -77,17 +78,31 @@ public class RestControlleur {
     }
     
     @PostMapping(value="/getPlayerConnection")
-    public User getPlayerConnection(@RequestBody String userId) {
-    	if(null != AuthentificationService.connectedUsers) {
-    		return AuthentificationService.connectedUsers.get(userId.substring(0, userId.length()-1));
+    public Boolean getPlayerConnection(@RequestBody String userId) {
+    	if(null != authService.getConnectedUsers()) {
+    		return authService.getConnectedUsers().containsKey(userId.substring(0, userId.length()-1));
     	}
-    	return null;
+    	return false;
     }
 
     @PostMapping(value="/getAllUsers")
     public List<User> getUsers() {
     	List<User> users = userRepository.findAll();
     	return users;
+    }
+    
+    @PostMapping(value="/getAllUserStatus")
+    public List<UserStatus> getAllUserStatus(){
+    	List<User> users = userRepository.findAll();
+    	List<UserStatus> userStatuses = new ArrayList<>();
+    	for(User user: users) {
+    		UserStatus status = new UserStatus();
+    		status.setUserId(user.getId());
+    		status.setUserName(user.getUsername());
+    		status.setIsConnected(authService.getConnectedUsers().containsKey(user.getId()));
+    		userStatuses.add(status);
+    	}
+    	return userStatuses;
     }
     
     @PostMapping(value="/getUserDecks")
@@ -152,7 +167,10 @@ public class RestControlleur {
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
     	User user = authService.getUserFromCredentials(userCredentials);
-
+    	if(authService.getConnectedUsers()==null) {
+    		authService.initDataLists();
+    		System.out.println(authService.getConnectedUsers()==null);
+    	}
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
         	authService.addUserToConnectedUsers(user);
