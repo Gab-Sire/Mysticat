@@ -16,18 +16,18 @@ export default class AdminDashBoard extends Component{
 			<div id="containerAdmin">
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
-					<p>Bonjour, {this.props.adminName}</p><br />
-					<img src="../img/backgroundImg/radar.gif" alt="radar"/>
+					<p id="salutationAdmin">Bonjour, {this.props.adminName}</p><br />
 					<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
-				</div>
-				<button id="btnDisconnect"
-				onClick={(event)=>{
-						setTimeout(()=>{
-							this.props.disconnectPlayerById(this.props.adminId);
-						}, TIME_BETWEEN_AXIOS_CALLS)
-					}
-				}
-				>D&eacute;connexion</button>
+					<div id="radar"></div>
+					<button id="btnDisconnect"
+						onClick={(event)=>{
+								setTimeout(()=>{
+									this.props.disconnectPlayerById(this.props.adminId);
+								}, TIME_BETWEEN_AXIOS_CALLS)
+							}
+						}
+						>D&eacute;connexion</button>
+				</div>		
 			</div>
 		)
 	}
