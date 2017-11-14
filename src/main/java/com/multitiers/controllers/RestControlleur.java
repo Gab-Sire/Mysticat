@@ -190,7 +190,8 @@ public class RestControlleur {
     	User user = authService.createUser(username, password, HeroPortrait.wizardHero);
         userRepository.save(user);
         if(user != null) {
-            session.setAttribute("userActif", user.getId());	
+            session.setAttribute("userActif", user.getId());
+            authService.addUserToConnectedUsers(user);
         }
     	return new Gson().toJson(user.getId());
     }

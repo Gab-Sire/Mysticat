@@ -31,9 +31,6 @@ class App extends Component{
 
 	componentWillMount(){
 		this.checkServerAvailability();
-		if(null !== this.state.playerId){
-			setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
-		}
 	}
 
 	render(){
@@ -205,6 +202,9 @@ class App extends Component{
 			this.goAdminDashBoard();
 		}else{
 			this.setState({appDisplay: "menu"});
+			if(null !== this.state.playerId){
+				setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
+			}
 		}
 	}
 
