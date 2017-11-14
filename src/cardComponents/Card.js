@@ -6,6 +6,8 @@ export default class Card extends Component{
 		this.state={faceUp: true};
 	}
 
+
+
 	render(){
 		let isSelected = "";
 		let listedInstance = "";
@@ -18,11 +20,14 @@ export default class Card extends Component{
 			isSelected = "selected";
 		}
 		if(true === this.props.listed){
-			listedInstance="Big ";
+			listedInstance+="Big ";
 			bigStat = "cardStatBig";
 		}
+		if(true===this.props.isFromCollection){
+			listedInstance+=" cardInCollection";
+		}
 		if(true === this.props.faceUp){
-			return (<div className={"card"+listedInstance +" "+ isSelected} title={this.props.description} onClick={this.props.onClick}>
+			return (<div className={"card"+listedInstance +" "+ isSelected+" "+this.props.color} title={this.props.description} onClick={this.props.onClick}>
 				<div className={'cardDetailContainer'+listedInstance+' cardManaCost'} title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
 				<img src= {'/' + this.props.imagePath}  className="cardArt" alt="card art" />
 				<div className={"cardName"+listedInstance}>{cardName}</div>
@@ -34,6 +39,7 @@ export default class Card extends Component{
 			if(true===this.props.isUserDeck){
 					return (
 							<div className="cardFacedDown" title={this.props.deck.name} onClick={this.selectDeck.bind(this)}>
+							<p className="displayDeckAjouter">Afficher le Deck</p>
 							</div>
 						);
 			}

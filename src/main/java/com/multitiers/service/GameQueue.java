@@ -1,3 +1,4 @@
+
 package com.multitiers.service;
 
 import java.util.ArrayList;
@@ -45,16 +46,20 @@ public class GameQueue {
 		this.listeners.add(listener);
 	}
 	
-	public Game matchFirstTwoPlayersInQueue() {
+	public synchronized Game matchFirstTwoPlayersInQueue() {
 		Player player1 = this.listOfPlayersInQueue.get(0);
 		Player player2 = this.listOfPlayersInQueue.get(1);
 		
 		Game game = new Game(player1, player2);
 		
-		this.listOfPlayersInQueue.remove(0);
-		this.listOfPlayersInQueue.remove(0);
-		
+		removeFirstTwoPlayersFromQueue();
+				
 		return game;
+	}
+
+	private void removeFirstTwoPlayersFromQueue() {
+		this.listOfPlayersInQueue.remove(0);
+		this.listOfPlayersInQueue.remove(0);
 	}
 	
 	public Player getPlayerInQueueById(String playerId) {
@@ -66,7 +71,12 @@ public class GameQueue {
 		return null;
 	}
 	
+	public Integer getNbOfPlayersInQueue() {
+		return listOfPlayersInQueue.size();
+	}
+	
 	public void initListOfPlayersInQueue() {
 		this.listOfPlayersInQueue = new ArrayList<>();
 	}
 }
+

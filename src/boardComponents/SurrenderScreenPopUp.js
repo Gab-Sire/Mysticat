@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 /**
  * Pop up menu si on a besoin plus tard
@@ -20,18 +21,19 @@ export default class SurrenderScreenPopUp extends Component {
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
 			            	<p>&Ecirc;tes-vous certain de vouloir abandonner?</p>
-			            	<button onClick={this.giveUp.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
+			            	<button onClick={this.surrender.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
 			            </div>
 		            </div>
 		        );
 	  }
   }
 
-  giveUp(){
-	  this.props.giveUp();
+  surrender(){
+	  this.props.surrender();
   }
 
   stayInTheGame(){
 	  this.props.stayInTheGame();
   }
 }
+

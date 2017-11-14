@@ -6,6 +6,7 @@ public class BadUsernameFormatException extends RuntimeException{
 	String username;
 	
 	public BadUsernameFormatException(String username) {
+		super(username);
 		this.username = username;
 	}
 }

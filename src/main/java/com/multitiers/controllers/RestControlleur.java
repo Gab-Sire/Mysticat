@@ -25,19 +25,16 @@ import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.entity.UserDeck;
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
-import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
-import com.multitiers.domaine.ingame.SummonAction;
+import com.multitiers.domaine.ingame.SurrenderAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
-import com.multitiers.repository.DeckRepository;
-import com.multitiers.repository.MinionCardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.AuthentificationService;
 import com.multitiers.service.DeckEditingService;
@@ -52,11 +49,8 @@ public class RestControlleur {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private DeckRepository deckRepository;
-	@Autowired
 	private CardRepository cardRepository;
-	@Autowired
-	private MinionCardRepository minionCardRepository;
+
 	
 	@Autowired
 	private AuthentificationService authService;
@@ -106,15 +100,36 @@ public class RestControlleur {
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
     	User user = userRepository.findById(userId);
+    	if(deckId >= user.getDecks().size()) {
+    		Deck newDeck = new Deck();
+    		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+    		newDeck.setName("New Deck");
+    		newDeck.setCardList(new ArrayList<Card>());
+    		return newDeck;
+    	}
     	Deck deck = user.getDecks().get(deckId);
     	Collections.sort(deck.getCardList());
     	return deck;
+    }
+    
+    @PostMapping(value="/getCollection")
+    public List<Card> getCollection() {
+    	List<Card> cardCollection = cardRepository.findAll();
+    	Collections.sort(cardCollection);
+    	return cardCollection;
     }
     
     @PostMapping(value="/saveDeck")
     public void saveDeck(@RequestBody String json) {
     	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
     	String userId = userDeck.getUserId();
+    	User user = userRepository.findById(userId);
+    	
+    	if(user==null) {
+    		System.out.println("Null user cannot save deck.");
+    		return;
+    	}
+    	
     	List<String> cardIds = userDeck.getCardIds();
     	Integer deckIndex = userDeck.getDeckIndex();
     	String deckName = userDeck.getDeckName();
@@ -124,15 +139,12 @@ public class RestControlleur {
     	for(String cardId : cardIds) {
     		cardList.add(cardRepository.findByCardId(cardId));
     	}
-    	
-    	User user = userRepository.findById(userId);
-    	if(user!=null) {
-    		Deck newDeck = new Deck();
-    		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
-    		newDeck.setName(deckName);
-    		newDeck.setCardList(cardList);
-    		deckEditingService.editDeck(user, deckIndex, newDeck);
-    	}
+
+		Deck newDeck = new Deck();
+		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
+		newDeck.setName(deckName);
+		newDeck.setCardList(cardList);
+		deckEditingService.changeDeck(user, deckIndex, newDeck);
     	System.out.println("Saved deck");
     }
     
@@ -185,6 +197,7 @@ public class RestControlleur {
     	this.gameService.gameQueue.addToQueue(player);
     }
     
+    
     @PostMapping(value="/cancelQueue")
     public void cancelQueue(@RequestBody String playerId) {
     	Player player = this.gameService.gameQueue.getPlayerInQueueById(playerId.substring(0, playerId.length()-1));
@@ -202,44 +215,34 @@ public class RestControlleur {
     	return null;
     }
     
-    @GetMapping(value="/getHardCodedActionSample")
-    public @ResponseBody ActionList getHardCodedActionSample() {
-		ActionList retour = new ActionList();
-		retour.setGameId("game1");
-		List<Action> actionList = new ArrayList<Action>();
-		SummonAction summonAction = new SummonAction();
-		summonAction.setFieldCellWhereTheMinionIsBeingSummoned(1);
-		summonAction.setIndexOfCardInHand(0);
-		summonAction.setPlayerIndex(0);
-		
-		AttackAction attackAction = new AttackAction();
-		attackAction.setAttackingMinionIndex(0);
-		attackAction.setPlayerIndex(0);
-		attackAction.setSpeed(3);
-		attackAction.setTargetIndex(5);
-		
-		actionList.add(attackAction);
-		actionList.add(summonAction);
-		
-		retour.setPlayerActions(actionList);
-		retour.setPlayerId("player1");
-		retour.setGameId("game1");
-		
-    	return retour;
-    } 
-    
     @PostMapping(value="/sendActions")
     public void sendActions(@RequestBody String actionListJson) {
     	ActionList currentPlayerActionList = JsonUtils.deserializeActionListFromJson(actionListJson);
     	String gameId = currentPlayerActionList.getGameId();
+    	gameService.newGameList.remove(currentPlayerActionList.getPlayerId());
+    	gameService.updatedGameList.remove(currentPlayerActionList.getPlayerId());
     	if(this.gameService.sentActionLists.containsKey(gameId)){
     		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
-    		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
+    		if(currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId()) && actionListContainsSurrender(currentPlayerActionList)) {
+    			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
+    		}
+    		else {
+        		this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
+    		}
     	}
     	else {
     		this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
     	}
     }
+
+	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
+		for(Action action : currentPlayerActionList.getPlayerActions()) {
+			if(action instanceof SurrenderAction) {
+				return true;
+			}
+		}
+		return false;
+	}
     
     @PostMapping(value="/checkIfGameUpdated")
     public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
@@ -290,6 +293,7 @@ public class RestControlleur {
 				"<li>Au moins 1 lettre majuscule</li>"+
 				"<li>Au moins un chiffre</li></ul>";
     }
+    
     @ExceptionHandler(value=BadUsernameFormatException.class)
     public String handleBadUsernameSignup() {
     	return "Votre mot de passe est dans un format invalide.\n"+

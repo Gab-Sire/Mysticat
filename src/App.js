@@ -31,8 +31,6 @@ class App extends Component{
 
 	componentWillMount(){
 		this.checkServerAvailability();
-		this.getTestActionList();
-
 	}
 
 	render(){
@@ -74,24 +72,6 @@ class App extends Component{
 			}
 		}
 		else return (<LoadingScreen text={"Contacting server..."}/>)
-	}
-
-	getTestActionList(){
-		axios({
-			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/getHardCodedActionSample',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"}
-			})
-			  .then((response)=>{
-				  
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				  setTimeout(()=>{
-							  this.checkServerAvailability();
-						  }, TIME_BETWEEN_AXIOS_CALLS)
-				});
 	}
 
 	selectDeck(deckId){

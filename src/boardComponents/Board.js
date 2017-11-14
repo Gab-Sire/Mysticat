@@ -19,8 +19,6 @@ let self;
 let opponent;
 let opponentIndex;
 
-let selectedFieldCellIndex;
-let cardIndex;
 let selectedOpponentFieldCellIndex;
 
 export default class Board extends Component{
@@ -37,8 +35,10 @@ export default class Board extends Component{
 			cellsOfAttackingMinion: [false, false, false, false, false, false, false],
 			targetMinion:null,
 			attackerSelected:null,
-			startOfTurnForSummoning:false,
-			endOfTurn:false
+			endOfTurn:false,
+			surrendering: false,
+			selectedCardIndex:null,
+			selectedFieldCellIndex:null
 		};
 	}
 
@@ -80,7 +80,10 @@ export default class Board extends Component{
 	render(){
 		return(
 			<div id="container">
-				<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
+				<Beforeunload onBeforeunload={() => {
+					this.addSurrenderAction();
+					this.sendActions();
+					this.props.disconnectPlayer(); return "Are you sure?"}}/>
 				<div id="board">
 					<div id="opponentHand" className="hand">
 						<Hand players={players} playerIndex={opponentIndex} faceUp={false} />
@@ -112,11 +115,11 @@ export default class Board extends Component{
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} startOfTurn={this.state.startOfTurnForSummoning} />
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} selectedCardIndex = {this.state.selectedCardIndex} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
-					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} giveUp={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
+					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} surrender={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 
 					<div id="menuGame"><p>Menu</p>
@@ -130,30 +133,34 @@ export default class Board extends Component{
 		);
 	}
 
-	addSummonAction = () => {
+	addSummonAction = (selectedIndex) => {
 		let wereTheseCardsPlayedThisTurn = this.state.indexesOfPlayedCardsThisTurn;
+		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex];
+
 		let areTheseCellsAboutToBeSummonedOn = this.state.cellsOfSummonedMinionsThisTurn;
-		let wasThisCardAlreadyPlayedThisTurn = wereTheseCardsPlayedThisTurn[cardIndex];
-		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex];
-		let manaCost = self.hand[cardIndex].manaCost;
+		let wasAMinionAlreadyPlayedOnThisCell = areTheseCellsAboutToBeSummonedOn[selectedIndex];
+		let manaCost = self.hand[this.state.selectedCardIndex].manaCost;
 		let selfMana = self.remainingMana;
 
-		if(false===wasThisCardAlreadyPlayedThisTurn && selfMana>=manaCost
-			&& null===self.field[selectedFieldCellIndex] && false===wasAMinionAlreadyPlayedOnThisCell){
-			//console.log("Card played from hand: "+cardIndex+" on field cell: "+selectedFieldCellIndex);
-			wereTheseCardsPlayedThisTurn[cardIndex] = true;
-			areTheseCellsAboutToBeSummonedOn[selectedFieldCellIndex] = true;
+		if(
+			false===wasThisCardAlreadyPlayedThisTurn
+			&& true===(selfMana>=manaCost)
+			&& true===(null===self.field[selectedIndex])
+			&& false===wasAMinionAlreadyPlayedOnThisCell){
+			wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex] = true;
+			areTheseCellsAboutToBeSummonedOn[selectedIndex] = true;
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
 			actions.push({ 	playerIndex : selfIndex,
-							indexOfCardInHand : cardIndex,
-							fieldCellWhereTheMinionIsBeingSummoned : selectedFieldCellIndex
+							indexOfCardInHand : this.state.selectedCardIndex,
+							fieldCellWhereTheMinionIsBeingSummoned : selectedIndex
 						});
-			this.setState({ actionList: actions })
+			this.setState({ actionList: actions ,
+			selectedCardIndex: null})
 
 			self.remainingMana = selfMana - manaCost;
-			cardIndex = null;
+			//this.retrieveCardSelectedIndex(cardIndex);
 		}
 	}
 
@@ -173,7 +180,7 @@ export default class Board extends Component{
 			this.setState({ actionList: actions })
 		}
 	}
-	
+
 	addSurrenderAction = () => {
 		let actions = this.state.actionList;
 		actions.push({ 	playerIndex : selfIndex,
@@ -245,6 +252,7 @@ export default class Board extends Component{
 	}
 
 	sendActions(){
+		this.setState({selectedCardIndex: null});
 		const data = {
 					gameId: this.state.gameState.gameId,
 					playerActions: this.state.actionList,
@@ -260,10 +268,14 @@ export default class Board extends Component{
 			})
 			  .then((response)=>{
 					this.setState({waitingForOpponentToEndTurn:true});
-					cardIndex = null;
-				  this.checkIfGameUpdated();
-				  this.resetAttackingState();
-				  this.setState({startOfTurnForSummoning:true,endOfTurn:true});
+					if(true===this.state.surrendering){
+							this.loseGame();
+					}
+					else{
+						this.checkIfGameUpdated();
+						this.resetAttackingState();
+						this.setState({endOfTurn:true});
+					}
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -279,19 +291,17 @@ export default class Board extends Component{
 	}
 
 	retrieveCardSelectedIndex = (selectedIndex) => {
-		if(selectedIndex===cardIndex){
-			cardIndex = null;
+		if(selectedIndex===this.state.selectedCardIndex){
+			this.setState({selectedCardIndex : null})
 		}
 		else{
-			cardIndex = selectedIndex;
-			this.setState({startOfTurnForSummoning:false});
+			this.setState({selectedCardIndex : selectedIndex})
 		}
 	}
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
-		if(null!==cardIndex && undefined!==cardIndex){
-			selectedFieldCellIndex = selectedIndex;
-			this.addSummonAction();
+		if(null!==this.state.selectedCardIndex && undefined!==this.state.selectedCardIndex){
+			this.addSummonAction(selectedIndex);
 		}
 	}
 
@@ -309,21 +319,22 @@ export default class Board extends Component{
 		this.surrenderGameConfirmStateChange();
 		this.clearActionList();
 		this.addSurrenderAction();
+		this.setState({surrendering: true});
 		this.sendActions();
 	}
 
 	loseGame(){
 		this.setState({ isEndGame: 1 });
 	}
-	
+
 	winGame(){
 		this.setState({ isEndGame: 0 });
 	}
-	
+
 	drawGame(){
 		this.setState({ isEndGame: -1 });
 	}
-	
+
 	selfUserHasWon(){
 		if(this.state.gameState.winnerPlayerIndex != null){
 			if(this.state.gameState.winnerPlayerIndex === selfIndex){
@@ -335,7 +346,7 @@ export default class Board extends Component{
 			}
 		}
 	}
-	
+
 	clearActionList(){
 		let actions = this.state.actionList;
 		actions.pop();
@@ -346,3 +357,4 @@ export default class Board extends Component{
 		this.props.endGame();
 	}
 }
+

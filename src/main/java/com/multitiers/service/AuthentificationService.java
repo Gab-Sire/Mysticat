@@ -1,3 +1,4 @@
+
 package com.multitiers.service;
 
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class AuthentificationService {
 	}
 
 	public void addUserToConnectedUsers(User user) {
-		System.out.println("added: "+ user);
+		
 		user = userRepository.findById(user.getId());
 		user.setConnected(true);
 		userRepository.save(user);
@@ -114,7 +115,7 @@ public class AuthentificationService {
 			this.connectedUsers = new HashMap<String, User>();
 		}
 		if (this.connectedUsers.containsKey(user.getId())) {
-			throw new UserAlreadyConnectedException();
+			throw new UserAlreadyConnectedException(user.getUsername());
 		} else {
 			this.connectedUsers.put(user.getId(), user);
 		}

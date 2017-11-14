@@ -1,3 +1,4 @@
+
 package com.multitiers.service;
 
 import java.util.ArrayList;
@@ -6,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multitiers.domaine.ingame.Action;
@@ -20,25 +20,13 @@ import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
 import com.multitiers.domaine.ingame.SurrenderAction;
-import com.multitiers.repository.CardRepository;
-import com.multitiers.repository.DeckRepository;
-import com.multitiers.repository.MinionCardRepository;
-import com.multitiers.repository.UserRepository;
 
 @Service
 public class GameService implements QueueListener {
 	private static final int PLAYER_ONE_INDEX = 0;
 	private static final int PLAYER_TWO_INDEX = 1;
 	private static final int HERO_FACE_INDEX = -1;
-	private static final int NB_OF_PLAYERS_PER_GAME = 2;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private DeckRepository deckRepository;
-	@Autowired
-	private CardRepository cardRepository;
-	@Autowired
-	private MinionCardRepository minionCardRepository;
+
 
 	public GameQueue gameQueue;
 	// Key: userId
@@ -74,8 +62,7 @@ public class GameService implements QueueListener {
 
 		resolveAllActions(actions, game);
 
-		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
-		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
+		removedPlayedCards(playerOneActions, playerTwoActions, playerOneId, playerTwoId, game);
 		if(!game.getEndedWithSurrender()) {
 			game.nextTurn();
 		}
@@ -101,6 +88,26 @@ public class GameService implements QueueListener {
 		removePlayedCards(currentPlayer, indexesOfCardsThatWerePlayed);
 	}
 
+	private void resolveAllActions(List<Action> actions, Game game) {
+		for (Action action : actions) {
+			if (action instanceof SummonAction && !game.getEndedWithSurrender()) {
+				resolveSummonAction((SummonAction) action, game);
+			} else if (action instanceof AttackAction && !game.getEndedWithSurrender()) {
+				resolveAttackAction((AttackAction) action, game);
+			} else if (action instanceof SurrenderAction) {
+				game.setEndedWithSurrender(true);
+				resolveSurrenderAction((SurrenderAction) action, game);
+			}
+			sendDeadMinionsToGraveyards(game);
+		}
+	}
+	
+	private void removedPlayedCards(ActionList playerOneActions, ActionList playerTwoActions, String playerOneId,
+			String playerTwoId, Game game) {
+		removePlayedCardsFromPlayerHand(playerOneActions, playerOneId, game);
+		removePlayedCardsFromPlayerHand(playerTwoActions, playerTwoId, game);
+	}
+	
 	private void removePlayedCards(Player currentPlayer, List<Integer> indexesOfCardsThatWerePlayed) {
 		Collections.sort(indexesOfCardsThatWerePlayed);
 		for (int i = indexesOfCardsThatWerePlayed.size() - 1; i >= 0; --i) {
@@ -113,20 +120,6 @@ public class GameService implements QueueListener {
 			if (action instanceof SummonAction) {
 				indexesOfCardsThatWerePlayed.add(((SummonAction) action).getIndexOfCardInHand());
 			}
-		}
-	}
-
-	private void resolveAllActions(List<Action> actions, Game game) {
-		for (Action action : actions) {
-			if (action instanceof SummonAction && !game.getEndedWithSurrender()) {
-				resolveSummonAction((SummonAction) action, game);
-			} else if (action instanceof AttackAction && !game.getEndedWithSurrender()) {
-				resolveAttackAction((AttackAction) action, game);
-			} else if (action instanceof SurrenderAction) {
-				game.setEndedWithSurrender(true);
-				resolveSurrenderAction((SurrenderAction) action, game);
-			}
-			sendDeadMinionsToGraveyards(game);
 		}
 	}
 	
@@ -204,11 +197,8 @@ public class GameService implements QueueListener {
 		Integer playerDeclaringSurrenderIndex = surrenderAction.getPlayerIndex();
 		Integer opponentPlayerIndex = (playerDeclaringSurrenderIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
 				: PLAYER_ONE_INDEX;
-		Player playerDeclaringSurrender = game.getPlayers()[playerDeclaringSurrenderIndex];
-		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
 		
-		playerDeclaringSurrender.getHero().setHealth(0);
-		if(game.getWinnerPlayerIndex()==opponentPlayerIndex) {
+		if(game.getWinnerPlayerIndex()==playerDeclaringSurrenderIndex) {
 			game.setWinnerPlayerIndex(-1);
 		}
 		else {
@@ -220,8 +210,7 @@ public class GameService implements QueueListener {
 		Minion targetOfTheAttack;
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
-			attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
-			targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
 				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
 			}
@@ -233,6 +222,19 @@ public class GameService implements QueueListener {
 			System.out.println("Target is missing or dead.");
 		}
 
+	}
+
+	private void attackerAndTargetExchangeDamage(Minion attacker, Minion targetOfTheAttack) {
+		attackerTakesDamageFromTarget(attacker, targetOfTheAttack);
+		targetTakesDamageFromAttacker(attacker, targetOfTheAttack);
+	}
+
+	private void targetTakesDamageFromAttacker(Minion attacker, Minion targetOfTheAttack) {
+		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
+	}
+
+	private void attackerTakesDamageFromTarget(Minion attacker, Minion targetOfTheAttack) {
+		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 	}
 
 	private void attackFace(Player opponentPlayer, Minion attacker) {
@@ -265,6 +267,14 @@ public class GameService implements QueueListener {
 		initGameQueue();
 	}
 	
+	//Utilitaire de debugging
+	public void printDataListStatus() {
+		System.out.println("***********************************");
+		System.out.println("Players in queue: "+gameQueue.getNbOfPlayersInQueue());
+		System.out.println("New game list: "+newGameList.size());
+		System.out.println("Updated game list: "+updatedGameList.size());
+		System.out.println("Sent actions list: "+sentActionLists.size());
+	}
 	
 	@Override
 	public void queueHasEnoughPlayers() {
@@ -278,3 +288,4 @@ public class GameService implements QueueListener {
 		this.existingGameList.put(game.getGameId(), game);
 	}
 }
+
