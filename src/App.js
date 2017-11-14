@@ -31,12 +31,12 @@ class App extends Component{
 
 	componentWillMount(){
 		this.checkServerAvailability();
-	}
-
-	render(){
 		if(null !== this.state.playerId){
 			setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
 		}
+	}
+
+	render(){
 		if(true===this.state.isServerAvailable){
 
 			if("admin_dashboard" === this.state.appDisplay){
@@ -106,7 +106,7 @@ class App extends Component{
 				  data : this.state.playerId
 				})
 				  .then((response)=>{
-					  if(false === response.data || null ===  response.data){
+					  if(false === response.data){
 						  this.setState({ playerId: null});
 						  this.setState({ appDisplay: ""});
 					  }

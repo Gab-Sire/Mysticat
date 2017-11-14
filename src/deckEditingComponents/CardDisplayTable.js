@@ -30,6 +30,7 @@ export default class CardDisplayTable extends Component {
         this.setState({editMode: true})
     }
   }
+  
   render() {
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
@@ -225,4 +226,3 @@ export default class CardDisplayTable extends Component {
   }
 
 }
-
