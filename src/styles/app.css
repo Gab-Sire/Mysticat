@@ -481,7 +481,8 @@
 }
 
 .invoquer{
-	opacity: 0.5;
+	visibility:hidden;
+	opacity: 0.2;
 }
 
 .minion img.cardArt{
