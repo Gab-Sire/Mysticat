@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import UserManagementList from './UserManagementList.js';
 import '../styles/admin.css';
+import Beforeunload from 'react-beforeunload';
+
 
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
 export default class AdminDashBoard extends Component{
@@ -14,6 +16,7 @@ export default class AdminDashBoard extends Component{
 	render(){
 		return(
 			<div id="containerAdmin">
+				<Beforeunload onBeforeunload={() => {	this.props.disconnectPlayerById(this.props.adminId); return "Are you sure?"}}/>
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<p id="salutationAdmin">Bonjour, {this.props.adminName}</p><br />
@@ -27,7 +30,7 @@ export default class AdminDashBoard extends Component{
 							}
 						}
 						>D&eacute;connexion</button>
-				</div>		
+				</div>
 			</div>
 		)
 	}
