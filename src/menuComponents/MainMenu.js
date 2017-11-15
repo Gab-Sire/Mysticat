@@ -130,28 +130,6 @@ export default class MainMenu extends Component{
 				});
 	}
 
-	checkIfStillConnected(){
-		if(null != this.state.playerId){
-			axios({
-				  method:'post',
-				  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data : this.state.playerId
-				})
-				  .then((response)=>{
-						console.log("Status", response.data);
-						if(false===response.data){
-								this.deconnexion();
-						}
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-						return false;
-					});
-		}
-	}
-
 	displayUnderContruction(){
 		this.setState({tag: "visible"});
 	}

@@ -22,7 +22,7 @@ public class ProjetMultitiersApplication {
         return (args) -> {
         	cardCreationService.initBasicCardSet();
         	authService.initDataLists();
-            authService.bootStrapTwoUsers();
+            authService.bootStrapUsersAndAdmin();
             gameService.initDataLists();
         };
     }
