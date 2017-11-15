@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "mys_deck_dec")
 public class Deck {
@@ -25,6 +27,7 @@ public class Deck {
 	private List<Card> cardList;
 
 	@Column(name = "dec_name")
+	@Length(min = 1, max=255)
 	private String name;
 
 	public String getDeckId() {
