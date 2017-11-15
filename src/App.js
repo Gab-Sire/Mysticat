@@ -94,7 +94,6 @@ class App extends Component{
 	}
 
 	checkIfStillConnected(){
-		console.log("Checkin");
 		if(null != this.state.playerId){
 			axios({
 				  method:'post',
@@ -171,7 +170,6 @@ class App extends Component{
 		}
 
 	goAdminDashBoard = () => {
-		console.log("We're in boys");
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':8089/getAllUserStatus',
