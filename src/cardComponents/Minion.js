@@ -13,7 +13,7 @@ export default class Card extends Component{
 		let classNameExtra = "cardTile minion";
 
 		if(true === this.props.active){
-			isSelected = "fiedlCellSelected";
+			isSelected = " fiedlCellSelected";
 		}
 		if(true === this.props.belongsToSelf && true ===this.props.activeAttacker){
 			classNameExtra = "cardTile minion attacker card";
@@ -23,7 +23,7 @@ export default class Card extends Component{
 
 		isEmpty = (this.props.name!=null) ? true : false;
 		if(isEmpty){
-			return (<div className={classNameExtra} title={this.props.description} onClick={this.props.onClick}>
+			return (<div className={(true === this.props.active)? classNameExtra+isSelected :classNameExtra} title={this.props.description} onClick={(true === this.props.active)?null:this.props.onClick}>
 				<img src={'/' + this.props.cardReference.imagePath} className="cardArt" alt="card art" ></img>
 				<div className="cardName">{this.props.name}</div>
 
