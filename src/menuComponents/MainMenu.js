@@ -45,28 +45,29 @@ export default class MainMenu extends Component{
 	}
 
 	enterQueue(){
-		this.hideUnderContruction();
-		this.setState({isLookingForGame: true})
-		this.forceUpdate();
-		let data = this.props.playerId;
-		axios({
-		  method:'post',
-		  url:'http://'+window.location.hostname+':8089/enterQueue',
-		  responseType:'text',
-		  headers: {'Access-Control-Allow-Origin': "true"},
-		  data: data
-		})
-		  .then((response)=>{
-			  setTimeout(()=>{
-				  this.checkIfQueuePopped();
-			  }, TIME_BETWEEN_AXIOS_CALLS)
+			this.checkIfStillConnected();
+			this.hideUnderContruction();
+			this.setState({isLookingForGame: true})
+			let data = this.props.playerId;
+			axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':8089/enterQueue',
+			  responseType:'text',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
 			})
-			.catch(error => {
-			  console.log('Error fetching and parsing data', error);
-			});
+			  .then((response)=>{
+				  setTimeout(()=>{
+					  this.checkIfQueuePopped();
+				  }, TIME_BETWEEN_AXIOS_CALLS)
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+				});
 	}
 
 	checkIfQueuePopped(){
+		this.checkIfStillConnected();
 		let data = this.props.playerId;
 		axios({
 		  method:'post',
@@ -107,6 +108,7 @@ export default class MainMenu extends Component{
 	}
 
 	getHardCodedGame(){
+		this.checkIfStillConnected();
 		axios({
 			  method:'get',
 			  url:'http://'+window.location.hostname+':8089/getHardCodedGame',
@@ -122,6 +124,29 @@ export default class MainMenu extends Component{
 				});
 	}
 
+	checkIfStillConnected(){
+		console.log("Checkin");
+		if(null != this.state.playerId){
+			axios({
+				  method:'post',
+				  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
+				  responseType:'json',
+				  headers: {'Access-Control-Allow-Origin': "true"},
+				  data : this.state.playerId
+				})
+				  .then((response)=>{
+						console.log("Status", response.data);
+						if(false===response.data){
+								this.cancelQueue();
+								this.deconnexion();
+						}
+					})
+					.catch(error => {
+					  console.log('Error fetching and parsing data', error);
+						return false;
+					});
+		}
+	}
 
 	displayUnderContruction(){
 		this.setState({tag: "visible"});
@@ -136,4 +161,3 @@ export default class MainMenu extends Component{
 	}
 
 }
-

@@ -54,7 +54,7 @@ class App extends Component{
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue}
-				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />
+				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)}/>
 			}
 			else if(true===this.state.inGame){
 				return(
@@ -94,6 +94,7 @@ class App extends Component{
 	}
 
 	checkIfStillConnected(){
+		console.log("Checkin");
 		if(null != this.state.playerId){
 			axios({
 				  method:'post',
@@ -103,17 +104,13 @@ class App extends Component{
 				  data : this.state.playerId
 				})
 				  .then((response)=>{
-					  if(false === response.data){
-						  this.setState({ playerId: null});
-						  this.setState({ appDisplay: ""});
-					  }
-
+						if(false===response.data){
+								this.disconnectPlayer();
+						}
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
-					  setTimeout(()=>{
-								  this.checkIfStillConnected();
-							  }, TIME_BETWEEN_AXIOS_CALLS)
+						return false;
 					});
 		}
 	}
@@ -132,7 +129,16 @@ class App extends Component{
 				.catch(error => {
 					console.log('Error fetching and parsing data', error);
 		});
-		this.setState({"playerId" : null});
+		this.setState({ playerId: null,
+										appDisplay: null,
+										inGame: false,
+										playerName: null,
+										gameState: null,
+										userDeckList: null,
+										userList: null,
+										deckId:null,
+										connectedAsAdmin:false
+									});
 	}
 
 	disconnectPlayerById(id){
@@ -202,9 +208,11 @@ class App extends Component{
 			this.goAdminDashBoard();
 		}else{
 			this.setState({appDisplay: "menu"});
+			/*
 			if(null !== this.state.playerId){
 				setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
 			}
+			*/
 		}
 	}
 
