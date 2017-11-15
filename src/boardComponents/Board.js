@@ -149,6 +149,12 @@ export default class Board extends Component{
 			&& false===wasAMinionAlreadyPlayedOnThisCell){
 			wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex] = true;
 			areTheseCellsAboutToBeSummonedOn[selectedIndex] = true;
+			self.field[selectedIndex] =({canAttack:false, cardReference:self.hand[this.state.selectedCardIndex], 
+				description: self.hand[this.state.selectedCardIndex].description,
+				health:self.hand[this.state.selectedCardIndex].initialHealth, 
+				name:self.hand[this.state.selectedCardIndex].name, 
+				power:self.hand[this.state.selectedCardIndex].initialPower,
+				speed:self.hand[this.state.selectedCardIndex].initialSpeed});
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
@@ -301,7 +307,10 @@ export default class Board extends Component{
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		if(null!==this.state.selectedCardIndex && undefined!==this.state.selectedCardIndex){
+			
+			
 			this.addSummonAction(selectedIndex);
+			
 		}
 	}
 

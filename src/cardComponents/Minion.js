@@ -31,8 +31,7 @@ export default class Card extends Component{
 				<div title="The amount of damage this minion can take" className=" cardHealth"><div className="placingAttribut">{this.props.health}</div></div>
 				<div title="Speed dictates the order in which attacks resolve" className=" cardSpeed"><div className="placingAttribut">{this.props.speed}</div></div>
 			</div>);
-		}
-		else{
+		}else{
 			if(true === this.props.active){
 				return (<div className={"cardTile " + isSelected} ></div>);
 			}else{
