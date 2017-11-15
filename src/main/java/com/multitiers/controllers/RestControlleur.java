@@ -68,19 +68,20 @@ public class RestControlleur {
     
     @PostMapping(value="/disconnectUser")
     public void disconnectUser(@RequestBody String userId) {
+    	String actualUserId = userId.substring(0, userId.length()-1);
     	try {
-    		Player player = this.gameService.gameQueue.getPlayerInQueueById(userId.substring(0, userId.length()-1));
+    		Player player = this.gameService.gameQueue.getPlayerInQueueById(actualUserId);
     		gameService.gameQueue.removeFromQueue(player);
     	}catch(Exception e) {
-    		
+    		e.printStackTrace();
     	}
-    	authService.removeUserFromConnectedUsers(userId.substring(0, userId.length()-1));
+    	authService.removeUserFromConnectedUsers(actualUserId);
     }
     
     @PostMapping(value="/getPlayerConnection")
     public Boolean getPlayerConnection(@RequestBody String userId) {
     	if(null != authService.getConnectedUsers()) {
-    		return authService.getConnectedUsers().containsKey(userId.substring(0, userId.length()-1));
+    		return authService.isThisUserConnected(userId.substring(0, userId.length()-1));
     	}
     	return false;
     }
@@ -96,10 +97,8 @@ public class RestControlleur {
     	List<User> users = userRepository.findAll();
     	List<UserStatus> userStatuses = new ArrayList<>();
     	for(User user: users) {
-    		UserStatus status = new UserStatus();
-    		status.setUserId(user.getId());
-    		status.setUserName(user.getUsername());
-    		status.setIsConnected(authService.getConnectedUsers().containsKey(user.getId()));
+    		UserStatus status = new UserStatus(user);
+    		status.setIsConnected(authService.isThisUserConnected(user.getId()));
     		userStatuses.add(status);
     	}
     	return userStatuses;
@@ -107,13 +106,20 @@ public class RestControlleur {
     
     @PostMapping(value="/getUserDecks")
     public List<Deck> getUserDecks(@RequestBody String userId) {
-    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
+    	userId = userId.substring(0, userId.length()-1);
+    	if(!authService.isThisUserConnected(userId)) {
+    		throw new RuntimeException("User no longer connected.");
+    	}
+    	User user = userRepository.findById(userId);
     	List<Deck> decks = user.getDecks();
     	return decks;
     }
     
     @GetMapping(value="/selectOneDeck/{userId}/{deckId}")
     public Deck selectSingleDeck(@PathVariable String userId, @PathVariable int deckId) {
+    	if(!authService.isThisUserConnected(userId)) {
+    		throw new RuntimeException("User no longer connected.");
+    	}
     	User user = userRepository.findById(userId);
     	if(deckId >= user.getDecks().size()) {
     		Deck newDeck = new Deck();
@@ -138,6 +144,9 @@ public class RestControlleur {
     public void saveDeck(@RequestBody String json) {
     	UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
     	String userId = userDeck.getUserId();
+    	if(!authService.isThisUserConnected(userId)) {
+    		throw new RuntimeException("User no longer connected.");
+    	}
     	User user = userRepository.findById(userId);
     	
     	if(user==null) {
@@ -167,10 +176,6 @@ public class RestControlleur {
     public @ResponseBody String loginWithCredentials(@RequestBody String json, HttpSession session) {
     	UserCredentials userCredentials = JsonUtils.deserializeUserCredentialsFromJson(json);
     	User user = authService.getUserFromCredentials(userCredentials);
-    	if(authService.getConnectedUsers()==null) {
-    		authService.initDataLists();
-    		System.out.println(authService.getConnectedUsers()==null);
-    	}
     	if(user != null) {
     		session.setAttribute("userActif", user.getId());
         	authService.addUserToConnectedUsers(user);
@@ -211,7 +216,11 @@ public class RestControlleur {
     
     @PostMapping(value="/enterQueue")
     public void enterQueue(@RequestBody String userId) {
-    	User user = userRepository.findById(userId.substring(0, userId.length()-1));
+    	userId = userId.substring(0, userId.length()-1);
+    	if(!authService.isThisUserConnected(userId)) {
+    		throw new RuntimeException("User no longer connected.");
+    	}
+    	User user = userRepository.findById(userId);
     	Player player = new Player(user);
     	this.gameService.gameQueue.addToQueue(player);
     }
@@ -219,15 +228,22 @@ public class RestControlleur {
     
     @PostMapping(value="/cancelQueue")
     public void cancelQueue(@RequestBody String playerId) {
-    	Player player = this.gameService.gameQueue.getPlayerInQueueById(playerId.substring(0, playerId.length()-1));
+    	playerId = playerId.substring(0, playerId.length()-1);
+    	Player player = this.gameService.gameQueue.getPlayerInQueueById(playerId);
     	if(player!=null) {
     		this.gameService.gameQueue.removeFromQueue(player);
+    	}
+    	if(!authService.isThisUserConnected(playerId)) {
+    		throw new RuntimeException("User no longer connected.");
     	}
     }
     
     @PostMapping(value="/checkIfQueuePopped")
     public Game checkIfQueuePopped(@RequestBody String userId) {
     	userId = userId.substring(0, userId.length()-1);
+    	if(!authService.isThisUserConnected(userId)) {
+    		throw new RuntimeException("User no longer connected.");
+    	}
     	if(gameService.newGameList.containsKey(userId)) {
     		return gameService.newGameList.get(userId);
     	}

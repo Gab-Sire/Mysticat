@@ -30,7 +30,7 @@ export default class CardDisplayTable extends Component {
         this.setState({editMode: true})
     }
   }
-  
+
   render() {
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
@@ -165,6 +165,7 @@ export default class CardDisplayTable extends Component {
           })
           .catch(error => {
             console.log('Error fetching and parsing data', error);
+            this.deconnexion();
           });
     }
     else{
@@ -225,4 +226,7 @@ export default class CardDisplayTable extends Component {
     this.setState({isSuccessVisible: false})
   }
 
+  deconnexion(){
+    this.props.disconnectPlayer();
+  }
 }
