@@ -28,7 +28,7 @@ export default class UserManagement extends Component{
 			)
 		}
 		else{
-			return( <div></div>)
+			return( null)
 		}
 	}
 

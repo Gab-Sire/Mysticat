@@ -67,29 +67,34 @@ export default class MainMenu extends Component{
 	}
 
 	checkIfQueuePopped(){
-		let data = this.props.playerId;
-		axios({
-		  method:'post',
-		  url:'http://'+window.location.hostname+':8089/checkIfQueuePopped',
-		  responseType:'json',
-		  headers: {'Access-Control-Allow-Origin': "true"},
-		  data: data
-		})
-		  .then((response)=>{
-			  if(response.data===null && this.state.isLookingForGame === true){
-				  setTimeout(()=>{
-					  this.checkIfQueuePopped();
-				  }, TIME_BETWEEN_AXIOS_CALLS)
-			  }
-			  else if(this.state.isLookingForGame===true){
-					console.log(response.data);
-				  this.props.getQueueForParent(response.data);
-			  }
+		if(this.state.isLookingForGame===true){
+			let data = this.props.playerId;
+			axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':8089/checkIfQueuePopped',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data
 			})
-			.catch(error => {
-			  console.log('Error fetching and parsing data', error);
-				this.deconnexion();
-			});
+			  .then((response)=>{
+				  if(response.data===null){
+					  setTimeout(()=>{
+						  this.checkIfQueuePopped();
+					  }, TIME_BETWEEN_AXIOS_CALLS)
+				  }
+				  else{
+						console.log(response.data);
+					  this.props.getQueueForParent(response.data);
+				  }
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', "checkIfQueuePopped", error);
+					this.setState({isLookingForGame: false});
+					setTimeout(()=>{
+						this.deconnexion();
+					}, TIME_BETWEEN_AXIOS_CALLS)
+				});
+		}
 	}
 
 	cancelQueue(){
@@ -155,9 +160,6 @@ export default class MainMenu extends Component{
 	}
 
 	deconnexion(){
-		this.cancelQueue();
-		this.hideUnderContruction();
 		this.props.disconnectPlayer();
 	}
-
 }
