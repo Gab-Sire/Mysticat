@@ -5,8 +5,11 @@ import '../styles/menu.css';
 import Card from '../cardComponents/Card.js';
 import Not30CardsInDeckWarning from './Not30CardsInDeckWarning.js';
 import SavedDeckSuccess from './SavedDeckSuccess.js';
+import IllegalDeckNameWarning from "./IllegalDeckNameWarning.js";
 
 const MAX_CARDS_IN_DECK = 30;
+const MAX_DECK_NAME_LENGTH = 255;
+const MIN_DECK_NAME_LENGTH = 1;
 
 export default class CardDisplayTable extends Component {
   constructor(props) {
@@ -14,8 +17,9 @@ export default class CardDisplayTable extends Component {
     this.state = {
         editMode: false,
         collection : [],
-        isAlertVisible: false,
-        isSuccessVisible: false
+        isAlertDeckSizeVisible: false,
+        isSuccessVisible: false,
+        isAlertDeckNameVisible: false
     }
   }
 
@@ -87,7 +91,11 @@ export default class CardDisplayTable extends Component {
 	return (<div id='CardCollection'>
 	<button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
         <Not30CardsInDeckWarning
-            MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertVisible}
+            MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertDeckSizeVisible}
+            onDismiss = {this.onDismissWarning.bind(this)}
+        />
+        <IllegalDeckNameWarning
+            MIN_DECK_NAME_LENGTH={MIN_DECK_NAME_LENGTH} MAX_DECK_NAME_LENGTH={MAX_DECK_NAME_LENGTH} visible={this.state.isAlertDeckNameVisible}
             onDismiss = {this.onDismissWarning.bind(this)}
         />
         <SavedDeckSuccess
@@ -139,7 +147,7 @@ export default class CardDisplayTable extends Component {
   }
 
   saveDeck(){
-    if(true===this.isTheDeckValid()){
+    if(true===this.isTheDeckValid() && this.isTheDeckNameValid()){
       let userId = this.state.userId;
       let cardIds = [];
       let deckIndex = this.state.deckIndex;
@@ -161,7 +169,8 @@ export default class CardDisplayTable extends Component {
         })
           .then((response)=>{
             this.setState({isSuccessVisible:true,
-                          isAlertVisible: false})
+                          isAlertDeckSizeVisible: false,
+                          isAlertDeckNameVisible: false})
           })
           .catch(error => {
             console.log('Error fetching and parsing data', error);
@@ -169,9 +178,13 @@ export default class CardDisplayTable extends Component {
           });
     }
     else{
-        //TODO pop-up d'avertissement que le deck est invalide.
-        this.setState({isAlertVisible:true,
-                  isSuccessVisible: false})
+      if(false===this.isTheDeckValid()){
+        this.setState({isAlertDeckSizeVisible:true})
+      }
+      if(false===this.isTheDeckNameValid()){
+        this.setState({isAlertDeckNameVisible:true})
+      }
+      this.setState({isSuccessVisible:false})
     }
   }
 
@@ -205,6 +218,10 @@ export default class CardDisplayTable extends Component {
     return (this.state.deck.length === MAX_CARDS_IN_DECK);
   }
 
+  isTheDeckNameValid(){
+    return (this.state.deckName.length <= MAX_DECK_NAME_LENGTH && this.state.deckName.length >= MIN_DECK_NAME_LENGTH);
+  }
+
   isThisCardInTheDeck(indexInCollection){
       let collection = this.state.collection;
       let deck = this.state.deck;
@@ -219,7 +236,7 @@ export default class CardDisplayTable extends Component {
   }
 
   onDismissWarning(){
-    this.setState({isAlertVisible: false})
+    this.setState({isAlertDeckSizeVisible: false})
   }
 
   onDismissSuccess(){
