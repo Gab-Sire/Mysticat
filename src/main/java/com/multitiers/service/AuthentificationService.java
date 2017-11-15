@@ -28,7 +28,7 @@ import com.multitiers.util.Constantes;
 
 @Service
 public class AuthentificationService {
-	
+
 	public static final String ADMIN_NAME = "Admin";
 
 	@Autowired
@@ -108,20 +108,27 @@ public class AuthentificationService {
 
 	public void addUserToConnectedUsers(User user) {
 		user = userRepository.findById(user.getId());
-
-		if (this.connectedUsers.containsKey(user.getId())) {
+		
+		if (isThisUserConnected(user)) {
 			throw new UserAlreadyConnectedException(user.getUsername());
 		} else {
 			this.connectedUsers.put(user.getId(), user);
 		}
 	}
 
-	public void removeUserFromConnectedUsers(String userId) {		
+	public boolean isThisUserConnected(User user) {
+		return this.connectedUsers.containsKey(user.getId());
+	}
+
+	public boolean isThisUserConnected(String userId) {
+		return this.connectedUsers.containsKey(userId);
+	}
+
+	public void removeUserFromConnectedUsers(String userId) {
 		this.connectedUsers.remove(userId);
 	}
 
 	public void initDataLists() {
 		this.connectedUsers = new HashMap<String, User>();
 	}
-
 }

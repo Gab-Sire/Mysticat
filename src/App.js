@@ -124,21 +124,11 @@ class App extends Component{
 				data: this.state.playerId
 			})
 				.then((response)=>{
-
 				})
 				.catch(error => {
 					console.log('Error fetching and parsing data', error);
 		});
-		this.setState({ playerId: null,
-										appDisplay: null,
-										inGame: false,
-										playerName: null,
-										gameState: null,
-										userDeckList: null,
-										userList: null,
-										deckId:null,
-										connectedAsAdmin:false
-									});
+		this.backToLoginScreen();
 	}
 
 	disconnectPlayerById(id){
@@ -152,11 +142,13 @@ class App extends Component{
 				.then((response)=>{
 					if(id === this.state.playerId){
 						console.log("Kicking admin out");
-						this.setState({appDisplay: "", playerId : null, connectedAsAdmin:false})
+						this.disconnectPlayer();
+						this.backToLoginScreen();
 					}
 				})
 				.catch(error => {
 					console.log('Error fetching and parsing data', error);
+					this.disconnectPlayer();
 		});
 	}
 
@@ -174,6 +166,7 @@ class App extends Component{
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
+						this.disconnectPlayer();
 					});
 		}
 
@@ -197,6 +190,7 @@ class App extends Component{
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+					this.disconnectPlayer();
 				});
 	}
 
@@ -233,6 +227,19 @@ class App extends Component{
 
 	getGameFromQueue = (gameState)=>{
 		this.setState({gameState: gameState, inGame: true})
+	}
+
+	backToLoginScreen(){
+		this.setState({ playerId: null,
+										appDisplay: null,
+										inGame: false,
+										playerName: null,
+										gameState: null,
+										userDeckList: null,
+										userList: null,
+										deckId:null,
+										connectedAsAdmin:false
+									});
 	}
 
 	updateAppDisplay = (displayMode) =>{

@@ -5,6 +5,11 @@ public class UserStatus {
 	private String userName;
 	private Boolean isConnected;
 	
+	public UserStatus(User user) {
+		this.userId = user.getId();
+		this.userName = user.getUsername();
+	}
+	
 	public String getUserId() {
 		return userId;
 	}

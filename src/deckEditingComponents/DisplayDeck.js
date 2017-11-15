@@ -40,6 +40,7 @@ export default class DisplayDeck extends Component {
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+          this.deconnexion();
 		});
 	}
   getCollection(){
@@ -54,6 +55,7 @@ export default class DisplayDeck extends Component {
 	        })
 	        .catch(error => {
 	          console.log('Error fetching and parsing data', error);
+            this.deconnexion();
 	        });
   }
 
@@ -62,9 +64,9 @@ export default class DisplayDeck extends Component {
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelection} 
+          <CardDisplayTable editMode={this.state.isEmpty} goDeckSelection = {this.props.goDeckSelection}
         	deckList={this.state.deck} playerId={this.props.playerId} deckId={this.props.deckId}
-        	appDisplay={this.props.appDisplay} collection={this.state.collection}/>
+        	appDisplay={this.props.appDisplay} collection={this.state.collection} disconnectPlayer={this.props.disconnectPlayer}/>
         </div>);
 	  }else{
 		  return (<div>En attente du serveur</div>);
@@ -75,4 +77,3 @@ export default class DisplayDeck extends Component {
     this.props.disconnectPlayer();
   }
 }
-

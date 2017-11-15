@@ -45,7 +45,6 @@ export default class MainMenu extends Component{
 	}
 
 	enterQueue(){
-			this.checkIfStillConnected();
 			this.hideUnderContruction();
 			this.setState({isLookingForGame: true})
 			let data = this.props.playerId;
@@ -63,11 +62,11 @@ export default class MainMenu extends Component{
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+					this.deconnexion();
 				});
 	}
 
 	checkIfQueuePopped(){
-		this.checkIfStillConnected();
 		let data = this.props.playerId;
 		axios({
 		  method:'post',
@@ -89,6 +88,7 @@ export default class MainMenu extends Component{
 			})
 			.catch(error => {
 			  console.log('Error fetching and parsing data', error);
+				this.deconnexion();
 			});
 	}
 
@@ -104,11 +104,11 @@ export default class MainMenu extends Component{
 		  data: data
 		}).catch(error => {
 			  console.log('Error fetching and parsing data', error);
+				this.deconnexion();
 			});
 	}
 
 	getHardCodedGame(){
-		this.checkIfStillConnected();
 		axios({
 			  method:'get',
 			  url:'http://'+window.location.hostname+':8089/getHardCodedGame',
@@ -121,11 +121,11 @@ export default class MainMenu extends Component{
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
+					this.deconnexion();
 				});
 	}
 
 	checkIfStillConnected(){
-		console.log("Checkin");
 		if(null != this.state.playerId){
 			axios({
 				  method:'post',
@@ -137,7 +137,6 @@ export default class MainMenu extends Component{
 				  .then((response)=>{
 						console.log("Status", response.data);
 						if(false===response.data){
-								this.cancelQueue();
 								this.deconnexion();
 						}
 					})
@@ -156,6 +155,7 @@ export default class MainMenu extends Component{
 	}
 
 	deconnexion(){
+		this.cancelQueue();
 		this.hideUnderContruction();
 		this.props.disconnectPlayer();
 	}
