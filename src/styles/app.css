@@ -479,6 +479,11 @@
 	border-radius: 5px;
 	background-color: green;
 }
+
+.invoquer{
+	opacity: 0.5;
+}
+
 .minion img.cardArt{
 	position:absolute;
 	top:0px;

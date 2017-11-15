@@ -115,8 +115,7 @@ export default class Board extends Component{
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
-						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} selectedCardIndex = {this.state.selectedCardIndex} 
-						indexesOfPlayedCardsThisTurn={this.state.indexesOfPlayedCardsThisTurn}/>
+						cellsOfSummonedMinionsThisTurn ={this.state.cellsOfSummonedMinionsThisTurn} selectedCardIndex = {this.state.selectedCardIndex} />
 					</div>
 					<button id="buttonEndTurn" onClick={this.sendActions.bind(this)}>Fin de tour</button>
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
@@ -158,6 +157,8 @@ export default class Board extends Component{
 				name:self.hand[this.state.selectedCardIndex].name, 
 				power:self.hand[this.state.selectedCardIndex].initialPower,
 				speed:self.hand[this.state.selectedCardIndex].initialSpeed});
+			
+			self.hand[this.state.selectedCardIndex].isSummoned = true;
 			
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
