@@ -479,6 +479,12 @@
 	border-radius: 5px;
 	background-color: green;
 }
+
+.invoquer{
+	visibility:hidden;
+	opacity: 0.2;
+}
+
 .minion img.cardArt{
 	position:absolute;
 	top:0px;
@@ -871,6 +877,7 @@
 	outline: none;
 	box-shadow: 0 0 30px #CAED9E;
 	border-radius: 5px;
+	opacity: 0.5;
 }
 
 /* Formulaires */
