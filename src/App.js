@@ -54,7 +54,8 @@ class App extends Component{
 			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue}
-				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)}/>
+				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)}
+				playerName = {this.state.playerName}/>
 			}
 			else if(true===this.state.inGame){
 				return(

@@ -76,6 +76,11 @@
 	right: 5%;
 }
 
+#menuPlayerName{
+	color: white;
+	font-weight: bold;
+}
+
 #loginForm {
 	position: relative;
 	width: 100%;
