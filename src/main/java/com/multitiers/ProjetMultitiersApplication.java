@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.multitiers.service.GameService;
-import com.multitiers.domaine.ingame.Minion;
-import com.multitiers.domaine.ingame.Player;
 import com.multitiers.service.AuthentificationService;
 import com.multitiers.service.CardCreationService;
 
