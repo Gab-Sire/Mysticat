@@ -12,6 +12,8 @@ public abstract class Action implements Comparable<Action>{
 		this.playerIndex = playerIndex;
 	}
 
+	public abstract void resolve(Game game);
+	
 
 	@Override
 	public int compareTo(Action a2) {

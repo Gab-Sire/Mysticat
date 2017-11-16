@@ -11,22 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
-import com.multitiers.domaine.ingame.AttackAction;
 import com.multitiers.domaine.ingame.Game;
-import com.multitiers.domaine.ingame.Hero;
-import com.multitiers.domaine.ingame.Minion;
-import com.multitiers.domaine.ingame.PlayableCard;
-import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
-import com.multitiers.domaine.ingame.SurrenderAction;
 
 @Service
 public class GameService implements QueueListener {
-	private static final int PLAYER_ONE_INDEX = 0;
-	private static final int PLAYER_TWO_INDEX = 1;
-	private static final int HERO_FACE_INDEX = -1;
-
 
 	public GameQueue gameQueue;
 	// Key: userId
@@ -90,15 +80,10 @@ public class GameService implements QueueListener {
 
 	private void resolveAllActions(List<Action> actions, Game game) {
 		for (Action action : actions) {
-			if (action instanceof SummonAction && !game.getEndedWithSurrender()) {
-				resolveSummonAction((SummonAction) action, game);
-			} else if (action instanceof AttackAction && !game.getEndedWithSurrender()) {
-				resolveAttackAction((AttackAction) action, game);
-			} else if (action instanceof SurrenderAction) {
-				game.setEndedWithSurrender(true);
-				resolveSurrenderAction((SurrenderAction) action, game);
-			}
-			sendDeadMinionsToGraveyards(game);
+			action.resolve(game);
+		}
+		if(game.getWinnerPlayerIndex()!=null) {
+			existingGameList.remove(game.getGameId());
 		}
 	}
 	
@@ -123,134 +108,12 @@ public class GameService implements QueueListener {
 		}
 	}
 	
-	// Enleve seulement les minions mort en ce moment.
-	private void sendDeadMinionsToGraveyards(Game game) {
-		Player[] players = game.getPlayers();
-		for(Player player : players) {
-			Minion[] field = player.getField();
-			List<PlayableCard> graveyard = player.getGraveyard();
-			for(int i=0; i<field.length; ++i) {
-				Minion minion = field[i];
-				if(minion!=null) {
-					if(minion.isDead()) {
-						field[i] = null;
-						graveyard.add(minion.getCardReference());
-					}
-				}
-			}
-			player.setGraveyard(graveyard);
-			player.setField(field);
-		}
-	}
-	
 	private List<Action> getCompleteSortedActionList(ActionList playerOneActions, ActionList playerTwoActions) {
 		List<Action> actions = new ArrayList<>();
 		actions.addAll(playerOneActions.getPlayerActions());
 		actions.addAll(playerTwoActions.getPlayerActions());
 		Collections.sort(actions);
 		return actions;
-	}
-
-	private void resolveSummonAction(SummonAction summonAction, Game game) {
-		Player playerSummoningTheMinion = game.getPlayers()[summonAction.getPlayerIndex()];
-		int fieldCell = summonAction.getFieldCellWhereTheMinionIsBeingSummoned();
-
-		PlayableMinionCard playableMinionCard = (PlayableMinionCard) playerSummoningTheMinion.getHand()
-				.get(summonAction.getIndexOfCardInHand());
-		Minion minion = new Minion(playableMinionCard);
-		playerSummoningTheMinion.getField()[fieldCell] = minion;
-		System.out.println(playerSummoningTheMinion.getName() + " played " + minion.getName() + " on: " + fieldCell);
-	}
-
-	private void resolveAttackAction(AttackAction attackAction, Game game) {
-		Integer playerDeclaringAttackIndex = attackAction.getPlayerIndex();
-		Integer opponentPlayerIndex = (playerDeclaringAttackIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
-				: PLAYER_ONE_INDEX;
-		Player playerDeclaringAttack = game.getPlayers()[playerDeclaringAttackIndex];
-		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
-
-		int attackerIndex = attackAction.getAttackingMinionIndex();
-		int attackedIndex = attackAction.getTargetIndex();
-		int speed = attackAction.getSpeed();
-		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
-		if (attacker == null) {
-			System.out.println("The minion on " + attackerIndex + " for " + playerDeclaringAttack.getName()
-					+ " had previously declared an attack but was killed before it could resolve");
-		} 
-		else {
-			verifySpeed(speed, attacker);
-			if (attackedIndex == HERO_FACE_INDEX) {
-				attackFace(opponentPlayer, attacker);
-				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
-					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
-				}
-			} else {
-				attackMinion(opponentPlayer, attackedIndex, attacker);
-			}
-		}
-		if(game.getWinnerPlayerIndex()!=null) {
-			existingGameList.remove(game.getGameId());
-		}
-	}
-	
-	private void resolveSurrenderAction(SurrenderAction surrenderAction, Game game) {
-		Integer playerDeclaringSurrenderIndex = surrenderAction.getPlayerIndex();
-		Integer opponentPlayerIndex = (playerDeclaringSurrenderIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
-				: PLAYER_ONE_INDEX;
-		
-		if(game.getWinnerPlayerIndex()==playerDeclaringSurrenderIndex) {
-			game.setWinnerPlayerIndex(-1);
-		}
-		else {
-			game.setWinnerPlayerIndex(opponentPlayerIndex);
-		}
-	}
-
-	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
-		Minion targetOfTheAttack;
-		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
-		if (targetOfTheAttack != null) {
-			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
-			if (attacker.isDead()) {
-				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
-			}
-			if (targetOfTheAttack.isDead()) {
-				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
-						+ " was killed by " + attacker.getName());
-			}
-		} else {
-			System.out.println("Target is missing or dead.");
-		}
-
-	}
-
-	private void attackerAndTargetExchangeDamage(Minion attacker, Minion targetOfTheAttack) {
-		attackerTakesDamageFromTarget(attacker, targetOfTheAttack);
-		targetTakesDamageFromAttacker(attacker, targetOfTheAttack);
-	}
-
-	private void targetTakesDamageFromAttacker(Minion attacker, Minion targetOfTheAttack) {
-		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
-	}
-
-	private void attackerTakesDamageFromTarget(Minion attacker, Minion targetOfTheAttack) {
-		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
-	}
-
-	private void attackFace(Player opponentPlayer, Minion attacker) {
-		Hero targetOfTheAttack;
-		targetOfTheAttack = opponentPlayer.getHero();
-		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
-		if (targetOfTheAttack.isDead()) {
-			//System.out.println("Congratz grad, you won.");
-		}
-	}
-
-	private void verifySpeed(int speed, Minion attacker) {
-		if (attacker.getSpeed() != speed) {
-			// TODO Gestion du mismatch
-			System.out.println("Error: Mismatch in speed for minion " + attacker.getName());
-		}
 	}
 
 	public void initDataLists() {
