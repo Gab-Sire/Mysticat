@@ -184,7 +184,7 @@ public class CardCreationService {
 		MinionCard kid = createMinionCard("Chat dessin Enfant", 1, 7 , 2, 1, "Mon premier dessin", "img/cardImg/DoodleSet/kiddrawing.png");
 		MinionCard chat = createMinionCard("Chat01", 1, 6, 3, 1, "Chat Chat chat", "img/cardImg/DoodleSet/cutelineCAt.png");
 		MinionCard clean = createMinionCard("Chat de Coeur", 3, 5, 7, 2, "Food Food Food", "img/cardImg/DoodleSet/heartCat.jpg");
-		MinionCard icon = createMinionCard("Icon", 9, 23, 3, 4, "Pay 2 win", "img/cardImg/DoodleSet/iconCat.png");
+		MinionCard icon = createMinionCard("Icon", 9, 13, 3, 4, "Pay 2 win", "img/cardImg/DoodleSet/iconCat.png");
 		MinionCard Painture = createMinionCard("Painture d'un chat", 5, 15, 5, 4, "Painture", "img/cardImg/DoodleSet/paintingCat.jpeg");
 		MinionCard Mozaichat = createMinionCard("Mozaichat",7 , 13, 10, 5, "Art", "img/cardImg/DoodleSet/mozaicCat.jpg");
 		MinionCard plusieur = createMinionCard("Many Chat", 5, 25, 5, 6, "Union fait la force", "img/cardImg/DoodleSet/ManyCat.png");
@@ -203,10 +203,10 @@ public class CardCreationService {
 	private void generateEpicSet() {
 		// Cartes de Jimmy, theme Epic
 		MinionCard sleeping = createMinionCard("Snooze", 5, 34 , 1, 7, "zZ zZ zZ", "img/cardImg/EpicSet/SleepingCat.gif");
-		MinionCard dancing = createMinionCard("Dancing Chat", 8, 12 , 20, 7, "Let dances", "img/cardImg/EpicSet/DancingCat.gif");
+		MinionCard dancing = createMinionCard("Dancing Chat", 8, 12 , 15, 6, "Let's dance", "img/cardImg/EpicSet/DancingCat.gif");
 		MinionCard RidingChat = createMinionCard("RidingChat", 8, 8 , 24, 7, "Yhay", "img/cardImg/EpicSet/RidingCat.gif");
-		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 8, 8, "Beat on the music", "img/cardImg/EpicSet/BeatCat.gif");
-		MinionCard Winter = createMinionCard("Winter Chat", 8, 8,24, 8, "Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
+		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 13, 8, "Beat on the music", "img/cardImg/EpicSet/BeatCat.gif");
+		MinionCard Winter = createMinionCard("Winter Chat", 8, 8, 19, 6, "Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
 		MinionCard padding = createMinionCard("Padding Chat", 8, 22, 15, 8, "My belly next, My belly next", "img/cardImg/EpicSet/Padding.gif");
 		MinionCard skatterA = createMinionCard("Grumpy Bat Lord", 10, 20, 15, 8, "Go my minion", "img/cardImg/EpicSet/BatLordCat.gif");
 		MinionCard jedi = createMinionCard("Nia", 10, 35, 5, 9, "Nia Nia Nia Nia Nia", "img/cardImg/EpicSet/RainbowCat.gif");
@@ -234,7 +234,7 @@ public class CardCreationService {
 		MinionCard clean = createMinionCard("Chat Clean", 4, 6, 5, 2, "Spot less", "img/cardImg/CatOverSet/CleanningCat.jpg");
 		MinionCard swim = createMinionCard("Chat Swim", 4, 5, 6, 2, "Dive in", "img/cardImg/CatOverSet/swimming.jpg");
 		MinionCard skatterA = createMinionCard("Chat Skater Trick", 5, 10, 5, 3, "Grab", "img/cardImg/CatOverSet/SkateBoardTrickCat.jpg");
-		MinionCard ariel = createMinionCard("Chariel", 22, 9, 4, 4, "Under the sea, Nobody beat us, Fry us and eat us, In fricassee", "img/cardImg/CatOverSet/MermaidCat.jpg");
+		MinionCard ariel = createMinionCard("Chariel", 12, 9, 4, 4, "Under the sea, Nobody beat us, Fry us and eat us, In fricassee", "img/cardImg/CatOverSet/MermaidCat.jpg");
 		MinionCard Chatraigner = createMinionCard("Chatraigner",10 , 15, 5, 5, "Food Food Food! Kill Food", "img/cardImg/CatOverSet/SpiderMonsterCat.jpeg");
 		cardRepository.save(turkey);
 		cardRepository.save(sushi);
