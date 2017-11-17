@@ -100,6 +100,7 @@ public class RestControlleur {
 			status.setIsConnected(authService.isThisUserConnected(user.getId()));
 			userStatuses.add(status);
 		}
+		Collections.sort(userStatuses);
 		return userStatuses;
 	}
 
