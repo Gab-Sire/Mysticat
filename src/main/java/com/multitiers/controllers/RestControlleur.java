@@ -263,19 +263,16 @@ public class RestControlleur {
 			if(playerTwoId.equals(playerOneId)) {
 				throw new RuntimeException("Duplicate action submission.");
 			}
-			surrenderForKickedPlayers(currentPlayerActionList, otherPlayerAction);
+			replaceKickedPlayersActionsWithSurrender(currentPlayerActionList, otherPlayerAction);
 			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);	
 		} else {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
 	}
 
-	private void surrenderForKickedPlayers(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		String playerOneId = currentPlayerActionList.getPlayerId();
-		String playerTwoId = otherPlayerAction.getPlayerId();
-		String gameId = currentPlayerActionList.getGameId();
-		surrenderForKickedPlayer(currentPlayerActionList, gameId, playerOneId);
-		surrenderForKickedPlayer(otherPlayerAction, gameId, playerTwoId);
+	private void replaceKickedPlayersActionsWithSurrender(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
+		replaceKickedPlayerActionsWithSurrender(currentPlayerActionList);
+		replaceKickedPlayerActionsWithSurrender(otherPlayerAction);
 	}
 
 
@@ -335,7 +332,9 @@ public class RestControlleur {
 	}
 	
 
-	private void surrenderForKickedPlayer(ActionList currentPlayerActionList, String gameId, String playerId) {
+	private void replaceKickedPlayerActionsWithSurrender(ActionList currentPlayerActionList) {
+		String gameId = currentPlayerActionList.getGameId();
+		String playerId = currentPlayerActionList.getPlayerId();
 		if(!authService.getConnectedUsers().containsKey(playerId)) {
 			List<Action> surrenderActionList = new ArrayList<>();
 			SurrenderAction surrenderAction = new SurrenderAction();
