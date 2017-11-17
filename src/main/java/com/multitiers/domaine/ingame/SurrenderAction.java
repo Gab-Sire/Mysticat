@@ -24,7 +24,7 @@ public class SurrenderAction extends Action{
 		Integer playerDeclaringSurrenderIndex = getPlayerIndex();
 		Integer opponentPlayerIndex = (playerDeclaringSurrenderIndex == PLAYER_ONE_INDEX) ? PLAYER_TWO_INDEX
 				: PLAYER_ONE_INDEX;
-		
+		System.out.println("Surrendering for "+playerDeclaringSurrenderIndex);
 		if(game.getWinnerPlayerIndex()==playerDeclaringSurrenderIndex) {
 			game.setWinnerPlayerIndex(-1);
 		}

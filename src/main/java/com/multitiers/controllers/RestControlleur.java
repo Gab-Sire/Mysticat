@@ -257,25 +257,25 @@ public class RestControlleur {
 		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
 		if (this.gameService.sentActionLists.containsKey(gameId)
 				&& !isSamePlayerSurrendering(currentPlayerActionList, otherPlayerAction)) {
-			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
+			String playerOneId = currentPlayerActionList.getPlayerId();
+			String playerTwoId = otherPlayerAction.getPlayerId();
+			
+			if(playerTwoId.equals(playerOneId)) {
+				throw new RuntimeException("Duplicate action submission.");
+			}
+			surrenderForKickedPlayers(currentPlayerActionList, otherPlayerAction, gameId, playerOneId, playerTwoId);
+			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);	
 		} else {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
 	}
 
-	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
-				&& actionListContainsSurrender(currentPlayerActionList);
+	private void surrenderForKickedPlayers(ActionList currentPlayerActionList, ActionList otherPlayerAction, String gameId, String playerOneId,
+			String playerTwoId) {
+		surrenderForKickedPlayer(currentPlayerActionList, gameId, playerOneId);
+		surrenderForKickedPlayer(otherPlayerAction, gameId, playerTwoId);
 	}
 
-	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
-		for (Action action : currentPlayerActionList.getPlayerActions()) {
-			if (action instanceof SurrenderAction) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	@PostMapping(value = "/checkIfGameUpdated")
 	public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
@@ -330,5 +330,33 @@ public class RestControlleur {
 				+ "<ul><li>Entre " + Constantes.MIN_USERNAME_LENGTH + " et " + Constantes.MAX_USERNAME_LENGTH
 				+ " caracteres inclusivement</li>" + "<li>Au moins 1 chiffre</li>"
 				+ "<li>Au moins 1 lettre minuscule</li>" + "<li>Au moins 1 lettre majuscule</li></ul>";
+	}
+	
+
+	private void surrenderForKickedPlayer(ActionList currentPlayerActionList, String gameId, String playerId) {
+		if(!authService.getConnectedUsers().containsKey(playerId)) {
+			List<Action> surrenderActionList = new ArrayList<>();
+			SurrenderAction surrenderAction = new SurrenderAction();
+			Game game = gameService.existingGameList.get(gameId);
+			Integer playerIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1 ;
+			surrenderAction.setField("kicked");
+			surrenderAction.setPlayerIndex(playerIndex);
+			surrenderActionList.add(surrenderAction);
+			currentPlayerActionList.setPlayerActions(surrenderActionList);
+		}
+	}
+
+	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
+		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
+				&& actionListContainsSurrender(currentPlayerActionList);
+	}
+
+	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
+		for (Action action : currentPlayerActionList.getPlayerActions()) {
+			if (action instanceof SurrenderAction) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

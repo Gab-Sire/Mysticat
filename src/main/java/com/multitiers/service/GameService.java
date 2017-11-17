@@ -44,9 +44,6 @@ public class GameService implements QueueListener {
 		if (!gameId.equals(playerTwoActions.getGameId())) {
 			throw new RuntimeException("Game id mismatch.");
 		}
-		if (playerOneId.equals(playerTwoId)) {
-			throw new RuntimeException("Duplicate action submission.");
-		}
 		List<Action> actions = getCompleteSortedActionList(playerOneActions, playerTwoActions);
 		Game game = this.existingGameList.get(gameId);
 
@@ -79,6 +76,9 @@ public class GameService implements QueueListener {
 	}
 
 	private void resolveAllActions(List<Action> actions, Game game) {
+		Player player1 = game.getPlayers()[0];
+		Player player2 = game.getPlayers()[1];
+
 		for (Action action : actions) {
 			action.resolve(game);
 		}
@@ -116,6 +116,9 @@ public class GameService implements QueueListener {
 		return actions;
 	}
 
+	
+	
+	
 	public void initDataLists() {
 		gameQueue = new GameQueue();
 		// Key: userId
@@ -150,5 +153,7 @@ public class GameService implements QueueListener {
 		}
 		this.existingGameList.put(game.getGameId(), game);
 	}
+	
+	
 }
 
