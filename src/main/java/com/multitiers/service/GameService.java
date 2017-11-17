@@ -14,6 +14,7 @@ import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Player;
 import com.multitiers.domaine.ingame.SummonAction;
+import com.multitiers.domaine.ingame.SurrenderAction;
 
 @Service
 public class GameService implements QueueListener {
@@ -116,7 +117,18 @@ public class GameService implements QueueListener {
 		return actions;
 	}
 
-	
+	public void replaceKickedPlayerActionsWithSurrender(ActionList currentPlayerActionList) {
+		String gameId = currentPlayerActionList.getGameId();
+		String playerId = currentPlayerActionList.getPlayerId();
+		List<Action> surrenderActionList = new ArrayList<>();
+		SurrenderAction surrenderAction = new SurrenderAction();
+		Game game = existingGameList.get(gameId);
+		Integer playerIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1;
+		surrenderAction.setField("kicked");
+		surrenderAction.setPlayerIndex(playerIndex);
+		surrenderActionList.add(surrenderAction);
+		currentPlayerActionList.setPlayerActions(surrenderActionList);
+	}
 	
 	
 	public void initDataLists() {

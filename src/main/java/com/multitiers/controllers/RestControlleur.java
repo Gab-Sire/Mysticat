@@ -207,12 +207,6 @@ public class RestControlleur {
 		return userRepository.findByUsername(username) != null;
 	}
 
-	@PostMapping(value = "/updateGame")
-	public Game updateGame(@RequestBody String jsonGame) {
-		Game game = JsonUtils.deserializeGameFromJson(jsonGame);
-		return game;
-	}
-
 	@PostMapping(value = "/enterQueue")
 	public void enterQueue(@RequestBody String userId) {
 		userId = userId.substring(0, userId.length() - 1);
@@ -259,22 +253,35 @@ public class RestControlleur {
 				&& !isSamePlayerSurrendering(currentPlayerActionList, otherPlayerAction)) {
 			String playerOneId = currentPlayerActionList.getPlayerId();
 			String playerTwoId = otherPlayerAction.getPlayerId();
-			
-			if(playerTwoId.equals(playerOneId)) {
+
+			if (playerTwoId.equals(playerOneId)) {
 				throw new RuntimeException("Duplicate action submission.");
 			}
-			replaceKickedPlayersActionsWithSurrender(currentPlayerActionList, otherPlayerAction);
-			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);	
+			if (!authService.getConnectedUsers().containsKey(playerOneId)) {
+				gameService.replaceKickedPlayerActionsWithSurrender(currentPlayerActionList);
+			}
+			if (!authService.getConnectedUsers().containsKey(playerTwoId)) {
+				gameService.replaceKickedPlayerActionsWithSurrender(otherPlayerAction);
+			}
+			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);
 		} else {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
 	}
 
-	private void replaceKickedPlayersActionsWithSurrender(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		replaceKickedPlayerActionsWithSurrender(currentPlayerActionList);
-		replaceKickedPlayerActionsWithSurrender(otherPlayerAction);
+	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
+		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
+				&& actionListContainsSurrender(currentPlayerActionList);
 	}
 
+	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
+		for (Action action : currentPlayerActionList.getPlayerActions()) {
+			if (action instanceof SurrenderAction) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@PostMapping(value = "/checkIfGameUpdated")
 	public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
@@ -329,35 +336,5 @@ public class RestControlleur {
 				+ "<ul><li>Entre " + Constantes.MIN_USERNAME_LENGTH + " et " + Constantes.MAX_USERNAME_LENGTH
 				+ " caracteres inclusivement</li>" + "<li>Au moins 1 chiffre</li>"
 				+ "<li>Au moins 1 lettre minuscule</li>" + "<li>Au moins 1 lettre majuscule</li></ul>";
-	}
-	
-
-	private void replaceKickedPlayerActionsWithSurrender(ActionList currentPlayerActionList) {
-		String gameId = currentPlayerActionList.getGameId();
-		String playerId = currentPlayerActionList.getPlayerId();
-		if(!authService.getConnectedUsers().containsKey(playerId)) {
-			List<Action> surrenderActionList = new ArrayList<>();
-			SurrenderAction surrenderAction = new SurrenderAction();
-			Game game = gameService.existingGameList.get(gameId);
-			Integer playerIndex = (game.getPlayers()[0].getPlayerId().equals(playerId)) ? 0 : 1 ;
-			surrenderAction.setField("kicked");
-			surrenderAction.setPlayerIndex(playerIndex);
-			surrenderActionList.add(surrenderAction);
-			currentPlayerActionList.setPlayerActions(surrenderActionList);
-		}
-	}
-
-	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
-				&& actionListContainsSurrender(currentPlayerActionList);
-	}
-
-	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
-		for (Action action : currentPlayerActionList.getPlayerActions()) {
-			if (action instanceof SurrenderAction) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
