@@ -275,12 +275,9 @@ public class RestControlleur {
 	}
 
 	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
-		for (Action action : currentPlayerActionList.getPlayerActions()) {
-			if (action instanceof SurrenderAction) {
-				return true;
-			}
-		}
-		return false;
+		List<Action> actions = currentPlayerActionList.getPlayerActions();
+		Collections.sort(actions);
+		return actions.get(0) instanceof SurrenderAction;
 	}
 
 	@PostMapping(value = "/checkIfGameUpdated")
