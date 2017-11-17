@@ -263,15 +263,17 @@ public class RestControlleur {
 			if(playerTwoId.equals(playerOneId)) {
 				throw new RuntimeException("Duplicate action submission.");
 			}
-			surrenderForKickedPlayers(currentPlayerActionList, otherPlayerAction, gameId, playerOneId, playerTwoId);
+			surrenderForKickedPlayers(currentPlayerActionList, otherPlayerAction);
 			this.gameService.calculateNextTurnFromActionLists(otherPlayerAction, currentPlayerActionList);	
 		} else {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
 	}
 
-	private void surrenderForKickedPlayers(ActionList currentPlayerActionList, ActionList otherPlayerAction, String gameId, String playerOneId,
-			String playerTwoId) {
+	private void surrenderForKickedPlayers(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
+		String playerOneId = currentPlayerActionList.getPlayerId();
+		String playerTwoId = otherPlayerAction.getPlayerId();
+		String gameId = currentPlayerActionList.getGameId();
 		surrenderForKickedPlayer(currentPlayerActionList, gameId, playerOneId);
 		surrenderForKickedPlayer(otherPlayerAction, gameId, playerTwoId);
 	}
