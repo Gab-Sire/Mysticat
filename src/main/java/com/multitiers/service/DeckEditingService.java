@@ -15,24 +15,23 @@ import com.multitiers.repository.UserRepository;
 public class DeckEditingService {
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Transactional
 	public void changeDeck(User user, Integer deckIndex, Deck newDeck, Boolean isNewFavoriteDeck) {
 		List<Deck> deckList = user.getDecks();
-		if(deckList.size()<=deckIndex) {
+		if (deckIndex >= user.getDecks().size()) {
+			deckIndex = user.getDecks().size();
 			deckList.add(newDeck);
 		}
 		else {
-			deckList.set(deckIndex, newDeck);	
+			deckList.set(deckIndex, newDeck);
 		}
-		if(isNewFavoriteDeck) {
-			if(deckIndex>=user.getDecks().size()) {
-				deckIndex = user.getDecks().size()-1;
-			}
+
+		if (isNewFavoriteDeck) {
 			user.setFavoriteDeck(deckIndex);
 		}
 		user.setDecks(deckList);
 		userRepository.save(user);
 	}
-	
+
 }

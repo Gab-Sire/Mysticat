@@ -112,6 +112,10 @@ public class RestControlleur {
 		}
 		User user = userRepository.findById(userId);
 		List<Deck> decks = user.getDecks();
+		System.out.println("printing decks");
+		for(Deck deck : decks) {
+			System.out.println(deck.getName());
+		}
 		return decks;
 	}
 
