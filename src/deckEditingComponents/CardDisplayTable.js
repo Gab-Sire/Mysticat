@@ -115,9 +115,9 @@ export default class CardDisplayTable extends Component {
         <div id="cardCounter">{<span className={(false===this.isTheDeckValid()) ? "invalidDeck" : ""}>{deck.length}</span>}/30</div>
         {
           (true===this.state.editMode) ? (
-            (this.state.deckIndex===this.state.favorite) ? <div id="changeFavoriteDeckText">Ce deck est votre favori</div> :
-            <div id="changeFavoriteDeckText">Faire ce deck votre favori<input type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite.bind(this)} /></div>
-          ) : null
+            (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck favori est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Ce deck est votre favori</div> :
+            <div id="changeFavoriteDeckText" title="Votre deck favori est celui avec lequel vous jouez une partie.">Deck Favori<input id="selectFavoriteDeckCheckbox" type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite.bind(this)} /></div>
+          ) : (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck favori est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Ce deck est votre favori</div> : null
         }
 
         <br/>
