@@ -178,11 +178,7 @@ public class RestControlleur {
 		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
 		newDeck.setName(deckName);
 		newDeck.setCardList(cardList);
-		deckEditingService.changeDeck(user, deckIndex, newDeck);
-		if(isNewFavoriteDeck) {
-			user.setFavoriteDeck(deckIndex);
-			userRepository.save(user);
-		}
+		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
 		System.out.println("Saved deck");
 	}
 
