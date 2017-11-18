@@ -251,7 +251,7 @@ public class RestControlleur {
 		gameService.updatedGameList.remove(currentPlayerActionList.getPlayerId());
 		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
 		if (this.gameService.sentActionLists.containsKey(gameId)
-				&& !isSamePlayerSurrendering(currentPlayerActionList, otherPlayerAction)) {
+				&& !currentPlayerActionList.isSamePlayerSurrendering(otherPlayerAction)) {
 			String playerOneId = currentPlayerActionList.getPlayerId();
 			String playerTwoId = otherPlayerAction.getPlayerId();
 
@@ -268,17 +268,6 @@ public class RestControlleur {
 		} else {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
-	}
-
-	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
-				&& actionListContainsSurrender(currentPlayerActionList);
-	}
-
-	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
-		List<Action> actions = currentPlayerActionList.getPlayerActions();
-		Collections.sort(actions);
-		return actions.get(0) instanceof SurrenderAction;
 	}
 
 	@PostMapping(value = "/checkIfGameUpdated")
