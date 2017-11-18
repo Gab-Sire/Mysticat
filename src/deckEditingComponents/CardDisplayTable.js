@@ -26,6 +26,7 @@ export default class CardDisplayTable extends Component {
   componentWillMount(){
     this.getCollection();
     this.setState({
+            favorite: this.props.favorite,
     		    deck:this.props.deckList.cardList,
             deckIndex: this.props.deckId,
             userId: this.props.playerId,
@@ -36,6 +37,8 @@ export default class CardDisplayTable extends Component {
   }
 
   render() {
+    console.log("Deck id:", this.state.deckIndex);
+    console.log("Favorite deck:", this.state.favorite)
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
     	  return (
@@ -105,17 +108,22 @@ export default class CardDisplayTable extends Component {
         <h1 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification Deck" : "Affichage Deck"}</h1>
 				<div>{(true===this.state.editMode) ?
 				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
-				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button></div>
+				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
+        </div>
 				:
 				<h2 className='displayDeckTitle'>{this.state.deckName}</h2>
 						}</div>
-
         <div id="cardCounter">{<span className={(false===this.isTheDeckValid()) ? "invalidDeck" : ""}>{deck.length}</span>}/30</div>
+        {
+          (true===this.state.editMode) ? (
+            (this.state.deckIndex===this.state.favorite) ? <div id="changeFavoriteDeckText">Ce deck est votre favori</div> :
+            <div id="changeFavoriteDeckText">Faire ce deck votre favori<input type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite} /></div>
+          ) : null
+        }
 
         <br/>
         {(true===this.state.editMode) ?
           <div>
-
   	        <div className='cardDisplayTable editMode'>
     					{(true===this.state.editMode) ? editModeCollection : deck}
     					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
@@ -186,6 +194,12 @@ export default class CardDisplayTable extends Component {
       }
       this.setState({isSuccessVisible:false})
     }
+  }
+
+  handleChangeFavorite(event){
+    let target = event.target;
+    let isFavorite = target.checked;
+    console.log(isFavorite);
   }
 
   handleChangeDeckName(event){

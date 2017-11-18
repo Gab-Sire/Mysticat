@@ -630,6 +630,12 @@
 	opacity:1 !important;
 }
 
+#changeFavoriteDeckText{
+	color: yellow;
+	font-weight: bold;
+	text-align: center;
+}
+
 .invalidDeck{
 	color: red;
 	font-weight: bold;

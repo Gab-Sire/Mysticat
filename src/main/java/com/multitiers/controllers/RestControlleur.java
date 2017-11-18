@@ -132,6 +132,15 @@ public class RestControlleur {
 		Collections.sort(deck.getCardList());
 		return deck;
 	}
+	
+	@GetMapping(value="/getFavoriteDeckIndex/{userId}")
+	public Integer getFavoriteDeckIndex(@PathVariable String userId) {
+		User user = userRepository.findById(userId);
+		if(user==null) {
+			throw new RuntimeException("User is null.");
+		}
+		return user.getFavoriteDeck();
+	}
 
 	@PostMapping(value = "/getCollection")
 	public List<Card> getCollection() {

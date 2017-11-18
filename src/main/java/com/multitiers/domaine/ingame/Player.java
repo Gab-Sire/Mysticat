@@ -43,7 +43,7 @@ public class Player {
 
 	private void convertUserDeckToPlayerDeck(User user) {
 		this.deck = new ArrayList<PlayableCard>();
-		List<Card> entityCardList = user.getDecks().get(0).getCardList();
+		List<Card> entityCardList = user.getDecks().get(user.getFavoriteDeck()).getCardList();
 		for(int i=0; i<entityCardList.size(); i++) {
 			this.deck.add(new PlayableMinionCard((MinionCard) entityCardList.get(i)));
 		}
