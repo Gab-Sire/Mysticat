@@ -153,6 +153,7 @@ public class RestControlleur {
 	public void saveDeck(@RequestBody String json) {
 		UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
 		String userId = userDeck.getUserId();
+		Boolean isNewFavoriteDeck = userDeck.getIsNewFavorite();
 		if (!authService.isThisUserConnected(userId)) {
 			throw new RuntimeException("User no longer connected.");
 		}
@@ -178,6 +179,11 @@ public class RestControlleur {
 		newDeck.setName(deckName);
 		newDeck.setCardList(cardList);
 		deckEditingService.changeDeck(user, deckIndex, newDeck);
+		if(isNewFavoriteDeck) {
+			user.setFavoriteDeck(deckIndex);
+			userRepository.save(user);
+			System.out.println("New favorite deck on "+deckIndex);
+		}
 		System.out.println("Saved deck");
 	}
 

@@ -17,6 +17,7 @@ export default class CardDisplayTable extends Component {
     this.state = {
         editMode: false,
         collection : [],
+        isNewFavorite : false,
         isAlertDeckSizeVisible: false,
         isSuccessVisible: false,
         isAlertDeckNameVisible: false
@@ -37,8 +38,6 @@ export default class CardDisplayTable extends Component {
   }
 
   render() {
-    console.log("Deck id:", this.state.deckIndex);
-    console.log("Favorite deck:", this.state.favorite)
       const props = this.state.deck;
       let deck = this.state.deck.map(function(card, index){
     	  return (
@@ -117,7 +116,7 @@ export default class CardDisplayTable extends Component {
         {
           (true===this.state.editMode) ? (
             (this.state.deckIndex===this.state.favorite) ? <div id="changeFavoriteDeckText">Ce deck est votre favori</div> :
-            <div id="changeFavoriteDeckText">Faire ce deck votre favori<input type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite} /></div>
+            <div id="changeFavoriteDeckText">Faire ce deck votre favori<input type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite.bind(this)} /></div>
           ) : null
         }
 
@@ -160,6 +159,7 @@ export default class CardDisplayTable extends Component {
       let cardIds = [];
       let deckIndex = this.state.deckIndex;
       let deckName = this.state.deckName;
+      let isNewFavorite = this.state.isNewFavorite;
       for(let i=0; i<this.state.deck.length; i++){
           cardIds.push(this.state.deck[i].cardId);
       }
@@ -172,7 +172,8 @@ export default class CardDisplayTable extends Component {
             cardIds: cardIds,
             deckIndex: deckIndex,
             deckName: deckName,
-            userId: userId
+            userId: userId,
+            isNewFavorite: isNewFavorite
           }
         })
           .then((response)=>{
@@ -199,7 +200,7 @@ export default class CardDisplayTable extends Component {
   handleChangeFavorite(event){
     let target = event.target;
     let isFavorite = target.checked;
-    console.log(isFavorite);
+    this.setState({isNewFavorite: isFavorite});
   }
 
   handleChangeDeckName(event){

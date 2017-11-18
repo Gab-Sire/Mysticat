@@ -7,6 +7,7 @@ public class UserDeck {
 	private String userId;
 	private Integer deckIndex;
 	private String deckName;
+	private Boolean isNewFavorite;
 	
 	public String getDeckName() {
 		return deckName;
@@ -32,4 +33,11 @@ public class UserDeck {
 	public void setDeckIndex(Integer deckIndex) {
 		this.deckIndex = deckIndex;
 	}
+	public Boolean getIsNewFavorite() {
+		return isNewFavorite;
+	}
+	public void setIsNewFavorite(Boolean isNewFavorite) {
+		this.isNewFavorite = isNewFavorite;
+	}
+	
 }

@@ -18,9 +18,9 @@ export default class DisplayDeck extends Component {
     }
   }
   componentWillMount(){
+    this.getFavoriteDeckIndex();
 	  this.getDeck();
 	  this.getCollection();
-    this.getFavoriteDeckIndex();
   }
 
   getDeck(){
@@ -57,6 +57,7 @@ export default class DisplayDeck extends Component {
 				  }
 			})
 			  .then((response)=>{
+          console.log("Fave deck:", response.data)
 				  this.setState({favoriteDeckIndex: response.data});
 				})
 				.catch(error => {
