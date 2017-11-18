@@ -182,7 +182,6 @@ public class RestControlleur {
 		if(isNewFavoriteDeck) {
 			user.setFavoriteDeck(deckIndex);
 			userRepository.save(user);
-			System.out.println("New favorite deck on "+deckIndex);
 		}
 		System.out.println("Saved deck");
 	}
