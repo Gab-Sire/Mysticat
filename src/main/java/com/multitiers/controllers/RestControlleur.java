@@ -282,6 +282,22 @@ public class RestControlleur {
 		}
 		return false;
 	}
+	
+	@PostMapping(value = "/getGameID")
+	public @ResponseBody String getObserverGameID() {
+		gameId = gameId.substring(0, gameId.length() - 1);
+		Game game = this.gameService.existingGameList.get(gameId);
+		
+		return game;
+	}
+	
+	@PostMapping(value = "/observe")
+	public @ResponseBody Game getObserverMode(@RequestBody String gameId) {
+		gameId = gameId.substring(0, gameId.length() - 1);
+		Game game = this.gameService.existingGameList.get(gameId);
+		
+		return game;
+	}
 
 	@PostMapping(value = "/checkIfGameUpdated")
 	public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
