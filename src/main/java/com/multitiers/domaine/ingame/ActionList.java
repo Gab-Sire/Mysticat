@@ -1,5 +1,6 @@
 package com.multitiers.domaine.ingame;
 
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -44,4 +45,13 @@ public class ActionList {
 		this.playerActions.addAll(otherList.playerActions);
 	}
 	
+	public Boolean containsSurrenderAction(){
+		List<Action> actions = getPlayerActions();
+		Collections.sort(actions);
+		return actions.get(0) instanceof SurrenderAction;
+	}
+	
+	public Boolean isSamePlayerSurrendering(ActionList otherPlayerAction) {
+		return (getPlayerId().equals(otherPlayerAction.getPlayerId()) && containsSurrenderAction());
+	}
 }

@@ -22,7 +22,7 @@ export default class DeckSelection extends Component{
 		let emptyDeckSlots = [];
 		for(var i = 0; i < slotsRemaining; i++){
 			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} index={i+numberDecks} isUserDeck={true}
-			deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay}/>);
+			deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} />);
 		}
 
 		return(
@@ -50,4 +50,3 @@ export default class DeckSelection extends Component{
 		this.props.disconnectPlayer();
 	}
 }
-

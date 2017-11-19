@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,7 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user")
+	@OrderColumn
 	protected List<Deck> decks;
 
 	@Column(name = "usr_salt", nullable = false, updatable = false)
@@ -34,6 +36,9 @@ public class User {
 
 	@Column(name = "usr_hero_img_path")
 	protected HeroPortrait heroPortrait;
+	
+	@Column(name="usr_favorite_deck")
+	protected Integer favoriteDeck;
 
 	public User(String username, String passwordHash, String hashedSalt) {
 		super();
@@ -41,6 +46,7 @@ public class User {
 		this.hashedSalt = hashedSalt;
 		this.passwordHash = passwordHash;
 		this.decks = new ArrayList<>();
+		this.favoriteDeck = 0;
 	}
 
 	public User() {
@@ -94,4 +100,11 @@ public class User {
 		this.heroPortrait = heroPortrait;
 	}
 
+	public Integer getFavoriteDeck() {
+		return favoriteDeck;
+	}
+
+	public void setFavoriteDeck(Integer favoriteDeck) {
+		this.favoriteDeck = favoriteDeck;
+	}
 }

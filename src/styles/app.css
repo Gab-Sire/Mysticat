@@ -630,6 +630,26 @@
 	opacity:1 !important;
 }
 
+#selectFavoriteDeckCheckbox{
+	position: relative;
+	width: 30px;
+	height: 100%;
+	margin-left: 10px;
+	 vertical-align:middle;
+	 margin-top:0;
+	 box-sizing: border-box;
+}
+
+#changeFavoriteDeckText{
+	font-size: 1.5em;
+	position: relative;
+	color: yellow;
+	font-weight: bold;
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+}
+
 .invalidDeck{
 	color: red;
 	font-weight: bold;
@@ -692,7 +712,7 @@
 }
 
 #cardCounter{
-	font-size: 20px;
+	font-size: 2em;
 	color: white;
 	text-align: center;
 }

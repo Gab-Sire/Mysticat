@@ -94,6 +94,8 @@ class App extends Component{
 				});
 	}
 
+	
+
 	checkIfStillConnected(){
 		if(null != this.state.playerId){
 			axios({

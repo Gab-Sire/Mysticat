@@ -100,6 +100,7 @@ public class RestControlleur {
 			status.setIsConnected(authService.isThisUserConnected(user.getId()));
 			userStatuses.add(status);
 		}
+		Collections.sort(userStatuses);
 		return userStatuses;
 	}
 
@@ -111,6 +112,10 @@ public class RestControlleur {
 		}
 		User user = userRepository.findById(userId);
 		List<Deck> decks = user.getDecks();
+		System.out.println("printing decks");
+		for(Deck deck : decks) {
+			System.out.println(deck.getName());
+		}
 		return decks;
 	}
 
@@ -131,6 +136,15 @@ public class RestControlleur {
 		Collections.sort(deck.getCardList());
 		return deck;
 	}
+	
+	@GetMapping(value="/getFavoriteDeckIndex/{userId}")
+	public Integer getFavoriteDeckIndex(@PathVariable String userId) {
+		User user = userRepository.findById(userId);
+		if(user==null) {
+			throw new RuntimeException("User is null.");
+		}
+		return user.getFavoriteDeck();
+	}
 
 	@PostMapping(value = "/getCollection")
 	public List<Card> getCollection() {
@@ -143,6 +157,7 @@ public class RestControlleur {
 	public void saveDeck(@RequestBody String json) {
 		UserDeck userDeck = JsonUtils.deserializeUserDeckFromJson(json);
 		String userId = userDeck.getUserId();
+		Boolean isNewFavoriteDeck = userDeck.getIsNewFavorite();
 		if (!authService.isThisUserConnected(userId)) {
 			throw new RuntimeException("User no longer connected.");
 		}
@@ -167,7 +182,7 @@ public class RestControlleur {
 		newDeck.setDeckId(ConnectionUtils.generateUUID().toString());
 		newDeck.setName(deckName);
 		newDeck.setCardList(cardList);
-		deckEditingService.changeDeck(user, deckIndex, newDeck);
+		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
 		System.out.println("Saved deck");
 	}
 
@@ -250,7 +265,7 @@ public class RestControlleur {
 		gameService.updatedGameList.remove(currentPlayerActionList.getPlayerId());
 		ActionList otherPlayerAction = this.gameService.sentActionLists.get(gameId);
 		if (this.gameService.sentActionLists.containsKey(gameId)
-				&& !isSamePlayerSurrendering(currentPlayerActionList, otherPlayerAction)) {
+				&& !currentPlayerActionList.isSamePlayerSurrendering(otherPlayerAction)) {
 			String playerOneId = currentPlayerActionList.getPlayerId();
 			String playerTwoId = otherPlayerAction.getPlayerId();
 
@@ -285,10 +300,9 @@ public class RestControlleur {
 	
 	@PostMapping(value = "/getGameID")
 	public @ResponseBody String getObserverGameID() {
-		gameId = gameId.substring(0, gameId.length() - 1);
-		Game game = this.gameService.existingGameList.get(gameId);
-		
-		return game;
+		int index =(int) (Math.random()*this.gameService.existingGameList.size());
+		Game game = this.gameService.existingGameList.get(this.gameService.existingGameList.keySet().toArray()[index]);
+		return new Gson().toJson(game.getGameId());
 	}
 	
 	@PostMapping(value = "/observe")
