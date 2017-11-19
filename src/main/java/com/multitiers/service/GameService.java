@@ -77,9 +77,6 @@ public class GameService implements QueueListener {
 	}
 
 	private void resolveAllActions(List<Action> actions, Game game) {
-		Player player1 = game.getPlayers()[0];
-		Player player2 = game.getPlayers()[1];
-
 		for (Action action : actions) {
 			action.resolve(game);
 		}
