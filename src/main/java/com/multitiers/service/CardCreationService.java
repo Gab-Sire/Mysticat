@@ -57,7 +57,7 @@ public class CardCreationService {
 		MinionCard chatBucheron = createMinionCard("Bu-chat-ronron", 8, 15, 2, 4, "And my axe. Meow.", "img/cardImg/jobSet/lumberjackCat.png");
 		MinionCard chatPecheur = createMinionCard("Chat Pecheur", 2, 7, 6, 2, "Un brave mousaillon.", "img/cardImg/jobSet/fishermanCat.jpg");
 		MinionCard docteurPatte = createMinionCard("Docteur Patte", 6, 3, 6, 2, "State the nature of your medical emergency.", "img/cardImg/jobSet/drChat.jpg");
-		MinionCard chatConstruction = createMinionCard("Handycat", 2,3,0,0, "Contracteur officiel du nouveau pont Chatplain", "img/cardImg/jobSet/chatWorker.jpg");
+		MinionCard chatConstruction = createMinionCard("Chat bricoleur", 2,3,0,0, "Contracteur officiel du nouveau pont Chatplain", "img/cardImg/jobSet/chatWorker.jpg");
 		MinionCard chatDaffaire = createMinionCard("Chat d'affaire", 1,1,3,0, "Est-ce que je peux avoir une augmentation? Ma femme a acouché de 9 enfants hier.", "img/cardImg/jobSet/chatDaffaire.jpg");
 		
 		cardRepository.save(chatBanquier);
@@ -282,7 +282,7 @@ public class CardCreationService {
 		MinionCard sushi = createMinionCard("Chat sushi", 1, 8, 1, 1, "Eat Me", "img/cardImg/CatOverSet/SushiCat.jpeg");
 		MinionCard mop = createMinionCard("Chat Mop", 1, 5, 4, 1, "No. Not the bucket",
 				"img/cardImg/CatOverSet/Mop.jpg");
-		MinionCard clean = createMinionCard("Chat Clean", 4, 6, 5, 2, "Spot less",
+		MinionCard clean = createMinionCard("Chat Clean", 3, 7, 5, 2, "Spot less",
 				"img/cardImg/CatOverSet/CleanningCat.jpg");
 		MinionCard swim = createMinionCard("Chat Swim", 4, 5, 6, 2, "Dive in", "img/cardImg/CatOverSet/swimming.jpg");
 		MinionCard skatterA = createMinionCard("Chat Skater Trick", 5, 10, 5, 3, "Grab",
