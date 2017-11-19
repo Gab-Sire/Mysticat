@@ -144,7 +144,7 @@ public class RestControlleur {
 		return user.getFavoriteDeck();
 	}
 
-	@PostMapping(value = "/getCollection")
+	@GetMapping(value = "/getCollection")
 	public List<Card> getCollection() {
 		List<Card> cardCollection = cardRepository.findAll();
 		Collections.sort(cardCollection);

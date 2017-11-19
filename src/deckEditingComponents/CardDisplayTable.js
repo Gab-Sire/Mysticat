@@ -140,7 +140,7 @@ export default class CardDisplayTable extends Component {
 
   getCollection(){
 	  axios({
-	        method:'post',
+	        method:'get',
 	        url:'http://'+window.location.hostname+':8089/getCollection',
 	        responseType:'json',
 	        headers: {'Access-Control-Allow-Origin': "true"}

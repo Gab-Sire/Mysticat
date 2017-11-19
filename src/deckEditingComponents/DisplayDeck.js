@@ -20,7 +20,6 @@ export default class DisplayDeck extends Component {
   componentWillMount(){
     this.getFavoriteDeckIndex();
 	  this.getDeck();
-	  this.getCollection();
   }
 
   getDeck(){
@@ -65,24 +64,9 @@ export default class DisplayDeck extends Component {
 		});
   }
 
-  getCollection(){
-	  axios({
-	        method:'post',
-	        url:'http://'+window.location.hostname+':8089/getCollection',
-	        responseType:'json',
-	        headers: {'Access-Control-Allow-Origin': "true"}
-	      })
-	        .then((response)=>{
-	        	this.setState({collection:response.data});
-	        })
-	        .catch(error => {
-	          console.log('Error fetching and parsing data', error);
-            this.deconnexion();
-	        });
-  }
 
   render() {
-	  if( null !== this.state.deck && null !== this.state.collection){
+	  if( null !== this.state.deck){
 		  return (
         <div className='MainMenu'>
         	<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
