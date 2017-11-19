@@ -58,6 +58,7 @@ public class CardCreationService {
 		MinionCard chatPecheur = createMinionCard("Chat Pecheur", 2, 7, 6, 2, "Un brave mousaillon.", "img/cardImg/jobSet/fishermanCat.jpg");
 		MinionCard docteurPatte = createMinionCard("Docteur Patte", 6, 3, 6, 2, "State the nature of your medical emergency.", "img/cardImg/jobSet/drChat.jpg");
 		MinionCard chatConstruction = createMinionCard("Handycat", 2,3,0,0, "Contracteur officiel du nouveau pont Chatplain", "img/cardImg/jobSet/chatWorker.jpg");
+		MinionCard chatDaffaire = createMinionCard("Chat d'affaire", 1,1,3,0, "Est-ce que je peux avoir une augmentation? Ma femme a acouché de 9 enfants hier.", "img/cardImg/jobSet/chatDaffaire.jpg");
 		
 		cardRepository.save(chatBanquier);
 		cardRepository.save(chatPompier);
@@ -68,6 +69,7 @@ public class CardCreationService {
 		cardRepository.save(chatPecheur);
 		cardRepository.save(docteurPatte);
 		cardRepository.save(chatConstruction);
+		cardRepository.save(chatDaffaire);
 	}
 
 	@Transactional
