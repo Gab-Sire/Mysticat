@@ -259,7 +259,7 @@ public class CardCreationService {
 				"img/cardImg/EpicSet/RainbowCat.gif");
 		MinionCard nia = createMinionCard("Chat Jedi", 10, 34, 6, 9, "Use the force Luke",
 				"img/cardImg/EpicSet/catSaber.gif");
-		MinionCard gun = createMinionCard("Chat Gun", 10, 40, 5, 10, "AHAHAHAHHAHAHAHAHA",
+		MinionCard gun = createMinionCard("Chatatatatata", 10, 40, 5, 10, "AHAHAHAHHAHAHAHAHA",
 				"img/cardImg/EpicSet/GunCat.gif");
 		cardRepository.save(sleeping);
 		cardRepository.save(dancing);
