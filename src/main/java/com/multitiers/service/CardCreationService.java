@@ -79,7 +79,7 @@ public class CardCreationService {
 				"img/cardImg/medievalSetCards/chavalier.jpg");
 		MinionCard chatDragon = createMinionCard("ChatDragon", 25, 25, 5, 10,
 				"Ce dragon peut vous pulvériser. Attention.", "img/cardImg/medievalSetCards/dragonCat.jpg");
-		MinionCard chatPrincesse = createMinionCard("ChatPrincesse", 10, 5, 5, 3,
+		MinionCard chatPrincesse = createMinionCard("Chat princesse", 10, 5, 5, 3,
 				"Ne vous faites pas avoir. Elle est rusée.", "img/cardImg/medievalSetCards/chatPrincesse.jpg");
 		MinionCard chatBotte = createMinionCard("ChatBotte", 15, 10, 15, 7,
 				"Il décidera de votre sort. Ce sera une chattastrophe", "img/cardImg/medievalSetCards/chatBotte.jpg");
@@ -245,7 +245,7 @@ public class CardCreationService {
 				"img/cardImg/EpicSet/SleepingCat.gif");
 		MinionCard dancing = createMinionCard("Dancing Chat", 8, 12, 15, 6, "Let's dance",
 				"img/cardImg/EpicSet/DancingCat.gif");
-		MinionCard RidingChat = createMinionCard("RidingChat", 8, 8, 24, 7, "Yhay",
+		MinionCard RidingChat = createMinionCard("Chat pilote", 8, 8, 24, 7, "Yhay",
 				"img/cardImg/EpicSet/RidingCat.gif");
 		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 13, 8, "Beat on the music",
 				"img/cardImg/EpicSet/BeatCat.gif");
