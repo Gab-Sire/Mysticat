@@ -245,15 +245,15 @@ public class CardCreationService {
 				"img/cardImg/EpicSet/SleepingCat.gif");
 		MinionCard dancing = createMinionCard("Dancing Chat", 8, 12, 15, 6, "Let's dance",
 				"img/cardImg/EpicSet/DancingCat.gif");
-		MinionCard RidingChat = createMinionCard("Chat pilote", 8, 8, 24, 7, "Yhay",
+		MinionCard ridingChat = createMinionCard("Chat pilote", 8, 8, 24, 7, "Yhay",
 				"img/cardImg/EpicSet/RidingCat.gif");
 		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 13, 8, "Beat on the music",
 				"img/cardImg/EpicSet/BeatCat.gif");
-		MinionCard Winter = createMinionCard("Winter Chat", 8, 8, 19, 6,
+		MinionCard winter = createMinionCard("Winter Chat", 8, 8, 19, 6,
 				"Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
 		MinionCard padding = createMinionCard("Padding Chat", 8, 22, 15, 8, "My belly next, My belly next",
 				"img/cardImg/EpicSet/Padding.gif");
-		MinionCard skatterA = createMinionCard("Grumpy Bat Lord", 10, 20, 15, 8, "Go my minion",
+		MinionCard skatterA = createMinionCard("Grumpy Bat Lord", 10, 20, 15, 8, "Go my minions",
 				"img/cardImg/EpicSet/BatLordCat.gif");
 		MinionCard jedi = createMinionCard("Nia", 10, 35, 5, 9, "Nia Nia Nia Nia Nia",
 				"img/cardImg/EpicSet/RainbowCat.gif");
@@ -265,8 +265,8 @@ public class CardCreationService {
 		cardRepository.save(dancing);
 		cardRepository.save(beat);
 		cardRepository.save(padding);
-		cardRepository.save(RidingChat);
-		cardRepository.save(Winter);
+		cardRepository.save(ridingChat);
+		cardRepository.save(winter);
 		cardRepository.save(skatterA);
 		cardRepository.save(jedi);
 		cardRepository.save(nia);
