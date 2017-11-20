@@ -189,9 +189,13 @@ export default class CardDisplayTable extends Component {
     else{
       if(false===this.isTheDeckValid()){
         this.setState({isAlertDeckSizeVisible:true})
+      }else{
+          this.setState({isAlertDeckSizeVisible:false})
       }
       if(false===this.isTheDeckNameValid()){
         this.setState({isAlertDeckNameVisible:true})
+      }else{
+          this.setState({isAlertDeckNameVisible:false})
       }
       this.setState({isSuccessVisible:false})
     }
