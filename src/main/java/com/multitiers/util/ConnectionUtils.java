@@ -8,8 +8,7 @@ public class ConnectionUtils {
 	public static final char MINIMUM_CHAR_PASSWORD = '!';
 	public static final char MAXIMUM_CHAR_PASSWORD = '~';
 
-	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5
-	// caracteres et maximale de 30.
+	// longueur de caracteres de 5 à 30
 	public final static String USERNAME_REGEX = "^." + "{"+ Constantes.MIN_USERNAME_LENGTH + "," + Constantes.MAX_USERNAME_LENGTH + "}$";
 
 	// Une lettre majuscule, une lettre minuscule, un chiffre, longueur minimale 5

@@ -1,28 +1,75 @@
 package com.multitiers.test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.Ignore;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.multitiers.domaine.entity.Card;
+import com.multitiers.domaine.entity.HeroPortrait;
+import com.multitiers.domaine.entity.User;
+import com.multitiers.exception.BadPasswordFormatException;
+import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
-import com.multitiers.service.CardCreationService;
+import com.multitiers.service.AuthentificationService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AuthentificationServiceTest {
 	
-	CardCreationService cardCreationService = new CardCreationService();
+	@Mock
+	CardRepository cardRepositoryMock;
 	
-	@Autowired
 	CardRepository cardRepository;
 	
-	@Test
-	@Ignore
-	public void testInsertCustomCardsInDatabase() {
-		cardCreationService.initBasicCardSet();
-		Card card = cardRepository.findByCardName("Chat noir");
-		assertNotNull(card);
+	@Mock
+	User user;
+	
+	@InjectMocks
+	AuthentificationService authService;
+	
+	List<Card> listeCartes;
+	
+	@Before
+	public void setUp() {
+		listeCartes = new ArrayList<>();
+		for(int i = 0; i < 40; i++) {
+			Card carte = null;
+			listeCartes.add(carte);
+		}
+	
 	}
+	
+	@After
+	public void tearDown() {
+		
+	}
+	
+	@Test()
+	public void testCreateUser() {
+		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
+		
+		User createdUser01 = authService.createUser("TestChat", "Power1", HeroPortrait.warriorHero);
+		
+		//cas valide pour créer un utilisateur
+		assertThat(createdUser01).isNotNull();
+		
+		//cas invalide: mot de passe ne contient pas de chiffre
+		assertThatThrownBy(() -> authService.createUser("TestChat2", "Power", HeroPortrait.warriorHero)).isInstanceOf(BadPasswordFormatException.class);
+		
+		//cas invalide: nom d'usager n'a pas la longueur appropriée (5 à 30)
+		assertThatThrownBy(() -> authService.createUser("Fail", "Power1", HeroPortrait.warriorHero)).isInstanceOf(BadUsernameFormatException.class);
+	}
+	
+	
 
 }

@@ -26,8 +26,6 @@ public class ConnectionUtilsTest {
 	private static final int NB_OF_DIGITS = 10;
 
 	static final char MIN_MAJUSCULE = 'A', MIN_MINUSCULE = 'a', MIN_DIGIT = '0';
-	@Autowired
-	AuthentificationService inscriptionService;
 	
 	RandomStringGenerator passwordGenerator;
 	RandomStringGenerator usernameGenerator;

@@ -60,8 +60,8 @@ public class AuthentificationService {
 		User user15 = createUser("Chat15", "Myboy2", HeroPortrait.zorroHero);	User user16 = createUser("Chat16", "Myboy2", HeroPortrait.zorroHero);
 		User user17 = createUser("Chat17", "Myboy2", HeroPortrait.zorroHero);	User user18 = createUser("Chat18", "Myboy2", HeroPortrait.zorroHero);
 		User user19 = createUser("Chat19", "Myboy2", HeroPortrait.zorroHero);	User user20 = createUser("Chat20", "Myboy2", HeroPortrait.valueOf("wizardHero"));
-		
 		User admin = createUser("Admin", "Toor1", HeroPortrait.valueOf("zorroHero"));
+		
 		userRepository.save(user1);	userRepository.save(user2);	userRepository.save(user3);	userRepository.save(user4);
 		userRepository.save(user5);	userRepository.save(user6);	userRepository.save(user7);	userRepository.save(user8);
 		userRepository.save(user9);	userRepository.save(user10);userRepository.save(user11);userRepository.save(user12);
@@ -86,7 +86,7 @@ public class AuthentificationService {
 		return user;
 	}
 
-	private void assignStarterDeck(User user) {
+	public void assignStarterDeck(User user) {
 		List<Deck> decks = new ArrayList<Deck>();
 		decks.add(createStarterDeck(user));
 		user.setDecks(decks);
