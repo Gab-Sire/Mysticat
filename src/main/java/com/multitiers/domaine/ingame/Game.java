@@ -93,5 +93,9 @@ public class Game {
 	
 	public void setBattlelog(List<String> battlelog) { 
 	    this.battlelog = battlelog; 
+	}
+	
+	public void addToBattlelog(String log) { 
+	    this.battlelog.add(log); 
 	} 
 }
