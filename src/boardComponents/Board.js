@@ -147,19 +147,19 @@ export default class Board extends Component{
 			&& true===(selfMana>=manaCost)
 			&& true===(null===self.field[selectedIndex])
 			&& false===wasAMinionAlreadyPlayedOnThisCell){
-			
+
 			wereTheseCardsPlayedThisTurn[this.state.selectedCardIndex] = true;
 			areTheseCellsAboutToBeSummonedOn[selectedIndex] = true;
-			
-			self.field[selectedIndex] =({canAttack:false, cardReference:self.hand[this.state.selectedCardIndex], 
+
+			self.field[selectedIndex] =({canAttack:false, cardReference:self.hand[this.state.selectedCardIndex],
 				description: self.hand[this.state.selectedCardIndex].description,
-				health:self.hand[this.state.selectedCardIndex].initialHealth, 
-				name:self.hand[this.state.selectedCardIndex].name, 
+				health:self.hand[this.state.selectedCardIndex].initialHealth,
+				name:self.hand[this.state.selectedCardIndex].name,
 				power:self.hand[this.state.selectedCardIndex].initialPower,
 				speed:self.hand[this.state.selectedCardIndex].initialSpeed});
-			
+
 			self.hand[this.state.selectedCardIndex].isSummoned = true;
-			
+
 			this.setState({indexesOfPlayedCardsThisTurn: wereTheseCardsPlayedThisTurn,
 										cellsOfSummonedMinionsThisTurn : areTheseCellsAboutToBeSummonedOn});
 			let actions = this.state.actionList;
@@ -203,7 +203,7 @@ export default class Board extends Component{
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/getHardCodedGame',
+			  url:'http://'+window.location.hostname+':80/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -224,7 +224,7 @@ export default class Board extends Component{
 		const data = this.state.playerId;
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/checkIfGameUpdated',
+			  url:'http://'+window.location.hostname+':80/checkIfGameUpdated',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -272,7 +272,7 @@ export default class Board extends Component{
 		console.log("Sending actions: ", data);
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/sendActions',
+			  url:'http://'+window.location.hostname+':80/sendActions',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -312,10 +312,10 @@ export default class Board extends Component{
 
 	retrieveMinionSelectedIndex = (selectedIndex) =>{
 		if(null!==this.state.selectedCardIndex && undefined!==this.state.selectedCardIndex){
-			
-			
+
+
 			this.addSummonAction(selectedIndex);
-			
+
 		}
 	}
 
@@ -371,4 +371,3 @@ export default class Board extends Component{
 		this.props.endGame();
 	}
 }
-

@@ -141,7 +141,7 @@ export default class CardDisplayTable extends Component {
   getCollection(){
 	  axios({
 	        method:'get',
-	        url:'http://'+window.location.hostname+':8089/getCollection',
+	        url:'http://'+window.location.hostname+':80/getCollection',
 	        responseType:'json',
 	        headers: {'Access-Control-Allow-Origin': "true"}
 	      })
@@ -165,7 +165,7 @@ export default class CardDisplayTable extends Component {
       }
       axios({
           method:'post',
-          url:'http://'+window.location.hostname+':8089/saveDeck',
+          url:'http://'+window.location.hostname+':80/saveDeck',
           responseType:'json',
           headers: {'Access-Control-Allow-Origin': "true"},
           data:{
