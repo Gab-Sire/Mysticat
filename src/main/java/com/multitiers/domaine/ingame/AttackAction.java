@@ -95,18 +95,20 @@ public class AttackAction extends Action {
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
 				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.";
+				game.addToBattlelog(log);
 				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower() + " and died.");
 			}
 			if (targetOfTheAttack.isDead()) {
 				log = "Minion: " + targetOfTheAttack.getName() + " of " + opponentPlayer.getName()
 				+ " was killed by " + attacker.getName();
+				game.addToBattlelog(log);
 				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
 						+ " was killed by " + attacker.getName());
 			}
 			if(log == "") {
 				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower();
+				game.addToBattlelog(log);
 			}
-			game.addToBattlelog(log);
 		} else {
 			System.out.println("Target is missing or dead.");
 		}
