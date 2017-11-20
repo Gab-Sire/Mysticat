@@ -14,6 +14,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.HeroPortrait;
@@ -54,8 +57,9 @@ public class AuthentificationServiceTest {
 		
 	}
 	
-	@Test()
+	@Test
 	public void testCreateUser() {
+		
 		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
 		
 		User createdUser01 = authService.createUser("TestChat", "Power1", HeroPortrait.warriorHero);
@@ -68,6 +72,8 @@ public class AuthentificationServiceTest {
 		
 		//cas invalide: nom d'usager n'a pas la longueur appropriée (5 à 30)
 		assertThatThrownBy(() -> authService.createUser("Fail", "Power1", HeroPortrait.warriorHero)).isInstanceOf(BadUsernameFormatException.class);
+		
+		verify(cardRepositoryMock, times(1)).findAll();
 	}
 	
 	
