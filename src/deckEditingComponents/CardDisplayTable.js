@@ -94,11 +94,11 @@ export default class CardDisplayTable extends Component {
 	<button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
         <Not30CardsInDeckWarning
             MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertDeckSizeVisible}
-            onDismiss = {this.onDismissWarning.bind(this)}
+            onDismiss = {this.onDismissWarningDeckSize.bind(this)}
         />
         <IllegalDeckNameWarning
             MIN_DECK_NAME_LENGTH={MIN_DECK_NAME_LENGTH} MAX_DECK_NAME_LENGTH={MAX_DECK_NAME_LENGTH} visible={this.state.isAlertDeckNameVisible}
-            onDismiss = {this.onDismissWarning.bind(this)}
+            onDismiss = {this.onDismissWarningName.bind(this)}
         />
         <SavedDeckSuccess
             visible={this.state.isSuccessVisible}
@@ -250,9 +250,14 @@ export default class CardDisplayTable extends Component {
       return -1;
   }
 
-  onDismissWarning(){
+  onDismissWarningDeckSize(){
     this.setState({isAlertDeckSizeVisible: false})
   }
+
+  onDismissWarningName(){
+    this.setState({isAlertDeckNameVisible: false})
+  }
+
 
   onDismissSuccess(){
     this.setState({isSuccessVisible: false})
