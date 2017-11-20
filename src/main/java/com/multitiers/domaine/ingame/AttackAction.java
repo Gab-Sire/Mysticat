@@ -62,6 +62,10 @@ public class AttackAction extends Action {
 				attackFace(opponentPlayer, attacker);
 				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
 					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
+					String log_gagnant = "Le joueur : " + game.getPlayers()[playerDeclaringAttackIndex].getName() + " a gagné.";
+					String log_perdant = "Le joueur : " + game.getPlayers()[opponentPlayerIndex].getName() + " a perdu.";
+					game.addToBattlelog(log_perdant);
+					game.addToBattlelog(log_gagnant);
 				}
 			} else {
 				attackMinion(opponentPlayer, attackedIndex, attacker, game);
