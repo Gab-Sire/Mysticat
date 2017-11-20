@@ -1,5 +1,8 @@
 package com.multitiers.domaine.ingame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
@@ -8,6 +11,7 @@ public class Game {
 	private Player[] players;
 	private Integer currentMana;
 	private Integer winnerPlayerIndex;
+	private List<String> battlelog; 
 	private transient Boolean endedWithSurrender;
 	
 	public Game() {
@@ -21,6 +25,7 @@ public class Game {
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
 		endedWithSurrender = false;
+		battlelog = new ArrayList<>(); 
     	this.nextTurn();
 	}
 	
@@ -82,5 +87,11 @@ public class Game {
 		this.endedWithSurrender = endedWithSurrender;
 	}
 	
+	public List<String> getBattlelog() { 
+	    return battlelog; 
+	} 
 	
+	public void setBattlelog(List<String> battlelog) { 
+	    this.battlelog = battlelog; 
+	} 
 }
