@@ -337,7 +337,7 @@
 }
 
 .battleField .cardTile:first-of-type {
-	margin-left: 14%;
+	margin-left: 12%;
 }
 
 #selfFieldUnderLayer {
@@ -758,7 +758,7 @@
 	background-color:navy;
 }
 
-.card+.card, .cardFacedDown+.cardFacedDown {
+.card+.card, .cardFacedDown+.cardFacedDown, .card+.cardTile, .cardTile+.card, .cardTile+.cardTile {
 	margin-left: 1%;
 }
 

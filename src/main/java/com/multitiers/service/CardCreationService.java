@@ -49,7 +49,7 @@ public class CardCreationService {
 	}
 
 	private void generateJobSet() {
-		MinionCard chatBanquier = createMinionCard("Chat Banquier", 5, 5, 5, 2, "$", "img/cardImg/jobSet/bankerCat.jpg");
+		MinionCard chatBanquier = createMinionCard("Chat Banquier", 5, 5, 5, 2, "$ $ $ $ $", "img/cardImg/jobSet/bankerCat.jpg");
 		MinionCard chatPompier = createMinionCard("Chat Pompier", 10, 10, 5, 4, "Viens ici Ashes.", "img/cardImg/jobSet/firefighterCat.jpg");
 		MinionCard sherrifMoustache = createMinionCard("Shérrif Moustache", 10, 15, 5, 5, "Vous êtes en état d'arrestation.", "img/cardImg/jobSet/policeCat.jpg");
 		MinionCard chatScientifique = createMinionCard("Chat Scientifique", 5, 14, 11, 5, "Non, je ne fabrique pas d'herbe à chat.", "img/cardImg/jobSet/scientistCat.jpg");
