@@ -24,13 +24,11 @@ import com.multitiers.domaine.entity.User;
 import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.domaine.entity.UserDeck;
 import com.multitiers.domaine.entity.UserStatus;
-import com.multitiers.domaine.ingame.Action;
 import com.multitiers.domaine.ingame.ActionList;
 import com.multitiers.domaine.ingame.Game;
 import com.multitiers.domaine.ingame.Minion;
 import com.multitiers.domaine.ingame.PlayableMinionCard;
 import com.multitiers.domaine.ingame.Player;
-import com.multitiers.domaine.ingame.SurrenderAction;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
@@ -112,10 +110,6 @@ public class RestControlleur {
 		}
 		User user = userRepository.findById(userId);
 		List<Deck> decks = user.getDecks();
-		System.out.println("printing decks");
-		for(Deck deck : decks) {
-			System.out.println(deck.getName());
-		}
 		return decks;
 	}
 
@@ -146,7 +140,7 @@ public class RestControlleur {
 		return user.getFavoriteDeck();
 	}
 
-	@PostMapping(value = "/getCollection")
+	@GetMapping(value = "/getCollection")
 	public List<Card> getCollection() {
 		List<Card> cardCollection = cardRepository.findAll();
 		Collections.sort(cardCollection);

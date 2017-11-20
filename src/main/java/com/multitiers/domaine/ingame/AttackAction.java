@@ -62,9 +62,13 @@ public class AttackAction extends Action {
 				attackFace(opponentPlayer, attacker);
 				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
 					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
+					String log_gagnant = "Le joueur : " + game.getPlayers()[playerDeclaringAttackIndex].getName() + " a gagné.";
+					String log_perdant = "Le joueur : " + game.getPlayers()[opponentPlayerIndex].getName() + " a perdu.";
+					game.addToBattlelog(log_perdant);
+					game.addToBattlelog(log_gagnant);
 				}
 			} else {
-				attackMinion(opponentPlayer, attackedIndex, attacker);
+				attackMinion(opponentPlayer, attackedIndex, attacker, game);
 				sendDeadMinionsToGraveyards(game);
 			}
 		}
@@ -83,18 +87,26 @@ public class AttackAction extends Action {
 		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 	}
 	
-	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker) {
+	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker, Game game) {
 		Minion targetOfTheAttack;
+		String log = "";
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.");
+				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.";
+				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower() + " and died.");
 			}
 			if (targetOfTheAttack.isDead()) {
+				log = "Minion: " + targetOfTheAttack.getName() + " of " + opponentPlayer.getName()
+				+ " was killed by " + attacker.getName();
 				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
 						+ " was killed by " + attacker.getName());
 			}
+			if(log == "") {
+				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower();
+			}
+			game.addToBattlelog(log);
 		} else {
 			System.out.println("Target is missing or dead.");
 		}
