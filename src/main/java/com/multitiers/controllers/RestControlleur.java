@@ -277,20 +277,6 @@ public class RestControlleur {
 			this.gameService.sentActionLists.put(gameId, currentPlayerActionList);
 		}
 	}
-
-	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
-		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
-				&& actionListContainsSurrender(currentPlayerActionList);
-	}
-
-	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
-		for (Action action : currentPlayerActionList.getPlayerActions()) {
-			if (action instanceof SurrenderAction) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	@PostMapping(value = "/getGameID")
 	public @ResponseBody String getObserverGameID() {
