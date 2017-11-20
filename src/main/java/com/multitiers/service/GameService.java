@@ -40,7 +40,6 @@ public class GameService implements QueueListener {
 	public void calculateNextTurnFromActionLists(ActionList playerOneActions, ActionList playerTwoActions) {
 		String playerOneId = playerOneActions.getPlayerId();
 		String playerTwoId = playerTwoActions.getPlayerId();
-
 		String gameId = playerOneActions.getGameId();
 		if (!gameId.equals(playerTwoActions.getGameId())) {
 			throw new RuntimeException("Game id mismatch.");

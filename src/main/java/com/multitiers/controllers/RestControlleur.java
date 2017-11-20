@@ -278,6 +278,35 @@ public class RestControlleur {
 		}
 	}
 
+	private boolean isSamePlayerSurrendering(ActionList currentPlayerActionList, ActionList otherPlayerAction) {
+		return currentPlayerActionList.getPlayerId().equals(otherPlayerAction.getPlayerId())
+				&& actionListContainsSurrender(currentPlayerActionList);
+	}
+
+	private Boolean actionListContainsSurrender(ActionList currentPlayerActionList) {
+		for (Action action : currentPlayerActionList.getPlayerActions()) {
+			if (action instanceof SurrenderAction) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@PostMapping(value = "/getGameID")
+	public @ResponseBody String getObserverGameID() {
+		int index =(int) (Math.random()*this.gameService.existingGameList.size());
+		Game game = this.gameService.existingGameList.get(this.gameService.existingGameList.keySet().toArray()[index]);
+		return new Gson().toJson(game.getGameId());
+	}
+	
+	@PostMapping(value = "/observe")
+	public @ResponseBody Game getObserverMode(@RequestBody String gameId) {
+		gameId = gameId.substring(0, gameId.length() - 1);
+		Game game = this.gameService.existingGameList.get(gameId);
+		
+		return game;
+	}
+
 	@PostMapping(value = "/checkIfGameUpdated")
 	public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {
 		userId = userId.substring(0, userId.length() - 1);

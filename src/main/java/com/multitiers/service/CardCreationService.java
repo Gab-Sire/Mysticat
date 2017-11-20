@@ -141,7 +141,7 @@ public class CardCreationService {
 				"Un chat qui mange d'autres chats.", "img/cardImg/superheroSet/channibalLecter.jpg");
 		MinionCard ashesThePurrifier = createMinionCard("Ashes, The Purrifier", 25, 30, 0, 10,
 				"Démon des temps anciens qui souhaite dominer le monde.",
-				"img/cardImg/superheroSet/ashesThepurrifier.jpg");
+				"img/cardImg/superheroSet/ashesThePurrifier.jpg");
 		MinionCard captainAmerichat = createMinionCard("Captain Americhat", 10, 20, 10, 7, "Protège la nation.",
 				"img/cardImg/superheroSet/captainAmerichat.jpg");
 		MinionCard superChat = createMinionCard("Super Chat", 15, 25, 10, 9, "Un chat super.",
