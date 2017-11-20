@@ -55,7 +55,7 @@ public class CardCreationService {
 		MinionCard chatScientifique = createMinionCard("Chat Scientifique", 5, 14, 11, 5, "Non, je ne fabrique pas d'herbe à chat.", "img/cardImg/jobSet/scientistCat.jpg");
 		MinionCard professeurMiaou = createMinionCard("Professeur Miaou", 1, 2, 2, 0, "Vous avez beaucoup à apprendre.", "img/cardImg/jobSet/chatErudit.jpg");
 		MinionCard chatBucheron = createMinionCard("Bu-chat-ronron", 8, 15, 2, 4, "And my axe. Meow.", "img/cardImg/jobSet/lumberjackCat.png");
-		MinionCard chatPecheur = createMinionCard("Chat Pecheur", 2, 7, 6, 2, "Un brave mousaillon.", "img/cardImg/jobSet/fishermanCat.jpg");
+		MinionCard chatPecheur = createMinionCard("Chat Pecheur", 2, 7, 6, 2, "Un brave moussaillon.", "img/cardImg/jobSet/fishermanCat.jpg");
 		MinionCard docteurPatte = createMinionCard("Docteur Patte", 6, 3, 6, 2, "State the nature of your medical emergency.", "img/cardImg/jobSet/drChat.jpg");
 		MinionCard chatConstruction = createMinionCard("Chat bricoleur", 2,3,0,0, "Contracteur officiel du nouveau pont Chatplain", "img/cardImg/jobSet/chatWorker.jpg");
 		MinionCard chatDaffaire = createMinionCard("Chat d'affaire", 1,1,3,0, "Est-ce que je peux avoir une augmentation? Ma femme a acouché de 9 enfants hier.", "img/cardImg/jobSet/chatDaffaire.jpg");

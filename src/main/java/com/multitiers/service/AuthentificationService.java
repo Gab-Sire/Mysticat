@@ -68,9 +68,9 @@ public class AuthentificationService {
 		User user17 = createUser("Chat17", "Myboy2", HeroPortrait.zorroHero);
 		User user18 = createUser("Chat18", "Myboy2", HeroPortrait.zorroHero);
 		User user19 = createUser("Chat19", "Myboy2", HeroPortrait.zorroHero);
-		User user20 = createUser("Chat20", "Myboy2", HeroPortrait.zorroHero);
+		User user20 = createUser("Chat20", "Myboy2", HeroPortrait.valueOf("wizardHero"));
 		
-		User admin = createUser("Admin", "Toor1", HeroPortrait.zorroHero);
+		User admin = createUser("Admin", "Toor1", HeroPortrait.valueOf("zorroHero"));
 		userRepository.save(user1);
 		userRepository.save(user2);
 		userRepository.save(user3);
