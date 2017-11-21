@@ -51,7 +51,7 @@ export default class MainMenu extends Component{
 			let data = this.props.playerId;
 			axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/enterQueue',
+			  url:'http://'+window.location.hostname+':8089/enterQueue',
 			  responseType:'text',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -72,7 +72,7 @@ export default class MainMenu extends Component{
 			let data = this.props.playerId;
 			axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/checkIfQueuePopped',
+			  url:'http://'+window.location.hostname+':8089/checkIfQueuePopped',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -104,7 +104,7 @@ export default class MainMenu extends Component{
 		let data = this.props.playerId;
 		axios({
 		  method:'post',
-		  url:'http://'+window.location.hostname+':80/cancelQueue',
+		  url:'http://'+window.location.hostname+':8089/cancelQueue',
 		  responseType:'json',
 		  headers: {'Access-Control-Allow-Origin': "true"},
 		  data: data
@@ -117,7 +117,7 @@ export default class MainMenu extends Component{
 	getHardCodedGame(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/getHardCodedGame',
+			  url:'http://'+window.location.hostname+':8089/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
