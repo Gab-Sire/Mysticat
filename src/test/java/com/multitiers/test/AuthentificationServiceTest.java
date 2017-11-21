@@ -69,6 +69,9 @@ public class AuthentificationServiceTest {
 		//construit un user avec un salt
 		String salt = ConnectionUtils.generateSalt();
 		user = new User("Username", ConnectionUtils.hashPassword("Password", salt), salt);
+		
+		authService.initDataLists();
+		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
 	}
 	
 	@After
@@ -146,7 +149,6 @@ public class AuthentificationServiceTest {
 		
 		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
 		
-		authService.initDataLists();
 		authService.addUserToConnectedUsers(user);
 		
 		//cas valide
@@ -156,6 +158,24 @@ public class AuthentificationServiceTest {
 		
 		verify(userRepositoryMock, atLeast(2)).findById(anyString());
 	}
+	
+	@Test
+	public void testIsThisUserConnected() {
+		
+		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
+		
+		User user02 = authService.createUser("Username2", "Password2", HeroPortrait.zorroHero);
+		authService.addUserToConnectedUsers(user);
+		
+		//cas utilisateur ajouté
+		assertThat(authService.isThisUserConnected(user)).isTrue();
+		assertThat(authService.isThisUserConnected(user.getId())).isTrue();
+		
+		//cas utilisateur non ajouté
+		assertThat(authService.isThisUserConnected(user02)).isFalse();
+		assertThat(authService.isThisUserConnected(user02.getId())).isFalse();
+	}
+	
 	
 	
 	
