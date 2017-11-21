@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.times;
@@ -28,6 +29,7 @@ import com.multitiers.domaine.entity.UserCredentials;
 import com.multitiers.exception.BadCredentialsLoginException;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
+import com.multitiers.exception.UserAlreadyConnectedException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.AuthentificationService;
@@ -138,6 +140,24 @@ public class AuthentificationServiceTest {
 		
 		verify(userRepositoryMock, atLeast(2)).findByUsername(anyString());
 	}
+	
+	@Test
+	public void testAddUserToConnectedUsers() {
+		
+		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
+		
+		authService.initDataLists();
+		authService.addUserToConnectedUsers(user);
+		
+		//cas valide
+		assertThat(authService.getConnectedUsers().get(user.getId()));
+		//cas invalide, tente d'ajouter le même utilisateur deux fois
+		assertThatThrownBy(() -> authService.addUserToConnectedUsers(user)).isInstanceOf(UserAlreadyConnectedException.class);
+		
+		verify(userRepositoryMock, atLeast(2)).findById(anyString());
+	}
+	
+	
 	
 
 }
