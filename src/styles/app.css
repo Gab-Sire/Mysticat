@@ -830,6 +830,41 @@
 	background-position: center;
 }
 
+.kungfuHero {
+	background-image: url('../img/heroImg/chatKungfu.jpg');
+	background-size: cover;
+}
+
+.chatHero {
+	background-image: url('../img/heroImg/chat.jpg');
+	background-size: cover;
+	background-position: center;
+}
+.renaissanceHero {
+	background-image: url('../img/heroImg/chatLisa.jpg');
+	background-size: cover;
+	background-position: center;
+}
+.policeHero {
+	background-image: url('../img/heroImg/chatPolice.jpg');
+	background-size: cover;
+}
+.prehistoricHero {
+	background-image: url('../img/heroImg/chatRex.jpg');
+	background-size: cover;
+	background-position: center;
+}
+.superHero {
+	background-image: url('../img/heroImg/chatThor.jpg');
+	background-size: cover;
+	background-position: center;
+}
+.hoodyHero {
+	background-image: url('../img/heroImg/chatHoody.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
 /* styles pour l'attribut vies du h�ros (joueur) */
 .heroHealth {
 	width: 29%;
