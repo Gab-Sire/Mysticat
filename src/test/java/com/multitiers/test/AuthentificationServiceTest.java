@@ -35,12 +35,13 @@ public class AuthentificationServiceTest {
 	CardRepository cardRepository;
 	
 	@Mock
-	User user;
+	User userMock;
 	
 	@InjectMocks
 	AuthentificationService authService;
 	
 	List<Card> listeCartes;
+	User user;
 	
 	@Before
 	public void setUp() {
@@ -49,12 +50,14 @@ public class AuthentificationServiceTest {
 			Card carte = null;
 			listeCartes.add(carte);
 		}
-	
+		
+		user = new User("Username", "PasswordHash", "HashedSalt");
 	}
 	
 	@After
 	public void tearDown() {
-		
+		listeCartes = null;
+		user = null;
 	}
 	
 	@Test
@@ -76,6 +79,16 @@ public class AuthentificationServiceTest {
 		verify(cardRepositoryMock, times(1)).findAll();
 	}
 	
+	@Test
+	public void testAssignStarterDeck() {
+		
+		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
+		
+		authService.assignStarterDeck(user);
+		
+		assertThat(user.getDecks().size()).isEqualTo(1);
+		verify(cardRepositoryMock, times(1)).findAll();
+	}
 	
 
 }
