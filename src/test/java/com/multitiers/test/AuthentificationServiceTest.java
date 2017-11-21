@@ -19,12 +19,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.multitiers.domaine.entity.Card;
+import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
 import com.multitiers.exception.BadPasswordFormatException;
 import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.service.AuthentificationService;
+import com.multitiers.util.Constantes;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthentificationServiceTest {
@@ -89,6 +91,20 @@ public class AuthentificationServiceTest {
 		assertThat(user.getDecks().size()).isEqualTo(1);
 		verify(cardRepositoryMock, times(1)).findAll();
 	}
+	
+	
+	@Test
+	public void testCreateStarterDeck() {
+		
+		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
+		
+		Deck deck = authService.createStarterDeck(user);
+		
+		assertThat(deck.getCardList().size()).isEqualTo(Constantes.CONSTRUCTED_DECK_MAX_SIZE);
+		assertThat(deck.getName()).isEqualTo("Starter deck : " + user.getUsername());
+		verify(cardRepositoryMock, times(1)).findAll();
+	}
+	
 	
 
 }
