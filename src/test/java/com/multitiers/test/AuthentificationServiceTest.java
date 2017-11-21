@@ -152,11 +152,11 @@ public class AuthentificationServiceTest {
 		authService.addUserToConnectedUsers(user);
 		
 		//cas valide
-		assertThat(authService.getConnectedUsers().get(user.getId()));
+		assertThat(authService.getConnectedUsers().get(user.getId())).isNotNull();
 		//cas invalide, tente d'ajouter le même utilisateur deux fois
 		assertThatThrownBy(() -> authService.addUserToConnectedUsers(user)).isInstanceOf(UserAlreadyConnectedException.class);
 		
-		verify(userRepositoryMock, atLeast(2)).findById(anyString());
+		verify(userRepositoryMock, atLeast(2)).findById(user.getId());
 	}
 	
 	@Test
@@ -174,10 +174,20 @@ public class AuthentificationServiceTest {
 		//cas utilisateur non ajouté
 		assertThat(authService.isThisUserConnected(user02)).isFalse();
 		assertThat(authService.isThisUserConnected(user02.getId())).isFalse();
+		
+		verify(userRepositoryMock, times(1)).findById(user.getId());
 	}
 	
-	
-	
-	
-
+	@Test
+	public void testRemoveUserFromConnectedUsers() {
+		
+		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
+		authService.addUserToConnectedUsers(user);
+		
+		authService.removeUserFromConnectedUsers(user.getId());
+		
+		assertThat(authService.getConnectedUsers().get(user.getId())).isNull();
+		
+		verify(userRepositoryMock, times(1)).findById(user.getId());
+	}
 }
