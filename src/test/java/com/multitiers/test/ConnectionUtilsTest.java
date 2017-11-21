@@ -190,8 +190,8 @@ public class ConnectionUtilsTest {
 	@Ignore
 	@Test(expected = Exception.class)
 	public void oneUserPerUsername() {
-		user1 = inscriptionService.createUser(validUsername, password, HeroPortrait.warriorHero);
-		user2 = inscriptionService.createUser(validUsername, password, HeroPortrait.warriorHero);
+		//user1 = auth.createUser(validUsername, password, HeroPortrait.warriorHero);
+		//user2 = inscriptionService.createUser(validUsername, password, HeroPortrait.warriorHero);
 	}
 
 	private String replaceAllDigitsWithLetters(String str) {

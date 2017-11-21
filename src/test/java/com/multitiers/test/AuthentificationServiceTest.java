@@ -45,11 +45,6 @@ public class AuthentificationServiceTest {
 	@Mock
 	UserRepository userRepositoryMock;
 	
-	CardRepository cardRepository;
-	
-	@Mock
-	User userMock;
-	
 	@InjectMocks
 	AuthentificationService authService;
 	
@@ -187,7 +182,6 @@ public class AuthentificationServiceTest {
 		authService.removeUserFromConnectedUsers(user.getId());
 		
 		assertThat(authService.getConnectedUsers().get(user.getId())).isNull();
-		
 		verify(userRepositoryMock, times(1)).findById(user.getId());
 	}
 }
