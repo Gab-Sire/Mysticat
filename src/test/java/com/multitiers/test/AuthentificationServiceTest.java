@@ -135,6 +135,8 @@ public class AuthentificationServiceTest {
 		credentials.setUsername("popo");	credentials.setPassword("lolol");
 		
 		assertThatThrownBy(() -> authService.getUserFromCredentials(credentials)).isInstanceOf(BadCredentialsLoginException.class);	
+		
+		verify(userRepositoryMock, atLeast(2)).findByUsername(anyString());
 	}
 	
 
