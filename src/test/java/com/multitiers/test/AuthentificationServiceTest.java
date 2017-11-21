@@ -65,8 +65,12 @@ public class AuthentificationServiceTest {
 		String salt = ConnectionUtils.generateSalt();
 		user = new User("Username", ConnectionUtils.hashPassword("Password", salt), salt);
 		
+		//initie la liste des joueurs connectés
 		authService.initDataLists();
+		
+		//setup des comportements des mocks pour les situations générales
 		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
+		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
 	}
 	
 	@After
@@ -77,8 +81,6 @@ public class AuthentificationServiceTest {
 	
 	@Test
 	public void testCreateUser() {
-		
-		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
 		
 		User createdUser01 = authService.createUser("TestChat", "Power1", HeroPortrait.warriorHero);
 		
@@ -97,8 +99,6 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testAssignStarterDeck() {
 		
-		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
-		
 		authService.assignStarterDeck(user);
 		
 		assertThat(user.getDecks().size()).isEqualTo(1);
@@ -108,8 +108,6 @@ public class AuthentificationServiceTest {
 	
 	@Test
 	public void testCreateStarterDeck() {
-		
-		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
 		
 		Deck deck = authService.createStarterDeck(user);
 		
@@ -124,7 +122,7 @@ public class AuthentificationServiceTest {
 		when(userRepositoryMock.findByUsername(anyString())).thenReturn(null);
 		when(userRepositoryMock.findByUsername(user.getUsername())).thenReturn(user);
 		
-		//cas valide : informations de l'utilisateur
+		//cas valide : informations de l'utilisateur dans le repository
 		UserCredentials validCredentials = new UserCredentials();
 		validCredentials.setUsername(user.getUsername());	validCredentials.setPassword("Password");
 		
@@ -142,8 +140,6 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testAddUserToConnectedUsers() {
 		
-		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
-		
 		authService.addUserToConnectedUsers(user);
 		
 		//cas valide
@@ -156,8 +152,6 @@ public class AuthentificationServiceTest {
 	
 	@Test
 	public void testIsThisUserConnected() {
-		
-		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
 		
 		User user02 = authService.createUser("Username2", "Password2", HeroPortrait.zorroHero);
 		authService.addUserToConnectedUsers(user);
@@ -176,7 +170,6 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testRemoveUserFromConnectedUsers() {
 		
-		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
 		authService.addUserToConnectedUsers(user);
 		
 		authService.removeUserFromConnectedUsers(user.getId());
