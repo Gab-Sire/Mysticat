@@ -25,7 +25,7 @@ export default class DisplayDeck extends Component {
   getDeck(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/selectOneDeck/'+this.props.playerId+'/'+this.props.deckId,
+			  url:'http://'+window.location.hostname+':80/selectOneDeck/'+this.props.playerId+'/'+this.props.deckId,
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 				params: {
@@ -48,7 +48,7 @@ export default class DisplayDeck extends Component {
   getFavoriteDeckIndex(){
     axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/getFavoriteDeckIndex/'+this.props.playerId,
+			  url:'http://'+window.location.hostname+':80/getFavoriteDeckIndex/'+this.props.playerId,
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 				params: {

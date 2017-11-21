@@ -79,7 +79,7 @@ class App extends Component{
 	checkServerAvailability(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':8089/getServerStatus',
+			  url:'http://'+window.location.hostname+':80/getServerStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -100,7 +100,7 @@ class App extends Component{
 		if(null != this.state.playerId){
 			axios({
 				  method:'post',
-				  url:'http://'+window.location.hostname+':8089/getPlayerConnection',
+				  url:'http://'+window.location.hostname+':80/getPlayerConnection',
 				  responseType:'json',
 				  headers: {'Access-Control-Allow-Origin': "true"},
 				  data : this.state.playerId
@@ -120,7 +120,7 @@ class App extends Component{
 	disconnectPlayer(){
 		axios({
 				method:'post',
-				url:'http://'+window.location.hostname+':8089/disconnectUser',
+				url:'http://'+window.location.hostname+':80/disconnectUser',
 				responseType:'json',
 				headers: {'Access-Control-Allow-Origin': "true"},
 				data: this.state.playerId
@@ -136,7 +136,7 @@ class App extends Component{
 	disconnectPlayerById(id){
 		axios({
 				method:'post',
-				url:'http://'+window.location.hostname+':8089/disconnectUser',
+				url:'http://'+window.location.hostname+':80/disconnectUser',
 				responseType:'json',
 				headers: {'Access-Control-Allow-Origin': "true"},
 				data: id
@@ -157,7 +157,7 @@ class App extends Component{
 	goDeckSelection(){
 			axios({
 				  method:'post',
-				  url:'http://'+window.location.hostname+':8089/getUserDecks',
+				  url:'http://'+window.location.hostname+':80/getUserDecks',
 				  responseType:'json',
 				  headers: {'Access-Control-Allow-Origin': "true"},
 				  data: this.state.playerId
@@ -175,7 +175,7 @@ class App extends Component{
 	goAdminDashBoard = () => {
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/getAllUserStatus',
+			  url:'http://'+window.location.hostname+':80/getAllUserStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			})
