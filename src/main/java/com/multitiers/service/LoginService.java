@@ -27,7 +27,7 @@ import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 @Service
-public class AuthentificationService {
+public class LoginService {
 
 	public static final String ADMIN_NAME = "Admin";
 

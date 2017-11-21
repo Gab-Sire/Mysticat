@@ -32,12 +32,12 @@ import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.exception.UserAlreadyConnectedException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.UserRepository;
-import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.LoginService;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AuthentificationServiceTest {
+public class LoginServiceTest {
 	
 	@Mock
 	CardRepository cardRepositoryMock;
@@ -46,7 +46,7 @@ public class AuthentificationServiceTest {
 	UserRepository userRepositoryMock;
 	
 	@InjectMocks
-	AuthentificationService authService;
+	LoginService loginService;
 	
 	List<Card> listeCartes;
 	User user;
@@ -66,7 +66,7 @@ public class AuthentificationServiceTest {
 		user = new User("Username", ConnectionUtils.hashPassword("Password", salt), salt);
 		
 		//initie la liste des joueurs connectés
-		authService.initDataLists();
+		loginService.initDataLists();
 		
 		//setup des comportements des mocks pour les situations générales
 		when(cardRepositoryMock.findAll()).thenReturn((ArrayList<Card>) listeCartes);
@@ -82,16 +82,16 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testCreateUser() {
 		
-		User createdUser01 = authService.createUser("TestChat", "Power1", HeroPortrait.warriorHero);
+		User createdUser01 = loginService.createUser("TestChat", "Power1", HeroPortrait.warriorHero);
 		
 		//cas valide pour créer un utilisateur
 		assertThat(createdUser01).isNotNull();
 		
 		//cas invalide: mot de passe ne contient pas de chiffre
-		assertThatThrownBy(() -> authService.createUser("TestChat2", "Power", HeroPortrait.warriorHero)).isInstanceOf(BadPasswordFormatException.class);
+		assertThatThrownBy(() -> loginService.createUser("TestChat2", "Power", HeroPortrait.warriorHero)).isInstanceOf(BadPasswordFormatException.class);
 		
 		//cas invalide: nom d'usager n'a pas la longueur appropriée (5 à 30)
-		assertThatThrownBy(() -> authService.createUser("Fail", "Power1", HeroPortrait.warriorHero)).isInstanceOf(BadUsernameFormatException.class);
+		assertThatThrownBy(() -> loginService.createUser("Fail", "Power1", HeroPortrait.warriorHero)).isInstanceOf(BadUsernameFormatException.class);
 		
 		verify(cardRepositoryMock, times(1)).findAll();
 	}
@@ -99,7 +99,7 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testAssignStarterDeck() {
 		
-		authService.assignStarterDeck(user);
+		loginService.assignStarterDeck(user);
 		
 		assertThat(user.getDecks().size()).isEqualTo(1);
 		verify(cardRepositoryMock, times(1)).findAll();
@@ -109,7 +109,7 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testCreateStarterDeck() {
 		
-		Deck deck = authService.createStarterDeck(user);
+		Deck deck = loginService.createStarterDeck(user);
 		
 		assertThat(deck.getCardList().size()).isEqualTo(Constantes.CONSTRUCTED_DECK_MAX_SIZE);
 		assertThat(deck.getName()).isEqualTo("Starter deck : " + user.getUsername());
@@ -126,13 +126,13 @@ public class AuthentificationServiceTest {
 		UserCredentials validCredentials = new UserCredentials();
 		validCredentials.setUsername(user.getUsername());	validCredentials.setPassword("Password");
 		
-		assertThat(authService.getUserFromCredentials(validCredentials)).isEqualTo(user);
+		assertThat(loginService.getUserFromCredentials(validCredentials)).isEqualTo(user);
 		
 		//cas invalide : informations que le repository ne trouve pas
 		UserCredentials credentials = new UserCredentials();
 		credentials.setUsername("popo");	credentials.setPassword("lolol");
 		
-		assertThatThrownBy(() -> authService.getUserFromCredentials(credentials)).isInstanceOf(BadCredentialsLoginException.class);	
+		assertThatThrownBy(() -> loginService.getUserFromCredentials(credentials)).isInstanceOf(BadCredentialsLoginException.class);	
 		
 		verify(userRepositoryMock, atLeast(2)).findByUsername(anyString());
 	}
@@ -140,12 +140,12 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testAddUserToConnectedUsers() {
 		
-		authService.addUserToConnectedUsers(user);
+		loginService.addUserToConnectedUsers(user);
 		
 		//cas valide
-		assertThat(authService.getConnectedUsers().get(user.getId())).isNotNull();
+		assertThat(loginService.getConnectedUsers().get(user.getId())).isNotNull();
 		//cas invalide, tente d'ajouter le même utilisateur deux fois
-		assertThatThrownBy(() -> authService.addUserToConnectedUsers(user)).isInstanceOf(UserAlreadyConnectedException.class);
+		assertThatThrownBy(() -> loginService.addUserToConnectedUsers(user)).isInstanceOf(UserAlreadyConnectedException.class);
 		
 		verify(userRepositoryMock, atLeast(2)).findById(user.getId());
 	}
@@ -153,16 +153,16 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testIsThisUserConnected() {
 		
-		User user02 = authService.createUser("Username2", "Password2", HeroPortrait.zorroHero);
-		authService.addUserToConnectedUsers(user);
+		User user02 = loginService.createUser("Username2", "Password2", HeroPortrait.zorroHero);
+		loginService.addUserToConnectedUsers(user);
 		
 		//cas utilisateur ajouté
-		assertThat(authService.isThisUserConnected(user)).isTrue();
-		assertThat(authService.isThisUserConnected(user.getId())).isTrue();
+		assertThat(loginService.isThisUserConnected(user)).isTrue();
+		assertThat(loginService.isThisUserConnected(user.getId())).isTrue();
 		
 		//cas utilisateur non ajouté
-		assertThat(authService.isThisUserConnected(user02)).isFalse();
-		assertThat(authService.isThisUserConnected(user02.getId())).isFalse();
+		assertThat(loginService.isThisUserConnected(user02)).isFalse();
+		assertThat(loginService.isThisUserConnected(user02.getId())).isFalse();
 		
 		verify(userRepositoryMock, times(1)).findById(user.getId());
 	}
@@ -170,11 +170,12 @@ public class AuthentificationServiceTest {
 	@Test
 	public void testRemoveUserFromConnectedUsers() {
 		
-		authService.addUserToConnectedUsers(user);
+		loginService.addUserToConnectedUsers(user);
 		
-		authService.removeUserFromConnectedUsers(user.getId());
+		loginService.removeUserFromConnectedUsers(user.getId());
 		
-		assertThat(authService.getConnectedUsers().get(user.getId())).isNull();
+		//cas utilisateur enlevé
+		assertThat(loginService.getConnectedUsers().get(user.getId())).isNull();
 		verify(userRepositoryMock, times(1)).findById(user.getId());
 	}
 }

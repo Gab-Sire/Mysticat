@@ -35,7 +35,7 @@ import com.multitiers.exception.BadUsernameFormatException;
 import com.multitiers.exception.UsernameTakenException;
 import com.multitiers.repository.CardRepository;
 import com.multitiers.repository.UserRepository;
-import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.LoginService;
 import com.multitiers.service.DeckEditingService;
 import com.multitiers.service.GameService;
 import com.multitiers.util.ConnectionUtils;
@@ -51,7 +51,7 @@ public class RestControlleur {
 	private CardRepository cardRepository;
 
 	@Autowired
-	private AuthentificationService authService;
+	private LoginService authService;
 	@Autowired
 	private GameService gameService;
 	@Autowired

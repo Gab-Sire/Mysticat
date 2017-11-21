@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.multitiers.domaine.entity.HeroPortrait;
 import com.multitiers.domaine.entity.User;
-import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.LoginService;
 import com.multitiers.util.ConnectionUtils;
 import com.multitiers.util.Constantes;
 

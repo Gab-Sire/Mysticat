@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.multitiers.service.GameService;
-import com.multitiers.service.AuthentificationService;
+import com.multitiers.service.LoginService;
 import com.multitiers.service.CardCreationService;
 
 @SpringBootApplication
@@ -18,7 +18,7 @@ public class ProjetMultitiersApplication {
 	
 	
 	@Bean
-    public CommandLineRunner peuplement(AuthentificationService authService, GameService gameService, CardCreationService cardCreationService) {
+    public CommandLineRunner peuplement(LoginService authService, GameService gameService, CardCreationService cardCreationService) {
         return (args) -> {
         	cardCreationService.initBasicCardSet();
         	authService.initDataLists();
