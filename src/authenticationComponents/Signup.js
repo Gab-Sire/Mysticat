@@ -41,7 +41,7 @@ export default class Login extends Component{
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':8089/signUp',
+			  url:'http://'+window.location.hostname+':80/signUp',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
