@@ -10,6 +10,7 @@ import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import PopUpEndOfTurn from './PopUpEndOfTurn.js';
 import Beforeunload from 'react-beforeunload';
+import * as Constantes from '../Constantes.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 
@@ -203,7 +204,7 @@ export default class Board extends Component{
 	getInitialGameInstance(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/getHardCodedGame',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -224,7 +225,7 @@ export default class Board extends Component{
 		const data = this.state.playerId;
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/checkIfGameUpdated',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/checkIfGameUpdated',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -272,7 +273,7 @@ export default class Board extends Component{
 		console.log("Sending actions: ", data);
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/sendActions',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/sendActions',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data

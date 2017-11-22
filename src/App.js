@@ -9,6 +9,8 @@ import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './deckEditingComponents/DeckSelection.js';
 import DisplayDeck from './deckEditingComponents/DisplayDeck.js';
 import AdminDashBoard from './adminComponents/AdminDashBoard.js';
+import * as Constantes from './Constantes.js';
+
 
 const TIME_BETWEEN_AXIOS_CALLS = 5000;
 
@@ -79,7 +81,7 @@ class App extends Component{
 	checkServerAvailability(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/getServerStatus',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getServerStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
@@ -94,13 +96,13 @@ class App extends Component{
 				});
 	}
 
-	
+
 
 	checkIfStillConnected(){
 		if(null != this.state.playerId){
 			axios({
 				  method:'post',
-				  url:'http://'+window.location.hostname+':80/getPlayerConnection',
+				  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getPlayerConnection',
 				  responseType:'json',
 				  headers: {'Access-Control-Allow-Origin': "true"},
 				  data : this.state.playerId
@@ -120,7 +122,7 @@ class App extends Component{
 	disconnectPlayer(){
 		axios({
 				method:'post',
-				url:'http://'+window.location.hostname+':80/disconnectUser',
+				url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/disconnectUser',
 				responseType:'json',
 				headers: {'Access-Control-Allow-Origin': "true"},
 				data: this.state.playerId
@@ -136,7 +138,7 @@ class App extends Component{
 	disconnectPlayerById(id){
 		axios({
 				method:'post',
-				url:'http://'+window.location.hostname+':80/disconnectUser',
+				url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/disconnectUser',
 				responseType:'json',
 				headers: {'Access-Control-Allow-Origin': "true"},
 				data: id
@@ -157,7 +159,7 @@ class App extends Component{
 	goDeckSelection(){
 			axios({
 				  method:'post',
-				  url:'http://'+window.location.hostname+':80/getUserDecks',
+				  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getUserDecks',
 				  responseType:'json',
 				  headers: {'Access-Control-Allow-Origin': "true"},
 				  data: this.state.playerId
@@ -175,7 +177,7 @@ class App extends Component{
 	goAdminDashBoard = () => {
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/getAllUserStatus',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getAllUserStatus',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			})

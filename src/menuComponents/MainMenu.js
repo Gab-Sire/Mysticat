@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PopUpQueue from './PopUpQueue.js';
 import Beforeunload from 'react-beforeunload';
+import * as Constantes from '../Constantes.js';
 
 const TIME_BETWEEN_AXIOS_CALLS = 1000;
 export default class MainMenu extends Component{
@@ -51,7 +52,7 @@ export default class MainMenu extends Component{
 			let data = this.props.playerId;
 			axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/enterQueue',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/enterQueue',
 			  responseType:'text',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -72,7 +73,7 @@ export default class MainMenu extends Component{
 			let data = this.props.playerId;
 			axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/checkIfQueuePopped',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/checkIfQueuePopped',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -104,7 +105,7 @@ export default class MainMenu extends Component{
 		let data = this.props.playerId;
 		axios({
 		  method:'post',
-		  url:'http://'+window.location.hostname+':80/cancelQueue',
+		  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/cancelQueue',
 		  responseType:'json',
 		  headers: {'Access-Control-Allow-Origin': "true"},
 		  data: data
@@ -117,7 +118,7 @@ export default class MainMenu extends Component{
 	getHardCodedGame(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/getHardCodedGame',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getHardCodedGame',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})

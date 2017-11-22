@@ -6,6 +6,7 @@ import Card from '../cardComponents/Card.js';
 import Not30CardsInDeckWarning from './Not30CardsInDeckWarning.js';
 import SavedDeckSuccess from './SavedDeckSuccess.js';
 import IllegalDeckNameWarning from "./IllegalDeckNameWarning.js";
+import * as Constantes from '../Constantes.js';
 
 const MAX_CARDS_IN_DECK = 30;
 const MAX_DECK_NAME_LENGTH = 255;
@@ -141,7 +142,7 @@ export default class CardDisplayTable extends Component {
   getCollection(){
 	  axios({
 	        method:'get',
-	        url:'http://'+window.location.hostname+':80/getCollection',
+	        url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getCollection',
 	        responseType:'json',
 	        headers: {'Access-Control-Allow-Origin': "true"}
 	      })
@@ -165,7 +166,7 @@ export default class CardDisplayTable extends Component {
       }
       axios({
           method:'post',
-          url:'http://'+window.location.hostname+':80/saveDeck',
+          url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/saveDeck',
           responseType:'json',
           headers: {'Access-Control-Allow-Origin': "true"},
           data:{

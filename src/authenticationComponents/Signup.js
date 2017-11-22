@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import '../styles/app.css';
 import axios from 'axios';
 import { Tooltip } from 'reactstrap';
+import * as Constantes from '../Constantes.js';
+
 
 export default class Login extends Component{
 	constructor(props){
@@ -41,7 +43,7 @@ export default class Login extends Component{
 		const data = {username: this.state.username, password: this.state.password}
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/signUp',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/signUp',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data
@@ -65,7 +67,7 @@ export default class Login extends Component{
 		const data = {username: this.state.username}
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':80/usernameAvailability',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/usernameAvailability',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: data

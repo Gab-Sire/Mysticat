@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../styles/app.css';
 import CardDisplayTable from './CardDisplayTable.js';
 import Beforeunload from 'react-beforeunload';
+import * as Constantes from '../Constantes.js';
 
 export default class DisplayDeck extends Component {
 
@@ -25,7 +26,7 @@ export default class DisplayDeck extends Component {
   getDeck(){
 		axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/selectOneDeck/'+this.props.playerId+'/'+this.props.deckId,
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/selectOneDeck/'+this.props.playerId+'/'+this.props.deckId,
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 				params: {
@@ -48,7 +49,7 @@ export default class DisplayDeck extends Component {
   getFavoriteDeckIndex(){
     axios({
 			  method:'get',
-			  url:'http://'+window.location.hostname+':80/getFavoriteDeckIndex/'+this.props.playerId,
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getFavoriteDeckIndex/'+this.props.playerId,
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 				params: {
