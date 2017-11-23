@@ -784,7 +784,7 @@
 
 /* styles pour les cr�atures invoqu�es sur le champ de bataille */
 .minion {
-	background: darkblue;
+	background: blue;
 }
 
 .minion:hover {
