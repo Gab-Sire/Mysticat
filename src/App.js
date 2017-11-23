@@ -96,29 +96,6 @@ class App extends Component{
 				});
 	}
 
-
-
-	checkIfStillConnected(){
-		if(null != this.state.playerId){
-			axios({
-				  method:'post',
-				  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getPlayerConnection',
-				  responseType:'json',
-				  headers: {'Access-Control-Allow-Origin': "true"},
-				  data : this.state.playerId
-				})
-				  .then((response)=>{
-						if(false===response.data){
-								this.disconnectPlayer();
-						}
-					})
-					.catch(error => {
-					  console.log('Error fetching and parsing data', error);
-						return false;
-					});
-		}
-	}
-
 	disconnectPlayer(){
 		axios({
 				method:'post',
@@ -145,7 +122,6 @@ class App extends Component{
 			})
 				.then((response)=>{
 					if(id === this.state.playerId){
-						console.log("Kicking admin out");
 						this.disconnectPlayer();
 						this.backToLoginScreen();
 					}
@@ -205,11 +181,6 @@ class App extends Component{
 			this.goAdminDashBoard();
 		}else{
 			this.setState({appDisplay: "menu"});
-			/*
-			if(null !== this.state.playerId){
-				setInterval(this.checkIfStillConnected.bind(this), TIME_BETWEEN_AXIOS_CALLS);
-			}
-			*/
 		}
 	}
 

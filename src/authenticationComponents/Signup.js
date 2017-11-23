@@ -35,7 +35,6 @@ export default class Login extends Component{
 	}
 
 	handleClick(event){
-		console.log('Signup form submitted');
 		this.attemptSignup();
 	}
 
@@ -49,7 +48,6 @@ export default class Login extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-				  console.log(response.data);
 				  if(response.data!==null){
 					  this.props.connectPlayer(response.data);
 				  }
@@ -62,24 +60,6 @@ export default class Login extends Component{
 				});
 	}
 
-	checkIfUsernameTaken(){
-		console.log("entering");
-		const data = {username: this.state.username}
-		axios({
-			  method:'post',
-			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/usernameAvailability',
-			  responseType:'json',
-			  headers: {'Access-Control-Allow-Origin': "true"},
-			  data: data
-			})
-			  .then((response)=>{
-				  console.log("User avail: ",response)
-				  this.forceUpdate();
-				})
-				.catch(error => {
-				  console.log('Error fetching and parsing data', error);
-				});
-	}
 	changeSignUpMode(){
 		this.props.changeSignUpMode();
 		}

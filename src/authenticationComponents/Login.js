@@ -47,7 +47,6 @@ export default class Login extends Component{
 				data: data
 			})
 				.then((response)=>{
-					console.log(response);
 					if(response.data!==null){
 						this.props.connectPlayer(response.data, this.state.username);
 					}else{
@@ -72,7 +71,6 @@ export default class Login extends Component{
 	}
 
 	handleClick(event){
-		console.log('Login form submitted');
 		this.attemptConnection();
 	}
 

@@ -231,7 +231,6 @@ export default class Board extends Component{
 			  data: data
 			})
 			  .then((response)=>{
-				  console.log(response.data);
 				  if(response.data!==null){
 					  	this.setState({gameState: response.data,
 							  actionList : [],
@@ -270,7 +269,6 @@ export default class Board extends Component{
 					playerActions: this.state.actionList,
 					playerId: this.state.playerId
 			};
-		console.log("Sending actions: ", data);
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/sendActions',
