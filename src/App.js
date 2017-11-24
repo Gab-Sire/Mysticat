@@ -9,6 +9,7 @@ import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './deckEditingComponents/DeckSelection.js';
 import DisplayDeck from './deckEditingComponents/DisplayDeck.js';
 import AdminDashBoard from './adminComponents/AdminDashBoard.js';
+import HeroChange from './menuComponents/HeroChange.js';
 import * as Constantes from './Constantes.js';
 
 
@@ -27,6 +28,7 @@ class App extends Component{
 			userDeckList: null,
 			userList: null,
 			deckId:null,
+			heros:null,
 			connectedAsAdmin:false
 		};
 	}
@@ -52,12 +54,16 @@ class App extends Component{
 			else if("displayDeck" === this.state.appDisplay){
 				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
-			}
-			else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
-				return <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
+			}else if("AvatarChange"===this.state.appDisplay){
+			
+				return (<HeroChange heros={this.state.heros} sendHero={this.sendHero} />);
+				
+			}else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
+				return( <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue}
 				disconnectPlayer={this.disconnectPlayer.bind(this)} appDisplay={this.updateAppDisplay.bind(this)}
-				playerName = {this.state.playerName}/>
+				playerName = {this.state.playerName} goHeroChange = {this.goHeroChange.bind(this)}
+				/>);
 			}
 			else if(true===this.state.inGame){
 				return(
@@ -132,6 +138,41 @@ class App extends Component{
 		});
 	}
 
+	goHeroChange(){
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getHeros',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"}
+			})
+			  .then((response)=>{
+				  	this.setState({heros:response.data});
+						this.updateAppDisplay("AvatarChange");
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+					this.disconnectPlayer();
+				});
+	}
+	
+	sendHero= (heroSelect) => {
+		const data = {player: this.state.playerId, hero: heroSelect}
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/setHero',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: data,
+			})
+			  .then((response)=>{
+						this.updateAppDisplay("menu");
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+					this.disconnectPlayer();
+				});
+	}
+	
 	goDeckSelection(){
 			axios({
 				  method:'post',

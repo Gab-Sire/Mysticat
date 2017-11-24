@@ -825,11 +825,21 @@
 	position: relative;
 }
 
+.wide{
+	width: 10% !important;
+}
+
 .hero:hover {
 	border: 4px solid #FAFAD2;
 	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
 }
 
+.containerHero{
+	width: 90%;
+	margin-left: 25%;
+	padding-bottom: 200px;
+	padding-top: 25px;
+}
 /* style pour les types de h�ros */
 .zorroHero {
 	background-image: url('../img/heroImg/chatZorro.jpg');
