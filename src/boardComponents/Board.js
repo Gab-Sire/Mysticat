@@ -41,7 +41,8 @@ export default class Board extends Component{
 			endOfTurn:false,
 			surrendering: false,
 			selectedCardIndex:null,
-			selectedFieldCellIndex:null
+			selectedFieldCellIndex:null,
+			showBattlelog: false
 		};
 	}
 
@@ -54,7 +55,8 @@ export default class Board extends Component{
 		opponentIndex = (selfIndex === 0) ? 1 : 0;
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
-
+		battlelog = this.props.gameState.battlelog;
+		
 	}
 	changeAttackingSelected(index){
 		if(null === this.state.attackerSelected){
@@ -245,11 +247,13 @@ export default class Board extends Component{
 								targetMinion:null,
 								attackerSelected:null,
 								waitingForOpponentToEndTurn: false,
-								endOfTurn:false
+								endOfTurn:false,
+								showBattlelog:false
 					  	});
 						players = this.state.gameState.players;
 						self = this.state.gameState.players[selfIndex];
 						opponent = this.state.gameState.players[opponentIndex];
+						battlelog = this.state.gameState.battlelog;
 						this.selfUserHasWon();
 						this.forceUpdate();
 				  }
@@ -365,7 +369,7 @@ export default class Board extends Component{
 	}
 	
 	showBattlelogBox(){
-		this.setState({ showBattlelog: -1 });
+		this.setState({ showBattlelog: true });
 	}
 
 	clearActionList(){

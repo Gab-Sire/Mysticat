@@ -65,6 +65,13 @@
 	left: 90.5%;
 }
 
+#buttonBattlelog {
+	position: absolute;
+	top: 95%;
+	left: 1%;
+	width: 12%;
+}
+
 #loading {
 	text-align: center;
 }
