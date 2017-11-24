@@ -92,6 +92,7 @@ export default class CardDisplayTable extends Component {
      }, this)
 
 	return (<div id='CardCollection'>
+        <div id="topMenuItems">
         <Not30CardsInDeckWarning
             MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertDeckSizeVisible}
             onDismiss = {this.onDismissWarningDeckSize.bind(this)}
@@ -104,11 +105,9 @@ export default class CardDisplayTable extends Component {
             visible={this.state.isSuccessVisible}
             onDismiss = {this.onDismissSuccess.bind(this)}
         />
-        <div id="topMenuItems">
          <button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
         <h2 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification du deck" : "Affichage du deck"}</h2>
         <button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
-
 				<div>{(true===this.state.editMode) ?
 				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
 				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
