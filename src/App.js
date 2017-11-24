@@ -156,7 +156,8 @@ class App extends Component{
 	}
 	
 	sendHero(heroSelect){
-		const data = {player: this.state.playerId, hero: heroSelect}
+		
+		const data = this.state.playerId+"&"+ heroSelect;
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/setHero',

@@ -12,7 +12,7 @@ export default class HeroDisplay extends Component{
 		let hero = this.props.hero;
       
 		  return(
-          	<a className={"card wide "+hero}></a>
+          	<a className={"card wide "+hero} onClick={this.sendTheHero.bind(this)}></a>
           	);
 	
 		
@@ -20,7 +20,7 @@ export default class HeroDisplay extends Component{
 	
 	sendTheHero(){
 		let hero = this.props.hero
-		//this.props.sendingTheHero(hero);
+		this.props.sendingTheHero(hero);
 	}
 	
 }
