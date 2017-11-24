@@ -70,9 +70,9 @@
 #backToDeckSelection {
 	display: block;
 	margin: 0 auto;
-	position: relative;
-	width: 25%;
+	position: absolute;
 	padding: 5px;
-	top: 24%;
-	font-size: 18px;
+	left: 2%;
+	font-size: 12px;
+	top: 50%;
 }
