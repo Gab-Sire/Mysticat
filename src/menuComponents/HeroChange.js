@@ -9,16 +9,17 @@ export default class CardTile extends Component{
 
 	render(){
       let heros = this.props.heros;
-      let heroSelect = [];
-      let nbHero = this.props.heros.length;
-	  for(var i = 0; i < nbHero; i++){
+      let heroSelect = this.props.heros.map(function(hero, index){//[];
+      //let nbHero = this.props.heros.length;
+      //this.sendTheHero.bind
+	  //for(var i = 0; i < nbHero; i++){
 		  
-		  heroSelect.push(
-		  <span> 
-          	<a className={"card wide "+heros[i]} key={"hero" + i}></a>
-          	{(0===((i+1)%5) ) ? <br/>:null}
-          </span>);
-	  }
+		 // heroSelect.push(
+		  return(<span> 
+          	<a className={"card wide "+hero} key={"hero" + index} onClick={() => this.sendTheHero(hero)}></a>
+          	{(0===((index+1)%5) ) ? <br/>:null}
+          </span>)});
+	  //}
 		 
 		 return (<div id='MainMenu'>
 		 			<div>
@@ -31,6 +32,10 @@ export default class CardTile extends Component{
 		 			</div>
 		 		</div>);
 		
+	}
+	
+	sendTheHero= (hero) => {
+		this.props.sendHero(hero);
 	}
 	
 }

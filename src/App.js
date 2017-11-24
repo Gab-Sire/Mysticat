@@ -56,7 +56,7 @@ class App extends Component{
 				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if("AvatarChange"===this.state.appDisplay){
 			
-				return (<HeroChange heros={this.state.heros} sendHero={this.sendHero.bind(this)} />);
+				return (<HeroChange heros={this.state.heros} sendHero={this.sendHero} />);
 				
 			}else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return( <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
@@ -155,8 +155,8 @@ class App extends Component{
 				});
 	}
 	
-	sendHero(hero){
-		const data = {player: this.state.playerId, password: hero}
+	sendHero= (heroSelect) => {
+		const data = {player: this.state.playerId, hero: heroSelect}
 		axios({
 			  method:'post',
 			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/setHero',

@@ -290,9 +290,13 @@ public class RestControlleur {
 	}
 	
 	@PostMapping(value = "/setHero")
-	public void setHero(@RequestBody String userId, @RequestBody  String hero) {
+	public boolean setHero(@RequestBody String userId, @RequestBody  String hero) {
+		System.out.println(userId);
+		System.out.println(hero);
 		User user = userRepository.findById(userId);
 		user.setHeroPortrait(HeroPortrait.valueOf(hero));
+		userRepository.save(user);
+		return true;
 	}
 	
 
