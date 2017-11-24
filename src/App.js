@@ -9,7 +9,7 @@ import LoadingScreen from './menuComponents/LoadingScreen.js';
 import DeckSelection from './deckEditingComponents/DeckSelection.js';
 import DisplayDeck from './deckEditingComponents/DisplayDeck.js';
 import AdminDashBoard from './adminComponents/AdminDashBoard.js';
-import HeroChange from './menuComponents/HeroChange.js';
+import HeroChange from './heroPicker/HeroChange.js';
 import * as Constantes from './Constantes.js';
 
 
@@ -56,7 +56,7 @@ class App extends Component{
 				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if("AvatarChange"===this.state.appDisplay){
 			
-				return (<HeroChange heros={this.state.heros} sendHero={this.sendHero} />);
+				return (<HeroChange heros={this.state.heros} sendingTheHero={this.sendHero.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />);
 				
 			}else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return( <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
@@ -155,7 +155,7 @@ class App extends Component{
 				});
 	}
 	
-	sendHero= (heroSelect) => {
+	sendHero(heroSelect){
 		const data = {player: this.state.playerId, hero: heroSelect}
 		axios({
 			  method:'post',

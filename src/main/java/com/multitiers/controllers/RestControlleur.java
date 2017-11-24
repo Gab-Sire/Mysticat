@@ -280,17 +280,14 @@ public class RestControlleur {
 	
 	@PostMapping(value = "/getHeros")
 	public @ResponseBody HeroPortrait[] getHeros() {
+		System.out.println("Sending Heros");
 		return HeroPortrait.values();
 	}
 	
-	@PostMapping(value = "/getCurrentHero")
-	public @ResponseBody HeroPortrait getCurrentHero(@RequestBody String userId) {
-		User user = userRepository.findById(userId);
-		return user.getHeroPortrait();
-	}
 	
 	@PostMapping(value = "/setHero")
 	public boolean setHero(@RequestBody String userId, @RequestBody  String hero) {
+		System.out.println("Get Hero");
 		System.out.println(userId);
 		System.out.println(hero);
 		User user = userRepository.findById(userId);
