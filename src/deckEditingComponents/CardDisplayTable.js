@@ -92,7 +92,6 @@ export default class CardDisplayTable extends Component {
      }, this)
 
 	return (<div id='CardCollection'>
-	<button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
         <Not30CardsInDeckWarning
             MAX_CARDS_IN_DECK={MAX_CARDS_IN_DECK} visible={this.state.isAlertDeckSizeVisible}
             onDismiss = {this.onDismissWarningDeckSize.bind(this)}
@@ -105,22 +104,25 @@ export default class CardDisplayTable extends Component {
             visible={this.state.isSuccessVisible}
             onDismiss = {this.onDismissSuccess.bind(this)}
         />
-        <h1 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification Deck" : "Affichage Deck"}</h1>
+        <div id="topMenuItems">
+        <h2 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification du deck" : "Affichage du deck"}</h2>
+        <button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode edit"}</button>
+
 				<div>{(true===this.state.editMode) ?
 				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
 				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
         </div>
 				:
-				<h2 className='displayDeckTitle'>{this.state.deckName}</h2>
+				<h4 className='displayDeckTitle'>{this.state.deckName}</h4>
 						}</div>
         <div id="cardCounter">{<span className={(false===this.isTheDeckValid()) ? "invalidDeck" : ""}>{deck.length}</span>}/30</div>
         {
           (true===this.state.editMode) ? (
-            (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck favori est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Ce deck est votre favori</div> :
-            <div id="changeFavoriteDeckText" title="Votre deck favori est celui avec lequel vous jouez une partie.">Deck Favori<input id="selectFavoriteDeckCheckbox" type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite.bind(this)} /></div>
-          ) : (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck favori est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Ce deck est votre favori</div> : null
+            (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck actif est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Deck actif</div> :
+            <div id="changeFavoriteDeckText" title="Votre deck actif est celui avec lequel vous jouez une partie.">Choisir comme deck actif<input id="selectFavoriteDeckCheckbox" type="checkbox" name="isFavorite" onChange={this.handleChangeFavorite.bind(this)} /></div>
+          ) : (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck actif est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Deck actif</div> : null
         }
-
+        </div>
         <br/>
         {(true===this.state.editMode) ?
           <div>
@@ -135,7 +137,6 @@ export default class CardDisplayTable extends Component {
     		      <button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
 	        </div>
         }
-
 			</div>);
   }
 
