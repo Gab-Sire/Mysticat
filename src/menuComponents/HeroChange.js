@@ -1,8 +1,5 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import '../styles/app.css';
+import React, { Component } from 'react';
 import Beforeunload from 'react-beforeunload';
-import * as Constantes from '../Constantes.js';
 
 export default class CardTile extends Component{
 	constructor(props){
@@ -11,18 +8,26 @@ export default class CardTile extends Component{
 	}
 
 	render(){
-      let heros = this.props.heros.map(function(hero, index){
-    	  return (
-					 <div> 
-              <a className={"hero "+hero}></a>
-              {(0===((index+1)%5) ) ? <br/>:null}
-           </div>
-        )
-		 }, this)
+      let heros = this.props.heros;
+      let heroSelect = [];
+      let nbHero = this.props.heros.length;
+	  for(var i = 0; i < nbHero; i++){
+		  heroSelect.push(
+		  <span> 
+          	<a className={"card "+heros[i]} key={"hero" + i}></a>
+          	{(0===((i+1)%5) ) ? <br/>:null}
+          </span>);
+	  }
 		 
-		 return (<div className='MainMenu'>
-		 			<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
-		 			{heros}
+		 return (<div id='MainMenu'>
+		 			<div>
+			 			<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
+			 			<h2 className='displayDeckTitle'>Quel est le Hero que tu préfères?</h2>
+			 			<h5 className='displayDeckTitle'> Moi j'ai bien Mitaine</h5>
+			 			<div className="containerHero">
+			 				{heroSelect}
+			 			</div>
+		 			</div>
 		 		</div>);
 		
 	}
