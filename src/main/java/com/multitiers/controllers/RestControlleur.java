@@ -177,7 +177,6 @@ public class RestControlleur {
 		newDeck.setName(deckName);
 		newDeck.setCardList(cardList);
 		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
-		System.out.println("Saved deck");
 	}
 
 	@PostMapping(value = "/attemptConnection")
