@@ -25,7 +25,8 @@ public class Game {
 		players[1] = player2;
 		currentMana = Constantes.STARTING_MANA;
 		endedWithSurrender = false;
-		battlelog = new ArrayList<>(); 
+		battlelog = new ArrayList<>();
+		battlelog.add("La partie débute.");
     	this.nextTurn();
 	}
 	
@@ -44,6 +45,8 @@ public class Game {
 			this.setWinnerPlayerIndex(1);
 		} else if(players[1].getHero().isDead()) {
 			this.setWinnerPlayerIndex(0);
+		}else {
+			battlelog.add("Début du tour "+currentMana+"!");
 		}
 	}
 
