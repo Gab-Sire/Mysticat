@@ -250,11 +250,11 @@ public class CardCreationService {
 		MinionCard beat = createMinionCard("Beat Chat", 8, 24, 13, 8, "Beat on the music",
 				"img/cardImg/EpicSet/BeatCat.gif");
 		MinionCard winter = createMinionCard("Winter Chat", 8, 8, 19, 6,
-				"Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.gif");
+				"Let the storm rage on, The cold never bothered me anyway", "img/cardImg/EpicSet/SuperCuteCat.jpg");
 		MinionCard padding = createMinionCard("Padding Chat", 8, 22, 15, 8, "My belly next, My belly next",
 				"img/cardImg/EpicSet/Padding.gif");
 		MinionCard skatterA = createMinionCard("Grumpy Bat Lord", 10, 20, 15, 8, "Go my minions",
-				"img/cardImg/EpicSet/BatLordCat.gif");
+				"img/cardImg/EpicSet/BatLordCat.jpg");
 		MinionCard jedi = createMinionCard("Nia", 10, 35, 5, 9, "Nia Nia Nia Nia Nia",
 				"img/cardImg/EpicSet/RainbowCat.gif");
 		MinionCard nia = createMinionCard("Chat Jedi", 10, 34, 6, 9, "Use the force Luke",
