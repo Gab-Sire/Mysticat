@@ -72,6 +72,16 @@
 	width: 12%;
 }
 
+#battlelogZone {
+	position: absolute;
+	top: 80%;
+	left: 1%;
+	width: 12%;
+	height: 12%;
+	background-color: white;
+	color: black;
+}
+
 #loading {
 	text-align: center;
 }

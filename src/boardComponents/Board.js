@@ -128,6 +128,7 @@ export default class Board extends Component{
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
 					
 					<button id="buttonBattlelog" onClick={this.showBattlelogBox.bind(this)}>Battlelog</button>
+					<Battlelog status={this.state.showBattlelog} logs={battlelog} />
 					
 					<div id="menuGame"><p>Menu</p>
 						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
@@ -369,7 +370,10 @@ export default class Board extends Component{
 	}
 	
 	showBattlelogBox(){
-		this.setState({ showBattlelog: true });
+		if(!this.state.showBattlelog)
+			this.setState({ showBattlelog: true });
+		else 
+			this.setState({ showBattlelog: false });
 	}
 
 	clearActionList(){
