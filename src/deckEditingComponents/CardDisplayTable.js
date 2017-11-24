@@ -217,7 +217,10 @@ export default class CardDisplayTable extends Component {
 	}
 
   switchEditMode(){
-      this.setState({editMode: !this.state.editMode})
+      this.setState({editMode: !this.state.editMode,
+                    isSuccessVisible: false,
+                    isAlertDeckNameVisible: false,
+                    isAlertDeckSizeVisible: false})
   }
 
   removeCardFromDeck(index){
