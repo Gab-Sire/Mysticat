@@ -16,9 +16,14 @@ export default class Battelog extends Component {
  
   createBoxBattlelog(){ 
     if(this.props.status){ 
+    	let props = this.props.logs;
+    	const listLogs = props.map((logs) =>
+    	  <p>{logs}</p>
+    	);
         return (
         		<div id="battlelogZone">
         			<p>Battlelog</p>
+        			{listLogs}
         		</div>	
             ); 
     } 
