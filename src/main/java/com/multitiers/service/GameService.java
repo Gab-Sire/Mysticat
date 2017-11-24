@@ -53,7 +53,17 @@ public class GameService implements QueueListener {
 		if(!game.getEndedWithSurrender()) {
 			game.nextTurn();
 		}
-
+		if(game.getWinnerPlayerIndex()!=null) {
+			if(game.getWinnerPlayerIndex()==-1) {
+				game.addToBattlelog("Partie nulle.");
+			}
+			else if(game.getWinnerPlayerIndex()==0) {
+				game.addToBattlelog(game.getPlayers()[0].getName()+" est victorieux.");
+			}
+			else {
+				game.addToBattlelog(game.getPlayers()[1].getName()+" est victorieux.");
+			}
+		}
 		this.existingGameList.put(gameId, game);
 		this.updatedGameList.put(playerOneId, game);
 		this.updatedGameList.put(playerTwoId, game);
