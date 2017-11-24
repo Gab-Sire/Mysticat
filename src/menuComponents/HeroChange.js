@@ -12,9 +12,10 @@ export default class CardTile extends Component{
       let heroSelect = [];
       let nbHero = this.props.heros.length;
 	  for(var i = 0; i < nbHero; i++){
+		  
 		  heroSelect.push(
 		  <span> 
-          	<a className={"card "+heros[i]} key={"hero" + i}></a>
+          	<a className={"card wide "+heros[i]} key={"hero" + i}></a>
           	{(0===((i+1)%5) ) ? <br/>:null}
           </span>);
 	  }

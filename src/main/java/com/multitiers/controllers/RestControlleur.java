@@ -283,6 +283,12 @@ public class RestControlleur {
 		return HeroPortrait.values();
 	}
 	
+	@PostMapping(value = "/getCurrentHero")
+	public @ResponseBody HeroPortrait getCurrentHero(@RequestBody String userId) {
+		User user = userRepository.findById(userId);
+		return user.getHeroPortrait();
+	}
+	
 	@PostMapping(value = "/setHero")
 	public void setHero(@RequestBody String userId, @RequestBody  String hero) {
 		User user = userRepository.findById(userId);
