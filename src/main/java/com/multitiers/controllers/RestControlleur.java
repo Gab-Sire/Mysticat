@@ -278,20 +278,17 @@ public class RestControlleur {
 		}
 	}
 	
-	@PostMapping(value = "/getGameID")
-	public @ResponseBody String getObserverGameID() {
-		int index =(int) (Math.random()*this.gameService.existingGameList.size());
-		Game game = this.gameService.existingGameList.get(this.gameService.existingGameList.keySet().toArray()[index]);
-		return new Gson().toJson(game.getGameId());
+	@PostMapping(value = "/getHeros")
+	public @ResponseBody HeroPortrait[] getHeros() {
+		return HeroPortrait.values();
 	}
 	
-	@PostMapping(value = "/observe")
-	public @ResponseBody Game getObserverMode(@RequestBody String gameId) {
-		gameId = gameId.substring(0, gameId.length() - 1);
-		Game game = this.gameService.existingGameList.get(gameId);
-		
-		return game;
+	@PostMapping(value = "/setHero")
+	public void setHero(@RequestBody String userId, @RequestBody  String hero) {
+		User user = userRepository.findById(userId);
+		user.setHeroPortrait(HeroPortrait.valueOf(hero));
 	}
+	
 
 	@PostMapping(value = "/checkIfGameUpdated")
 	public @ResponseBody Game getUpdatedGame(@RequestBody String userId) {

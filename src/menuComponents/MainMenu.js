@@ -29,6 +29,7 @@ export default class MainMenu extends Component{
 					<div className='menuContainer'>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.props.goDeckSelection}>Consulter ses decks</button></p>
+						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.props.goHeroChange}>Changer son avatar</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{
 								setTimeout(()=>{
 									this.deconnexion();
