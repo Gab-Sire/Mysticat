@@ -12,9 +12,10 @@ export default class HeroChange extends Component{
       let heros = this.props.heros;
       let heroSelect = this.props.heros.map(function(hero, index){
 		  return(<span> 
-          	<HeroDisplay hero={hero}  />
+          	<HeroDisplay hero={hero} key={hero} sendingTheHero={this.sendTheHero.bind(this)}/>
           	{(0===((index+1)%5) ) ? <br/>:null}
-          </span>)});
+          </span>);
+      }.bind(this));
 	 
 		 
 		 return (<div id='MainMenu'>

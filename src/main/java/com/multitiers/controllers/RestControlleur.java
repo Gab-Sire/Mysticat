@@ -285,14 +285,17 @@ public class RestControlleur {
 	
 	
 	@PostMapping(value = "/setHero")
-	public boolean setHero(@RequestBody String userId, @RequestBody  String hero) {
-		System.out.println("Get Hero");
-		System.out.println(userId);
-		System.out.println(hero);
+	public void setHero(@RequestBody String cluster) {
+		System.out.println("set Hero");
+		String [] splitUp = cluster.split("&");
+		String userId = splitUp[0];
+		String hero = splitUp[1];
+		
+		userId = userId.substring(0, userId.length() - 1);
+		hero = hero.substring(0, hero.length() - 1);
 		User user = userRepository.findById(userId);
 		user.setHeroPortrait(HeroPortrait.valueOf(hero));
 		userRepository.save(user);
-		return true;
 	}
 	
 
