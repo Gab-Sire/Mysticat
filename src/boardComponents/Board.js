@@ -9,6 +9,7 @@ import Hand from './Hand.js';
 import SurrenderScreenPopUp from './SurrenderScreenPopUp.js';
 import EndGameScreen from './EndGameScreen.js';
 import PopUpEndOfTurn from './PopUpEndOfTurn.js';
+import Battlelog from './Battlelog.js';
 import Beforeunload from 'react-beforeunload';
 import * as Constantes from '../Constantes.js';
 
@@ -19,6 +20,7 @@ let selfIndex;
 let self;
 let opponent;
 let opponentIndex;
+let battlelog;
 
 let selectedOpponentFieldCellIndex;
 
@@ -122,7 +124,9 @@ export default class Board extends Component{
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
 					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} surrender={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
-
+					
+					<button id="buttonBattlelog" onClick={this.showBattlelogBox.bind(this)}>Battlelog</button>
+					
 					<div id="menuGame"><p>Menu</p>
 						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
 					</div>
@@ -358,6 +362,10 @@ export default class Board extends Component{
 				this.drawGame();
 			}
 		}
+	}
+	
+	showBattlelogBox(){
+		this.setState({ showBattlelog: -1 });
 	}
 
 	clearActionList(){
