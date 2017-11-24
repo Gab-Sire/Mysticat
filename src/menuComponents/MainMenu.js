@@ -28,7 +28,6 @@ export default class MainMenu extends Component{
 					<h4 id="menuPlayerName">Bienvenue {this.props.playerName}</h4>
 					<div className='menuContainer'>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.enterQueue.bind(this)}>Trouver un adversaire</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.displayUnderContruction.bind(this)}>Regarder une Partie</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.props.goDeckSelection}>Consulter ses decks</button></p>
 						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={(event)=>{
 								setTimeout(()=>{
@@ -85,7 +84,6 @@ export default class MainMenu extends Component{
 					  }, TIME_BETWEEN_AXIOS_CALLS)
 				  }
 				  else{
-						console.log(response.data);
 					  this.props.getQueueForParent(response.data);
 				  }
 				})
@@ -115,6 +113,7 @@ export default class MainMenu extends Component{
 			});
 	}
 
+	//TODO remove for prod build
 	getHardCodedGame(){
 		axios({
 			  method:'get',
@@ -123,7 +122,6 @@ export default class MainMenu extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-					console.log(response.data);
 				  this.props.getQueueForParent(response.data);
 				})
 				.catch(error => {

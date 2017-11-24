@@ -141,18 +141,8 @@ public class GameService implements QueueListener {
 		initGameQueue();
 	}
 	
-	//Utilitaire de debugging
-	public void printDataListStatus() {
-		System.out.println("***********************************");
-		System.out.println("Players in queue: "+gameQueue.getNbOfPlayersInQueue());
-		System.out.println("New game list: "+newGameList.size());
-		System.out.println("Updated game list: "+updatedGameList.size());
-		System.out.println("Sent actions list: "+sentActionLists.size());
-	}
-	
 	@Override
 	public void queueHasEnoughPlayers() {
-		System.out.println("Queue pop");
 		// Create game
 		// Assigner la game aux 2 joueurs qui devraient la recevoir
 		Game game = this.gameQueue.matchFirstTwoPlayersInQueue();
