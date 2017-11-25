@@ -65,7 +65,7 @@ public class AttackAction extends Action {
 					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
 				}
 			} else {
-				attackMinion(opponentPlayer, attackedIndex, attacker, game);
+				attackMinion(opponentPlayerIndex, attackedIndex, attacker, game);
 				sendDeadMinionsToGraveyards(game);
 			}
 		}
@@ -84,27 +84,28 @@ public class AttackAction extends Action {
 		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 	}
 	
-	private void attackMinion(Player opponentPlayer, int attackedIndex, Minion attacker, Game game) {
+	private void attackMinion(int opponentPlayerIndex, int attackedIndex, Minion attacker, Game game) {
+		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
+		int attackingPlayerIndex = (opponentPlayerIndex==0) ? 1 : 0;
+		Player attackingPlayer = game.getPlayers()[attackingPlayerIndex];
 		Minion targetOfTheAttack;
 		String log = "";
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
+			game.addToBattlelog(attacker.getName()+ "["+attackingPlayer.getName()
+			+"] a attaqué "+targetOfTheAttack.getName()+"["+opponentPlayer.getName() + "] pour " + attacker.getPower()
+			+" points de dégât et s'est pris en retour "+targetOfTheAttack.getPower()+" points de dégât.");
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.";
+				log = attacker.getName()+"["+attackingPlayer.getName() + "] en est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 			if (targetOfTheAttack.isDead()) {
-				log = "Minion: " + targetOfTheAttack.getName() + " of " + opponentPlayer.getName()
-				+ " was killed by " + attacker.getName();
-				game.addToBattlelog(log);
-			}
-			if(log == "") {
-				log = attacker.getName() + " a attaqué " + targetOfTheAttack.getName() + " with power of " + attacker.getPower();
+				log = targetOfTheAttack.getName() +"["+opponentPlayer.getName() + "] en est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 		} else {
-			game.addToBattlelog("La cible de "+attacker.getName()+" est déjà morte.");
+			game.addToBattlelog("La cible de "+attacker.getName()+ " de"+attackingPlayer.getName()+" est morte avant que son attaque se produise.");
 		}
 
 	}
