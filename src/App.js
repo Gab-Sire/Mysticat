@@ -55,9 +55,9 @@ class App extends Component{
 				return <DisplayDeck goDeckSelection={this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if("AvatarChange"===this.state.appDisplay){
-			
-				return (<HeroChange heros={this.state.heros} sendingTheHero={this.sendHero.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />);
-				
+
+				return (<HeroChange disconnectPlayer={this.disconnectPlayer.bind(this)} heros={this.state.heros} sendingTheHero={this.sendHero.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />);
+
 			}else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return( <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
 				setUserDeckList={this.setUserDeckList.bind(this)} getQueueForParent={this.getGameFromQueue}
@@ -154,9 +154,9 @@ class App extends Component{
 					this.disconnectPlayer();
 				});
 	}
-	
+
 	sendHero(heroSelect){
-		
+
 		const data = this.state.playerId+"&"+ heroSelect;
 		axios({
 			  method:'post',
@@ -173,7 +173,7 @@ class App extends Component{
 					this.disconnectPlayer();
 				});
 	}
-	
+
 	goDeckSelection(){
 			axios({
 				  method:'post',
