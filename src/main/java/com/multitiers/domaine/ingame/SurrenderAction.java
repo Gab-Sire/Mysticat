@@ -29,9 +29,6 @@ public class SurrenderAction extends Action{
 		}
 		else {
 			game.setWinnerPlayerIndex(opponentPlayerIndex);
-			String log_abandon = "Le joueur : " + game.getPlayers()[playerDeclaringSurrenderIndex].getName() + " a abandonné,"
-					+ " le joueur: " + game.getPlayers()[opponentPlayerIndex].getName() + " est victorieux.";
-			game.addToBattlelog(log_abandon);
 		}
 		
 	}

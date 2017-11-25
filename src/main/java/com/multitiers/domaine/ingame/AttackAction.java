@@ -60,6 +60,7 @@ public class AttackAction extends Action {
 		} 
 		else {
 			if (attackedIndex == HERO_FACE_INDEX) {
+				game.addToBattlelog(attacker.getName()+"["+playerDeclaringAttack.getName()+"] a attaqué le héro de "+opponentPlayer.getName());
 				attackFace(opponentPlayer, attacker);
 				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
 					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
