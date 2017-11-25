@@ -6,7 +6,7 @@ public class AttackAction extends Action {
 	private static final int PLAYER_ONE_INDEX = 0;
 	private static final int PLAYER_TWO_INDEX = 1;
 	private static final int HERO_FACE_INDEX = -1;
-
+	
 	private Integer attackingMinionIndex;
 	private Integer targetIndex;
 	private Integer speed;
@@ -41,7 +41,7 @@ public class AttackAction extends Action {
 
 	@Override
 	public void resolve(Game game) {
-		if (game.getEndedWithSurrender()) {
+		if(game.getEndedWithSurrender()) {
 			return;
 		}
 		Integer playerDeclaringAttackIndex = this.getPlayerIndex();
@@ -53,26 +53,26 @@ public class AttackAction extends Action {
 		int attackerIndex = this.getAttackingMinionIndex();
 		int attackedIndex = this.getTargetIndex();
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
-
-		if (attackedIndex == HERO_FACE_INDEX) {
-			game.addToBattlelog(attacker.getName() + "[" + playerDeclaringAttack.getName() + "] a attaqué le héro de "
-					+ opponentPlayer.getName() + " pour " + attacker.getPower() + " points de dégât.");
-			attackFace(opponentPlayer, attacker);
-			if (opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
-				game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
+		if(attacker!=null) {
+			if (attackedIndex == HERO_FACE_INDEX) {
+				game.addToBattlelog(attacker.getName()+"["+playerDeclaringAttack.getName()+"] a attaqué le héro de "
+						+opponentPlayer.getName() + " pour "+attacker.getPower() + " points de dégât.");
+				attackFace(opponentPlayer, attacker);
+				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
+					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
+				}
+			} else {
+				attackMinion(opponentPlayerIndex, attackedIndex, attacker, game);
+				sendDeadMinionsToGraveyards(game);
 			}
-		} else {
-			attackMinion(opponentPlayerIndex, attackedIndex, attacker, game);
-			sendDeadMinionsToGraveyards(game);
 		}
-
 	}
-
+	
 	private void attackerAndTargetExchangeDamage(Minion attacker, Minion targetOfTheAttack) {
 		attackerTakesDamageFromTarget(attacker, targetOfTheAttack);
 		targetTakesDamageFromAttacker(attacker, targetOfTheAttack);
 	}
-
+	
 	private void targetTakesDamageFromAttacker(Minion attacker, Minion targetOfTheAttack) {
 		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
 	}
@@ -80,50 +80,48 @@ public class AttackAction extends Action {
 	private void attackerTakesDamageFromTarget(Minion attacker, Minion targetOfTheAttack) {
 		attacker.setHealth(attacker.getHealth() - ((Minion) targetOfTheAttack).getPower());
 	}
-
+	
 	private void attackMinion(int opponentPlayerIndex, int attackedIndex, Minion attacker, Game game) {
 		Player opponentPlayer = game.getPlayers()[opponentPlayerIndex];
-		int attackingPlayerIndex = (opponentPlayerIndex == 0) ? 1 : 0;
+		int attackingPlayerIndex = (opponentPlayerIndex==0) ? 1 : 0;
 		Player attackingPlayer = game.getPlayers()[attackingPlayerIndex];
 		Minion targetOfTheAttack;
 		String log = "";
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
-			game.addToBattlelog(attacker.getName() + "[" + attackingPlayer.getName() + "] a attaqué "
-					+ targetOfTheAttack.getName() + "[" + opponentPlayer.getName() + "] pour " + attacker.getPower()
-					+ " points de dégât et s'est pris en retour " + targetOfTheAttack.getPower() + " points de dégât.");
+			game.addToBattlelog(attacker.getName()+ "["+attackingPlayer.getName()
+			+"] a attaqué "+targetOfTheAttack.getName()+"["+opponentPlayer.getName() + "] pour " + attacker.getPower()
+			+" points de dégât et s'est pris en retour "+targetOfTheAttack.getPower()+" points de dégât.");
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				log = attacker.getName() + "[" + attackingPlayer.getName() + "] est mort et est envoyé au cimetierre.";
+				log = attacker.getName()+"["+attackingPlayer.getName() + "] est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 			if (targetOfTheAttack.isDead()) {
-				log = targetOfTheAttack.getName() + "[" + opponentPlayer.getName()
-						+ "] est mort et est envoyé au cimetierre.";
+				log = targetOfTheAttack.getName() +"["+opponentPlayer.getName() + "] est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 		} else {
-			game.addToBattlelog("La cible de " + attacker.getName() + " de" + attackingPlayer.getName()
-					+ " est morte avant que son attaque se produise.");
+			game.addToBattlelog("La cible de "+attacker.getName()+ " de"+attackingPlayer.getName()+" est morte avant que son attaque se produise.");
 		}
 
 	}
-
+	
 	private void attackFace(Player opponentPlayer, Minion attacker) {
 		Hero targetOfTheAttack;
 		targetOfTheAttack = opponentPlayer.getHero();
 		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
 	}
-
+	
 	private void sendDeadMinionsToGraveyards(Game game) {
 		Player[] players = game.getPlayers();
-		for (Player player : players) {
+		for(Player player : players) {
 			Minion[] field = player.getField();
 			List<PlayableCard> graveyard = player.getGraveyard();
-			for (int i = 0; i < field.length; ++i) {
+			for(int i=0; i<field.length; ++i) {
 				Minion minion = field[i];
-				if (minion != null) {
-					if (minion.isDead()) {
+				if(minion!=null) {
+					if(minion.isDead()) {
 						field[i] = null;
 						graveyard.add(minion.getCardReference());
 					}
