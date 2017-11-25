@@ -207,7 +207,7 @@
 }
 
 #menuGame {
-	z-index: 1;
+	z-index: 4;
 	text-align: center;
 	background-color: darkred;
 	position: absolute;
@@ -224,6 +224,7 @@
 #menuGame:hover #listeMenuHidden {
 	display: block;
 }
+
 
 #FullScreenRED, #FullScreenGREEN, #FullScreenOrange {
 	z-index: 2;

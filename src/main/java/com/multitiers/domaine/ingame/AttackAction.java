@@ -54,8 +54,9 @@ public class AttackAction extends Action {
 		int attackedIndex = this.getTargetIndex();
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
 		if (attacker == null) {
-			System.out.println("The minion on " + attackerIndex + " for " + playerDeclaringAttack.getName()
-					+ " had previously declared an attack but was killed before it could resolve");
+			game.addToBattlelog(game.getPlayers()[playerDeclaringAttackIndex].getField()[attackerIndex].getName() 
+					+ " de " + playerDeclaringAttack.getName()
+					+ " avait déclaré une attaque, mais est mort avant qu'elle puisse se produire.");
 		} 
 		else {
 			if (attackedIndex == HERO_FACE_INDEX) {
@@ -92,21 +93,18 @@ public class AttackAction extends Action {
 			if (attacker.isDead()) {
 				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " and died.";
 				game.addToBattlelog(log);
-				System.out.println(attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower() + " and died.");
 			}
 			if (targetOfTheAttack.isDead()) {
 				log = "Minion: " + targetOfTheAttack.getName() + " of " + opponentPlayer.getName()
 				+ " was killed by " + attacker.getName();
 				game.addToBattlelog(log);
-				System.out.println("Target on cell: " + attackedIndex + " for " + opponentPlayer.getName()
-						+ " was killed by " + attacker.getName());
 			}
 			if(log == "") {
-				log = attacker.getName() + " attacked " + targetOfTheAttack.getName() + " with power of " + attacker.getPower();
+				log = attacker.getName() + " a attaqué " + targetOfTheAttack.getName() + " with power of " + attacker.getPower();
 				game.addToBattlelog(log);
 			}
 		} else {
-			System.out.println("Target is missing or dead.");
+			game.addToBattlelog("La cible de "+attacker.getName()+" est déjà morte.");
 		}
 
 	}
@@ -115,9 +113,6 @@ public class AttackAction extends Action {
 		Hero targetOfTheAttack;
 		targetOfTheAttack = opponentPlayer.getHero();
 		targetOfTheAttack.setHealth(targetOfTheAttack.getHealth() - attacker.getPower());
-		if (targetOfTheAttack.isDead()) {
-			//System.out.println("Congratz grad, you won.");
-		}
 	}
 	
 	private void sendDeadMinionsToGraveyards(Game game) {
