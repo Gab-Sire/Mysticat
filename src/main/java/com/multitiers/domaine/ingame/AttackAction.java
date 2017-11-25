@@ -98,11 +98,11 @@ public class AttackAction extends Action {
 			+" points de dégât et s'est pris en retour "+targetOfTheAttack.getPower()+" points de dégât.");
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				log = attacker.getName()+"["+attackingPlayer.getName() + "] en est mort et est envoyé au cimetierre.";
+				log = attacker.getName()+"["+attackingPlayer.getName() + "] est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 			if (targetOfTheAttack.isDead()) {
-				log = targetOfTheAttack.getName() +"["+opponentPlayer.getName() + "] en est mort et est envoyé au cimetierre.";
+				log = targetOfTheAttack.getName() +"["+opponentPlayer.getName() + "] est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 		} else {
