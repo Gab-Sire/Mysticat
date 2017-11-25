@@ -21,8 +21,7 @@ export default class HeroChange extends Component{
 		 return (<div id='MainMenu'>
 		 			<div>
 			 			<Beforeunload onBeforeunload={() => {this.props.disconnectPlayer(); return "Are you sure?"}}/>
-			 			<h2 className='displayDeckTitle'>Choisissez votre héro</h2>
-			 			<h5 className='displayDeckTitle'> Moi, j'ai bien Mitaine</h5>
+			 			<h2 className='displayDeckTitle'>Choisissez votre avatar</h2>
 			 			<div className="containerHero">
 			 				{heroSelect}
 			 				<button id="backToMenu" onClick={this.goBackToMenu.bind(this)}>Retour au menu</button>
