@@ -12,8 +12,12 @@ export default class DeckSelection extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-
+				favoriteDeckIndex:null
 		};
+	}
+
+	componentWillMount(){
+			this.setState({favoriteDeckIndex: this.props.favoriteDeckIndex})
 	}
 
 	render(){
@@ -24,7 +28,7 @@ export default class DeckSelection extends Component{
 			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} index={i+numberDecks} isUserDeck={true}
 			deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} />);
 		}
-
+		console.log(this.state.favoriteDeckIndex);
 		return(
 			<div id="deckSelectionContainer">
 				<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
@@ -32,8 +36,13 @@ export default class DeckSelection extends Component{
 					<h2>S&eacute;lection de deck</h2>
 				</div>
 				<div id="deckSlotsContainer">
-					{this.props.deckList.map((deck, index) => <Card key={"deckSlot" + index} index={index} isUserDeck={true}
-					deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} faceUp={false} {...deck} deck={deck} />)}
+					{this.props.deckList.map((deck, index) => {
+						return (
+							<Card key={"deckSlot" + index} index={index} isUserDeck={true} isFavorite={(this.state.favoriteDeckIndex===index)}
+							deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} faceUp={false} {...deck} deck={deck}
+							/>)
+						})
+					}
 					{emptyDeckSlots}
 				</div>
 				<div id="deckSlotsContainerUnderLayer"></div>

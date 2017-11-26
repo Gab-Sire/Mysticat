@@ -14,7 +14,8 @@ export default class Card extends Component{
 		let bigStat = "";
 		let cardName=this.props.name;
 		let isSummoned = "";
-		
+		let isFavorite = "";
+
 		if(null!==this.props.listed && true===this.props.listed ){
 			cardName = this.props.cardName;
 		}
@@ -31,6 +32,9 @@ export default class Card extends Component{
 		if(null!== this.props.isSummoned && true===this.props.isSummoned){
 			isSummoned= " invoquer ";
 		}
+		if(true===this.props.isFavorite){
+			isFavorite = " favoriteDeck";
+		}
 		if(true === this.props.faceUp){
 			return (<div className={"card"+listedInstance +" "+ isSelected+" "+this.props.color+" "+isSummoned} title={this.props.description} onClick={this.props.onClick}>
 				<div className={'cardDetailContainer'+listedInstance+' cardManaCost'} title="The amount of mana crystals consumed when summoning this minion"><div className=" balancingDetail" >{this.props.manaCost}</div></div>
@@ -43,7 +47,7 @@ export default class Card extends Component{
 		}else if(null!==this.props.index){
 			if(true===this.props.isUserDeck){
 					return (
-							<div className="cardFacedDown" title={this.props.deck.name} onClick={this.selectDeck.bind(this)}>
+							<div className={"cardFacedDown"+isFavorite} title={this.props.deck.name} onClick={this.selectDeck.bind(this)}>
 							<p className="displayDeckAjouter">Afficher le Deck</p>
 							</div>
 						);

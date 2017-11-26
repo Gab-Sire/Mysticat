@@ -29,7 +29,8 @@ class App extends Component{
 			userList: null,
 			deckId:null,
 			heros:null,
-			connectedAsAdmin:false
+			connectedAsAdmin:false,
+			favoriteDeckIndex: null
 		};
 	}
 
@@ -39,7 +40,6 @@ class App extends Component{
 
 	render(){
 		if(true===this.state.isServerAvailable){
-
 			if("admin_dashboard" === this.state.appDisplay){
 				return <AdminDashBoard adminName={this.state.playerName} adminId={this.state.playerId}
 				userList={this.state.userList} setIdPlayer={this.setIdPlayer.bind(this)}
@@ -48,7 +48,7 @@ class App extends Component{
 			else if("deck_selection" === this.state.appDisplay){
 				if(null != this.state.userDeckList){
 					return <DeckSelection deckList={this.state.userDeckList} appDisplay={this.updateAppDisplay.bind(this)}
-					deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)}/>
+					deckSelection={this.selectDeck.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} favoriteDeckIndex={this.state.favoriteDeckIndex}/>
 				}
 			}
 			else if("displayDeck" === this.state.appDisplay){
@@ -92,7 +92,7 @@ class App extends Component{
 			  headers: {'Access-Control-Allow-Origin': "true"}
 			})
 			  .then((response)=>{
-				  this.setState({isServerAvailable: true});
+				  this.setState({isServerAvailable: true, appDisplay:"menu"});
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);
@@ -174,6 +174,26 @@ class App extends Component{
 				});
 	}
 
+	getFavoriteDeckIndex(){
+		let data = this.state.playerId;
+		axios({
+			method:'get',
+			url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getFavoriteDeckIndex/'+data,
+			responseType:'json',
+			headers: {'Access-Control-Allow-Origin': "true"},
+		})
+			.then((response)=>{
+				if(response.data!==null){
+						this.setState({favoriteDeckIndex: response.data,
+													appDisplay:"deck_selection"});
+				}
+			})
+			.catch(error => {
+				console.log('Error fetching and parsing data', "checkIfQueuePopped", error);
+			});
+	}
+
+
 	goDeckSelection(){
 			axios({
 				  method:'post',
@@ -184,7 +204,7 @@ class App extends Component{
 				})
 				  .then((response)=>{
 					  	this.setUserDeckList(response.data);
-							this.updateAppDisplay("deck_selection");
+							this.getFavoriteDeckIndex();
 					})
 					.catch(error => {
 					  console.log('Error fetching and parsing data', error);
