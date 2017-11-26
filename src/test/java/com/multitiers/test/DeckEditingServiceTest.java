@@ -65,19 +65,19 @@ public class DeckEditingServiceTest {
 		newDeckMoreThan30Cards.setName(deckName);
 		
 		List<Card> listeCartes = new ArrayList<>();
-		for(int i = 0; i < Constantes.DECK_LIST_SIZE; ++i) {
+		for(int i = 0; i < Constantes.CONSTRUCTED_DECK_MAX_SIZE; ++i) {
 			Card carte = new MinionCard();
 			listeCartes.add(carte);
 		}
 		newDeck.setCardList(listeCartes);
 		listeCartes = new ArrayList<>();
-		for(int i = 0; i < Constantes.DECK_LIST_SIZE+1; ++i) {
+		for(int i = 0; i < Constantes.CONSTRUCTED_DECK_MAX_SIZE+1; ++i) {
 			Card carte = new MinionCard();
 			listeCartes.add(carte);
 		}
 		newDeckMoreThan30Cards.setCardList(listeCartes);
 		listeCartes = new ArrayList<>();
-		for(int i = 0; i < Constantes.DECK_LIST_SIZE-1; ++i) {
+		for(int i = 0; i < Constantes.CONSTRUCTED_DECK_MAX_SIZE-1; ++i) {
 			Card carte = new MinionCard();
 			listeCartes.add(carte);
 		}
