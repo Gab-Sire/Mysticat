@@ -1,10 +1,5 @@
 package com.multitiers.domaine.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public enum HeroPortrait {
 	warriorHero("warriorHero"), 
 	wizardHero("wizardHero"), 
@@ -17,9 +12,7 @@ public enum HeroPortrait {
 	prehistoricHero("prehistoricHero"),
 	superHero("superHero");
 	
-	private String hero;
 	private HeroPortrait(String hero) {
-		this.hero = hero;
 	}
 	
 	
