@@ -10,9 +10,13 @@ export default class HeroDisplay extends Component{
 
 	render(){
 		let hero = this.props.hero;
+		let selected = "";
+		if(true===this.props.isActiveHero){
+			selected == "selected";
+		}
       
 		  return(
-          	<a className={"card wide "+hero} onClick={this.sendTheHero.bind(this)}></a>
+          	<a className={selected+" card wide "+hero} onClick={this.sendTheHero.bind(this)}></a>
           	);
 	
 		

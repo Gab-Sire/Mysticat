@@ -29,6 +29,7 @@ class App extends Component{
 			userList: null,
 			deckId:null,
 			heros:null,
+			currentHero:null,
 			connectedAsAdmin:false,
 			favoriteDeckIndex: null
 		};
@@ -56,7 +57,7 @@ class App extends Component{
 				deckId={this.state.deckId} appDisplay={this.updateAppDisplay.bind(this)} disconnectPlayer={this.disconnectPlayer.bind(this)} />
 			}else if("AvatarChange"===this.state.appDisplay){
 
-				return (<HeroChange disconnectPlayer={this.disconnectPlayer.bind(this)} heros={this.state.heros} sendingTheHero={this.sendHero.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} />);
+				return (<HeroChange disconnectPlayer={this.disconnectPlayer.bind(this)} heros={this.state.heros} sendingTheHero={this.sendHero.bind(this)} appDisplay={this.updateAppDisplay.bind(this)} currentHero={this.state.currentHero}/>);
 
 			}else if("menu" === this.state.appDisplay && (false===this.state.inGame && null !==this.state.playerId)){
 				return( <MainMenu  goDeckSelection = {this.goDeckSelection.bind(this)} playerId={this.state.playerId}
@@ -147,6 +148,24 @@ class App extends Component{
 			})
 			  .then((response)=>{
 				  	this.setState({heros:response.data});
+				  	this.getCurrentHero();
+				})
+				.catch(error => {
+				  console.log('Error fetching and parsing data', error);
+					this.disconnectPlayer();
+				});
+	}
+	
+	getCurrentHero(){
+		axios({
+			  method:'post',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getHeros',
+			  responseType:'json',
+			  headers: {'Access-Control-Allow-Origin': "true"},
+			  data: this.state.playerId,
+			})
+			  .then((response)=>{
+				  	this.setState({currentHero:response.data});
 						this.updateAppDisplay("AvatarChange");
 				})
 				.catch(error => {

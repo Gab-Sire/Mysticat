@@ -12,7 +12,7 @@ export default class HeroChange extends Component{
       let heros = this.props.heros;
       let heroSelect = this.props.heros.map(function(hero, index){
 		  return(<span>
-          	<HeroDisplay hero={hero} key={hero} sendingTheHero={this.sendTheHero.bind(this)}/>
+          	<HeroDisplay hero={hero} key={hero} sendingTheHero={this.sendTheHero.bind(this)} isActiveHero={this.props.currentHero===hero}/>
           	{(0===((index+1)%5) ) ? <br/>:null}
           </span>);
       }.bind(this));
