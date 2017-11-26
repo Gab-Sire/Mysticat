@@ -12,7 +12,7 @@ export default class HeroDisplay extends Component{
 		let hero = this.props.hero;
 		let selected = "";
 		if(true===this.props.isActiveHero){
-			selected == "selected";
+			selected = "selected";
 		}
       
 		  return(

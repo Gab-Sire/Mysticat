@@ -159,7 +159,7 @@ class App extends Component{
 	getCurrentHero(){
 		axios({
 			  method:'post',
-			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getHeros',
+			  url:'http://'+window.location.hostname+':'+Constantes.PORT_NUMBER+'/getCurrentHero',
 			  responseType:'json',
 			  headers: {'Access-Control-Allow-Origin': "true"},
 			  data: this.state.playerId,
@@ -185,7 +185,8 @@ class App extends Component{
 			  data: data,
 			})
 			  .then((response)=>{
-						this.updateAppDisplay("menu");
+				  this.getCurrentHero();
+						//this.updateAppDisplay("menu");
 				})
 				.catch(error => {
 				  console.log('Error fetching and parsing data', error);

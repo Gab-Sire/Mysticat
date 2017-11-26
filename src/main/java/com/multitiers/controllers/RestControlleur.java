@@ -279,12 +279,12 @@ public class RestControlleur {
 	
 	@PostMapping(value = "/getHeros")
 	public @ResponseBody HeroPortrait[] getHeros() {
-		System.out.println("Sending Heros");
+		
 		return HeroPortrait.values();
 	}
 	
 	@PostMapping(value = "/getCurrentHero")
-	public @ResponseBody HeroPortrait getCurrentHero(String userId) {
+	public @ResponseBody HeroPortrait getCurrentHero(@RequestBody String userId) {
 		userId = userId.substring(0, userId.length() - 1);
 		User user = userRepository.findById(userId);
 		return user.getHeroPortrait();
@@ -292,7 +292,7 @@ public class RestControlleur {
 	
 	@PostMapping(value = "/setHero")
 	public void setHero(@RequestBody String cluster) {
-		System.out.println("set Hero");
+	
 		String [] splitUp = cluster.split("&");
 		String userId = splitUp[0];
 		String hero = splitUp[1];
