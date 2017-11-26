@@ -23,6 +23,12 @@ public class DeckEditingService {
 		if(newDeck.getCardList().size()!=Constantes.DECK_LIST_SIZE) {
 			throw new InvalidDeckSizeException(newDeck.getCardList().size());
 		}
+		if(newDeck.getName().length()>Constantes.MAX_DECK_NAME_SIZE) {
+			throw new RuntimeException("Deck name too long.");
+		}
+		else if(newDeck.getName().length()<Constantes.MIN_DECK_NAME_SIZE) {
+			throw new RuntimeException("Deck name too short.");
+		}
 		List<Deck> deckList = user.getDecks();
 		if (deckIndex >= user.getDecks().size()) {
 			deckIndex = user.getDecks().size();

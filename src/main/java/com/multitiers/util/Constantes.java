@@ -21,5 +21,8 @@ public interface Constantes {
 	public final static Integer MAX_HAND_SIZE = 10;
 	public final static Integer MAX_FIELD_SIZE = 7;
 	public final static Integer DECK_LIST_SIZE = 3;
+	public final static Integer MAX_DECK_NAME_SIZE = 255;
+	public final static Integer MIN_DECK_NAME_SIZE = 1;
+	
 }
 

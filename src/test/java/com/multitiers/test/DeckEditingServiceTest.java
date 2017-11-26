@@ -39,7 +39,8 @@ public class DeckEditingServiceTest {
 	DeckEditingService deckEditingService;
 
 	
-	
+	String deckName;
+	String deckNameOver255;
 	User user;
 	Integer deckIndex;
 	Deck newDeck;
@@ -49,10 +50,19 @@ public class DeckEditingServiceTest {
 	
 	@Before
 	public void setUp() {
+		deckName = "deck";
+		deckNameOver255 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+				+ "Nulla varius, turpis vel cursus tempus, massa libero sodales lacus, "
+				+ "sed varius enim ex id massa. Nulla mi sapien, tincidunt at metus sed, "
+				+ "convallis "
+				+ "tempus dolor. Sed sit amet congue lorem, eu nullam.";
 		deckIndex = 0;
 		newDeck = new Deck();
+		newDeck.setName(deckName);
 		newDeckLessThan30Cards = new Deck();
+		newDeckLessThan30Cards.setName(deckName);
 		newDeckMoreThan30Cards = new Deck();
+		newDeckMoreThan30Cards.setName(deckName);
 		
 		List<Card> listeCartes = new ArrayList<>();
 		for(int i = 0; i < Constantes.DECK_LIST_SIZE; ++i) {
@@ -105,4 +115,10 @@ public class DeckEditingServiceTest {
 		deckEditingService.changeDeck(user, deckIndex, newDeckMoreThan30Cards, isNewFavoriteDeck);
 	}
 
+	@Test(expected=RuntimeException.class)
+	public void testSaveDeckNameOver255Chars() {
+		newDeck.setName(deckNameOver255);
+		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
+	}
+	
 }
