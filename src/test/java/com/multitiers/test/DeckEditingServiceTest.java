@@ -42,20 +42,38 @@ public class DeckEditingServiceTest {
 	User user;
 	Integer deckIndex;
 	Deck newDeck;
+	Deck newDeckLessThan30Cards;
+	Deck newDeckMoreThan30Cards;
 	Boolean isNewFavoriteDeck;
 	
 	@Before
 	public void setUp() {
 		deckIndex = 0;
 		newDeck = new Deck();
+		newDeckLessThan30Cards = new Deck();
+		newDeckMoreThan30Cards = new Deck();
 		
 		List<Card> listeCartes = new ArrayList<>();
-		for(int i = 0; i < Constantes.DECK_LIST_SIZE; i++) {
+		for(int i = 0; i < Constantes.DECK_LIST_SIZE; ++i) {
 			Card carte = new MinionCard();
 			listeCartes.add(carte);
 		}
 		newDeck.setCardList(listeCartes);
+		listeCartes = new ArrayList<>();
+		for(int i = 0; i < Constantes.DECK_LIST_SIZE+1; ++i) {
+			Card carte = new MinionCard();
+			listeCartes.add(carte);
+		}
+		newDeckMoreThan30Cards.setCardList(listeCartes);
+		listeCartes = new ArrayList<>();
+		for(int i = 0; i < Constantes.DECK_LIST_SIZE-1; ++i) {
+			Card carte = new MinionCard();
+			listeCartes.add(carte);
+		}
+		newDeckLessThan30Cards.setCardList(listeCartes);
+		
 		isNewFavoriteDeck = true;
+		
 		String salt = ConnectionUtils.generateSalt();
 		user = new User("Username", ConnectionUtils.hashPassword("Password", salt), salt);
 		when(userRepositoryMock.findById(user.getId())).thenReturn(user);
@@ -74,6 +92,11 @@ public class DeckEditingServiceTest {
 	public void testSaveDeck() {
 		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
 		assertThat(user.getDecks().get(deckIndex)).isEqualTo(newDeck);
+	}
+	
+	@Test(expected=InvalidDeckSizeException.class)
+	public void testSaveDeckLessThan30Cards() {
+		deckEditingService.changeDeck(user, deckIndex, newDeckLessThan30Cards, isNewFavoriteDeck);
 	}
 
 }
