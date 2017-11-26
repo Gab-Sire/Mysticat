@@ -68,6 +68,7 @@
 }
 
 #backToDeckSelection {
+	z-index:3;
 	width: 10%;
 	float:left;
 	display: inline-block;

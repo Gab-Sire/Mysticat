@@ -163,6 +163,7 @@
 }
 
 .buttonDeckMod{
+	z-index:3;
 	float:right;
 	display: inline-block;
 	position: relative;
