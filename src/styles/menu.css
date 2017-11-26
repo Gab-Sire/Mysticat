@@ -68,11 +68,12 @@
 }
 
 #backToDeckSelection {
-	display: block;
-	margin: 0 auto;
-	position: absolute;
+	width: 10%;
+	float:left;
+	display: inline-block;
+	position: relative;
 	padding: 5px;
 	left: 2%;
 	font-size: 12px;
-		top:2%;
+	top:10px;
 }

@@ -113,7 +113,7 @@ export default class CardDisplayTable extends Component {
 				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
         </div>
 				:
-				<h4 className='displayDeckTitle'>{this.state.deckName}</h4>
+				<h4 className='displayDeckName'>{this.state.deckName}</h4>
 						}</div>
         <div id="cardCounter">{<span className={(false===this.isTheDeckValid()) ? "invalidDeck" : ""}>{deck.length}</span>}/30</div>
         {
