@@ -99,5 +99,10 @@ public class DeckEditingServiceTest {
 	public void testSaveDeckLessThan30Cards() {
 		deckEditingService.changeDeck(user, deckIndex, newDeckLessThan30Cards, isNewFavoriteDeck);
 	}
+	
+	@Test(expected=InvalidDeckSizeException.class)
+	public void testSaveDeckMoreThan30Cards() {
+		deckEditingService.changeDeck(user, deckIndex, newDeckMoreThan30Cards, isNewFavoriteDeck);
+	}
 
 }
