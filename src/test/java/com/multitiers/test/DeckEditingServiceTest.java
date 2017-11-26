@@ -1,18 +1,13 @@
 package com.multitiers.test;
 
-import static org.junit.Assert.*;
-
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -134,7 +129,7 @@ public class DeckEditingServiceTest {
 	
 	@Test(expected=RuntimeException.class)
 	public void testSaveDeckIndexTooHigh() {
-		deckEditingService.changeDeck(user, 4, newDeck, isNewFavoriteDeck);
+		deckEditingService.changeDeck(user, 3, newDeck, isNewFavoriteDeck);
 	}
 	
 }
