@@ -28,7 +28,6 @@ export default class DeckSelection extends Component{
 			emptyDeckSlots.push(<CardTile key={"emptyDeckSlot" + i} index={i+numberDecks} isUserDeck={true}
 			deckSelection={this.props.deckSelection} appDisplay={this.props.appDisplay} />);
 		}
-		console.log(this.state.favoriteDeckIndex);
 		return(
 			<div id="deckSelectionContainer">
 				<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
