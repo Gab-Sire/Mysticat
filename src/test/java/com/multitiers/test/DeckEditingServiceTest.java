@@ -127,4 +127,14 @@ public class DeckEditingServiceTest {
 		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
 	}
 	
+	@Test(expected=RuntimeException.class)
+	public void testSaveDeckIndexTooLow() {
+		deckEditingService.changeDeck(user, -1, newDeck, isNewFavoriteDeck);
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void testSaveDeckIndexTooHigh() {
+		deckEditingService.changeDeck(user, 4, newDeck, isNewFavoriteDeck);
+	}
+	
 }
