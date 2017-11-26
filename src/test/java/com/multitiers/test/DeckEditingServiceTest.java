@@ -23,6 +23,7 @@ import com.multitiers.domaine.entity.Card;
 import com.multitiers.domaine.entity.Deck;
 import com.multitiers.domaine.entity.MinionCard;
 import com.multitiers.domaine.entity.User;
+import com.multitiers.exception.InvalidDeckSizeException;
 import com.multitiers.repository.UserRepository;
 import com.multitiers.service.DeckEditingService;
 import com.multitiers.util.ConnectionUtils;
