@@ -128,7 +128,6 @@ export default class CardDisplayTable extends Component {
           <div>
   	        <div className='cardDisplayTable editMode'>
     					{(true===this.state.editMode) ? editModeCollection : deck}
-    					<button id="backToDeckSelection" onClick={this.props.goDeckSelection}>Retour &agrave; la s&eacute;lection de deck</button>
   		      </div>
 	        </div>
           :
