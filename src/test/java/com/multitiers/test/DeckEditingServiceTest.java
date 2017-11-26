@@ -121,4 +121,10 @@ public class DeckEditingServiceTest {
 		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
 	}
 	
+	@Test(expected=RuntimeException.class)
+	public void testSaveDeckNameEmpty() {
+		newDeck.setName("");
+		deckEditingService.changeDeck(user, deckIndex, newDeck, isNewFavoriteDeck);
+	}
+	
 }
