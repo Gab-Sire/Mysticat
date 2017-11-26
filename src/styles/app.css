@@ -163,6 +163,7 @@
 }
 
 .buttonDeckMod{
+	z-index:3;
 	float:right;
 	display: inline-block;
 	position: relative;
@@ -178,7 +179,6 @@
 	margin:0 auto;
 	text-align: center;
 	position: relative;
-	right: 5%;
 }
 
 .cardDisplayTable{

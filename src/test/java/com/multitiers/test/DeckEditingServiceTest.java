@@ -129,7 +129,7 @@ public class DeckEditingServiceTest {
 	
 	@Test(expected=RuntimeException.class)
 	public void testSaveDeckIndexTooHigh() {
-		deckEditingService.changeDeck(user, 3, newDeck, isNewFavoriteDeck);
+		deckEditingService.changeDeck(user, Constantes.MAX_NB_OF_DECKS, newDeck, isNewFavoriteDeck);
 	}
 	
 }
