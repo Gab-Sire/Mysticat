@@ -55,8 +55,8 @@ public class AttackAction extends Action {
 		Minion attacker = playerDeclaringAttack.getField()[attackerIndex];
 		if(attacker!=null) {
 			if (attackedIndex == HERO_FACE_INDEX) {
-				game.addToBattlelog(attacker.getName()+"["+playerDeclaringAttack.getName()+"] a attaqué le héro de "
-						+opponentPlayer.getName() + " pour "+attacker.getPower() + " points de dégât.");
+				game.addToBattlelog("["+playerDeclaringAttack.getName()+"] "+attacker.getName()+" a attaqué le héro de "
+						+opponentPlayer.getName() + " pour "+attacker.getPower() + " point"+((attacker.getPower()>1) ? "s" : "")+ " de dégât.");
 				attackFace(opponentPlayer, attacker);
 				if(opponentPlayer.getHero().isDead() && game.getWinnerPlayerIndex() == null) {
 					game.setWinnerPlayerIndex(playerDeclaringAttackIndex);
@@ -89,20 +89,20 @@ public class AttackAction extends Action {
 		String log = "";
 		targetOfTheAttack = opponentPlayer.getField()[attackedIndex];
 		if (targetOfTheAttack != null) {
-			game.addToBattlelog(attacker.getName()+ "["+attackingPlayer.getName()
-			+"] a attaqué "+targetOfTheAttack.getName()+"["+opponentPlayer.getName() + "] pour " + attacker.getPower()
-			+" points de dégât et s'est pris en retour "+targetOfTheAttack.getPower()+" points de dégât.");
+			game.addToBattlelog("["+attackingPlayer.getName()
+			+"] "+attacker.getName()+ " a attaqué "+targetOfTheAttack.getName()+ " pour " + attacker.getPower()+" point"+((attacker.getPower()>1) ? "s" : "")+ " de dégât et s'est pris en retour "
+					+targetOfTheAttack.getPower()+" point"+((targetOfTheAttack.getPower()>1) ? "s" : "")+ " de dégât.");
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				log = attacker.getName()+"["+attackingPlayer.getName() + "] est mort et est envoyé au cimetierre.";
+				log = "["+attackingPlayer.getName() + "] "+attacker.getName()+" est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 			if (targetOfTheAttack.isDead()) {
-				log = targetOfTheAttack.getName() +"["+opponentPlayer.getName() + "] est mort et est envoyé au cimetierre.";
+				log = "["+opponentPlayer.getName() + "] "+targetOfTheAttack.getName() +" est mort et est envoyé au cimetierre.";
 				game.addToBattlelog(log);
 			}
 		} else {
-			game.addToBattlelog("La cible de "+attacker.getName()+ " de"+attackingPlayer.getName()+" est morte avant que son attaque se produise.");
+			game.addToBattlelog("["+attackingPlayer.getName()+"] La cible de "+attacker.getName()+ " de "+" est morte avant que son attaque se produise.");
 		}
 
 	}

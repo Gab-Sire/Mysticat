@@ -37,7 +37,7 @@ public class SummonAction extends Action{
 				.get(getIndexOfCardInHand());
 		Minion minion = new Minion(playableMinionCard);
 		playerSummoningTheMinion.getField()[fieldCell] = minion;
-		String log = minion.getName() +"["+playerSummoningTheMinion.getName()+ "] invoqué sur la case " + fieldCell;
+		String log = "["+playerSummoningTheMinion.getName()+"] "+minion.getName() + " invoqué sur la case " + fieldCell;
 		game.addToBattlelog(log);
 		
 	}

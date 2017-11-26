@@ -46,7 +46,7 @@ public class Game {
 		} else if(players[1].getHero().isDead()) {
 			this.setWinnerPlayerIndex(0);
 		}else {
-			battlelog.add("Début du tour!");
+			battlelog.add("*** Début du tour! ***");
 		}
 	}
 

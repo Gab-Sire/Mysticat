@@ -73,7 +73,7 @@
 }
 
 #battlelogZone {
-	z-index: 3;
+	z-index: 5;
 	position: absolute;
 	top: 72%;
 	left: 1%;
@@ -82,6 +82,7 @@
 	background-color: white;
 	color: black;
 	overflow-y: scroll;
+	    resize: both;
 }
 
 #loading {
@@ -222,7 +223,7 @@
 }
 
 #menuGame {
-	z-index: 4;
+	z-index: 6;
 	text-align: center;
 	background-color: darkred;
 	position: absolute;
