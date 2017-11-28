@@ -94,15 +94,15 @@ public class AttackAction extends Action {
 					+targetOfTheAttack.getPower()+" point"+((targetOfTheAttack.getPower()>1) ? "s" : "")+ " de dégât.");
 			attackerAndTargetExchangeDamage(attacker, targetOfTheAttack);
 			if (attacker.isDead()) {
-				log = "["+attackingPlayer.getName() + "] "+attacker.getName()+" est mort et est envoyé au cimetierre.";
+				log = "["+attackingPlayer.getName() + "] "+attacker.getName()+" est mort et est envoyé au cimetière.";
 				game.addToBattlelog(log);
 			}
 			if (targetOfTheAttack.isDead()) {
-				log = "["+opponentPlayer.getName() + "] "+targetOfTheAttack.getName() +" est mort et est envoyé au cimetierre.";
+				log = "["+opponentPlayer.getName() + "] "+targetOfTheAttack.getName() +" est mort et est envoyé au cimetière.";
 				game.addToBattlelog(log);
 			}
 		} else {
-			game.addToBattlelog("["+attackingPlayer.getName()+"] La cible de "+attacker.getName()+ " de "+" est morte avant que son attaque se produise.");
+			game.addToBattlelog("["+attackingPlayer.getName()+"] La cible de "+attacker.getName()+ " de "+" est morte avant que son attaque ne se produise.");
 		}
 
 	}
