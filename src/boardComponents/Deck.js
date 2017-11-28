@@ -11,7 +11,7 @@ export default class Deck extends Component{
 
 	render(){
 		if(this.props.size===0){
-			return (<div id={this.props.id} className="deck" title="Empty deck.">
+			return (<div id={this.props.id} className="deck" title="Deck vide.">
 				<div className="deckCount">
 					{this.props.size}
 				</div>
@@ -19,7 +19,7 @@ export default class Deck extends Component{
 	   		</div>);
 		}
 		else{
-			return (<div id={this.props.id} className="deck" title="Contains the remaining cards you can draw.">
+			return (<div id={this.props.id} className="deck" title="Contient les cartes que vous pouvez piger.">
 				<div className="deckCount">
 					{this.props.size}
 				</div>
@@ -28,4 +28,3 @@ export default class Deck extends Component{
 		}
 	}
 }
-

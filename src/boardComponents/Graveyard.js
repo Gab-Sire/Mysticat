@@ -9,17 +9,18 @@ export default class Graveyard extends Component{
 	}
 
 	render(){
+		console.log(this.props.graveyard);
 		if(this.props.graveyard.length===0){
 			return (<div id={this.props.id} className="graveyard" title="Empty graveyard.">
 				<div className="graveyardCount">
-					{this.props.size}
+					{this.props.graveyard.length}
 				</div>
 					<CardTile />
 	   		</div>);
 		}
 		else{
 			let topCardOnGraveyard = this.props.graveyard[this.props.graveyard.length-1];
-			return (<div id={this.props.id} className="graveyard" title="The graveyard contains the minions that have died during the game.">
+			return (<div id={this.props.id} className="graveyard" title="Le cimitère contient les minions qui sont morts durant la partie.">
 				<div className="graveyardCount">
 					{this.props.graveyard.length}
 				</div>
