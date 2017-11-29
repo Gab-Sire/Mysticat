@@ -244,7 +244,7 @@ border-radius: 20px;
 	z-index: 3;
 	top: 50%;
 	left: 10%;
-	width: 15vw;
+	width: 20vw;
 	height: 30vh;
 	background-image: url('../img/backgroundImg/flyingCat.gif');
 	background-size: cover;
@@ -538,28 +538,31 @@ border-radius: 20px;
 .cardTile {
 	position: relative;
 	display: inline-block;
-	border: 1px solid red;
+	border: 0.3vh solid red;
 	width: 8%;
 	height: 90%;
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 1.2vh;
 	background-color: black;
 	font-size: 10px;
+	vertical-align: bottom;
 }
 .displayDeckAjouter{
 	display: none;
 	position: absolute;
-	top: 40%;
-	border: 1px solid red;
+	top: 10.5vh;
+	border: 0.5vh solid red;
 	color:white;
-	width: 80%;
-	height: 60px;
-	margin-left:10%;
-	border-radius: 20px;
+	width: 10vw;
+	height: 12vh;
+	border-radius: 4vh;
 	background-color: darkblue;
-	font-size: 20px;
+	font-size: 3vh;
+	line-height:5vh;
 	text-align: center;
 	cursor:default;
+	left: 50%;
+	margin-left:-5vw;
 }
 .displayDeckTitle input{
 	color:black;
@@ -742,9 +745,9 @@ border-radius: 20px;
 }
 
 .favoriteDeck{
-	border: yellow 5px solid!important;
-	box-shadow: 0 0 20px #DAA520;
-	border-radius: 5px;
+	border: yellow 1vh solid!important;
+	box-shadow: 0 0 1vh #DAA520;
+	border-radius: 1vh;
 }
 
 #changeFavoriteDeckText{
