@@ -158,6 +158,12 @@ border-radius: 20px;
 	height: 100%;
 }
 
+#btnLeaveQueue{
+	height:5vh;
+	width: 15vw;
+	font-size: 2.5vh;
+}
+
 .hidden {
 	display: none;
 }
