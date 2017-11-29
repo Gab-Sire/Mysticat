@@ -130,9 +130,7 @@ export default class Board extends Component{
 					<button id="buttonBattlelog" onClick={this.showBattlelogBox.bind(this)}>Battlelog</button>
 					<Battlelog status={this.state.showBattlelog} logs={battlelog} />
 
-					<div id="menuGame"><p>Menu</p>
-						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
-					</div>
+					<button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button>
 
 					<div id="opponentUserName"><p title={opponent.name}>{opponent.name}</p></div>
 					<div id="selfUserName"><p title={self.name}>{self.name}</p></div>

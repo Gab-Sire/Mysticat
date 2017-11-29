@@ -9,7 +9,6 @@ export default class Graveyard extends Component{
 	}
 
 	render(){
-		console.log(this.props.graveyard);
 		if(this.props.graveyard.length===0){
 			return (<div id={this.props.id} className="graveyard" title="Cimetière vide.">
 				<div className="graveyardCount">
