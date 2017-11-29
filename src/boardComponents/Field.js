@@ -23,7 +23,7 @@ export default class Field extends Component{
 		     	onClick={() => this.handleSelectMinion(index, this.props.playerIndex)} {...minion}{...props}/>
 		    )
 		   }, this)
-		return <div> {fieldMinions} </div>;
+		return <div className="minionFieldContainer"> {fieldMinions} </div>;
 	}
 
 	assignFieldCellToSummon = (index) => {

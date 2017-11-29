@@ -20,7 +20,7 @@ export default class Hand extends Component{
 					 onClick={() => this.handleSelectHandCard(index)} faceUp={this.props.faceUp} {...card}{...props}/>
 				)
 			 }, this)
-		return <div> {handCards} </div>;
+		return <div className="handCardContainer"> {handCards} </div>;
 	}
 
 	handleSelectHandCard = (index) => {
@@ -32,4 +32,3 @@ export default class Hand extends Component{
 		  }
 	}
 }
-

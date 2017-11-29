@@ -56,7 +56,7 @@ export default class Board extends Component{
 		self = players[selfIndex];
 		opponent = players[opponentIndex];
 		battlelog = this.props.gameState.battlelog;
-		
+
 	}
 	changeAttackingSelected(index){
 		if(null === this.state.attackerSelected){
@@ -116,7 +116,7 @@ export default class Board extends Component{
 					</div>
 					<div id="selfFieldUnderLayer"></div>
 
-					<Hero id="selfHero" health={self.hero.health} mana={self.remainingMana} heroName={self.heroPortrait}/>
+					<Hero id="selfHero" health={self.hero.health} heroName={self.heroPortrait}/>
 
 					<div id="selfHand" className="hand">
 						<Hand players={players} playerIndex={selfIndex} faceUp={true} callBackSelectedCardIndex={this.retrieveCardSelectedIndex}
@@ -126,16 +126,17 @@ export default class Board extends Component{
 					<PopUpEndOfTurn status={this.state.endOfTurn} />
 					<SurrenderScreenPopUp status={this.state.isThinkingToGiveUp} surrender={this.surrender.bind(this)} stayInTheGame={this.surrenderGameConfirmStateChange.bind(this)} />
 					<EndGameScreen status={this.state.isEndGame} backToMainMenu={this.backToMainMenu.bind(this)}/>
-					
+
 					<button id="buttonBattlelog" onClick={this.showBattlelogBox.bind(this)}>Battlelog</button>
 					<Battlelog status={this.state.showBattlelog} logs={battlelog} />
-					
+
 					<div id="menuGame"><p>Menu</p>
 						<p id="listeMenuHidden"><button id="ButtonSurrender" onClick={this.surrenderGameConfirmStateChange.bind(this)}>Abandonner</button></p>
 					</div>
 
 					<div id="opponentUserName"><p title={opponent.name}>{opponent.name}</p></div>
 					<div id="selfUserName"><p title={self.name}>{self.name}</p></div>
+					<div id="selfMana"><div>{self.remainingMana}</div></div>
 				</div>
 			</div>
 		);
@@ -179,7 +180,6 @@ export default class Board extends Component{
 			selectedCardIndex: null})
 
 			self.remainingMana = selfMana - manaCost;
-			//this.retrieveCardSelectedIndex(cardIndex);
 		}
 	}
 
@@ -368,11 +368,11 @@ export default class Board extends Component{
 			}
 		}
 	}
-	
+
 	showBattlelogBox(){
 		if(!this.state.showBattlelog)
 			this.setState({ showBattlelog: true });
-		else 
+		else
 			this.setState({ showBattlelog: false });
 	}
 

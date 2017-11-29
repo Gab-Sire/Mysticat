@@ -13,18 +13,12 @@ export default class Hero extends Component{
 	render(){
 		let heroId = this.props.id;
 		let health = this.props.health;
-		let mana = this.props.mana;
 
 		if("selfHero" === heroId){
 			return(<div className="heroContainer">
 						<div id={heroId} className={"hero " + this.state.heroName}>
 							<div id="selfHealth" className="heroHealth">
 								{health}
-							</div>
-						</div>
-						<div id="selfMana">
-							<div>
-								{mana}
 							</div>
 						</div>
 				  </div>);

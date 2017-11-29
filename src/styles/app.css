@@ -32,7 +32,14 @@ html, body{
 #container {
 	min-width: 1200px;
 	height: 100%;
-	position: relative;
+	background-size: cover;
+	width: 100%;
+	position: absolute;
+	display: block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+ url(/static/media/background.68f5ccb5.jpg);
 }
 
 .centerTitle {
@@ -56,14 +63,14 @@ html, body{
 
 /* PLATEAU DE JEU */
 #board {
-	position: relative;
+	position: absolute;
 	border: 2px solid black;
 	margin-left: 1%;
 	width: 100%;
-	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-		url('../img/backgroundImg/background.jpg');
+	height: 100%;
 	cursor: default;
 	margin:0;
+	box-sizing: border-box;
 }
 
 /* BOUTTONS DU JEU */
@@ -314,10 +321,11 @@ html, body{
 }
 
 #selfHand {
-	position: relative;
+	position: absolute;
 	bottom: 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	height:21%;
 }
 
 #opponentHero{
@@ -325,12 +333,15 @@ html, body{
 	border-top-right-radius: 0%;
 	border-bottom-left-radius: 35%;
 	border-bottom-right-radius: 35%;
-	margin-top:-45	px;
 }
 
 #opponentHand {
 	height: 19%;
 	margin-top: -7%;
+}
+
+.handCardContainer{
+	height:100%;
 }
 
 #opponentHandUnderLayer {
@@ -343,14 +354,6 @@ html, body{
 }
 
 /* styles pour les cartes dans les mains */
-#selfHand .card {
-	margin-top: 0.75%;
-	font-size: 15px;
-	font-size: 12px;
-	text-align: center;
-	font-weight: bold;
-}
-
 .hand .cardTile:first-of-type {
 	margin-left: 5.5%;
 }
@@ -358,6 +361,10 @@ html, body{
 /* CHAMPS DE BATAILLE */
 
 /* styles pour les conteneurs */
+.minionFieldContainer{
+	height:100%;
+}
+
 .fieldContainer {
 	height: 21%;
 }
@@ -366,7 +373,7 @@ html, body{
 .battleField {
 	display: inline-block;
 	width: 60%;
-	height: 100%;
+	height:100%;
 	margin: 0;
 	background-color: rgba(255, 210, 150, 1);
 }
@@ -428,34 +435,36 @@ html, body{
 }
 
 #selfGraveyard .graveyardCount {
-	bottom: 35%;
+	bottom: 50%;
+	margin-bottom:-15px;
 	right: 42.5%;
 }
 
 #opponentGraveyard .graveyardCount {
-	top: 35%;
+	top: 50%;
+	margin-top:-15px;
 	right: 42.5%;
 }
 
 #selfGraveyard {
-	background-image: url('../img/backgroundImg/backgroundCemetery2.jpg');
-	background-position: -60px;
+	background: url('../img/backgroundImg/backgroundCemetery2.jpg') no-repeat;
+		background-size: cover;
 }
 
 #opponentGraveyard {
-	background-image: url('../img/backgroundImg/backgroundCemetery3.jpg');
-	background-position: -65px;
+	background: url('../img/backgroundImg/backgroundCemetery3.jpg') no-repeat;
+		background-size: cover;
 }
 
 /* styles pour les cartes dans le cimeti�re */
 .graveyard .cardTile {
+	top:5%;
 	width: 30%;
 	margin-left: 65%;
 }
 
-.graveyard .cardFacedDown {
-	width: 30%;
-	margin-left: 65%;
+.graveyard .card{
+		top:5%;
 }
 
 /* DECK */
@@ -495,7 +504,7 @@ html, body{
 	display: inline-block;
 	border: 1px solid red;
 	width: 8%;
-	height: 130px;
+	height: 90%;
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 5px;
 	background-color: black;
@@ -532,7 +541,7 @@ html, body{
 	border: 1px solid black;
 	position: relative;
 	width: 8%;
-	height: 130px;
+	height: 90%;
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
 	border-radius: 5px;
@@ -546,25 +555,22 @@ html, body{
 
 .minion img.cardArt{
 	position:absolute;
-	top:0px;
-	left:5px;
-	margin-top: 10px;
-	width: 60px;
-	height: 75px;
-		border-radius:30px;
-		margin-left: 50%;
-		left:-30px;
+	top:0;
+	margin-top: 10%;
+	width: 90%;
+	height: 55%;
+	border-radius:30px;
+	left:5%;
 }
 
 .card img.cardArt{
 	position:absolute;
 	top:0px;
-	margin-left: 50%;
-	left:-30px;
-	margin-top: 10px;
+	left:5%;
+	margin-top: 10%;
 	border-radius:30px;
-	width: 60px;
-	height: 75px;
+	width: 90%;
+	height: 55%;
 }
 
 .deleteIcon{
@@ -585,10 +591,9 @@ html, body{
 .cardName {
 	text-align: center;
 	width: 100%;
-	font-size:10px;
+	font-size:1.65vh;
 	position: absolute;
 	bottom:20%;
-	text-decoration: underline;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
@@ -613,14 +618,12 @@ html, body{
 
 .placingAttribut{
 	position: absolute;
-	top:50%;
-	margin-top: -10px;
-	left:50%;
-	margin-left: -10px;
-	height:20px;
-	width: 20px;
-	line-height: 20px;
+	top:10%;
+	height:100%;
+	width: 100%;
+	line-height: 3vh;
 	text-align: center;
+	font-size: 2vh;
 }
 .cardManaCost {
 	z-index:1;
@@ -642,10 +645,9 @@ html, body{
 
 .cardPower {
 	position: absolute;
-	left:-2px;
-	bottom:0px;
-	width: 25px;
-	height: 25px;
+	bottom:0;
+	width: 33%;
+	height: 22%;
 	background-image: url("../img/cardImg/catpaw2.png");
 	background-size:cover;
 	color: white;
@@ -653,23 +655,23 @@ html, body{
 
 .cardHealth {
 	position: absolute;
-	left:23px;
+	left:33%;
 	bottom:0px;
-	width: 25px;
-	height: 25px;
-	position: absolute;
+	width: 33%;
+	height: 22%;
 	background-image: url("../img/cardImg/heart.png");
 	background-size:cover;
 	color: white;
 }
 
 .cardSpeed {
+	padding:0;
+	margin:0;
 	position: absolute;
-	left:48px;
+	left:66%;
 	bottom:0px;
-	width: 25px;
-	height: 25px;
-	position: absolute;
+	width: 33%;
+	height: 22%;
 	background-image: url("../img/cardImg/shoe.png");
 	background-size:cover;
 	font-style: italic;
@@ -747,7 +749,6 @@ html, body{
 	font-size:13px;
 	position: absolute;
 	bottom:23%;
-	text-decoration: underline;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
@@ -843,7 +844,7 @@ html, body{
 	border: 1px solid black;
 	position: relative;
 	width: 8%;
-	height: 130px;
+	height: 90%;
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 5px;
 	box-sizing: border-box;
@@ -866,13 +867,22 @@ html, body{
 	border: 1px yellow solid;
 	display: block;
 	width: 10%;
-	height: 90px;
+	height: 12%;
 	margin: 7px auto;
 	padding: 0;
 	z-index: auto;
 	border-top-left-radius: 35%;
 	border-top-right-radius: 35%;
 	position: relative;
+}
+
+.heroContainer{
+	position: relative;
+	height: 12%;
+}
+
+.heroContainer .hero{
+	height:100%;
 }
 
 .wide{
@@ -962,9 +972,10 @@ html, body{
 .heroHealth {
 	width: 29%;
 	border: 2px solid black;
-	line-height: 30px;
-	font-size: 1.5em;
-	height: 40px;
+	line-height: 4.5vh;
+	font-size: 3vh;
+	height: 52%;
+	width: 40%;
 	text-align: center;
 	color: white;
 	background: black;
@@ -972,10 +983,11 @@ html, body{
 	border: lightgreen solid 2px;
 	position: absolute;
 	top: 55%;
+	vertical-align: middle;
 }
 
 #selfHealth, #opponentHealth {
-	padding: 5px;
+	padding: 1%;
 	border-radius: 50%;
 	right: -15%;
 	top: 35px;
