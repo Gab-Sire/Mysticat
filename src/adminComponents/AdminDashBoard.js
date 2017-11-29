@@ -19,17 +19,21 @@ export default class AdminDashBoard extends Component{
 				<Beforeunload onBeforeunload={() => {	this.props.disconnectPlayerById(this.props.adminId); return "Are you sure?"}}/>
 				<h1>Tableau Administrateur</h1>
 				<div id="contentAdmin">
-					<p id="salutationAdmin">Bonjour, {this.props.adminName}</p><br />
-					<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
-					<aside><div id="radar"></div>
-					<button id="btnDisconnect"
-						onClick={(event)=>{
-								setTimeout(()=>{
-									this.props.disconnectPlayerById(this.props.adminId);
-								}, TIME_BETWEEN_AXIOS_CALLS)
+					<aside className='gauche'>
+						<p id="salutationAdmin">Bonjour, {this.props.adminName}</p>
+						<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
+					</aside>
+					<aside className='droit'>
+						<div id="radar"></div>
+						<button id="btnDisconnect"
+							onClick={(event)=>{
+									setTimeout(()=>{
+										this.props.disconnectPlayerById(this.props.adminId);
+									}, TIME_BETWEEN_AXIOS_CALLS)
+								}
 							}
-						}
-						>D&eacute;connexion</button></aside>
+							>D&eacute;connexion</button>
+					</aside>
 				</div>
 			</div>
 		)

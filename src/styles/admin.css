@@ -29,17 +29,20 @@ h1{
 	background-color:rgba(10,123,134,0.4);
 	border-radius:10px;
 	width: 70%;
-	height: 70%;
+	height: 60%;
 	padding: 5px;
 }
 
 #salutationAdmin{
+	border-top-left-radius:2em;
+border-top-right-radius:2em;
+text-align:center;
 	margin: 15px 0 0 20px;
 	background-color: green;
 	font-family: "Courier New", serif;
 	font-size: 22px;
 	color:white;
-	width: 45%;
+	width: 90%;
 	padding: 2px;
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -52,12 +55,21 @@ h1{
 	background: linear-gradient(to right, red , #ff4d4d, #ff4d4d);
 	padding: 5px;
 	font-size: 18px;
-	margin: 15px 0 0 20px;
+	margin: 15px 0 0 45px;
 	border-radius: 50%;
 	
 }
 
-aside{
+aside.gauche{
+	padding-top:20px;
+	width:60%;
+	padding-left:10%;
+	float: left;
+}
+aside.droit{
+	padding-top:50px;
+	padding-left:5%;
+	width:40%;
 	float: right;
 }
 
@@ -67,8 +79,8 @@ aside{
 	background-color: black;
 	font-family: "Courier New", serif;
 	color: white;
-	width: 45%;
-	height: 270px;
+	width: 90%;
+	height: 320px;
 	padding: 5px;
 	margin: 0 20% 0 20px;
 	overflow: auto;
@@ -81,6 +93,7 @@ aside{
 }
 
 .isConnected {
+	padding-left:20px;
 	color: green;
 	display: inline-block;
 	font-size: 20px;
@@ -88,6 +101,7 @@ aside{
 }
 
 .isNotConnected{
+	padding-left:20px;
 	color: grey;
 	display: inline-block;
 	font-size: 18px;
@@ -99,7 +113,8 @@ aside{
 	position: absolute;
 	right: 50px;
 	color: blue;
-	background-color: yellow;
+	background-color: green;
+	color:black;
 	border-radius: 20px;
 	padding: 2px;
 	
@@ -108,17 +123,16 @@ aside{
 #radar{
 	display: inline-block;
 	position: relative;
-	bottom: 76px;
 	margin: 0;
 	background-image: url('../img/backgroundImg/radar.gif');
 	background-position: 49.2% 48.7%;
-	border-radius:20px;
+	border-radius:40px;
 	width: 221px;
 	height: 190px;
 	
 }
 
 .btnDeconnexionUser:disabled{
-	background-color: lightgrey;
+	background-color: grey;
 	color: white;
 }
