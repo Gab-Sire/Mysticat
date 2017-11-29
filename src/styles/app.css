@@ -49,11 +49,14 @@ html, body{
 	color: white;
 	text-align: center;
 	margin: 0px;
+	margin-bottom: 0.5vh;
+	font-size: 4.5vh;
 }
 
 .changeConnexionMode {
 	color: white;
 	cursor: pointer;
+	font-size: 3vh;
 }
 
 .changeConnexionMode:hover {
@@ -1107,6 +1110,11 @@ border-radius: 1vh;
 
 .errorMessage {
 	color: red;
+	font-size: 2.5vh;
+}
+
+.btn-block+.btn-block{
+	margin-top:1vh!important;
 }
 
 .expectedFormat div {
@@ -1153,8 +1161,9 @@ form {
 }
 
 .card-container.boiteConnexion {
-	max-width: 350px;
-	padding: 40px 40px;
+	width: 30vw;
+	height: 90vh;
+	padding: 3vh 7vh;
 }
 
 .btn {
@@ -1172,9 +1181,8 @@ form {
 .boiteConnexion {
 	background-color: #F7F7F7;
 	/* just in case there no content*/
-	padding: 20px 25px 30px;
-	margin: 0 auto 25px;
-	margin-top: 8%;
+	margin: 0 auto 0;
+	margin-top: 8vh;
 	/* shadows and rounded borders */
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
@@ -1186,9 +1194,9 @@ form {
 }
 
 .profile-img-card {
-	width: 96px;
-	height: 96px;
-	margin: 0 auto 10px;
+	width: 10vw;
+	height: 10vw;
+	margin: 0 auto 1vw;
 	display: block;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
@@ -1204,6 +1212,7 @@ form {
 	text-align: center;
 	margin: 10px 0 0;
 	min-height: 1em;
+	display:none;
 }
 
 .reauth-email {
@@ -1219,12 +1228,15 @@ form {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	display:none;
 }
 
 .form-signin #username, .form-signin #password {
 	direction: ltr;
-	height: 44px;
-	font-size: 16px;
+	height: 7vh;
+	font-size: 4vh;
+	margin-bottom: 1vh;
+	padding:0;
 }
 
 .form-signin input[type=email], .form-signin input[type=password],
