@@ -30,7 +30,6 @@ html, body{
 }
 
 #container {
-	min-width: 1200px;
 	height: 100%;
 	background-size: cover;
 	width: 100%;
@@ -39,7 +38,7 @@ html, body{
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
- url(/static/media/background.68f5ccb5.jpg);
+ url(../img/backgroundImg/background.jpg);
 }
 
 .centerTitle {
@@ -82,7 +81,7 @@ html, body{
 width: 8vw;
 line-height: 2vh;
 height: 4vh;
-border-radius: 20px;
+border-radius: 1vh;
 }
 
 #buttonBattlelog {
@@ -93,7 +92,7 @@ border-radius: 20px;
   width: 8vw;
   line-height: 2vh;
   height: 4vh;
-  border-radius: 20px;
+  border-radius: 1vh;
 }
 
 #battlelogZone {
@@ -294,7 +293,7 @@ border-radius: 20px;
 	width: 8vw;
 	line-height:2vh;
 	height: 4vh;
-	border-radius: 20px;
+	border-radius: 1vh;
 }
 
 #FullScreenRED, #FullScreenGREEN, #FullScreenOrange {
@@ -387,7 +386,7 @@ border-radius: 20px;
 }
 
 #opponentHandUnderLayer {
-	height: 10px;
+	height: 1vh;
 	width: 70%;
 	margin-left: 15%;
 	background-color: orange;
@@ -444,7 +443,7 @@ border-radius: 20px;
 }
 
 #selfFieldUnderLayer {
-	height: 10px;
+	height: 1vh;
 	background-color: orange;
 	width: 60%;
 	margin-left: 19.75%;
@@ -458,7 +457,7 @@ border-radius: 20px;
 .graveyard {
 	position: relative;
 	display: inline-block;
-	width: 19.75%;
+	width: 20vw;
 	height: 100%;
 	bottom: 5px;
 	border: 1px solid black;
@@ -583,7 +582,7 @@ border-radius: 20px;
 /* styles pour une carte visible (de face) */
 .card {
 	display: inline-block;
-	border: 1px solid black;
+	border: 0.2vh solid black;
 	position: relative;
 	width: 8%;
 	height: 90%;
@@ -604,7 +603,7 @@ border-radius: 20px;
 	margin-top: 10%;
 	width: 90%;
 	height: 55%;
-	border-radius:30px;
+	border-radius:2vh;
 	left:5%;
 }
 
@@ -613,7 +612,7 @@ border-radius: 20px;
 	top:0px;
 	left:5%;
 	margin-top: 10%;
-	border-radius:30px;
+	border-radius:2vh;
 	width: 90%;
 	height: 55%;
 }
@@ -645,10 +644,8 @@ border-radius: 20px;
 }
 
 .cardDetailContainer{
-	width: 18px;
-	height: 18px;
-	font-size:12px;
-	border: 2px solid black;
+	font-size:1.65vh;
+	border: 0.3vh solid black;
 	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -672,10 +669,14 @@ border-radius: 20px;
 }
 .cardManaCost {
 	z-index:1;
-	left:5px;
+	left:0.3vw;
 	top:2%;
+	height:2.5vh;
+	width:2.5vh;
 	position: absolute;
 	color: white;
+	line-height: 2vh;
+	font-size: 2vh;
 }
 
 .balancingDetail{
@@ -909,7 +910,7 @@ border-radius: 20px;
 
 /* styles pour les h�ros */
 .hero {
-	border: 1px yellow solid;
+	border: 0.1vh yellow solid;
 	display: block;
 	width: 10%;
 	height: 12%;
@@ -942,9 +943,9 @@ border-radius: 20px;
 	margin:0;
 	color:white;
 	text-align: center;
-	width:500px;
+	width:30vw;
 	left: 50%;
-	margin-left:-250px;
+	margin-left:-15vw;
 	margin-top: 10px;
 	font-size: 6vh;
 }
@@ -1020,8 +1021,6 @@ border-radius: 20px;
 
 /* styles pour l'attribut vies du h�ros (joueur) */
 .heroHealth {
-	width: 29%;
-	border: 2px solid black;
 	line-height: 4.5vh;
 	font-size: 3vh;
 	height: 52%;
@@ -1030,17 +1029,15 @@ border-radius: 20px;
 	color: white;
 	background: black;
 	display: inline-block;
-	border: lightgreen solid 2px;
+	border: lightgreen solid 0.1vh;
 	position: absolute;
-	top: 55%;
-	vertical-align: middle;
 }
 
 #selfHealth, #opponentHealth {
 	padding: 1%;
 	border-radius: 50%;
 	right: -15%;
-	top: 35px;
+	top: 4vh;
 }
 
 /* styles pour l'attribut mana du h�ros (joueur) */
@@ -1080,7 +1077,7 @@ border-radius: 20px;
 
 /* G�n�ral overrides */
 .selected {
-	border: pink 4px solid;
+	border: pink 1vh solid;
 	outline: none;
 	box-shadow: 0 0 20px #9ecaed;
 	border-radius: 5px;
