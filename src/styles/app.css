@@ -531,7 +531,7 @@ border-radius: 20px;
 	width: 8%;
 	height: 90%;
 	margin: 0 0.5% 0 0.5%;
-	border-radius: 5px;
+	border-radius: 1.2vh;
 	background-color: black;
 	font-size: 10px;
 }
@@ -858,7 +858,7 @@ border-radius: 20px;
 
 #selfField .card:hover, #opponentField .card:hover, #selfHand .card:hover
 	{
-	bottom: 50px;
+	bottom: 4vh;
 }
 
 /* style pour une carte non visible (de dos) */
@@ -866,12 +866,12 @@ border-radius: 20px;
 	background-image: url("../img/cardImg/cardback.jpg");
 	background-size: 100% 100%;
 	display: inline-block;
-	border: 1px solid black;
+	border: 0.1vh solid black;
 	position: relative;
 	width: 8%;
 	height: 90%;
 	margin: 0 0.5% 0 0.5%;
-	border-radius: 5px;
+	border-radius: 1.2vh;
 	box-sizing: border-box;
 	vertical-align: bottom;
 }
@@ -911,7 +911,8 @@ border-radius: 20px;
 }
 
 .wide{
-	width: 10% !important;
+	height:20vh;
+	width: 10vw;
 }
 
 .displayHeroSelectionTitle{
@@ -925,6 +926,7 @@ border-radius: 20px;
 	left: 50%;
 	margin-left:-250px;
 	margin-top: 10px;
+	font-size: 6vh;
 }
 
 .hero:hover {
@@ -933,11 +935,14 @@ border-radius: 20px;
 }
 
 .containerHero{
-	width: 90%;
-	margin-left: 25%;
+	position: relative;
 	padding-bottom: 200px;
-	padding-top: 25px;
+	padding-top: 3vh;
+	width: 55vw;
+	margin-left:-27.5vw;
+	left: 50%;
 }
+
 /* style pour les types de h�ros */
 .zorroHero {
 	background-image: url('../img/heroImg/chatZorro.jpg');

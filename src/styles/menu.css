@@ -65,9 +65,10 @@
 	margin: 0 auto;
 	position: relative;
 	width: 15%;
+	height: 12vh;
 	padding: 5px;
 	top: 24%;
-	font-size: 18px;
+	font-size: 3vh;
 }
 
 #backToDeckSelection {
