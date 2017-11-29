@@ -951,13 +951,12 @@ border-radius: 1vh;
 }
 
 .hero:hover {
-	border: 4px solid #FAFAD2;
-	box-shadow: 0 0 0 5px rgba(255, 255, 255, .25);
+	border: 0.5vh solid #FAFAD2;
+	box-shadow: 0 0 0 1vh rgba(255, 255, 255, .25);
 }
 
 .containerHero{
 	position: relative;
-	padding-bottom: 200px;
 	padding-top: 3vh;
 	width: 55vw;
 	margin-left:-27.5vw;

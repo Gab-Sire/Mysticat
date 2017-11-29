@@ -70,10 +70,9 @@
 	display: block;
 	margin: 0 auto;
 	position: relative;
-	width: 15%;
+	width: 10vw;
 	height: 12vh;
-	padding: 5px;
-	top: 20vh;
+	top: 15vh;
 	font-size: 3vh;
 }
 
