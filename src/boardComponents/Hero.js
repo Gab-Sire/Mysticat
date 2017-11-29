@@ -16,7 +16,7 @@ export default class Hero extends Component{
 		let mana = this.props.mana;
 
 		if("selfHero" === heroId){
-			return(<div>
+			return(<div className="heroContainer">
 						<div id={heroId} className={"hero " + this.state.heroName}>
 							<div id="selfHealth" className="heroHealth">
 								{health}
