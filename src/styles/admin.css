@@ -26,9 +26,9 @@ h1{
 	position: relative;
 	margin: 0 auto;
 	top: 10%;
-	background-image: url('../img/backgroundImg/metal.jpg');
-	background-size: cover;
-	width: 90%;
+	background-color:rgba(10,123,134,0.4);
+	border-radius:10px;
+	width: 70%;
 	height: 70%;
 	padding: 5px;
 }
@@ -48,13 +48,17 @@ h1{
 #btnDisconnect{
 	display: block;
 	width: 120px;
-	background: linear-gradient(to right, red , #ff4d4d, #ff4d4d);
 	height: 120px;
+	background: linear-gradient(to right, red , #ff4d4d, #ff4d4d);
 	padding: 5px;
 	font-size: 18px;
 	margin: 15px 0 0 20px;
 	border-radius: 50%;
 	
+}
+
+aside{
+	float: right;
 }
 
 #containerUserList{
@@ -108,6 +112,7 @@ h1{
 	margin: 0;
 	background-image: url('../img/backgroundImg/radar.gif');
 	background-position: 49.2% 48.7%;
+	border-radius:20px;
 	width: 221px;
 	height: 190px;
 	

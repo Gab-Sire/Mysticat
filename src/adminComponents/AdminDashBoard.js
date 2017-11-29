@@ -21,7 +21,7 @@ export default class AdminDashBoard extends Component{
 				<div id="contentAdmin">
 					<p id="salutationAdmin">Bonjour, {this.props.adminName}</p><br />
 					<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
-					<div id="radar"></div>
+					<aside><div id="radar"></div>
 					<button id="btnDisconnect"
 						onClick={(event)=>{
 								setTimeout(()=>{
@@ -29,7 +29,7 @@ export default class AdminDashBoard extends Component{
 								}, TIME_BETWEEN_AXIOS_CALLS)
 							}
 						}
-						>D&eacute;connexion</button>
+						>D&eacute;connexion</button></aside>
 				</div>
 			</div>
 		)
