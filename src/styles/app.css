@@ -332,8 +332,22 @@ border-radius: 1vh;
 	font-size: 3vh;
 }
 
+#blocGiveUp button, #blocGagne button, #blocPartieNulle, button{
+	margin:0;
+	padding:0;
+	height:6vh;
+	width: 15vw;
+}
+
 #blocGiveUp {
 	background-color: darkred;
+}
+
+#blocGiveUp .surrenderChoice{
+	margin:0;
+	padding:0;
+	height:6vh;
+	width: 10vw;
 }
 
 #blocGagne {

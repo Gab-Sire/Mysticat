@@ -21,7 +21,7 @@ export default class SurrenderScreenPopUp extends Component {
 		            <div id='FullScreenRED'>
 			            <div id='blocGiveUp'>
 			            	<p>&Ecirc;tes-vous certain de vouloir abandonner?</p>
-			            	<button onClick={this.surrender.bind(this)}>Oui</button><button onClick={this.stayInTheGame.bind(this)}>Non</button>
+			            	<button className="surrenderChoice" onClick={this.surrender.bind(this)}>Oui</button><button className="surrenderChoice" onClick={this.stayInTheGame.bind(this)}>Non</button>
 			            </div>
 		            </div>
 		        );
@@ -36,4 +36,3 @@ export default class SurrenderScreenPopUp extends Component {
 	  this.props.stayInTheGame();
   }
 }
-
