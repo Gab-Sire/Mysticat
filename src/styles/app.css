@@ -485,13 +485,12 @@ html, body {
 .deck .cardTile {
 	transform: rotate(90deg);
 	width: 30%;
-	margin-left: 45px;
 }
 
 .deck .cardFacedDown {
 	transform: rotate(90deg);
 	width: 30%;
-	margin-left: 30px;
+	margin-left: 2vw;
 }
 
 .battleField .cardTile:first-of-type {
@@ -607,7 +606,7 @@ html, body {
 	margin: 0 0.5% 0 0.5%;
 	border-radius: 1.2vh;
 	background-color: black;
-	font-size: 10px;
+	font-size: 2vh;
 	vertical-align: bottom;
 }
 
@@ -654,7 +653,7 @@ html, body {
 	height: 90%;
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 1.2vh;
 	background-color: green;
 }
 
@@ -1201,11 +1200,11 @@ html, body {
 	border: pink 1vh solid;
 	outline: none;
 	box-shadow: 0 0 20px #9ecaed;
-	border-radius: 5px;
+	border-radius: 1vh;
 }
 
 .fiedlCellSelected {
-	border: solid 4px green;
+	border: solid 0.5vh green;
 	outline: none;
 	box-shadow: 0 0 30px #CAED9E;
 	border-radius: 5px;
@@ -1406,17 +1405,17 @@ form {
 
 */
 .attacker {
-	border: red 4px solid;
+	border: red 0.7vh solid;
 	outline: none;
 	box-shadow: 0 0 20px #d35400;
-	border-radius: 5px;
+	border-radius: 1vh;
 	box-sizing: border-box;
 }
 
 .target {
-	border: white 4px solid;
+	border: white 0.5vh solid;
 	outline: none;
-	box-shadow: 0 0 20px #c0392b;
+	box-shadow: 0 0 1vh #c0392b;
 	border-radius: 5px;
 }
 
