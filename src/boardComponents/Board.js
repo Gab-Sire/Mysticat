@@ -83,8 +83,9 @@ export default class Board extends Component{
 	}
 
 	render(){
+	
 		return(
-			<div id="container">
+			<div id="container" className='orientationSensitive'>
 				<Beforeunload onBeforeunload={() => {
 					this.addSurrenderAction();
 					this.sendActions();

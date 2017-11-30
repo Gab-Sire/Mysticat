@@ -82,3 +82,19 @@
 	display: inline-block;
 	left: 2%;
 }
+@media screen and (max-width: 900px), @media (orientation: portrait){
+	#deckSlotsContainer{
+		width: 90%;
+	}
+	#deckSlotsContainer div{
+		width: 20%;
+	}	
+	#deckSlotsContainerUnderLayer{
+		width: 90%;
+	}
+	#selectionDeckTitle{
+		width: 90%;	
+	}
+
+}
+

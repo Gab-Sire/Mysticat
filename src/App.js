@@ -33,6 +33,7 @@ class App extends Component{
 			connectedAsAdmin:false,
 			favoriteDeckIndex: null
 		};
+		
 	}
 
 	componentWillMount(){
