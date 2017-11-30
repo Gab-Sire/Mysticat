@@ -938,9 +938,9 @@ html, body {
 .cardStatBig {
 	position: absolute;
 	color: white;
-	bottom: 0px;
-	width: 4.5vh;
-	height: 4.5vh;
+	bottom: 0.2vh;
+	width: 6vh;
+	height: 6vh;
 	background-size: cover;
 }
 
@@ -951,12 +951,12 @@ html, body {
 
 .cardHealthBig {
 	background-image: url("../img/cardImg/heart.png");
-	left: 4vh;
+	left: 2.8vw;
 }
 
 .cardSpeedBig {
 	background-image: url("../img/cardImg/shoe.png");
-	right: 0.1vh;
+	right: 0.1vw;
 	font-style: italic;
 }
 
@@ -1492,21 +1492,24 @@ form {
 	#backToDeckSelection, .buttonDeckMod {
 		width: 20vh;
 		height: 7vh;
-		font-size: 1vh;
+		font-size: 2vh;
 		padding: 1vh;
 		top: 5vh;
 		position: absolute;
+		padding:0;
 	}
 	.editDeckInputs {
 		width: 90%;
 		left: 35%;
-
+		top:17vh;
+		margin-top:0;
 	}
 	#deckName {
 		width: 40%;
 	}
 	#saveDeck{
 		width: 40%;
+		padding:0;
 	}
 
 .cardStatBig {
