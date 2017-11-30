@@ -726,10 +726,11 @@ html, body {
 	top: 10%;
 	height: 100%;
 	width: 100%;
-	line-height: 6vh;
+	line-height: 3vh;
 	text-align: center;
-	font-size: 4vh;
+	font-size: 2vh;
 }
+
 
 .cardManaCost {
 	z-index: 1;
@@ -943,6 +944,12 @@ html, body {
 	width: 7.5vh;
 	height: 7.5vh;
 	background-size: cover;
+}
+
+.cardStatBig .placingAttribut{
+	line-height: 6vh;
+	text-align: center;
+	font-size: 4vh;
 }
 
 .cardPowerBig {
