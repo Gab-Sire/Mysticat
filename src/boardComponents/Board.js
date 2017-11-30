@@ -83,9 +83,7 @@ export default class Board extends Component{
 	}
 
 	render(){
-		lockedAllowed = window.screen.lockOrientation(orientation);
-		screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
-		screen.lockOrientationUniversal("landscape-primary");
+	
 		return(
 			<div id="container" className='orientationSensitive'>
 				<Beforeunload onBeforeunload={() => {

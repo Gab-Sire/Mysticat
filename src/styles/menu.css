@@ -84,6 +84,7 @@
 }
 @media screen and (max-width: 900px), @media (orientation: portrait){
 	#deckSlotsContainer{
+		margin-left:40;
 		width: 90%;
 	}
 	#deckSlotsContainer div{

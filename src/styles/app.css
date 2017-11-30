@@ -1432,7 +1432,7 @@ form {
 
 */
 @media ( orientation : portrait) {
-	.orientationSensitive {
+	/*.orientationSensitive {
 	
 		-webkit-transform: rotate(-90deg);
 		-moz-transform: rotate(-90deg);
@@ -1442,7 +1442,7 @@ form {
 		height: auto;
 		width: auto;
 		
-	}
+	}*/
 }
 
 @media screen and (max-width: 900px),
@@ -1492,6 +1492,9 @@ form {
 		width:90%;
 		font-size: 3vh;
 	}
+	.cardBig {
+		height: 35vh;
+	}
 
 	#backToDeckSelection, .buttonDeckMod {
 		width: 20vh;
@@ -1514,5 +1517,10 @@ form {
 	#saveDeck{
 		width: 40%;
 		padding:0;
+	}
+	.cardStatBig {
+		width: 5vh;
+		height: 5vh;
+		background-size: cover;
 	}
 }
