@@ -1146,13 +1146,13 @@ html, body {
 /* styles pour l'attribut mana du h�ros (joueur) */
 #selfMana {
 	bottom: 2vh;
-	padding: 5px;
+	padding: 1.4vh;
 	right: 5.75%;
 	position: absolute;
-	width: 5vh;
-	height: 5vh;
+	width: 7vh;
+	height: 7vh;
 	font-size: 4vh;
-	border: 2px solid black;
+	border: 0.5vh solid black;
 	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -1500,7 +1500,7 @@ form {
 	.editDeckInputs {
 		width: 90%;
 		left: 35%;
-	
+
 	}
 	#deckName {
 		width: 40%;
