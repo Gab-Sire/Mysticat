@@ -17,7 +17,7 @@ export default class AdminDashBoard extends Component{
 		return(
 			<div id="containerAdmin">
 				<Beforeunload onBeforeunload={() => {	this.props.disconnectPlayerById(this.props.adminId); return "Are you sure?"}}/>
-				<h1>Tableau Administrateur</h1>
+				<h1 id="adminDashboardTitle">Tableau Administrateur</h1>
 				<div id="contentAdmin">
 					<aside className='gauche'>
 						<p id="salutationAdmin">Bonjour, {this.props.adminName}</p>
