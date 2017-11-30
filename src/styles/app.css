@@ -588,10 +588,12 @@ html, body {
 
 #opponentDeck {
 	background-image: url('../img/backgroundImg/woodenBackground1.jpg');
+	background-size: cover;
 }
 
 #selfDeck {
 	background-image: url('../img/backgroundImg/woodenBackground2.jpg');
+	background-size: cover;
 }
 
 /* CARTES */
@@ -1443,7 +1445,7 @@ form {
 */
 @media ( orientation : portrait) {
 	/*.orientationSensitive {
-	
+
 		-webkit-transform: rotate(-90deg);
 		-moz-transform: rotate(-90deg);
 		-o-transform: rotate(-90deg);
@@ -1451,7 +1453,7 @@ form {
 		transform: rotate(-90deg);
 		height: auto;
 		width: auto;
-		
+
 	}*/
 }
 
