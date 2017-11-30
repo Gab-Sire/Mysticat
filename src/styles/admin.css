@@ -3,19 +3,19 @@
 	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center fixed;
 	background-size: cover;
 	width: 100%;
-	height: 720px;
+	height: 100vh;
 	margin: 0 0 0 0;
 }
 
-h1{
+#adminDashboardTitle{
 	color:white;
-	font-size: 40px;
-	line-height: 70px;
+	font-size: 6vh;
+	line-height: 6vh;
 	font-weight: bold;
 	display: block;
 	margin: 0 auto;
 	position: relative;
-	top: 5%;
+	top: 5vh;
 	width: 50%;
 	padding: 10px;
 	text-align: center;
@@ -28,42 +28,44 @@ h1{
 	top: 10%;
 	background-color:rgba(10,123,134,0.4);
 	border-radius:10px;
-	width: 70%;
-	height: 60%;
+	width: 70vw;
+	height: 60vh;
 	padding: 5px;
 }
 
 #salutationAdmin{
 	border-top-left-radius:2em;
-border-top-right-radius:2em;
-text-align:center;
-	margin: 15px 0 0 20px;
+	border-top-right-radius:2em;
+	text-align:center;
+	margin: 1vh 0 0 1.55vw;
 	background-color: green;
 	font-family: "Courier New", serif;
-	font-size: 22px;
+	font-size: 3vh;
 	color:white;
 	width: 90%;
-	padding: 2px;
-	padding-top: 3px;
-	padding-bottom: 3px;
+	height:5vh;
+	padding: 1vw;
+	padding-top: 0.5vh;
+	padding-bottom: 0.5vh;
 }
 
 #btnDisconnect{
 	display: block;
-	width: 120px;
-	height: 120px;
+	width: 17vh;
+	height: 17vh;
 	background: linear-gradient(to right, red , #ff4d4d, #ff4d4d);
-	padding: 5px;
-	font-size: 18px;
-	margin: 15px 0 0 45px;
+	padding: 1vh;
+	font-size: 2.5vh;
+	margin: 1vh 0 0 4vw;
 	border-radius: 50%;
-	
+
 }
 
 aside.gauche{
-	padding-top:20px;
-	width:60%;
-	padding-left:10%;
+	padding-top:1.5vh;
+	width:40vw;
+	height:40vh;
+	padding-left:4vw;
 	float: left;
 }
 aside.droit{
@@ -80,7 +82,7 @@ aside.droit{
 	font-family: "Courier New", serif;
 	color: white;
 	width: 90%;
-	height: 320px;
+	height: 40vh;
 	padding: 5px;
 	margin: 0 20% 0 20px;
 	overflow: auto;
@@ -88,23 +90,24 @@ aside.droit{
 
 .userLine{
 	width: 100%;
-	height: 30px;
-	margin-top: 7px;
+	height: 5vh;
+	margin-top: 1vh;
+	font-size:2vh;
 }
 
 .isConnected {
-	padding-left:20px;
+	padding-left:2vw;
 	color: green;
 	display: inline-block;
-	font-size: 20px;
+	font-size: 3vh;
 	font-weight: bold;
 }
 
 .isNotConnected{
-	padding-left:20px;
+	padding-left:2vw;
 	color: grey;
 	display: inline-block;
-	font-size: 18px;
+	font-size: 3vh;
 	font-weight: bold;
 }
 
@@ -120,8 +123,8 @@ aside.droit{
 	width: 30%;
 	height: auto;
 	margin-bottom: 10px
-	
-	
+
+
 }
 
 #radar{
@@ -130,10 +133,10 @@ aside.droit{
 	margin: 0;
 	background-image: url('../img/backgroundImg/radar.gif');
 	background-position: 49.2% 48.7%;
-	border-radius:40px;
-	width: 221px;
-	height: 190px;
-	
+	border-radius:4vh;
+	width: 22vw;
+	height: 23vh;
+
 }
 
 .btnDeconnexionUser:disabled{
@@ -153,20 +156,24 @@ aside.droit{
 		padding: 5% !important;
 	}
 	aside.gauche{
-		padding-top:2px;
+		padding-top:1vh;
 		padding-left:0px;
-		width:100%;
+		width:60vw;
 		float: left;
-	}	
+	}
 	aside.droit{
 		display:none;
 	}
 	.singleLineAdmin{
 		display:block !important;
+		position:absolute!important;
 		margin-left:35% !important;
+		margin:0!important;
+		left:70vw;
+		bottom:25vh;
 	}
 	#containerAdmin{
-		height: 900px !important;
+		height: 100vh !important;
 	}
 	.btnDeconnexionUser{
 		display: inline-block;
@@ -178,10 +185,5 @@ aside.droit{
 		border-radius: 20px;
 		padding: 1%;
 		width: 30%;
-	}
-	h1{
-		top: 2% !important;
-		width: 90% !important;
-		padding: 5% !important;
 	}
 }
