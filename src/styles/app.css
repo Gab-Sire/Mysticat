@@ -240,8 +240,8 @@ html, body {
 
 .cardDisplayTable {
 	position: relative;
-	width: 50%;
-	margin-left: 25%;
+	width: 90%;
+	margin-left: 10%;
 	padding-top: 15%;
 }
 
@@ -731,6 +731,7 @@ html, body {
 	font-size: 2vh;
 }
 
+
 .cardManaCost {
 	z-index: 1;
 	left: 0.3vw;
@@ -859,8 +860,8 @@ html, body {
 	display: inline-block;
 	border: 0.3vh solid black;
 	position: relative;
-	width: 9vw;
-	height: 25vh;
+	width: 15vw;
+	height: 35vh;
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
 	border-radius: 2vh;
@@ -871,7 +872,7 @@ html, body {
 	background: darkgreen;
 	width: 100%;
 	text-align: center;
-	font-size: 1.8vh;
+	font-size: 2.2vh;
 	position: absolute;
 	bottom: 23%;
 	overflow: auto;
@@ -884,26 +885,30 @@ html, body {
 	position: relative;
 	height: 10vh;
 	width: 100%;
-	line-height: 1vh;
+	line-height: 3vh;
 	margin-bottom: 0 !important;
 	font-size: 3vh !important;
+}
+
+.alert span{
+	font-size:5vh;
 }
 
 .cardBig img {
 	position: absolute;
 	top: 0;
 	left: 50%;
-	margin-left: -4vw;
+	margin-left: -6vw;
 	border-radius: 3vh;
 	margin-top: 1vh;
-	width: 8vw;
-	height: 16vh;
+	width: 12vw;
+	height: 22vh;
 }
 
 .cardDetailContainerBig {
-	width: 3vh;
-	height: 3vh;
-	font-size: 2.5vh;
+	width: 5vh;
+	height: 5vh;
+	font-size: 3vh;
 	border: 0.3vh solid black;
 	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
@@ -912,6 +917,7 @@ html, body {
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 	color: white;
+	padding:1vh;
 	box-shadow: 0 0 1vh white;
 	margin-top: 0.3vh;
 }
@@ -939,9 +945,15 @@ html, body {
 	position: absolute;
 	color: white;
 	bottom: 0.2vh;
-	width: 6vh;
-	height: 6vh;
+	width: 7.5vh;
+	height: 7.5vh;
 	background-size: cover;
+}
+
+.cardStatBig .placingAttribut{
+	line-height: 6vh;
+	text-align: center;
+	font-size: 4vh;
 }
 
 .cardPowerBig {
@@ -951,7 +963,7 @@ html, body {
 
 .cardHealthBig {
 	background-image: url("../img/cardImg/heart.png");
-	left: 2.8vw;
+	left: 5.5vw;
 }
 
 .cardSpeedBig {
@@ -965,12 +977,8 @@ html, body {
 	z-index: 4;
 }
 
-.gris {
-	background-color: gray;
-}
-
-.gris .cardNameBig {
-	background-color: navy;
+.cardNameBig.cardInCollection  {
+	background-color: navy!important;
 }
 
 .card+.card, .cardFacedDown+.cardFacedDown, .card+.cardTile, .cardTile+.card,
@@ -1484,15 +1492,7 @@ form {
 		width:90%;
 		font-size: 3vh;
 	}
-	.cardDisplayTable {
-		position: relative;
-		width: 90%;
-		margin-left: 10%;
-		padding-top: 30%;
-	}
-	.cardBig {
-		width: 18%;
-	}
+
 	#backToDeckSelection, .buttonDeckMod {
 		width: 20vh;
 		height: 7vh;
@@ -1515,14 +1515,4 @@ form {
 		width: 40%;
 		padding:0;
 	}
-
-.cardStatBig {
-	width: 30%;
-	height: 4.5vh;
-	background-size: cover;
-	background-position: center;
-}
-
-
-
 }
