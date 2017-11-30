@@ -884,10 +884,20 @@ html, body {
 	z-index: 10;
 	position: relative;
 	height: 10vh;
+	line-height:3vh;
 	width: 100%;
+	padding:0!important;
+	padding-top:3vh!important;
 	line-height: 3vh;
 	margin-bottom: 0 !important;
 	font-size: 3vh !important;
+}
+
+.close{
+	line-height:0vh!important;
+	font-size:1vh!important;
+	right:1vw!important;
+	width:2vw;
 }
 
 .alert span{
