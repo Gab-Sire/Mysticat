@@ -1080,6 +1080,7 @@ html, body {
 }
 
 .containerHero {
+	line-height: 3vh;
 	position: relative;
 	padding-top: 3vh;
 	width: 55vw;
