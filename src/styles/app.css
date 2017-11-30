@@ -145,6 +145,7 @@ border-radius: 1vh;
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	min-height:100vh;
 	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -222,6 +223,8 @@ border-radius: 1vh;
 	margin:0 auto;
 	text-align: center;
 	position: relative;
+	top: 12vh;
+	font-size:5vh;
 }
 
 .cardDisplayTable{
@@ -235,10 +238,11 @@ border-radius: 1vh;
 }
 
 .editDeckInputs{
-	position: relative;
+	position: absolute;
 	height: 5vh;
 	width:30vw;
 	left:50%;
+	top:16vh;
 	margin-left:-15vw;
 	margin-top:1vh;
 	margin-bottom:1vh;
@@ -251,16 +255,18 @@ border-radius: 1vh;
 	font-size:2vh;
 	padding:1vh;
 	top:3vh;
+	position: absolute;
 }
 
 .displayDeckTitle{
-	position: relative;
+	position: absolute;
 	display: inline-block;
 	padding:0;
 	margin:0;
 	color:white;
 	text-align: center;
 	left:50%;
+	width: 50vw;
 	margin-left:-25vw;
 	margin-top:1vh;
 	margin-bottom:1vh;
@@ -769,7 +775,7 @@ border-radius: 1vh;
 #topMenuItems{
 	position: fixed;
 	width: 100%;
-	height:23vh;
+	height:22vh;
 	z-index:4;
 	background: black;
 	padding:0;
@@ -814,6 +820,7 @@ border-radius: 1vh;
 	color: yellow;
 	font-weight: bold;
 	text-align: center;
+	top:12vh;
 	height: 4.5vh;
 	font-size:2.5vh;
 	left:50%;
@@ -854,6 +861,16 @@ border-radius: 1vh;
 	text-decoration: underline;
 }
 
+.alert{
+	z-index:10;
+	position:relative;
+	height:10vh;
+	width:100%;
+	line-height:1vh;
+	margin-bottom:0!important;
+	font-size: 3vh!important;
+}
+
 .cardBig img{
 	position:absolute;
 	top:0;
@@ -881,10 +898,15 @@ border-radius: 1vh;
 }
 
 #cardCounter{
+	top:6vh;
+	width: 10vw;
+	position: absolute;
 	padding-top:1vh;
-	font-size: 3vh;
+	font-size: 4vh;
 	color: white;
 	text-align: center;
+	left:50%;
+	margin-left:-5vw;
 }
 
 .cardManaCostBig {
