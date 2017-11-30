@@ -211,10 +211,9 @@ border-radius: 1vh;
 	float:right;
 	display: inline-block;
 	position: relative;
-	padding: 5px;
+	padding: 1vh;
 	right: 2%;
-	font-size: 12px;
-	top:10px;
+	top:3vh;
 	width: 10%;
 }
 
@@ -234,6 +233,26 @@ border-radius: 1vh;
 .gris{
 	background-color:gray;
 }
+
+.editDeckInputs{
+	position: relative;
+	height: 5vh;
+	width:30vw;
+	left:50%;
+	margin-left:-15vw;
+	margin-top:1vh;
+	margin-bottom:1vh;
+	padding:0;
+}
+
+#backToDeckSelection, .buttonDeckMod{
+	width:10vw;
+	height: 10vh;
+	font-size:2vh;
+	padding:1vh;
+	top:3vh;
+}
+
 .displayDeckTitle{
 	position: relative;
 	display: inline-block;
@@ -241,10 +260,11 @@ border-radius: 1vh;
 	margin:0;
 	color:white;
 	text-align: center;
-	width:500px;
-	left: 40%;
-	margin-left:-250px;
-	margin-top: 10px;
+	left:50%;
+	margin-left:-25vw;
+	margin-top:1vh;
+	margin-bottom:1vh;
+	font-size: 5vh;
 }
 
 #imgMenuPrincipal {
@@ -634,6 +654,7 @@ border-radius: 1vh;
 	height: 55%;
 }
 
+
 .deleteIcon{
 	position: absolute;
 	right:-2px;
@@ -748,10 +769,23 @@ border-radius: 1vh;
 #topMenuItems{
 	position: fixed;
 	width: 100%;
+	height:23vh;
 	z-index:4;
 	background: black;
 	padding:0;
 	margin:0;
+}
+
+#saveDeck{
+	height:5vh;
+	width:15vw;
+	font-size:1.5vw;
+}
+
+#deckName{
+	height:5vh;
+	width:15vw;
+	font-size:1.5vw;
 }
 
 .fade{
@@ -760,12 +794,12 @@ border-radius: 1vh;
 
 #selectFavoriteDeckCheckbox{
 	position: relative;
-	width: 30px;
-	height: 100%;
-	margin-left: 10px;
-	 vertical-align:middle;
-	 margin-top:0;
-	 box-sizing: border-box;
+	height: 4.5vh;
+	width:4.5vh;
+	margin-left: 1.2vw;
+ 	vertical-align:middle;
+ 	margin-top:0;
+ 	box-sizing: border-box;
 }
 
 .favoriteDeck{
@@ -776,11 +810,14 @@ border-radius: 1vh;
 
 #changeFavoriteDeckText{
 	position: relative;
+	width: 26vw;
 	color: yellow;
 	font-weight: bold;
 	text-align: center;
-	line-height: 30px;
-	height: 30px;
+	height: 4.5vh;
+	font-size:2.5vh;
+	left:50%;
+	margin-left:-13vw;
 }
 
 .invalidDeck{
@@ -795,13 +832,13 @@ border-radius: 1vh;
 
 .cardBig{
 	display: inline-block;
-	border: 1px solid black;
+	border: 0.3vh solid black;
 	position: relative;
-	width: 18%;
-	height: 170px;
+	width: 9vw;
+	height: 25vh;
 	margin: 0 0.5% 0 0.5%;
 	box-sizing: border-box;
-	border-radius: 5px;
+	border-radius: 2vh;
 	background-color: green;
 }
 
@@ -809,7 +846,7 @@ border-radius: 1vh;
 	background:darkgreen;
 	width: 100%;
 	text-align: center;
-	font-size:13px;
+	font-size:1.8vh;
 	position: absolute;
 	bottom:23%;
 	overflow: auto;
@@ -819,19 +856,19 @@ border-radius: 1vh;
 
 .cardBig img{
 	position:absolute;
-	top:0px;
+	top:0;
 	left:50%;
-	margin-left: -50px;
-	border-radius:30px;
-	margin-top: 10px;
-	width: 100px;
-	height: 100px;
+	margin-left:-4vw;
+	border-radius:3vh;
+	margin-top: 1vh;
+	width: 8vw;
+	height: 16vh;
 }
 .cardDetailContainerBig{
-	width: 20px;
-	height: 20px;
-	font-size: 15px;
-	border: 2px solid black;
+	width: 3vh;
+	height: 3vh;
+	font-size: 2.5vh;
+	border: 0.3vh solid black;
 	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -839,12 +876,13 @@ border-radius: 1vh;
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 	color: white;
-	box-shadow: 0 0 5px white;
-	margin-top:3%;
+	box-shadow: 0 0 1vh white;
+	margin-top:0.3vh;
 }
 
 #cardCounter{
-	font-size: 1.2em;
+	padding-top:1vh;
+	font-size: 3vh;
 	color: white;
 	text-align: center;
 }
@@ -860,23 +898,22 @@ border-radius: 1vh;
 	position: absolute;
 	color: white;
 	bottom: 0px;
-	width: 40px;
-	height: 40px;
+	width: 4.5vh;
+	height: 4.5vh;
 	background-size:cover;
 }
 
 .cardPowerBig {
 	background-image: url("../img/cardImg/catpaw2.png");
-	left: 1%;
+	left: 0.1vh;
 }
 .cardHealthBig {
 	background-image: url("../img/cardImg/heart.png");
-	left:34%;
+	left:4vh;
 }
 .cardSpeedBig {
-
 	background-image: url("../img/cardImg/shoe.png");
-	right: 1%;
+	right: 0.1vh;
 	font-style: italic;
 }
 .cardBig:hover {

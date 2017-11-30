@@ -109,7 +109,7 @@ export default class CardDisplayTable extends Component {
         <h2 className='displayDeckTitle'>{(true===this.state.editMode) ? "Modification du deck" : "Affichage du deck"}</h2>
         <button className='buttonDeckMod' onClick={this.switchEditMode.bind(this)}>{(true===this.state.editMode) ? "Changer au mode visualisation" : "Changer au mode modification"}</button>
 				<div>{(true===this.state.editMode) ?
-				<div className='displayDeckTitle'><input type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
+				<div className='editDeckInputs'><input id="deckName" type="text" onChange={this.handleChangeDeckName.bind(this)} placeholder="Nom du deck" value={this.state.deckName} />
 				<button id="saveDeck" onClick={this.saveDeck.bind(this)}>Sauvegarder le deck</button>
         </div>
 				:
