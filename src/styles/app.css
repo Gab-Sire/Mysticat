@@ -427,6 +427,7 @@ html, body {
 	border-top-right-radius: 0%;
 	border-bottom-left-radius: 35%;
 	border-bottom-right-radius: 35%;
+	margin-bottom:3vh;
 }
 
 #opponentHand {
@@ -1032,12 +1033,17 @@ html, body {
 	display: block;
 	width: 10%;
 	height: 12%;
-	margin: 7px auto;
+	margin: auto;
 	padding: 0;
 	z-index: auto;
 	border-top-left-radius: 35%;
 	border-top-right-radius: 35%;
 	position: relative;
+	line-height:1vh;
+}
+
+#selfHero{
+	top:3vh;
 }
 
 .heroContainer {
