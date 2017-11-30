@@ -250,6 +250,7 @@ html, body {
 }
 
 .editDeckInputs {
+	line-height:1vh;
 	position: absolute;
 	height: 5vh;
 	width: 30vw;
@@ -834,7 +835,7 @@ html, body {
 }
 
 #changeFavoriteDeckText {
-	position: relative;
+	position: absolute;
 	width: 26vw;
 	color: yellow;
 	font-weight: bold;
