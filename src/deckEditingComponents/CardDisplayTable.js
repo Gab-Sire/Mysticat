@@ -123,7 +123,6 @@ export default class CardDisplayTable extends Component {
           ) : (this.state.deckIndex===this.state.favorite) ? <div title="Votre deck actif est celui avec lequel vous jouez une partie." id="changeFavoriteDeckText">Deck actif</div> : null
         }
         </div>
-        <br/>
         {(true===this.state.editMode) ?
           <div>
   	        <div className='cardDisplayTable editMode'>

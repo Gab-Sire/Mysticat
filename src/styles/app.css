@@ -236,6 +236,7 @@ html, body {
 	position: relative;
 	top: 15.5vh;
 	font-size: 5vh;
+	line-height:5vh;
 }
 
 .cardDisplayTable {
@@ -243,10 +244,6 @@ html, body {
 	width: 90%;
 	margin-left: 10%;
 	padding-top: 15%;
-}
-
-.gris {
-	background-color: gray;
 }
 
 .editDeckInputs {
@@ -1436,103 +1433,4 @@ form {
 	top: 32% !important;
 	left: 41% !important;
 	will-change: transform !important;
-}
-
-/*
-
-* Responsive media Screen
-
-*/
-@media ( orientation : portrait) {
-	/*.orientationSensitive {
-
-		-webkit-transform: rotate(-90deg);
-		-moz-transform: rotate(-90deg);
-		-o-transform: rotate(-90deg);
-		-ms-transform: rotate(-90deg);
-		transform: rotate(-90deg);
-		height: auto;
-		width: auto;
-
-	}*/
-}
-
-@media screen and (max-width: 900px),
-@media ( orientation : portrait) {
-	.card-container.boiteConnexion {
-		width: 80% !important;
-		max-height: 900px;
-	}
-	.form-control {
-		text-align: center;
-	}
-	.menuContainer {
-		width: 80%;
-		left: 30%;
-	}
-	#menuBox {
-		left: 30%;
-		width: 80% !important;
-	}
-	#menuBox {
-		z-index: 2;
-	}
-	#imgMenuPrincipal {
-		z-index: 1;
-		width: 40vw;
-		left: 50%;
-		bottom: 0px;
-	}
-	.displayHeroSelectionTitle {
-		width: 90%;
-		left: 35%;
-	}
-	.containerHero {
-		width: 90%;
-		left: 35%;
-	}
-	.wide {
-		height: 20vh;
-		width: 18%;
-	}
-	#backToMenu {
-		width: 75% !important;
-	}
-	.displayDeckTitle {
-		left:0px;
-		margin-left:5%;
-		width:90%;
-		font-size: 3vh;
-	}
-	.cardBig {
-		height: 35vh;
-	}
-
-	#backToDeckSelection, .buttonDeckMod {
-		width: 20vh;
-		height: 7vh;
-		font-size: 2vh;
-		padding: 1vh;
-		top: 5vh;
-		position: absolute;
-		padding:0;
-	}
-	.editDeckInputs {
-		width: 90%;
-		left: 35%;
-		top:17vh;
-		margin-top:0;
-	}
-	#deckName {
-		width: 40%;
-	}
-	#saveDeck{
-		width: 40%;
-		padding:0;
-	}
-	.cardStatBig {
-		width: 5vh;
-		height: 5vh;
-		background-size: cover;
-	}
 }
