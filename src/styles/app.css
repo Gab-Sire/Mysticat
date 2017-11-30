@@ -112,6 +112,11 @@ border-radius: 1vh;
 	font-size:2vh;
 }
 
+#battlelogZone p{
+	margin-bottom: 1vh;
+	border-bottom: solid 0.2vh black;
+}
+
 #loading {
 	text-align: center;
 }
