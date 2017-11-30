@@ -140,4 +140,48 @@ aside.droit{
 	background-color: grey;
 	color: white;
 }
+.singleLineAdmin{
+	display:none !important;
+}
 
+@media screen and (max-width: 900px),
+@media ( orientation : portrait) {
+	#contentAdmin{
+		top: 2% !important;
+		width: 90% !important;
+		height: 65% !important;
+		padding: 5% !important;
+	}
+	aside.gauche{
+		padding-top:2px;
+		padding-left:0px;
+		width:100%;
+		float: left;
+	}	
+	aside.droit{
+		display:none;
+	}
+	.singleLineAdmin{
+		display:block !important;
+		margin-left:35% !important;
+	}
+	#containerAdmin{
+		height: 900px !important;
+	}
+	.btnDeconnexionUser{
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		color: blue;
+		background-color: green;
+		color:black;
+		border-radius: 20px;
+		padding: 1%;
+		width: 30%;
+	}
+	h1{
+		top: 2% !important;
+		width: 90% !important;
+		padding: 5% !important;
+	}
+}

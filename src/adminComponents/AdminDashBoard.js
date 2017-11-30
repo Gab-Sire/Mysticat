@@ -22,6 +22,14 @@ export default class AdminDashBoard extends Component{
 					<aside className='gauche'>
 						<p id="salutationAdmin">Bonjour, {this.props.adminName}</p>
 						<UserManagementList userList={this.props.userList} disconnectPlayerById={this.props.disconnectPlayerById}/>
+						<button id="btnDisconnect" className="singleLineAdmin"
+							onClick={(event)=>{
+									setTimeout(()=>{
+										this.props.disconnectPlayerById(this.props.adminId);
+									}, TIME_BETWEEN_AXIOS_CALLS)
+								}
+							}
+							>D&eacute;connexion</button>
 					</aside>
 					<aside className='droit'>
 						<div id="radar"></div>
