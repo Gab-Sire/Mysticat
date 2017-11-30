@@ -5,11 +5,10 @@
 	box-sizing: border-box;
 }
 
-
-html, body{
-	margin:0;
-	padding:0;
-	height:100%;
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
 	position: relative;
 }
 
@@ -39,7 +38,7 @@ html, body{
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
- url(../img/backgroundImg/background.jpg);
+		url(../img/backgroundImg/background.jpg);
 }
 
 .centerTitle {
@@ -72,7 +71,7 @@ html, body{
 	width: 100%;
 	height: 100%;
 	cursor: default;
-	margin:0;
+	margin: 0;
 	box-sizing: border-box;
 }
 
@@ -82,10 +81,10 @@ html, body{
 	top: 67%;
 	left: 90.5%;
 	font-size: 2.5vh;
-width: 8vw;
-line-height: 2vh;
-height: 4vh;
-border-radius: 1vh;
+	width: 8vw;
+	line-height: 2vh;
+	height: 4vh;
+	border-radius: 1vh;
 }
 
 #buttonBattlelog {
@@ -93,16 +92,16 @@ border-radius: 1vh;
 	top: 95%;
 	left: 1%;
 	font-size: 2.5vh;
-  width: 8vw;
-  line-height: 2vh;
-  height: 4vh;
-  border-radius: 1vh;
-}
-#buttonBattlelog:hover, #ButtonSurrender:hover, #buttonEndTurn:hover{
-	background-color:blue;
-	color: white;
+	width: 8vw;
+	line-height: 2vh;
+	height: 4vh;
+	border-radius: 1vh;
 }
 
+#buttonBattlelog:hover, #ButtonSurrender:hover, #buttonEndTurn:hover {
+	background-color: blue;
+	color: white;
+}
 
 #battlelogZone {
 	z-index: 5;
@@ -115,10 +114,10 @@ border-radius: 1vh;
 	color: black;
 	overflow-y: scroll;
 	resize: both;
-	font-size:2vh;
+	font-size: 2vh;
 }
 
-#battlelogZone p{
+#battlelogZone p {
 	margin-bottom: 1vh;
 	border-bottom: solid 0.2vh black;
 }
@@ -134,7 +133,7 @@ border-radius: 1vh;
 	right: 5%;
 }
 
-#menuPlayerName{
+#menuPlayerName {
 	font-size: 4vh;
 	color: white;
 	font-weight: bold;
@@ -144,36 +143,37 @@ border-radius: 1vh;
 	position: relative;
 	width: 100%;
 	height: -webkit-fill-available;
-	background: url('../img/backgroundImg/backgroundLogin.jpg') no-repeat center center
-		fixed;
+	background: url('../img/backgroundImg/backgroundLogin.jpg') no-repeat
+		center center fixed;
 	background-size: cover;
 	overflow: hidden;
 }
 
 #MainMenu, #CardCollection {
 	color: black;
-	top:0px;
+	top: 0px;
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	min-height:100vh;
-	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	min-height: 100vh;
+	background: url('../img/backgroundImg/BackgroundSpace.jpg') no-repeat
+		center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
-#CardCollection{
+#CardCollection {
 	height: auto;
 }
 
-#MainMenu{
+#MainMenu {
 	height: 100%;
 }
 
-#btnLeaveQueue{
-	height:5vh;
+#btnLeaveQueue {
+	height: 5vh;
 	width: 15vw;
 	font-size: 2.5vh;
 }
@@ -191,8 +191,8 @@ border-radius: 1vh;
 	position: relative;
 	margin: 3vh 3vh 3vh 6vh;
 	width: 28vw;
-	left:50%;
-	margin-left:-14vw;
+	left: 50%;
+	margin-left: -14vw;
 }
 
 #menuBox {
@@ -207,80 +207,81 @@ border-radius: 1vh;
 	border-radius: 8vh;
 }
 
-.btn{
-	height: 5vh!important;
-	font-size: 3vh!important;
+.btn {
+	height: 5vh !important;
+	font-size: 3vh !important;
 }
 
-#titleMenu{
+#titleMenu {
 	color: white;
 	padding-top: 4%;
 	font-size: 6vh;
 }
 
-.buttonDeckMod{
-	z-index:3;
-	float:right;
+.buttonDeckMod {
+	z-index: 3;
+	float: right;
 	display: inline-block;
 	position: relative;
 	padding: 1vh;
 	right: 2%;
-	top:3vh;
+	top: 3vh;
 	width: 10%;
 }
 
-.displayDeckName{
-	color:white;
-	margin:0 auto;
+.displayDeckName {
+	color: white;
+	margin: 0 auto;
 	text-align: center;
 	position: relative;
 	top: 12vh;
-	font-size:5vh;
+	font-size: 5vh;
 }
 
-.cardDisplayTable{
+.cardDisplayTable {
 	position: relative;
 	width: 50%;
 	margin-left: 25%;
 	padding-top: 15%;
 }
-.gris{
-	background-color:gray;
+
+.gris {
+	background-color: gray;
 }
 
-.editDeckInputs{
+.editDeckInputs {
 	position: absolute;
 	height: 5vh;
-	width:30vw;
-	left:50%;
-	top:16vh;
-	margin-left:-15vw;
-	margin-top:1vh;
-	margin-bottom:1vh;
-	padding:0;
+	width: 30vw;
+	left: 50%;
+	top: 16vh;
+	margin-left: -15vw;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	padding: 0;
 }
 
-#backToDeckSelection, .buttonDeckMod{
-	width:10vw;
+#backToDeckSelection, .buttonDeckMod {
+	width: 10vw;
 	height: 10vh;
-	font-size:2vh;
-	padding:1vh;
-	top:3vh;
+	font-size: 2vh;
+	padding: 1vh;
+	top: 3vh;
 	position: absolute;
 }
 
-.displayDeckTitle{
+.displayDeckTitle {
 	position: absolute;
 	display: inline-block;
-	padding:0;
-	margin:0;
-	color:white;
+	padding: 0;
+	margin: 0;
+	color: white;
 	text-align: center;
-	left:50%;
+	left: 50%;
 	width: 50vw;
-	margin-left:-25vw;
-	margin-top:1vh;
-	margin-bottom:1vh;
+	margin-left: -25vw;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
 	font-size: 5vh;
 }
 
@@ -295,11 +296,11 @@ border-radius: 1vh;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-		transition:1.5s all;
+	transition: 1.5s all;
 }
 
 #imgMenuPrincipal:hover {
-	top:-5vh;
+	top: -5vh;
 }
 
 #menuGame {
@@ -309,7 +310,7 @@ border-radius: 1vh;
 	position: absolute;
 	top: 67%;
 	left: 0.5%;
-	font-size:3vh;
+	font-size: 3vh;
 	width: 8vw;
 	height: 4vh;
 	border-radius: 20px;
@@ -323,15 +324,15 @@ border-radius: 1vh;
 	display: block;
 }
 
-#ButtonSurrender{
+#ButtonSurrender {
 	z-index: 6;
 	text-align: center;
 	position: absolute;
 	top: 67%;
 	left: 0.5%;
-	font-size:2.5vh;
+	font-size: 2.5vh;
 	width: 8vw;
-	line-height:2vh;
+	line-height: 2vh;
 	height: 4vh;
 	border-radius: 1vh;
 }
@@ -369,10 +370,10 @@ border-radius: 1vh;
 	font-size: 3vh;
 }
 
-#blocGiveUp button, #blocGagne button, #blocPartieNulle, button{
-	margin:0;
-	padding:0;
-	height:6vh;
+#blocGiveUp button, #blocGagne button, #blocPartieNulle, button {
+	margin: 0;
+	padding: 0;
+	height: 6vh;
 	width: 15vw;
 }
 
@@ -380,10 +381,10 @@ border-radius: 1vh;
 	background-color: darkred;
 }
 
-#blocGiveUp .surrenderChoice{
-	margin:0;
-	padding:0;
-	height:6vh;
+#blocGiveUp .surrenderChoice {
+	margin: 0;
+	padding: 0;
+	height: 6vh;
 	width: 10vw;
 }
 
@@ -392,10 +393,10 @@ border-radius: 1vh;
 }
 
 #blocPartieNulle {
-	background-color: rgb(238,118,0);
+	background-color: rgb(238, 118, 0);
 }
 
-#blocGiveUp > p, #blocGagne > p, #blocPartieNulle > p{
+#blocGiveUp>p, #blocGagne>p, #blocPartieNulle>p {
 	color: white;
 }
 
@@ -420,10 +421,10 @@ border-radius: 1vh;
 	bottom: 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	height:21%;
+	height: 21%;
 }
 
-#opponentHero{
+#opponentHero {
 	border-top-left-radius: 0%;
 	border-top-right-radius: 0%;
 	border-bottom-left-radius: 35%;
@@ -435,8 +436,8 @@ border-radius: 1vh;
 	margin-top: -7%;
 }
 
-.handCardContainer{
-	height:100%;
+.handCardContainer {
+	height: 100%;
 }
 
 #opponentHandUnderLayer {
@@ -456,8 +457,8 @@ border-radius: 1vh;
 /* CHAMPS DE BATAILLE */
 
 /* styles pour les conteneurs */
-.minionFieldContainer{
-	height:100%;
+.minionFieldContainer {
+	height: 100%;
 }
 
 .fieldContainer {
@@ -468,7 +469,7 @@ border-radius: 1vh;
 .battleField {
 	display: inline-block;
 	width: 60%;
-	height:100%;
+	height: 100%;
 	margin: 0;
 	background-color: rgba(255, 210, 150, 1);
 }
@@ -517,7 +518,7 @@ border-radius: 1vh;
 	border: 1px solid black;
 }
 
-.graveyard .card{
+.graveyard .card {
 	width: 30%;
 	margin-left: 65%;
 }
@@ -532,34 +533,36 @@ border-radius: 1vh;
 #selfGraveyard .graveyardCount {
 	bottom: 50%;
 	right: 42.5%;
-	margin-bottom:-3vh;
+	margin-bottom: -3vh;
 }
 
 #opponentGraveyard .graveyardCount {
 	top: 50%;
-	margin-top:-3vh;
+	margin-top: -3vh;
 	right: 42.5%;
 }
 
 #selfGraveyard {
-	background: url('../img/backgroundImg/backgroundCemetery2.jpg') no-repeat;
-		background-size: cover;
+	background: url('../img/backgroundImg/backgroundCemetery2.jpg')
+		no-repeat;
+	background-size: cover;
 }
 
 #opponentGraveyard {
-	background: url('../img/backgroundImg/backgroundCemetery3.jpg') no-repeat;
-		background-size: cover;
+	background: url('../img/backgroundImg/backgroundCemetery3.jpg')
+		no-repeat;
+	background-size: cover;
 }
 
 /* styles pour les cartes dans le cimeti�re */
 .graveyard .cardTile {
-	top:5%;
+	top: 5%;
 	width: 30%;
 	margin-left: 65%;
 }
 
-.graveyard .card{
-		top:5%;
+.graveyard .card {
+	top: 5%;
 }
 
 /* DECK */
@@ -606,32 +609,40 @@ border-radius: 1vh;
 	font-size: 10px;
 	vertical-align: bottom;
 }
-.displayDeckAjouter{
+
+.displayDeckAjouter {
 	display: none;
 	position: absolute;
 	top: 10.5vh;
 	border: 0.5vh solid red;
-	color:white;
+	color: white;
 	width: 10vw;
 	height: 12vh;
 	border-radius: 4vh;
 	background-color: darkblue;
 	font-size: 3vh;
-	line-height:5vh;
+	line-height: 5vh;
 	text-align: center;
-	cursor:default;
+	cursor: default;
 	left: 50%;
-	margin-left:-5vw;
+	margin-left: -5vw;
 }
-.displayDeckTitle input{
-	color:black;
-}
-.displayDeckTitle button{
-	color:black;
-}
-.cardTile:hover .displayDeckAjouter{display: inline;}
 
-.cardFacedDown:hover .displayDeckAjouter{display: inline;}
+.displayDeckTitle input {
+	color: black;
+}
+
+.displayDeckTitle button {
+	color: black;
+}
+
+.cardTile:hover .displayDeckAjouter {
+	display: inline;
+}
+
+.cardFacedDown:hover .displayDeckAjouter {
+	display: inline;
+}
 
 /* styles pour une carte visible (de face) */
 .card {
@@ -646,40 +657,39 @@ border-radius: 1vh;
 	background-color: green;
 }
 
-.invoquer{
+.invoquer {
 	display: none;
 	opacity: 0.2;
 }
 
-.minion img.cardArt{
-	position:absolute;
-	top:0;
-	margin-top: 10%;
-	width: 90%;
-	height: 55%;
-	border-radius:2vh;
-	left:5%;
-}
-
-.card img.cardArt{
-	position:absolute;
-	top:0px;
-	left:5%;
-	margin-top: 10%;
-	border-radius:2vh;
-	width: 90%;
-	height: 55%;
-}
-
-
-.deleteIcon{
+.minion img.cardArt {
 	position: absolute;
-	right:-2px;
-	top:0px;
+	top: 0;
+	margin-top: 10%;
+	width: 90%;
+	height: 55%;
+	border-radius: 2vh;
+	left: 5%;
+}
+
+.card img.cardArt {
+	position: absolute;
+	top: 0px;
+	left: 5%;
+	margin-top: 10%;
+	border-radius: 2vh;
+	width: 90%;
+	height: 55%;
+}
+
+.deleteIcon {
+	position: absolute;
+	right: -2px;
+	top: 0px;
 	width: 25px;
 	height: 25px;
 	background-image: url("../img/cardImg/deleteIcon.png");
-	background-size:cover;
+	background-size: cover;
 }
 
 .card:hover {
@@ -690,16 +700,16 @@ border-radius: 1vh;
 .cardName {
 	text-align: center;
 	width: 100%;
-	font-size:1.65vh;
+	font-size: 1.65vh;
 	position: absolute;
-	bottom:20%;
+	bottom: 20%;
 	overflow: hidden;
 	color: white;
 	text-decoration: underline;
 }
 
-.cardDetailContainer{
-	font-size:1.65vh;
+.cardDetailContainer {
+	font-size: 1.65vh;
 	border: 0.3vh solid black;
 	background-color: #008ae6;
 	-webkit-transform: rotate(45deg);
@@ -711,30 +721,29 @@ border-radius: 1vh;
 	box-shadow: 0 0 5px white;
 }
 
-
-
-.placingAttribut{
+.placingAttribut {
 	position: absolute;
-	top:10%;
-	height:100%;
+	top: 10%;
+	height: 100%;
 	width: 100%;
 	line-height: 3vh;
 	text-align: center;
 	font-size: 2vh;
 }
+
 .cardManaCost {
-	z-index:1;
-	left:0.3vw;
-	top:2%;
-	height:2.5vh;
-	width:2.5vh;
+	z-index: 1;
+	left: 0.3vw;
+	top: 2%;
+	height: 2.5vh;
+	width: 2.5vh;
 	position: absolute;
 	color: white;
 	line-height: 2vh;
 	font-size: 2vh;
 }
 
-.balancingDetail{
+.balancingDetail {
 	-webkit-transform: rotate(-45deg);
 	-moz-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
@@ -743,38 +752,37 @@ border-radius: 1vh;
 	text-align: center;
 }
 
-
 .cardPower {
 	position: absolute;
-	bottom:0;
+	bottom: 0;
 	width: 33%;
 	height: 22%;
 	background-image: url("../img/cardImg/catpaw2.png");
-	background-size:cover;
+	background-size: cover;
 	color: white;
 }
 
 .cardHealth {
 	position: absolute;
-	left:33%;
-	bottom:0px;
+	left: 33%;
+	bottom: 0px;
 	width: 33%;
 	height: 22%;
 	background-image: url("../img/cardImg/heart.png");
-	background-size:cover;
+	background-size: cover;
 	color: white;
 }
 
 .cardSpeed {
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 	position: absolute;
-	left:66%;
-	bottom:0px;
+	left: 66%;
+	bottom: 0px;
 	width: 33%;
 	height: 22%;
 	background-image: url("../img/cardImg/shoe.png");
-	background-size:cover;
+	background-size: cover;
 	font-style: italic;
 	color: white;
 }
@@ -782,73 +790,72 @@ border-radius: 1vh;
 /**
  Deck viewing and editing
 */
-
-#topMenuItems{
+#topMenuItems {
 	position: fixed;
 	width: 100%;
-	height:22vh;
-	z-index:4;
+	height: 22vh;
+	z-index: 4;
 	background: black;
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 }
 
-#saveDeck{
-	height:5vh;
-	width:15vw;
-	font-size:1.5vw;
+#saveDeck {
+	height: 5vh;
+	width: 15vw;
+	font-size: 1.5vw;
 }
 
-#deckName{
-	height:5vh;
-	width:15vw;
-	font-size:1.5vw;
+#deckName {
+	height: 5vh;
+	width: 15vw;
+	font-size: 1.5vw;
 }
 
-.fade{
-	opacity:1 !important;
+.fade {
+	opacity: 1 !important;
 }
 
-#selectFavoriteDeckCheckbox{
+#selectFavoriteDeckCheckbox {
 	position: relative;
 	height: 4.5vh;
-	width:4.5vh;
+	width: 4.5vh;
 	margin-left: 1.2vw;
- 	vertical-align:middle;
- 	margin-top:0;
- 	box-sizing: border-box;
+	vertical-align: middle;
+	margin-top: 0;
+	box-sizing: border-box;
 }
 
-.favoriteDeck{
-	border: yellow 1vh solid!important;
+.favoriteDeck {
+	border: yellow 1vh solid !important;
 	box-shadow: 0 0 1vh #DAA520;
 	border-radius: 1vh;
 }
 
-#changeFavoriteDeckText{
+#changeFavoriteDeckText {
 	position: relative;
 	width: 26vw;
 	color: yellow;
 	font-weight: bold;
 	text-align: center;
-	top:12vh;
+	top: 12vh;
 	height: 4.5vh;
-	font-size:2.5vh;
-	left:50%;
-	margin-left:-13vw;
+	font-size: 2.5vh;
+	left: 50%;
+	margin-left: -13vw;
 }
 
-.invalidDeck{
+.invalidDeck {
 	color: red;
 	font-weight: bold;
 }
 
-.cardInCollection{
-	background-color: gray!important;
-	opacity:0.75;
+.cardInCollection {
+	background-color: gray !important;
+	opacity: 0.75;
 }
 
-.cardBig{
+.cardBig {
 	display: inline-block;
 	border: 0.3vh solid black;
 	position: relative;
@@ -861,38 +868,39 @@ border-radius: 1vh;
 }
 
 .cardNameBig {
-	background:darkgreen;
+	background: darkgreen;
 	width: 100%;
 	text-align: center;
-	font-size:1.8vh;
+	font-size: 1.8vh;
 	position: absolute;
-	bottom:23%;
+	bottom: 23%;
 	overflow: auto;
 	color: white;
 	text-decoration: underline;
 }
 
-.alert{
-	z-index:10;
-	position:relative;
-	height:10vh;
-	width:100%;
-	line-height:1vh;
-	margin-bottom:0!important;
-	font-size: 3vh!important;
+.alert {
+	z-index: 10;
+	position: relative;
+	height: 10vh;
+	width: 100%;
+	line-height: 1vh;
+	margin-bottom: 0 !important;
+	font-size: 3vh !important;
 }
 
-.cardBig img{
-	position:absolute;
-	top:0;
-	left:50%;
-	margin-left:-4vw;
-	border-radius:3vh;
+.cardBig img {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -4vw;
+	border-radius: 3vh;
 	margin-top: 1vh;
 	width: 8vw;
 	height: 16vh;
 }
-.cardDetailContainerBig{
+
+.cardDetailContainerBig {
 	width: 3vh;
 	height: 3vh;
 	font-size: 2.5vh;
@@ -905,62 +913,68 @@ border-radius: 1vh;
 	transform: rotate(45deg);
 	color: white;
 	box-shadow: 0 0 1vh white;
-	margin-top:0.3vh;
+	margin-top: 0.3vh;
 }
 
-#cardCounter{
-	top:6vh;
+#cardCounter {
+	top: 6vh;
 	width: 10vw;
 	position: absolute;
-	padding-top:1vh;
+	padding-top: 1vh;
 	font-size: 4vh;
 	color: white;
 	text-align: center;
-	left:50%;
-	margin-left:-5vw;
+	left: 50%;
+	margin-left: -5vw;
 }
 
 .cardManaCostBig {
-	z-index:1;
-	left:5px;
+	z-index: 1;
+	left: 5px;
 	position: absolute;
 	color: blue;
 }
 
-.cardStatBig{
+.cardStatBig {
 	position: absolute;
 	color: white;
 	bottom: 0px;
 	width: 4.5vh;
 	height: 4.5vh;
-	background-size:cover;
+	background-size: cover;
 }
 
 .cardPowerBig {
 	background-image: url("../img/cardImg/catpaw2.png");
 	left: 0.1vh;
 }
+
 .cardHealthBig {
 	background-image: url("../img/cardImg/heart.png");
-	left:4vh;
+	left: 4vh;
 }
+
 .cardSpeedBig {
 	background-image: url("../img/cardImg/shoe.png");
 	right: 0.1vh;
 	font-style: italic;
 }
+
 .cardBig:hover {
 	transform: scale(1.5);
 	z-index: 4;
 }
-.gris{
-	background-color:gray;
-}
-.gris .cardNameBig{
-	background-color:navy;
+
+.gris {
+	background-color: gray;
 }
 
-.card+.card, .cardFacedDown+.cardFacedDown, .card+.cardTile, .cardTile+.card, .cardTile+.cardTile {
+.gris .cardNameBig {
+	background-color: navy;
+}
+
+.card+.card, .cardFacedDown+.cardFacedDown, .card+.cardTile, .cardTile+.card,
+	.cardTile+.cardTile {
 	margin-left: 1%;
 }
 
@@ -1009,30 +1023,30 @@ border-radius: 1vh;
 	position: relative;
 }
 
-.heroContainer{
+.heroContainer {
 	position: relative;
 	height: 12%;
 }
 
-.heroContainer .hero{
-	height:100%;
+.heroContainer .hero {
+	height: 100%;
 }
 
-.wide{
-	height:20vh;
+.wide {
+	height: 20vh;
 	width: 10vw;
 }
 
-.displayHeroSelectionTitle{
+.displayHeroSelectionTitle {
 	position: relative;
 	display: inline-block;
-	padding:0;
-	margin:0;
-	color:white;
+	padding: 0;
+	margin: 0;
+	color: white;
 	text-align: center;
-	width:30vw;
+	width: 30vw;
 	left: 50%;
-	margin-left:-15vw;
+	margin-left: -15vw;
 	margin-top: 10px;
 	font-size: 6vh;
 }
@@ -1042,11 +1056,11 @@ border-radius: 1vh;
 	box-shadow: 0 0 0 1vh rgba(255, 255, 255, .25);
 }
 
-.containerHero{
+.containerHero {
 	position: relative;
 	padding-top: 3vh;
 	width: 55vw;
-	margin-left:-27.5vw;
+	margin-left: -27.5vw;
 	left: 50%;
 }
 
@@ -1078,32 +1092,35 @@ border-radius: 1vh;
 	background-size: cover;
 	background-position: center;
 }
+
 .renaissanceHero {
 	background-image: url('../img/heroImg/chatLisa.jpg');
 	background-size: cover;
 	background-position: center;
 }
+
 .policeHero {
 	background-image: url('../img/heroImg/chatPolice.jpg');
 	background-size: cover;
 }
+
 .prehistoricHero {
 	background-image: url('../img/heroImg/chatRex.jpg');
 	background-size: cover;
 	background-position: center;
 }
+
 .superHero {
 	background-image: url('../img/heroImg/chatThor.jpg');
 	background-size: cover;
 	background-position: center;
 }
+
 .hoodyHero {
 	background-image: url('../img/heroImg/chatHoody.jpg');
 	background-size: cover;
 	background-position: center;
 }
-
-
 
 /* styles pour l'attribut vies du h�ros (joueur) */
 .heroHealth {
@@ -1145,7 +1162,6 @@ border-radius: 1vh;
 	color: white;
 	box-shadow: 0 0 5px white;
 }
-
 
 #selfMana div {
 	-webkit-transform: rotate(-45deg);
@@ -1197,8 +1213,8 @@ border-radius: 1vh;
 	font-size: 2.5vh;
 }
 
-.btn-block+.btn-block{
-	margin-top:1vh!important;
+.btn-block+.btn-block {
+	margin-top: 1vh !important;
 }
 
 .expectedFormat div {
@@ -1296,7 +1312,7 @@ form {
 	text-align: center;
 	margin: 10px 0 0;
 	min-height: 1em;
-	display:none;
+	display: none;
 }
 
 .reauth-email {
@@ -1312,7 +1328,7 @@ form {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	display:none;
+	display: none;
 }
 
 .form-signin #username, .form-signin #password {
@@ -1320,7 +1336,7 @@ form {
 	height: 7vh;
 	font-size: 4vh;
 	margin-bottom: 1vh;
-	padding:0;
+	padding: 0;
 }
 
 .form-signin input[type=email], .form-signin input[type=password],
@@ -1386,21 +1402,20 @@ form {
 }
 
 /* Tooltip */
-
 #tooltipLink {
-  color: white;
+	color: white;
 }
 
 .tooltip.show {
-  opacity: 0.9;
+	opacity: 0.9;
 }
 
 .tooltip {
-  position: absolute;
-  transform: none !important;
-  top: 32% !important;
-  left: 41% !important;
-  will-change: transform !important;
+	position: absolute;
+	transform: none !important;
+	top: 32% !important;
+	left: 41% !important;
+	will-change: transform !important;
 }
 
 /*
@@ -1408,60 +1423,104 @@ form {
 * Responsive media Screen
 
 */
-@media (orientation: portrait) {
-  .orientationSensitive {
-  	
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-  }
-}
-@media screen and (max-width: 900px), @media (orientation: portrait) {
-    .card-container.boiteConnexion{
- 		width: 80% !important;
- 		max-height: 900px;
- 	}
- 	.form-control{
- 		text-align: center;
- 	}
- 	.menuContainer{
- 		width: 80%;
- 		left:30%;
- 	}
- 	#menuBox{
- 		left:30%;
- 		width: 80% !important;
- 	}
- 	#menuBox{
- 	z-index:2;
- 	}
- 	#imgMenuPrincipal{
- 	z-index:1;
- 		width: 40vw;
- 		left:50%;
- 		bottom: 0px;
- 	}
- 	.displayHeroSelectionTitle{
- 		width: 90%;
- 		left:35%;
- 	}
- 	.containerHero{
- 		width: 90%;
- 		left:35%;
- 	}
- 	.wide{
-		height:20vh;
-		width: 18%;
+@media ( orientation : portrait) {
+	.orientationSensitive {
+		-webkit-transform: rotate(-90deg);
+		-moz-transform: rotate(-90deg);
+		-o-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+		transform: rotate(-90deg);
 	}
- 	#backToMenu{
- 	width: 75% !important;
- 	}
- 	.displayDeckTitle{
-	
-	font-size: 3vh;
-}
- 	
 }
 
+@media
+screen
+and
+(max-width:
+900px)
+,
+@media ( orientation : portrait) {
+	.card-container.boiteConnexion {
+		width: 80% !important;
+		max-height: 900px;
+	}
+	.form-control {
+		text-align: center;
+	}
+	.menuContainer {
+		width: 80%;
+		left: 30%;
+	}
+	#menuBox {
+		left: 30%;
+		width: 80% !important;
+	}
+	#menuBox {
+		z-index: 2;
+	}
+	#imgMenuPrincipal {
+		z-index: 1;
+		width: 40vw;
+		left: 50%;
+		bottom: 0px;
+	}
+	.displayHeroSelectionTitle {
+		width: 90%;
+		left: 35%;
+	}
+	.containerHero {
+		width: 90%;
+		left: 35%;
+	}
+	.wide {
+		height: 20vh;
+		width: 18%;
+	}
+	#backToMenu {
+		width: 75% !important;
+	}
+	.displayDeckTitle {
+		left:0px;
+		margin-left:5%;
+		width:90%;
+		font-size: 3vh;
+	}
+	.cardDisplayTable {
+		position: relative;
+		width: 90%;
+		margin-left: 10%;
+		padding-top: 30%;
+	}
+	.cardBig {
+		width: 18%;
+	}
+	#backToDeckSelection, .buttonDeckMod {
+		width: 20vh;
+		height: 7vh;
+		font-size: 1vh;
+		padding: 1vh;
+		top: 5vh;
+		position: absolute;
+	}
+	.editDeckInputs {
+		width: 90%;
+		left: 35%;
+	
+	}
+	#deckName {
+		width: 40%;
+	}
+	#saveDeck{
+		width: 40%;
+	}
+
+.cardStatBig {
+	width: 30%;
+	height: 4.5vh;
+	background-size: cover;
+	background-position: center;
+}
+
+
+
+}
