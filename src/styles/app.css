@@ -1441,3 +1441,25 @@ form {
 	left: 41% !important;
 	will-change: transform !important;
 }
+@media screen and (max-width: 900px),
+@media ( orientation : portrait) {
+	.card-container.boiteConnexion {
+		width: 80% !important;
+		max-height: 900px;
+	}
+	.form-control {
+		text-align: center;
+	}
+	.menuContainer {
+		width: 80%;
+		left: 30%;
+	}
+	#menuBox {
+		left: 30%;
+		width: 80% !important;
+	}
+	#menuBox {
+		z-index: 2;
+	}
+	
+}
