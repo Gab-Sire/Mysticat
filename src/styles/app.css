@@ -1428,6 +1428,11 @@ form {
 /* Tooltip */
 #tooltipLink {
 	color: white;
+	font-size:3vh;
+}
+
+#tooltip li{
+	font-size:2vh;
 }
 
 .tooltip.show {
@@ -1461,5 +1466,5 @@ form {
 	#menuBox {
 		z-index: 2;
 	}
-	
+
 }

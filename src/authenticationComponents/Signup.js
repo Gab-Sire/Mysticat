@@ -49,7 +49,7 @@ export default class Login extends Component{
 			})
 			  .then((response)=>{
 				  if(response.data!==null){
-					  this.props.connectPlayer(response.data);
+					  this.props.connectPlayer(response.data, this.state.username);
 				  }
 				  else{
 					  	this.setState({errorMessage: "Échec, veuillez vérifier le format de votre nom d'utilisateur et mot de passe."});
