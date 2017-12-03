@@ -335,7 +335,7 @@ html, body {
 	border-radius: 1vh;
 }
 
-#FullScreenRED, #FullScreenGREEN, #FullScreenOrange {
+#FullScreenRED, #FullScreenGREEN, #FullScreenORANGE {
 	z-index: 2;
 	position: absolute;
 	top: 0px;
@@ -351,7 +351,7 @@ html, body {
 	background-color: rgba(100, 200, 100, 0.3);
 }
 
-#FullScreenOrange {
+#FullScreenORANGE {
 	background-color: rgba(244, 185, 66, 0.3);
 }
 
@@ -368,7 +368,7 @@ html, body {
 	font-size: 3vh;
 }
 
-#blocGiveUp button, #blocGagne button, #blocPartieNulle, button {
+#blocGiveUp button, #blocGagne button, #blocPartieNulle button {
 	margin: 0;
 	padding: 0;
 	height: 6vh;
@@ -1429,10 +1429,6 @@ form {
 #tooltipLink {
 	color: white;
 	font-size:3vh;
-}
-
-#tooltip li{
-	font-size:2vh;
 }
 
 .tooltip.show {
