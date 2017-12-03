@@ -1438,8 +1438,8 @@ form {
 .tooltip {
 	position: absolute;
 	transform: none !important;
-	top: 32% !important;
-	left: 41% !important;
+	top: 50% !important;
+  	left: 65% !important;
 	will-change: transform !important;
 }
 @media screen and (max-width: 900px),
