@@ -277,8 +277,8 @@ public class CardCreationService {
 	@Transactional
 	private void generateGodSet() {
 		// Creer par Jimmy, Ex God Card Permettant de changer le jeu (Effect Equivalent)
-		MinionCard ex1 = createMinionCard("Mana Pool", -2, 1 , 1 , -1, "Utilise mon energie","img/cardImg/godSet/glow.jpg");
-		MinionCard ex2 = createMinionCard("Reda EX",  -7, 1,1, -2, "T'en a fumé du bon","img/cardImg/godSet/Reda.png");
+		MinionCard ex1 = createMinionCard("Chatton transcendent", -2, 1 , 1 , -1, "Utilise mon energie","img/cardImg/godSet/glow.jpg");
+		MinionCard ex2 = createMinionCard("Reda EX",  -7, 1,1, -2, "Oh la la.","img/cardImg/godSet/Reda.png");
 		MinionCard ex3 = createMinionCard("François EX",  -12, 1, 1, -3, "Aujourd'hui On a Oncle Bob","img/cardImg/godSet/Francois.png");
 		
 		cardRepository.save(ex1);

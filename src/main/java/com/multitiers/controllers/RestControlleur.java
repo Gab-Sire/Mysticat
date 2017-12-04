@@ -158,7 +158,6 @@ public class RestControlleur {
 		User user = userRepository.findById(userId);
 
 		if (user == null) {
-			System.out.println("Null user cannot save deck.");
 			return;
 		}
 
