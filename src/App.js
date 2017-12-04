@@ -33,7 +33,7 @@ class App extends Component{
 			connectedAsAdmin:false,
 			favoriteDeckIndex: null
 		};
-		
+
 	}
 
 	componentWillMount(){
@@ -156,7 +156,7 @@ class App extends Component{
 					this.disconnectPlayer();
 				});
 	}
-	
+
 	getCurrentHero(){
 		axios({
 			  method:'post',
@@ -210,7 +210,7 @@ class App extends Component{
 				}
 			})
 			.catch(error => {
-				console.log('Error fetching and parsing data', "checkIfQueuePopped", error);
+				console.log('Error fetching and parsing data', error);
 			});
 	}
 
