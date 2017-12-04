@@ -19,7 +19,7 @@ export default class MainMenu extends Component{
 	componentWillMount(){
 		this.setState({playerId: this.props.playerId});
 	}
-
+//<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
 	render(){
 		return (<div id='MainMenu'>
 		<Beforeunload onBeforeunload={() => {this.deconnexion(); return "Are you sure?"}}/>
@@ -37,7 +37,6 @@ export default class MainMenu extends Component{
 							}
 						}
 						>Déconnexion</button></p>
-						<p><button className='btn btn-lg btn-primary btn-block btn-signin' onClick={this.getHardCodedGame.bind(this)}>Get test game</button></p>
 						<div className={this.state.tag}>Pas encore disponible</div>
 					</div>
 				</div>
