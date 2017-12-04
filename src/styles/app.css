@@ -275,6 +275,7 @@ html, body {
 	margin: 0;
 	color: white;
 	text-align: center;
+	top:0px;
 	left: 50%;
 	top:0;
 	width: 50vw;
@@ -805,7 +806,7 @@ html, body {
 #saveDeck {
 	height: 5vh;
 	width: 15vw;
-	font-size: 1.5vw;
+	font-size: 1.2vw;
 }
 
 #deckName {
