@@ -65,7 +65,48 @@ public class AttackActionTest {
 		weakMinion.setPower(weakStat);
 		weakMinion.setHealth(weakStat);
 		weakMinion.setSpeed(weakStat);
-
+		
+		user1 = new User();
+		user2 = new User();
+		
+		user1.setId("zerx1");
+		user2.setId("zerx2");
+		
+		player1 = new Player(user1);
+		player2 = new Player(user2);
+		
+		Minion[] fieldPlayerOne= {fastMinion,powerfulMinion,bulkyMinion,weakMinion};
+		Minion[] fieldPlayerTwo= {fastMinion,powerfulMinion,bulkyMinion,weakMinion};
+		player1.setField(fieldPlayerOne);
+		player2.setField(fieldPlayerTwo);
+		
+		game = new Game(player1, player2);
+		
+		defeatedAttack = new AttackAction();
+		survidedAttack= new AttackAction();
+		mutualDestructionAttack= new AttackAction();
+		snipeAttack= new AttackAction();
+		
+		defeatedAttack.setPlayerIndex(0);
+		survidedAttack.setPlayerIndex(0);
+		mutualDestructionAttack.setPlayerIndex(0);
+		snipeAttack.setPlayerIndex(0);
+		
+		defeatedAttack.setAttackingMinionIndex(2);
+		survidedAttack.setAttackingMinionIndex(2);
+		mutualDestructionAttack.setAttackingMinionIndex(1);
+		snipeAttack.setAttackingMinionIndex(0);
+		
+		defeatedAttack.setTargetIndex(3);
+		survidedAttack.setTargetIndex(2);
+		mutualDestructionAttack.setTargetIndex(1);
+		snipeAttack.setTargetIndex(1);
+		
+		defeatedAttack.setSpeed(0);;
+		survidedAttack.setSpeed(0);
+		mutualDestructionAttack.setSpeed(0);
+		snipeAttack.setSpeed(0);
+		
 		actionListToSort = new ArrayList<Action>();
 	}
 
@@ -75,7 +116,13 @@ public class AttackActionTest {
 		user2 = null;
 		player1 = null;
 		player2 = null;
-
+		fastMinion = null;
+		powerfulMinion = null;
+		bulkyMinion = null;
+		weakMinion = null;
+		highStat = 10;
+		midStat = 5;
+		weakStat = 1;
 
 		actionListToSort = null;
 	}
