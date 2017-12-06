@@ -27,6 +27,7 @@ public class CardCreationService {
 		generateCatOverSet();
 		generateDoodleSet();
 		generateEpicSet();
+		generateGodSet();
 	}
 
 	private void generatePrehistoricalSet() {
@@ -272,6 +273,18 @@ public class CardCreationService {
 		cardRepository.save(nia);
 		cardRepository.save(gun);
 
+	}
+	@Transactional
+	private void generateGodSet() {
+		// Creer par Jimmy, Ex God Card Permettant de changer le jeu (Effect Equivalent)
+		MinionCard ex1 = createMinionCard("Chatton transcendent", -2, 1 , 1 , -1, "Utilise mon energie","img/cardImg/godSet/glow.jpg");
+		MinionCard ex2 = createMinionCard("Reda EX",  -7, 1,1, -2, "Oh la la.","img/cardImg/godSet/Reda.png");
+		MinionCard ex3 = createMinionCard("François EX",  -12, 1, 1, -3, "Aujourd'hui On a Oncle Bob","img/cardImg/godSet/Francois.png");
+		
+		cardRepository.save(ex1);
+		cardRepository.save(ex2);
+		cardRepository.save(ex3);
+		
 	}
 
 	@Transactional
